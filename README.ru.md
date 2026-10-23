@@ -57,46 +57,6 @@ PitchComet это инструмент и набор инструкций. Он 
 Все картинки это копии настоящих результатов из папки примеров. Команда
 `python docs/make_assets.py` создаёт их заново.
 
-
-## Пошагово без начальных данных
-
-```bash
-pip install -r requirements.txt
-# 1. план поиска, профиль продукта, определение рынка и ключи для фактов
-python tools/auto_pitch.py --brief examples/autonomous_shiftlyra/brief_en.json --plan-only < /dev/null
-# 2. агент ищет данные по инструкции prompts/<locale>/research_loop.md и заполняет список фактов
-python tools/research_ledger.py validate --input examples/autonomous_shiftlyra/ledger_en.json < /dev/null
-# 3. расчёт, сборка, проверка качества и картинки страниц
-python tools/auto_pitch.py --brief examples/autonomous_shiftlyra/brief_en.json \
-       --pattern large_investor --theme comet --render < /dev/null
-```
-
-Описание продукта это просто название, текст о том что он делает и для кого, рынок и аудитория.
-
-```json
-{"name": "My product", "text": "One paragraph about what it does and for whom",
- "market": "en", "locale": "en", "audience": "seed funds", "ledger": "ledger.json"}
-```
-
-Если файла с фактами нет, инструмент всё равно доделает работу. Он использует помеченные
-приближённые значения и ставит на документ пометку о черновике без проверенных данных. В
-результате вы получите профиль продукта, определение рынка, план поиска, полный список фактов,
-итоговые числа, презентацию, отчёт, результат проверки качества и короткий список того что
-стоит уточнить.
-
-## Пошагово с готовыми данными
-
-```bash
-python tools/run_pipeline.py --project examples/example_en/project.json --theme light --theme editorial < /dev/null
-python tools/new_project.py --dir work/my_product --name "My product" --locale en
-```
-
-Для картинок страниц нужны LibreOffice и poppler. Для китайского языка нужен восточный шрифт.
-
-```bash
-python -m unittest discover -s tools/tests -v < /dev/null
-```
-
 ## Шаблоны презентаций
 
 | Название | Для кого | Стиль | Слайдов | Обязательные числа |
