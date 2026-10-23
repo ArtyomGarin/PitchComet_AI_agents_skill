@@ -9,145 +9,95 @@
 
 ![PitchComet](docs/social_preview.png)
 
-An agent skill and a Python toolkit that turn **a short description of an IT product** into a
-**computed pitch deck (.pptx)** and a **strategy report (.docx)** — with market sizing, growth,
-pricing, unit economics, financial model and valuation the tools work out themselves when the user
-has no data. Native editable charts, one fact base for both documents, a strict QA gate, six locales.
+PitchComet is a tool and a set of instructions. It takes a short description of a software product
+and turns it into a finished slide deck (.pptx) and an analytical report (.docx). The tool works out
+the market size, growth, price, economics of a single customer, financial model and valuation on its
+own, even when the user has no data. The charts are embedded into the documents and can be edited.
+Both documents take their numbers from a single source. The program supports six languages.
 
-* **Autonomous data mode.** Product profile → market, segments and ICP → web research plan →
-  evidence ledger → computed TAM/SAM/SOM (top-down, bottom-up, value-based + triangulation), CAGR,
-  scenarios, value-based price, unit economics (CAC, LTV, payback from benchmark ranges), customer
-  ROI/TCO, 5-year financial model, NPV/IRR/MOIC, Rule of 40, valuation by comparables.
-* **Never fabricated.** Every number is either *sourced* (link, year, access date) or a *labelled
-  estimate* (formula, inputs, low–base–high range, confidence). Only a short "to confirm with the
-  founders" list remains — it never blocks the deck.
-* **QA fails** a pitch without market sizing, CAGR or unit economics, and any "no data / TBD"
-  placeholder in any of the six languages.
-* **Five pitch patterns** — large investor, small investor, corporate, SMB, government — change slide
-  order, length, mandatory metrics, scoring weights, charts, tone and call to action.
-* **Seven themes** — `light`, `dark`, `academic_light`, `comet`, `editorial`, `corporate`, `warm`
-  (all with CJK font settings).
-* Data-driven mode is still there: structured inputs → `run_pipeline.py`.
-* **"What the numbers mean".** Every deck opens with a plain-language glossary of exactly the
-  metrics it shows (and the report has the same section); QA fails if a metric is not explained.
-* **Agent-ready.** `SKILL.md` for agents that load skills, JSON Schemas for function calling and a
-  dependency-free MCP server.
-* Locales `ru`, `en`, `zh`, `vi`, `id`, `ms`; market profiles Russia, United States, China, Vietnam,
-  Indonesia, Malaysia.
+* **Mode without source data.** First the tool understands what the product is and who the buyer
+  is. Then it builds a web search plan and a list of facts with links, and sizes the market three
+  ways. After that come growth, scenarios, price, the economics of one customer, the buyer's
+  benefit, a five-year financial model, returns and valuation.
+* **Quality check.** The tool does not let a deck through without market size, growth and unit
+  economics. It also does not let through any blank placeholder instead of data in any of the six
+  languages.
+* **Five deck patterns.** For a large investor, a small investor, a large corporate buyer, a small
+  business and the government. Each pattern changes the slide order, length, set of required
+  numbers, score, charts, tone and the final call to action.
+* **Seven visual themes.** Light, dark, academic, comet, editorial, corporate and warm. All of them
+  support East Asian fonts.
+* **A mode with ready data exists too.** If the user already has their own figures, they fill in
+  the input templates and run the main pipeline.
+* **What the numbers mean.** Every deck starts with a slide that explains in plain words only the
+  metrics it shows. The report has the same section. The quality check does not let a document
+  through if any metric is left unexplained.
+* **Ready for agents.** The instructions for assistant programs live in a separate file. There are
+  function descriptions for calling and a simple server with no external dependencies.
+* **Languages.** Russian, English, Chinese, Vietnamese, Indonesian and Malay. Market profiles for
+  Russia, the United States, China, Vietnam, Indonesia and Malaysia.
 
 Other languages: [Русский](README.ru.md) · [简体中文](README.zh-CN.md)
 
-## Quickstart in 60 seconds
-
-```bash
-git clone <this repository> pitchcomet && cd pitchcomet
-pip install -r requirements.txt
-python tools/auto_pitch.py --brief examples/autonomous_shiftlyra/brief_en.json \
-       --pattern large_investor --out demo < /dev/null
-ls examples/autonomous_shiftlyra/demo   # deck.pptx  report.docx  qa_comet.json  auto_summary.json ...
-```
-
-That writes a 20-slide investor deck (`examples/autonomous_shiftlyra/demo/`) and a report for a fictional product from the example brief
-and its research ledger, in a few seconds, with QA. Add `--render` for PNG previews (LibreOffice
-and poppler-utils). To pitch your own product, write a four-line brief (below) and start with
-`--plan-only`.
-
 ## Gallery
 
-Full English investor deck (comet theme), from the brief above:
+A full English investor deck in the comet theme, built from the description above.
 
 ![Deck](docs/deck_large_investor_en.png)
 
-| Five pitch patterns (first slides) | Seven themes |
+| First slides of five patterns | Seven visual themes |
 |---|---|
 | ![Patterns](docs/patterns.png) | ![Themes](docs/themes.png) |
 
-The glossary slide in six languages, and the report:
+The glossary slide in six languages and the report itself.
 
-| Glossary in ru · en · zh · vi · id · ms | Report (.docx) |
+| Glossary in six languages | Report (.docx) |
 |---|---|
 | ![Glossary](docs/glossary_locales.png) | ![Report](docs/report_en.png) |
 
-All images are contact sheets of real outputs in `examples/`; `python docs/make_assets.py` rebuilds them.
+All the images are copies of real results from the examples folder. The command
+`python docs/make_assets.py` creates them again.
 
+## Deck patterns
 
-## Step by step — autonomous
-
-```bash
-pip install -r requirements.txt
-# 1. research plan: profile, market definition, ledger keys, web queries
-python tools/auto_pitch.py --brief examples/autonomous_shiftlyra/brief_en.json --plan-only < /dev/null
-# 2. the agent researches (prompts/<locale>/research_loop.md) and fills the ledger
-python tools/research_ledger.py validate --input examples/autonomous_shiftlyra/ledger_en.json < /dev/null
-# 3. compute + build + QA (+ PNG previews)
-python tools/auto_pitch.py --brief examples/autonomous_shiftlyra/brief_en.json \
-       --pattern large_investor --theme comet --render < /dev/null
-```
-
-A brief is just a name, a description, a market and an audience:
-
-```json
-{"name": "My product", "text": "One paragraph about what it does and for whom",
- "market": "en", "locale": "en", "audience": "seed funds", "ledger": "ledger.json"}
-```
-
-Without a ledger the run still completes with labelled offline assumptions and an "offline draft"
-watermark. Output: `profile.json`, `market_definition.json`, `research_plan.json`,
-`ledger_full.json`, `facts.json`, `deck*.pptx`, `report.docx`, `qa_<theme>.json`,
-`auto_summary.json` (pattern, QA, key numbers, to-confirm list), `renders/`.
-
-## Step by step — data-driven
-
-```bash
-python tools/run_pipeline.py --project examples/example_en/project.json --theme light --theme editorial < /dev/null
-python tools/new_project.py --dir work/my_product --name "My product" --locale en
-```
-
-Previews need LibreOffice and poppler-utils; Chinese needs a CJK font (e.g. `fonts-noto-cjk`).
-
-```bash
-python -m unittest discover -s tools/tests -v < /dev/null
-```
-
-## Pitch patterns
-
-| id | Audience | Theme | Slides | Must show |
+| Name | For whom | Theme | Slides | Required numbers |
 |---|---|---|---|---|
-| `large_investor` | growth / late-stage fund | comet | 15–20 | TAM, SAM, SOM, CAGR, LTV/CAC, Rule of 40, IRR, MOIC |
-| `small_investor` | angel / pre-seed / seed (default) | warm | 10–14 | TAM, SOM, CAGR, LTV/CAC, MOIC |
-| `corporate` | enterprise buyer / partner | corporate | 9–13 | customer ROI, TCO, payback |
+| `large_investor` | growth fund, late stages | comet | 15–20 | TAM, SAM, SOM, CAGR, LTV/CAC, Rule of 40, IRR, MOIC |
+| `small_investor` | angel, pre-seed, seed | warm | 10–14 | TAM, SOM, CAGR, LTV/CAC, MOIC |
+| `corporate` | large buyer or partner | corporate | 9–13 | customer benefit, total cost of ownership, payback |
 | `smb` | small-business owners | warm | 6–9 | price per month, saving, payback |
-| `government` | grant / public programme | corporate | 11–15 | SAM, CAGR, ROI, public effect |
+| `government` | grant, public programme | corporate | 11–15 | SAM, CAGR, benefit, public effect |
 
-`--pattern auto` picks a pattern from the brief's `audience`. Playbooks: [`patterns/`](patterns/README.md).
+The command `--pattern auto` picks a pattern from the audience description. Details are in the
+[`patterns/`](patterns/README.md) folder.
 
-## Locales
+## Languages
 
-| Locale | Money example | Dates | Citations (default) | Market guide |
+| Language | Money example | Dates | Source citations | Market guide |
 |---|---|---|---|---|
-| `ru` | `3,0 млрд ₽` | 20.10.2026 | GOST R 7.0.5-2008, footnotes | `markets/ru.md` |
-| `en` | `$3.0B` | October 20, 2026 | APA 7 (Chicago available) | `markets/en.md` |
-| `zh` | `30.0亿元` | 2026年10月20日 | GB/T 7714-2015, numeric | `markets/zh.md` |
+| `ru` | `3,0 млрд ₽` | 20.10.2026 | GOST R 7.0.5 2008, footnotes | `markets/ru.md` |
+| `en` | `$3.0B` | October 20, 2026 | APA 7, Chicago available | `markets/en.md` |
+| `zh` | `30.0亿元` | 2026年10月20日 | GB/T 7714 2015, numeric | `markets/zh.md` |
 | `vi` | `3,0 nghìn tỷ ₫` | ngày 20 tháng 10 năm 2026 | APA 7 | `markets/vn.md` |
 | `id` | `Rp3,0 triliun` | 20 Oktober 2026 | APA 7 | `markets/id.md` |
 | `ms` | `RM3.0 bilion` | 20 Oktober 2026 | APA 7 | `markets/my.md` |
 
-Narrative text of the autonomous mode is written in Russian and English; other locales get English
-narrative with locale formatting (add wording in `tools/pitch_story.py`).
+The text in the mode without source data is written in Russian and English. The other languages get
+English text with the correct number and date formats for their language.
 
-## Agent integration
+## Connecting to agents
 
-PitchComet is a folder an agent can use in three ways. Each wraps the same command-line tools.
+PitchComet is a folder that an assistant program can use in three ways. Each way runs the same
+command-line programs.
 
-**1. As a skill.** Agents that load skill folders read [`SKILL.md`](SKILL.md) (front matter with
-`name` and `description`, then the recipe). Copy or link the folder into the agent's skills
-directory.
+**1. As a skill.** Assistant programs that can read skill folders read the [`SKILL.md`](SKILL.md)
+file. Copy the folder into the skills directory of your assistant.
 
-**2. Function calling.** Six high-level tools with JSON Schemas:
+**2. Function calling.** There are six functions with descriptions in the JSON Schema format.
 
 ```bash
-python tools/agent_tools.py schemas                # [{name, description, parameters}]
-python tools/agent_tools.py schemas --format mcp   # [{name, description, inputSchema}]
+python tools/agent_tools.py schemas                # a list of name, description and parameters
+python tools/agent_tools.py schemas --format mcp   # the same list in the MCP format
 ```
 
 ```json
@@ -160,87 +110,84 @@ python tools/agent_tools.py schemas --format mcp   # [{name, description, inputS
                   "render": {"type": "boolean"}}}}
 ```
 
-Pass the list to any LLM API or agent framework that accepts JSON Schema tools, and route the
-calls to one function:
+Pass this list to any language model that can call functions, and route the calls into one function.
 
 ```python
 import sys; sys.path.insert(0, "tools")
 from agent_tools import schemas, call_tool
 
-tools = schemas()                       # give these to the model
-result = call_tool("pitchcomet_build",  # when the model calls a tool
+tools = schemas()                       # give this to the model
+result = call_tool("pitchcomet_build",  # when the model calls a function
                    {"brief": "examples/autonomous_shiftlyra/brief_en.json", "pattern": "auto"})
 print(result["ok"], result["json"]["qa"])
 ```
 
-Tools: `pitchcomet_plan`, `pitchcomet_build`, `pitchcomet_pipeline`, `pitchcomet_qa`,
-`pitchcomet_metric`, `pitchcomet_glossary`. Lower-level schemas for every module: `tools/tools.json`.
+Functions to call: `pitchcomet_plan`, `pitchcomet_build`, `pitchcomet_pipeline`, `pitchcomet_qa`,
+`pitchcomet_metric`, `pitchcomet_glossary`. Detailed descriptions for each module live in the file
+`tools/tools.json`.
 
-**3. MCP server.** `tools/mcp_server.py` speaks the Model Context Protocol over stdio (JSON-RPC 2.0,
-no dependencies). Add it to any MCP client:
+**3. MCP server.** The program `tools/mcp_server.py` speaks the Model Context Protocol over standard
+input and output. There are no dependencies. Add it to any MCP client.
 
 ```json
 {"mcpServers": {"pitchcomet": {"command": "python", "args": ["/path/to/pitchcomet/tools/mcp_server.py"]}}}
 ```
 
-**CLI.** Everything is also a plain command (`auto_pitch.py`, `run_pipeline.py`, `qa_check.py`,
-`metrics_calc.py`, `glossary.py` …), so shell-only agents and CI jobs need nothing else.
+**Command line.** Everything also works as plain commands. So agents that can only run commands need
+nothing else.
 
 ## Tools
 
-| Tool | Purpose |
+| Tool | What it does |
 |---|---|
-| `tools/auto_pitch.py` | autonomous mode: brief → plan → ledger + estimates → pattern → deck + report → QA |
-| `tools/product_profiler.py` | infer category, buyer, unit, pricing, deployment, stage from a description |
-| `tools/market_definer.py` | classification codes, segments, ICP, research plan, queries, official sources |
-| `tools/research_ledger.py` | evidence ledger: validate, deduplicate, normalise currency/year, resolve conflicts |
-| `tools/estimator.py` | labelled estimates: ranges, sizing methods, triangulation, CAGR, price, unit economics, comparables |
-| `tools/pitch_story.py` | narrative for each pattern, speaker notes, deck ↔ report figure appendix |
-| `tools/run_pipeline.py` | full pipeline: market → finance → scoring → facts → docx + pptx → QA → renders |
-| `tools/market_sizing.py` · `tools/financial_model.py` · `tools/scoring.py` | sizing, P&L/NPV/IRR/MOIC, potential score |
-| `tools/metrics_calc.py` | ~50 metrics incl. customer ROI, TCO, SMB monthly value |
-| `tools/build_docx.py` · `tools/build_pptx.py` | builders with native charts and themes |
-| `tools/qa_check.py` | QA incl. the completeness gate (`--pattern`, `--no-completeness`) and the glossary gate (`--no-glossary`) |
-| `tools/glossary.py` | plain-language glossary: detects the metrics a deck or report shows; definitions in `config/glossary.json` |
-| `tools/agent_tools.py` · `tools/mcp_server.py` | function-calling schemas and dispatcher; MCP stdio server |
-| `tools/render_preview.py` · `tools/citations.py` · `tools/new_project.py` | previews, references, scaffolding |
+| `tools/auto_pitch.py` | the mode without data, from a description to a deck with a quality check |
+| `tools/product_profiler.py` | understands category, buyer, unit, price and stage from a description |
+| `tools/market_definer.py` | classification codes, segments, target customer, search plan and sources |
+| `tools/research_ledger.py` | a list of facts with links, checking and resolving disagreements |
+| `tools/estimator.py` | labelled estimates, ranges, market size, growth, price and unit economics |
+| `tools/pitch_story.py` | text for each pattern, speaker notes and a figure appendix |
+| `tools/run_pipeline.py` | the full pipeline from market and finance to documents and quality check |
+| `tools/market_sizing.py` `tools/financial_model.py` `tools/scoring.py` | market size, money and returns, score |
+| `tools/metrics_calc.py` | about fifty metrics including customer benefit and cost of ownership |
+| `tools/build_docx.py` `tools/build_pptx.py` | document builders with embedded charts and themes |
+| `tools/qa_check.py` | quality check including the required glossary and required numbers |
+| `tools/glossary.py` | a plain-words glossary, finds the metrics shown in a document |
+| `tools/agent_tools.py` `tools/mcp_server.py` | function descriptions and the MCP server |
+| `tools/render_preview.py` `tools/citations.py` `tools/new_project.py` | page previews, citations, project creation |
 
-Details: [`tools/README.md`](tools/README.md); schemas: `tools/tools.json`.
+Details are in [`tools/README.md`](tools/README.md). Schema descriptions are in `tools/tools.json`.
 
-## Repository layout
+## Folder structure
 
 ```
 pitchcomet/
-├── SKILL.md                      # agent instructions
+├── SKILL.md                      # instructions for the agent
 ├── README.md · README.ru.md · README.zh-CN.md · ADAPTING.md · CHANGELOG.md
 ├── deck_structure.md · style_guide.md · metrics.md · scoring_model*.md
 ├── config/  scoring_model.json · banned_phrases.json · themes.json · benchmarks.json · market_taxonomy.json · glossary.json
-├── patterns/  patterns.json + five playbooks
-├── markets/  ru · en · zh · vn · id · my guides
-├── prompts/{ru,en,zh,vi,id,ms}/  research loop, intake, research brief, storyline, slide writer, red team
+├── patterns/  patterns.json and five guides
+├── markets/  guides for the ru en zh vn id my markets
+├── prompts/{ru,en,zh,vi,id,ms}/  search, questions, story, slide text, review
 ├── templates/{ru,en,zh,vi,id,ms}/
-├── examples/  example_{ru,en,zh,vi,id,ms}/ (data-driven) · autonomous_shiftlyra/ (autonomous)
-├── tools/  Python tools + tools.json + agent_tools.py + mcp_server.py + tests/
-├── docs/  gallery images, social_preview.png, make_assets.py, github_settings.md
+├── examples/  example_{ru,en,zh,vi,id,ms} and autonomous_shiftlyra
+├── tools/  programs and tests
+├── docs/  gallery images
 └── LICENSE · CITATION.cff · SECURITY.md · CODE_OF_CONDUCT.md · CONTRIBUTING.md · pyproject.toml · .github/
 ```
 
 ## Principles
 
-* Never invent real-world facts; every real figure needs a link; every estimate shows its formula.
-* Benchmarks in `config/benchmarks.json` are rules of thumb, labelled as such.
-* Numbers come from tools, not from prose. One message per slide; titles state conclusions.
-* Examples are fictional products and say so (market data in the autonomous example is real and linked).
+* Real facts need a link. Every estimate shows its formula.
+* The values in `config/benchmarks.json` are approximate rules, and they are labelled as such.
+* Numbers come from tools, not from prose. One message per slide, and the title is the conclusion.
+* The examples are fictional products, and they say so. The market data in the example without
+  source data is real and linked.
 
-## Acknowledgements
-
-PitchComet was developed with personal hands-on experience together with AI
-assistants — in particular **Grok** and **GigaChat** — which were actively used for drafting,
-reviewing and refining the skill, its prompts, tools and documentation.
+## PitchComet was built on personal hands-on experience together with AI agents, including GigaChat and xAI tools
 
 ## Licence
 
-MIT — see [LICENSE](LICENSE).
+MIT, details are in the [LICENSE](LICENSE) file.
 
 ## Disclaimer
 
