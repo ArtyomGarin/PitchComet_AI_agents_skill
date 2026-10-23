@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use PitchComet in your work, please cite it as below."
+type: software
+title: "PitchComet: computed pitch decks and strategy reports for IT products"
+version: 0.1b0
+date-released: 2026-10-20
+license: MIT
+authors:
+  - name: "The PitchComet contributors"
+abstract: >-
+  An agent skill and Python toolkit that turns a short description of an IT product into an
+  editable pitch deck (.pptx) and strategy report (.docx) with computed market sizing
+  (TAM/SAM/SOM), growth, pricing, unit economics, a five-year financial model and valuation.
+  Every figure is either sourced with a link or a labelled estimate with its formula. Native
+  charts, a plain-language glossary, a QA gate and six locales (ru, en, zh, vi, id, ms).
+keywords:
+  - pitch deck
+  - market sizing
+  - financial model
+  - unit economics
+  - python-pptx
+  - python-docx
+  - agent skill
+  - model context protocol

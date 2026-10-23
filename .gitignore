@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+~$*
+
+# Generated outputs of user projects (examples keep a small curated set)
+work/
+output/
+!examples/*/output/
+examples/*/output/renders/**/*.pdf
+*.tmp
+.env
+# quickstart demo output and page renders (the repository keeps contact sheets only)
+examples/autonomous_shiftlyra/demo/
+examples/**/renders/**/page-*.png
+examples/**/renders/**/*.pdf

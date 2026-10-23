@@ -1,0 +1,9 @@
+# Core (required)
+python-docx>=1.1
+python-pptx>=1.0
+openpyxl>=3.1
+lxml>=4.9
+# Optional: contact sheets in tools/render_preview.py
+Pillow>=9.0
+# System packages (optional, only for PNG previews): LibreOffice (soffice), poppler-utils (pdftoppm),
+# and for Chinese renders a CJK font such as Noto Sans CJK SC (fonts-noto-cjk).

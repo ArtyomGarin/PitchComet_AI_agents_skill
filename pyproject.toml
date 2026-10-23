@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pitchcomet"
+version = "0.1b0"
+description = "Numbers-backed strategic reports (.docx) and decks (.pptx) for IT products: market sizing, financial model, potential scoring, QA; locales ru, en, zh, vi, id, ms."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "The contributors" }]
+requires-python = ">=3.10"
+dependencies = [
+  "python-docx>=1.1",
+  "python-pptx>=1.0",
+  "openpyxl>=3.1",
+  "lxml>=4.9",
+]
+keywords = ["pptx", "docx", "strategy", "market-sizing", "financial-model", "localization", "agent-skill"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Office/Business",
+]
+
+[project.optional-dependencies]
+preview = ["Pillow>=9.0"]
+
+[tool.setuptools]
+packages = []
+
+[tool.ruff]
+line-length = 120
