@@ -4,150 +4,200 @@
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![python](https://img.shields.io/badge/python-3.10%2B-3776AB)](pyproject.toml)
 [![tests](https://img.shields.io/badge/tests-unittest-brightgreen)](tools/tests)
-[![MCP](https://img.shields.io/badge/MCP-stdio%20server-8A9BC9)](README.md#agent-integration)
+[![locales](https://img.shields.io/badge/locales-ru%20%C2%B7%20en%20%C2%B7%20zh%20%C2%B7%20vi%20%C2%B7%20id%20%C2%B7%20ms-5CC8FF)](#locales)
+[![MCP](https://img.shields.io/badge/MCP-stdio%20server-8A9BC9)](#agent-integration)
 
 ![PitchComet](docs/social_preview.png)
 
-Скилл для ИИ-агента и набор Python-инструментов: из **короткого описания ИТ-продукта** получаются
-**рассчитанная питч-презентация (.pptx)** и **стратегический отчёт (.docx)**. Размер рынка, рост,
-цену, юнит-экономику, финансовую модель и оценку компании инструменты считают сами, если у
-пользователя нет данных. Нативные редактируемые диаграммы, одна база фактов для обоих документов,
-строгая проверка качества, шесть локалей.
+PitchComet это инструмент и набор инструкций. Он берёт короткое описание компьютерной программы
+и делает из него готовую презентацию (.pptx) и аналитический отчёт (.docx). Инструмент сам
+считает размер рынка, рост, цену, экономику одного клиента, финансовую модель и оценку
+стоимости, даже когда у пользователя нет своих данных. Диаграммы встроены в документы и их можно
+менять. Оба документа получают числа из одного источника. Программа поддерживает шесть языков.
 
-* **Автономный режим.** Профиль продукта → рынок, сегменты и ICP → план поиска в интернете →
-  реестр доказательств → TAM/SAM/SOM (сверху вниз, снизу вверх, по ценности + триангуляция), CAGR,
-  сценарии, цена по ценности, юнит-экономика (CAC, LTV, окупаемость по эталонным диапазонам),
-  ROI/TCO клиента, финмодель на 5 лет, NPV/IRR/MOIC, Rule of 40, оценка по аналогам.
-* **Ничего не выдумывается.** Каждая цифра — либо *факт из источника* (ссылка, год, дата
-  обращения), либо *помеченная оценка* (формула, входы, диапазон низкий–базовый–высокий,
-  уверенность). Остаётся только короткий список «уточнить у основателей» — он не блокирует презентацию.
-* **QA не пропускает** питч без размера рынка, CAGR или юнит-экономики и любые заглушки
-  «нет данных / TBD» на шести языках.
-* **Пять паттернов питча** — крупный инвестор, небольшой инвестор, корпоративный заказчик, МСП,
-  государство: порядок и число слайдов, обязательные метрики, веса скоринга, диаграммы, тон, призыв.
-* **Семь тем** — `light`, `dark`, `academic_light`, `comet`, `editorial`, `corporate`, `warm`
-  (все с настройками CJK-шрифтов).
-* Режим «по данным» сохранён: структурированные входы → `run_pipeline.py`.
-* Локали `ru`, `en`, `zh`, `vi`, `id`, `ms`; рыночные профили: Россия, США, Китай, Вьетнам,
-  Индонезия, Малайзия.
-* **«Что значат цифры».** Каждая презентация начинается с глоссария простыми словами: в нём ровно
-  те показатели, которые есть на слайдах. В отчёте такой же раздел. QA не пропустит показатель без объяснения.
-* **Готово для агентов.** `SKILL.md` для агентов со скиллами, JSON-схемы для вызова функций и MCP-сервер
-  без зависимостей.
+* **Режим без начальных данных.** Сначала инструмент понимает что за продукт и кто покупатель.
+  Дальше он собирает план поиска в интернете, список фактов со ссылками и считает размер рынка
+  тремя способами. Потом идёт рост, сценарии, цена, экономика одного клиента, выгода для
+  покупателя, финансовая модель на пять лет, доходность и оценка стоимости.
+* **Проверка качества.** Инструмент не пропускает презентацию без размера рынка, роста и
+  экономики клиента. Он также не пропускает пустые места вместо данных в любом из шести языков.
+* **Пять шаблонов презентаций.** Для крупного инвестора, для небольшого инвестора, для крупной
+  компании покупателя, для малого бизнеса и для государства. Каждый шаблон меняет порядок
+  слайдов, длину, набор обязательных чисел, оценку, диаграммы, тон и финальный призыв.
+* **Семь стилей оформления.** Светлый, тёмный, академический, комета, издательский, корпоративный
+  и тёплый. Все поддерживают восточные шрифты.
+* **Режим с готовыми данными тоже есть.** Если у пользователя уже есть свои цифры, он заполняет
+  шаблоны входных данных и запускает основной конвейер.
+* **Что значат числа.** Каждая презентация начинается со слайда, где простыми словами объяснены
+  только те показатели, которые в ней есть. В отчёте есть такой же раздел. Проверка качества
+  не пропускает документ, если какой то показатель не объяснён.
+* **Готово для агентов.** Инструкция для программ помощников лежит в отдельном файле. Есть
+  описания функций для вызова и простой сервер без внешних зависимостей.
+* **Языки.** Русский, английский, китайский, вьетнамский, индонезийский и малайский. Профили
+  рынков для России, США, Китая, Вьетнама, Индонезии и Малайзии.
 
-Другие языки: [English](README.md) · [简体中文](README.zh-CN.md)
+Другие языки: [Русский](README.ru.md) · [简体中文](README.zh-CN.md)
 
 ## Галерея
 
-![Презентация](docs/deck_large_investor_en.png)
+Полная англоязычная презентация для инвестора в стиле комета, по описанию выше.
 
-| Пять паттернов | Семь тем |
+![Deck](docs/deck_large_investor_en.png)
+
+| Первые слайды пяти шаблонов | Семь стилей оформления |
 |---|---|
-| ![Паттерны](docs/patterns.png) | ![Темы](docs/themes.png) |
+| ![Patterns](docs/patterns.png) | ![Themes](docs/themes.png) |
 
-| Глоссарий на шести языках | Отчёт (.docx) |
+Слайд со словарём на шести языках и сам отчёт.
+
+| Словарь на шести языках | Отчёт (.docx) |
 |---|---|
-| ![Глоссарий](docs/glossary_locales.png) | ![Отчёт](docs/report_en.png) |
+| ![Glossary](docs/glossary_locales.png) | ![Report](docs/report_en.png) |
 
-Это контактные листы настоящих результатов из `examples/`; пересобрать: `python docs/make_assets.py`.
+Все картинки это копии настоящих результатов из папки примеров. Команда
+`python docs/make_assets.py` создаёт их заново.
 
-## По шагам — автономно
+
+## Пошагово без начальных данных
 
 ```bash
 pip install -r requirements.txt
-# 1. план исследования: профиль, определение рынка, ключи реестра, поисковые запросы
-python tools/auto_pitch.py --brief examples/autonomous_shiftlyra/brief_ru.json --plan-only < /dev/null
-# 2. агент ищет данные (prompts/ru/research_loop.md) и заполняет реестр
-python tools/research_ledger.py validate --input examples/autonomous_shiftlyra/ledger_ru.json < /dev/null
-# 3. расчёт + сборка + QA (+ PNG-превью)
-python tools/auto_pitch.py --brief examples/autonomous_shiftlyra/brief_ru.json \
-       --pattern small_investor --theme warm --render < /dev/null
+# 1. план поиска, профиль продукта, определение рынка и ключи для фактов
+python tools/auto_pitch.py --brief examples/autonomous_shiftlyra/brief_en.json --plan-only < /dev/null
+# 2. агент ищет данные по инструкции prompts/<locale>/research_loop.md и заполняет список фактов
+python tools/research_ledger.py validate --input examples/autonomous_shiftlyra/ledger_en.json < /dev/null
+# 3. расчёт, сборка, проверка качества и картинки страниц
+python tools/auto_pitch.py --brief examples/autonomous_shiftlyra/brief_en.json \
+       --pattern large_investor --theme comet --render < /dev/null
 ```
 
-Бриф — это название, описание, рынок и аудитория:
+Описание продукта это просто название, текст о том что он делает и для кого, рынок и аудитория.
 
 ```json
-{"name": "Мой продукт", "text": "Абзац о том, что делает продукт и для кого",
- "market": "ru", "locale": "ru", "audience": "бизнес-ангелы", "ledger": "ledger.json"}
+{"name": "My product", "text": "One paragraph about what it does and for whom",
+ "market": "en", "locale": "en", "audience": "seed funds", "ledger": "ledger.json"}
 ```
 
-Без реестра запуск всё равно завершается — с помеченными офлайн-допущениями и водяным знаком
-«черновик без исследования». Результат: `profile.json`, `market_definition.json`,
-`research_plan.json`, `ledger_full.json`, `facts.json`, `deck*.pptx`, `report.docx`,
-`qa_<тема>.json`, `auto_summary.json` (паттерн, QA, ключевые цифры, что уточнить), `renders/`.
+Если файла с фактами нет, инструмент всё равно доделает работу. Он использует помеченные
+приближённые значения и ставит на документ пометку о черновике без проверенных данных. В
+результате вы получите профиль продукта, определение рынка, план поиска, полный список фактов,
+итоговые числа, презентацию, отчёт, результат проверки качества и короткий список того что
+стоит уточнить.
 
-## По шагам — по данным
+## Пошагово с готовыми данными
 
 ```bash
-python tools/run_pipeline.py --project examples/example_ru/project.json --theme light --theme editorial < /dev/null
-python tools/new_project.py --dir work/my_product --name "Мой продукт" --locale ru
+python tools/run_pipeline.py --project examples/example_en/project.json --theme light --theme editorial < /dev/null
+python tools/new_project.py --dir work/my_product --name "My product" --locale en
 ```
 
-Для превью нужны LibreOffice и poppler-utils; для китайского — CJK-шрифт (например, `fonts-noto-cjk`).
+Для картинок страниц нужны LibreOffice и poppler. Для китайского языка нужен восточный шрифт.
 
 ```bash
 python -m unittest discover -s tools/tests -v < /dev/null
 ```
 
-## Паттерны питча
+## Шаблоны презентаций
 
-| id | Аудитория | Тема | Слайдов | Обязательно |
+| Название | Для кого | Стиль | Слайдов | Обязательные числа |
 |---|---|---|---|---|
-| `large_investor` | фонд роста / поздние стадии | comet | 15–20 | TAM, SAM, SOM, CAGR, LTV/CAC, Rule of 40, IRR, MOIC |
-| `small_investor` | бизнес-ангел / pre-seed / seed (по умолчанию) | warm | 10–14 | TAM, SOM, CAGR, LTV/CAC, MOIC |
-| `corporate` | крупный заказчик / партнёр | corporate | 9–13 | ROI клиента, TCO, окупаемость |
+| `large_investor` | фонд роста, поздние стадии | comet | 15–20 | TAM, SAM, SOM, CAGR, LTV/CAC, Rule of 40, IRR, MOIC |
+| `small_investor` | бизнес-ангел, pre-seed, seed | warm | 10–14 | TAM, SOM, CAGR, LTV/CAC, MOIC |
+| `corporate` | крупный покупатель или партнёр | corporate | 9–13 | выгода клиента, общая стоимость владения, окупаемость |
 | `smb` | владельцы малого бизнеса | warm | 6–9 | цена в месяц, экономия, окупаемость |
-| `government` | грант / госпрограмма | corporate | 11–15 | SAM, CAGR, ROI, общественный эффект |
+| `government` | грант, государственная программа | corporate | 11–15 | SAM, CAGR, выгода, общественный эффект |
 
-`--pattern auto` выбирает паттерн по полю `audience`. Плейбуки: [`patterns/`](patterns/README.md).
+Команда `--pattern auto` подбирает шаблон по описанию аудитории. Подробности в папке
+[`patterns/`](patterns/README.md).
 
-## Локали
+## Языки
 
-| Локаль | Пример суммы | Даты | Цитирование (по умолчанию) | Гид по рынку |
+| Язык | Пример денег | Даты | Ссылки на источники | Руководство по рынку |
 |---|---|---|---|---|
-| `ru` | `3,0 млрд ₽` | 20.10.2026 | ГОСТ Р 7.0.5-2008, сноски | `markets/ru.md` |
-| `en` | `$3.0B` | October 20, 2026 | APA 7 (есть Chicago) | `markets/en.md` |
-| `zh` | `30.0亿元` | 2026年10月20日 | GB/T 7714-2015, нумерация | `markets/zh.md` |
+| `ru` | `3,0 млрд ₽` | 20.10.2026 | ГОСТ Р 7.0.5 2008, сноски | `markets/ru.md` |
+| `en` | `$3.0B` | October 20, 2026 | APA 7, можно Chicago | `markets/en.md` |
+| `zh` | `30.0亿元` | 2026年10月20日 | GB/T 7714 2015, цифры | `markets/zh.md` |
 | `vi` | `3,0 nghìn tỷ ₫` | ngày 20 tháng 10 năm 2026 | APA 7 | `markets/vn.md` |
 | `id` | `Rp3,0 triliun` | 20 Oktober 2026 | APA 7 | `markets/id.md` |
 | `ms` | `RM3.0 bilion` | 20 Oktober 2026 | APA 7 | `markets/my.md` |
 
-Повествовательный текст автономного режима написан на русском и английском; остальные локали
-получают английский текст с форматами своей локали (формулировки добавляются в `tools/pitch_story.py`).
+Текст в режиме без начальных данных написан на русском и английском. Остальные языки получают
+английский текст с правильным форматом чисел и дат для своего языка.
 
-## Подключение к агенту
+## Подключение к агентам
 
-* **Как скилл.** Агенты, которые загружают папки скиллов, читают [`SKILL.md`](SKILL.md).
-* **Вызов функций.** `python tools/agent_tools.py schemas` печатает шесть инструментов с JSON-схемами
-  (`--format mcp` для формата MCP). В коде: `from agent_tools import schemas, call_tool`.
-* **MCP-сервер.** `python tools/mcp_server.py` работает по stdio без зависимостей:
-  `{"mcpServers": {"pitchcomet": {"command": "python", "args": ["/path/to/pitchcomet/tools/mcp_server.py"]}}}`
-* **CLI.** Все инструменты запускаются как обычные команды.
+PitchComet это папка, которой программа помощник может пользоваться тремя способами. Каждый
+способ запускает те же самые программы командной строки.
 
-Подробнее с примерами: [README.md#agent-integration](README.md#agent-integration).
+**1. Как навык.** Программы помощники, которые умеют читать папки навыков, читают файл
+[`SKILL.md`](SKILL.md). Скопируйте папку в каталог навыков вашего помощника.
+
+**2. Вызов функций.** Есть шесть функций с описаниями в формате JSON Schema.
+
+```bash
+python tools/agent_tools.py schemas                # список из имени, описания и параметров
+python tools/agent_tools.py schemas --format mcp   # тот же список в формате для MCP
+```
+
+```json
+{"name": "pitchcomet_build",
+ "description": "Autonomous mode: brief + evidence ledger → computed TAM/SAM/SOM, CAGR, ... → deck.pptx + report.docx → QA.",
+ "parameters": {"type": "object", "required": ["brief"],
+   "properties": {"brief": {"type": "string"},
+                  "pattern": {"enum": ["auto", "large_investor", "small_investor", "corporate", "smb", "government"]},
+                  "themes": {"type": "array", "items": {"type": "string"}},
+                  "render": {"type": "boolean"}}}}
+```
+
+Передайте этот список любой языковой модели, которая умеет вызывать функции, а сами вызовы
+направьте в одну функцию.
+
+```python
+import sys; sys.path.insert(0, "tools")
+from agent_tools import schemas, call_tool
+
+tools = schemas()                       # отдайте это модели
+result = call_tool("pitchcomet_build",  # когда модель вызывает функцию
+                   {"brief": "examples/autonomous_shiftlyra/brief_en.json", "pattern": "auto"})
+print(result["ok"], result["json"]["qa"])
+```
+
+Функции для вызова: `pitchcomet_plan`, `pitchcomet_build`, `pitchcomet_pipeline`, `pitchcomet_qa`,
+`pitchcomet_metric`, `pitchcomet_glossary`. Подробные описания для каждого модуля лежат в файле
+`tools/tools.json`.
+
+**3. Сервер MCP.** Программа `tools/mcp_server.py` работает по протоколу Model Context Protocol
+через стандартный ввод и вывод. Зависимостей нет. Добавьте её в любой клиент MCP.
+
+```json
+{"mcpServers": {"pitchcomet": {"command": "python", "args": ["/path/to/pitchcomet/tools/mcp_server.py"]}}}
+```
+
+**Командная строка.** Всё также работает как обычные команды. Поэтому агентам, которые умеют
+только запускать команды, больше ничего не нужно.
 
 ## Инструменты
 
-| Инструмент | Назначение |
+| Инструмент | Что делает |
 |---|---|
-| `tools/auto_pitch.py` | автономный режим: бриф → план → реестр и оценки → паттерн → дека и отчёт → QA |
-| `tools/product_profiler.py` | категория, покупатель, единица, модель цены, развёртывание, стадия по описанию |
-| `tools/market_definer.py` | коды классификаторов, сегменты, ICP, план исследования, запросы, официальные источники |
-| `tools/research_ledger.py` | реестр доказательств: проверка, дедупликация, валюта и год цен, разрешение конфликтов |
-| `tools/estimator.py` | помеченные оценки: диапазоны, методы оценки рынка, триангуляция, CAGR, цена, юнит-экономика, аналоги |
-| `tools/pitch_story.py` | текст под каждый паттерн, заметки докладчика, приложение «цифры презентации» |
-| `tools/run_pipeline.py` | полный конвейер: рынок → финансы → скоринг → факты → docx + pptx → QA → превью |
-| `tools/market_sizing.py` · `tools/financial_model.py` · `tools/scoring.py` | рынок, P&L/NPV/IRR/MOIC, балл потенциала |
-| `tools/metrics_calc.py` | ~50 метрик, включая ROI и TCO клиента и ценность для МСП в месяц |
-| `tools/build_docx.py` · `tools/build_pptx.py` | сборщики с нативными диаграммами и темами |
-| `tools/qa_check.py` | QA, включая проверку полноты (`--pattern`, `--no-completeness`) |
-| `tools/glossary.py` | глоссарий простыми словами: находит показатели в презентации или отчёте; определения в `config/glossary.json` |
-| `tools/agent_tools.py` · `tools/mcp_server.py` | схемы для вызова функций и диспетчер; MCP-сервер по stdio |
-| `tools/render_preview.py` · `tools/citations.py` · `tools/new_project.py` | превью, библиография, заготовка проекта |
+| `tools/auto_pitch.py` | режим без данных, от описания до презентации с проверкой качества |
+| `tools/product_profiler.py` | понимает категорию, покупателя, единицу, цену и стадию по описанию |
+| `tools/market_definer.py` | коды классификации, сегменты, целевой клиент, план поиска и источники |
+| `tools/research_ledger.py` | список фактов со ссылками, проверка и разрешение расхождений |
+| `tools/estimator.py` | помеченные оценки, диапазоны, размер рынка, рост, цена и экономика клиента |
+| `tools/pitch_story.py` | текст для каждого шаблона, заметки докладчика и приложение с числами |
+| `tools/run_pipeline.py` | полный конвейер от рынка и финансов до документов и проверки качества |
+| `tools/market_sizing.py` `tools/financial_model.py` `tools/scoring.py` | размер рынка, деньги и доходность, оценка |
+| `tools/metrics_calc.py` | около пятидесяти показателей включая выгоду клиента и стоимость владения |
+| `tools/build_docx.py` `tools/build_pptx.py` | сборка документов со встроенными диаграммами и стилями |
+| `tools/qa_check.py` | проверка качества включая обязательный словарь и обязательные числа |
+| `tools/glossary.py` | словарь простыми словами, находит показатели которые показаны в документе |
+| `tools/agent_tools.py` `tools/mcp_server.py` | описания функций и сервер MCP |
+| `tools/render_preview.py` `tools/citations.py` `tools/new_project.py` | картинки страниц, ссылки, создание проекта |
 
-Подробности: [`tools/README.md`](tools/README.md); схемы: `tools/tools.json`.
+Подробности в [`tools/README.md`](tools/README.md). Описания схем в `tools/tools.json`.
 
-## Структура репозитория
+## Структура папки
 
 ```
 pitchcomet/
@@ -155,31 +205,31 @@ pitchcomet/
 ├── README.md · README.ru.md · README.zh-CN.md · ADAPTING.md · CHANGELOG.md
 ├── deck_structure.md · style_guide.md · metrics.md · scoring_model*.md
 ├── config/  scoring_model.json · banned_phrases.json · themes.json · benchmarks.json · market_taxonomy.json · glossary.json
-├── patterns/  patterns.json + пять плейбуков
-├── markets/  гиды ru · en · zh · vn · id · my
-├── prompts/{ru,en,zh,vi,id,ms}/  цикл исследования, анкета, задание на исследование, сюжет, слайды, «красная команда»
+├── patterns/  patterns.json и пять руководств
+├── markets/  руководства для рынков ru en zh vn id my
+├── prompts/{ru,en,zh,vi,id,ms}/  поиск, вопросы, сюжет, текст слайдов, проверка
 ├── templates/{ru,en,zh,vi,id,ms}/
-├── examples/  example_{ru,en,zh,vi,id,ms}/ (по данным) · autonomous_shiftlyra/ (автономно)
-├── tools/  инструменты + tools.json + tests/
-└── LICENSE · CONTRIBUTING.md · pyproject.toml · requirements.txt · .github/workflows/tests.yml
+├── examples/  example_{ru,en,zh,vi,id,ms} и autonomous_shiftlyra
+├── tools/  программы и тесты
+├── docs/  картинки для галереи
+└── LICENSE · CITATION.cff · SECURITY.md · CODE_OF_CONDUCT.md · CONTRIBUTING.md · pyproject.toml · .github/
 ```
 
 ## Принципы
 
-* Не выдумывать реальные факты; у каждой реальной цифры — ссылка; у каждой оценки — формула.
-* Эталоны в `config/benchmarks.json` — эмпирические правила, так и помечены.
-* Числа берутся из инструментов, а не из текста. Одна мысль на слайд; заголовки — выводы.
-* Примеры — вымышленные продукты, это указано (рыночные данные автономного примера реальные, со ссылками).
+* Для настоящих фактов нужна ссылка. Каждая оценка показывает свою формулу.
+* Значения в `config/benchmarks.json` это примерные правила, и они так помечены.
+* Числа приходят из инструментов, а не из текста. Одна мысль на слайд, заголовок это вывод.
+* Примеры это вымышленные продукты, и они об этом говорят. Рыночные данные в примере без
+  начальных данных настоящие и со ссылками.
 
-## PitchComet разработан с использованием личного практического опыта, а также
-ИИ-ассистентов — в первую очередь **Grok** и **GigaChat**, которые активно применялись для
-написания, рецензирования и доработки скилла, его промптов, инструментов и документации.
+## PitchComet создан на основе личного практического опыта вместе с ИИ-агентами, включая "Гигачат" и решения xAI
 
 ## Лицензия
 
-MIT — см. [LICENSE](LICENSE).
+MIT, подробности в файле [LICENSE](LICENSE).
 
-## Отказ от ответственности
+## Disclaimer
 
 PitchComet формирует черновики автоматически. Результат **не является юридической консультацией
 и не является инвестиционной рекомендацией**. Каждую цифру перед использованием необходимо
