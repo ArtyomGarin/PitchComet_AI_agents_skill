@@ -1,0 +1,347 @@
+{
+  "_template_note": "TEMPLAT daripada contoh rekaan Velordoc. Gantikan semua teks dan angka dengan data projek anda; kekalkan pemegang tempat «{ {path|format} }» yang merujuk kepada facts.json. Kunci bermula dengan '_' diabaikan oleh alat.",
+  "meta": {
+    "title": "Velordoc — penilaian strategik (CONTOH REKAAN)",
+    "author": "Pasukan analisis strategi (contoh)",
+    "locale": "ms",
+    "currency": "MYR",
+    "theme": "light",
+    "slide_numbers": true,
+    "watermark": "CONTOH · data rekaan"
+  },
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Velordoc: AI di premis yang membaca, menyemak dan menghala dokumen perniagaan",
+      "subtitle": "Penilaian potensi produk dan tesis pelaburan · peringkat perintis",
+      "author": "Pasukan analisis strategi (contoh)",
+      "date": "Oktober 2026",
+      "notes": "CONTOH REKAAN untuk kemahiran PitchComet. Semua angka direka dan dikira dengan alat dalam tools/."
+    },
+    {
+      "layout": "big_number",
+      "title": "Potensi {{score.total|num0}}/100: masalah dan pasaran kukuh, tetapi bukti jualan masih sedikit",
+      "numbers": [
+        {
+          "value": "{{market.sam_base|money_bn}}",
+          "label": "Pasaran boleh dilayan (SAM), {{market.base_year}}",
+          "context": "bawah ke atas bagi 4 segmen; atas ke bawah berbeza {{market.td_bu_ratio_tam|x1}}"
+        },
+        {
+          "value": "{{fin.revenue_last|money_mn0}}",
+          "label": "Hasil {{fin.end_year}}, senario asas",
+          "context": "EBITDA positif pada {{fin.breakeven_year}}"
+        },
+        {
+          "value": "{{fin.moic_base|x1}}",
+          "label": "MOIC pelabur, senario asas",
+          "context": "IRR {{fin.irr_base|pct0}}; optimis {{fin.moic_bull|x1}}"
+        }
+      ],
+      "source": "model contoh (market_sizing.py, financial_model.py, scoring.py); data rekaan",
+      "notes": "Jawapan dahulu: skor, pasaran, hasil asas dan pulangan pelabur; butiran menyusul."
+    },
+    {
+      "layout": "bullets",
+      "title": "Kakitangan pejabat belakang mengambil 15 minit setiap dokumen untuk kemasukan dan semakan manual — kesesakan dalam kewangan dan perolehan",
+      "bullets": [
+        "**32 temu bual** dengan ketua operasi kewangan dan perolehan (contoh)",
+        "**15 minit** setiap kontrak atau invois: membaca, memasukkan, menyemak silang",
+        "Perkhidmatan awan tidak dibenarkan untuk dokumen **sulit**",
+        "OCR berasaskan templat gagal pada format baharu: **18% medan** perlu dibuat semula",
+        "Mengapa sekarang: model bahasa terbuka kini berjalan pada satu pelayan tempatan"
+      ],
+      "source": "temu bual dan kajian masa dalam perintis contoh; data rekaan",
+      "notes": "Nyatakan masalah dengan kata-kata pelanggan dan unit yang boleh diukur (minit, bahagian medan)."
+    },
+    {
+      "layout": "two_column",
+      "title": "Penyelesaian: aliran tempatan “klasifikasi → ekstrak → sahkan → hala” menggantikan kemasukan manual",
+      "left": {
+        "heading": "Hari ini",
+        "bullets": [
+          "Membaca dan memasukkan data secara manual",
+          "Peraturan gagal pada templat baharu",
+          "Semakan ERP secara manual",
+          "Awan dilarang oleh dasar keselamatan"
+        ]
+      },
+      "right": {
+        "heading": "Dengan Velordoc",
+        "bullets": [
+          "Kira-kira 3 minit setiap dokumen",
+          "Model menyesuaikan format baharu",
+          "Semakan automatik dengan data ERP",
+          "Berjalan dalam rangkaian pelanggan"
+        ]
+      },
+      "notes": "Demo langsung pada dokumen tanpa nama lebih berkesan daripada mock-up."
+    },
+    {
+      "layout": "chart",
+      "title": "Pasaran boleh dilayan {{market.sam_base|money_bn}} pada {{market.base_year}}; bahagian boleh dicapai menjelang {{market.horizon_year}} {{market.som_horizon_base|money_mn0}}",
+      "chart": {
+        "$ref": "charts.tam_sam_som"
+      },
+      "takeaway": [
+        "TAM {{market.tam_base|money_bn}}: 4 segmen × bilangan organisasi × nilai kontrak tahunan",
+        "SAM: hanya pembeli yang mewajibkan pemasangan di premis",
+        "TAM atas ke bawah = {{market.tam_td|money_bn}}: beza {{market.td_bu_ratio_tam|x1}}, dalam had 2x"
+      ],
+      "source": "anggaran bawah ke atas (market_sizing.py); data rekaan; {{project.units.bn}}",
+      "notes": "TAM→SAM→SOM sebagai corong; SAM ditonjolkan. Bawah ke atas utama, atas ke bawah sebagai semakan."
+    },
+    {
+      "layout": "table",
+      "title": "Bank dan sektor awam membentuk bahagian SAM terbesar; pembeli kerajaan membayar kontrak tahunan tertinggi",
+      "columns": [
+        "Segmen",
+        "Organisasi",
+        "Kontrak tahunan",
+        "TAM",
+        "SAM",
+        "SOM 2030"
+      ],
+      "rows": {
+        "$ref": "tables.segments"
+      },
+      "col_widths": [
+        4.2,
+        1.6,
+        1.7,
+        1.6,
+        1.6,
+        1.6
+      ],
+      "source": "anggaran bawah ke atas (market_sizing.py); data rekaan",
+      "notes": "Setiap baris ialah andaian yang boleh diuji."
+    },
+    {
+      "layout": "chart",
+      "title": "SAM meningkat kepada {{market.sam_horizon_base|money_bn}} menjelang {{market.horizon_year}} pada kadar {{market.cagr_base|pct0}} setahun (senario asas)",
+      "chart": {
+        "$ref": "charts.sam_scenarios"
+      },
+      "takeaway": [
+        "Pesimis: {{market.cagr_bear|pct0}} setahun → {{market.sam_horizon_bear|money_bn}}",
+        "Optimis: {{market.cagr_bull|pct0}} setahun → {{market.sam_horizon_bull|money_bn}}",
+        "Secara benar (inflasi 2.5%): pertumbuhan asas {{market.real_cagr_base|pct0}}"
+      ],
+      "source": "andaian senario contoh (market_sizing.py); nilai nominal; {{project.units.bn}}",
+      "notes": "Unjuran sentiasa dalam senario; nominal dan benar dipisahkan."
+    },
+    {
+      "layout": "big_number",
+      "title": "Perintis: pemprosesan 5x lebih pantas, ketepatan ekstrak {{metrics.pilot_accuracy.value|pp0}} lebih tinggi daripada OCR templat",
+      "numbers": [
+        {
+          "value": "−{{metrics.pilot_roi.time_reduction|pct0}}",
+          "label": "masa kakitangan setiap dokumen",
+          "context": "15 → 3 minit, 3 perintis"
+        },
+        {
+          "value": "+{{metrics.pilot_accuracy.value|pp0}}",
+          "label": "ketepatan ekstrak medan",
+          "context": "{{metrics.pilot_accuracy.accuracy_model|pct0}} berbanding {{metrics.pilot_accuracy.accuracy_baseline|pct0}}, 2,000 medan"
+        },
+        {
+          "value": "{{metrics.pilot_roi.value|pct0}}",
+          "label": "ROI pelanggan dalam 3 tahun",
+          "context": "tempoh pulangan ≈ {{metrics.pilot_roi.payback_months|num0}} bulan"
+        }
+      ],
+      "source": "kajian masa dan sampel berlabel perintis (metrics_calc.py: automation_roi, accuracy_vs_baseline); data rekaan",
+      "notes": "Keputusan pelanggan dalam metrik pelanggan, dengan saiz sampel."
+    },
+    {
+      "layout": "matrix",
+      "title": "Berbanding alternatif: lebih tepat daripada OCR templat dan, tidak seperti perkhidmatan awan, berjalan dalam rangkaian pelanggan",
+      "x_label": "Ketepatan pada format dokumen baharu",
+      "y_label": "Kesesuaian untuk pemasangan persendirian",
+      "quadrants": [
+        "",
+        "Kedudukan sasaran",
+        "",
+        ""
+      ],
+      "items": [
+        {
+          "name": "OCR templat",
+          "x": 0.3,
+          "y": 0.75
+        },
+        {
+          "name": "AI dokumen awan",
+          "x": 0.78,
+          "y": 0.15
+        },
+        {
+          "name": "Kemasukan data luar",
+          "x": 0.5,
+          "y": 0.45
+        },
+        {
+          "name": "Velordoc",
+          "x": 0.82,
+          "y": 0.85,
+          "highlight": true
+        }
+      ],
+      "takeaway": [
+        "Kelebihan: korpus 1.2 juta dokumen berlabel dan penyambung ERP",
+        "Risiko: platform besar mungkin melancarkan edisi di premis dalam 12–18 bulan"
+      ],
+      "source": "penilaian pakar pasukan; perbandingan mengikut kategori penyelesaian, bukan syarikat tertentu",
+      "notes": "Matriks ialah penilaian pakar; pesaing dinamakan mengikut kategori."
+    },
+    {
+      "layout": "scorecard",
+      "title": "Skor {{score.total|num0}}/100 (gred {{score.grade}}): jurang utama ialah daya tarikan dan ekonomi unit yang terbukti",
+      "criteria": {
+        "$ref": "tables.scorecard"
+      },
+      "total": {
+        "$ref": "score.total"
+      },
+      "grade": "{{score.grade}}",
+      "grade_label": "{{score.grade_label}}",
+      "range": [
+        {
+          "$ref": "score.range_lo"
+        },
+        {
+          "$ref": "score.range_hi"
+        }
+      ],
+      "source": "scoring.py, profil “perintis / pelabur”; skor rekaan",
+      "notes": "Julat mencerminkan kualiti bukti: andaian (C) ±1, anggaran (B) ±0.5."
+    },
+    {
+      "layout": "table",
+      "title": "Pelan asas: hasil meningkat daripada {{fin.revenue_first|money_mn0}} kepada {{fin.revenue_last|money_mn0}}; EBITDA positif pada {{fin.breakeven_year}}",
+      "columns": {
+        "$ref": "tables.pnl_columns"
+      },
+      "rows": {
+        "$ref": "tables.pnl"
+      },
+      "col_widths": [
+        3.6,
+        1.7,
+        1.7,
+        1.7,
+        1.7,
+        1.7
+      ],
+      "source": "financial_model.py, senario asas; nilai nominal; data rekaan",
+      "notes": "LTV dihadkan kepada 5 tahun hayat pelanggan."
+    },
+    {
+      "layout": "chart",
+      "title": "Julat hasil luas: hasil {{fin.end_year}} antara {{fin.revenue_last_bear|money_mn0}} dan {{fin.revenue_last_bull|money_mn0}}",
+      "chart": {
+        "$ref": "charts.revenue_scenarios"
+      },
+      "takeaway": [
+        "Pemacu utama: pelanggan baharu dan nilai kontrak",
+        "Pesimis: perlu pusingan tambahan; tunai minimum {{fin.min_cash_bear|money_mn0}}",
+        "Optimis: EBITDA positif seawal {{fin.breakeven_bull}}"
+      ],
+      "source": "financial_model.py, senario asas; nilai nominal; data rekaan; {{project.units.mn}}",
+      "notes": "Senario ialah pengganda untuk pelanggan baharu, nilai kontrak dan kadar berhenti."
+    },
+    {
+      "layout": "table",
+      "title": "Pulangan pelabur {{fin.moic_base|x1}} dalam senario asas, di bawah tanda aras teroka 3x; senario optimis {{fin.moic_bull|x1}}",
+      "columns": [
+        "Senario",
+        "Hasil 2030",
+        "EBITDA > 0",
+        "NPV pada {{fin.discount_rate|pct0}}",
+        "MOIC",
+        "IRR"
+      ],
+      "rows": {
+        "$ref": "tables.fin_scenarios"
+      },
+      "col_widths": [
+        2.6,
+        1.9,
+        1.7,
+        1.9,
+        1.4,
+        1.4
+      ],
+      "highlight_row": 1,
+      "source": "financial_model.py; pelaburan RM22 juta pada penilaian pra-wang RM68 juta, keluar 2030 pada 4x hasil, pencairan 15%; data rekaan",
+      "notes": "Pulangan mengikut senario dengan andaian masuk dan keluar yang jelas."
+    },
+    {
+      "layout": "two_column",
+      "title": "Empat risiko utama boleh diurus jika pembaharuan kontrak pertama berlaku sebelum akhir 2027",
+      "left": {
+        "heading": "Risiko",
+        "bullets": [
+          "Perintis tidak menjadi kontrak",
+          "Tumpuan: 42% hasil daripada satu pelanggan",
+          "Platform melancarkan edisi di premis",
+          "Kos infrastruktur GPU meningkat"
+        ]
+      },
+      "right": {
+        "heading": "Mitigasi",
+        "bullets": [
+          "Kontrak dengan ambang metrik sebelum perintis",
+          "Pelan: 10 pembaharuan sebelum S4 2027",
+          "Templat industri dan penyambung ERP",
+          "Model terkuantum, sandaran CPU"
+        ]
+      },
+      "notes": "Satu mitigasi dan satu metrik kawalan bagi setiap risiko."
+    },
+    {
+      "layout": "timeline",
+      "title": "Dalam 18 bulan: 10 kontrak diperbaharui, pencapaian pematuhan selesai dan perintis eksport pertama",
+      "steps": [
+        {
+          "label": "S4 2026",
+          "title": "Pembiayaan dan pasukan",
+          "text": "RM22 juta; +6 jurutera, ketua jualan korporat"
+        },
+        {
+          "label": "S1 2027",
+          "title": "Pematuhan",
+          "text": "Program PDPA lengkap (DPO, proses pelanggaran data); permohonan status MD"
+        },
+        {
+          "label": "S2 2027",
+          "title": "Jualan berulang",
+          "text": "5 kontrak diperbaharui, kitaran ≤ 6 bulan"
+        },
+        {
+          "label": "S4 2027",
+          "title": "Skala",
+          "text": "10 kontrak, NRR ≥ 110%, 2 penyepadu"
+        },
+        {
+          "label": "S2 2028",
+          "title": "Eksport",
+          "text": "Perintis di pasaran jiran; keputusan pusingan RM17 juta"
+        }
+      ],
+      "source": "pelan pasukan contoh; data rekaan",
+      "notes": "Pencapaian bertarikh, boleh disahkan dan dikawal pasukan."
+    },
+    {
+      "layout": "closing",
+      "title": "Permintaan: RM22 juta untuk {{fin.ownership_entry|pct0}} ekuiti sehingga jualan berulang terbukti",
+      "bullets": [
+        "Tranche 1 — RM14 juta sekarang; tranche 2 — RM9 juta selepas 5 kontrak diperbaharui",
+        "Kerusi lembaga untuk pelabur; laporan suku tahunan 6 metrik",
+        "Keputusan hari ini: luluskan term sheet dan usaha wajar 6 minggu"
+      ],
+      "contact": "Hubungi: ketua projek · team@example.org (contoh)",
+      "notes": "Satu permintaan, satu angka, satu keputusan."
+    }
+  ]
+}

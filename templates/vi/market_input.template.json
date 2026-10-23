@@ -1,0 +1,83 @@
+{
+  "_template_note": "MẪU dựa trên ví dụ hư cấu Velordoc. Thay toàn bộ văn bản và số liệu bằng dữ liệu dự án của bạn; giữ các chỗ giữ chỗ «{ {path|format} }» trỏ tới facts.json. Các khóa bắt đầu bằng '_' bị công cụ bỏ qua.",
+  "_EXAMPLE_DATA": "SẢN PHẨM HƯ CẤU \"Velordoc\". Mọi dữ liệu đều được tạo ra để minh họa công cụ; mọi sự trùng hợp với công ty thực tế là ngẫu nhiên.",
+  "currency": "VND",
+  "base_year": 2025,
+  "horizon_year": 2030,
+  "primary": "bottom_up",
+  "top_down": {
+    "total_market": 225000000000000.0,
+    "total_market_label": "Thị trường minh họa phần mềm thu nhận và xử lý chứng từ, 2025",
+    "source": "EXAMPLE",
+    "filters": [
+      {
+        "name": "Tỷ trọng chi tiêu cho xử lý tài liệu thông minh bằng AI",
+        "share": 0.14,
+        "level": "TAM",
+        "rationale": "EXAMPLE"
+      },
+      {
+        "name": "Khách hàng yêu cầu triển khai tại chỗ",
+        "share": 0.4,
+        "level": "SAM",
+        "rationale": "EXAMPLE"
+      },
+      {
+        "name": "Thị phần đạt được đến 2030",
+        "share": 0.06,
+        "level": "SOM",
+        "rationale": "EXAMPLE"
+      }
+    ]
+  },
+  "bottom_up": {
+    "segments": [
+      {
+        "name": "Ngân hàng và bảo hiểm",
+        "units": 4000,
+        "arpa": 1500000000.0,
+        "sam_share": 0.5,
+        "som_share": 0.06,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "Cơ quan nhà nước và DNNN",
+        "units": 3000,
+        "arpa": 2000000000.0,
+        "sam_share": 0.6,
+        "som_share": 0.05,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "Tập đoàn sản xuất",
+        "units": 12000,
+        "arpa": 750000000.0,
+        "sam_share": 0.35,
+        "som_share": 0.04,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "Logistics và bán lẻ",
+        "units": 15000,
+        "arpa": 500000000.0,
+        "sam_share": 0.3,
+        "som_share": 0.04,
+        "source": "EXAMPLE"
+      }
+    ]
+  },
+  "growth": {
+    "cagr": {
+      "bear": 0.1,
+      "base": 0.18,
+      "bull": 0.26
+    }
+  },
+  "som_ramp": "s_curve",
+  "som_share_multiplier": {
+    "bear": 0.6,
+    "base": 1.0,
+    "bull": 1.4
+  },
+  "inflation": 0.035
+}

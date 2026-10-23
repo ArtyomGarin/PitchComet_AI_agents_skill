@@ -1,0 +1,244 @@
+{
+  "light": {
+    "bg": "FFFFFF",
+    "text": "1A1D23",
+    "muted": "6B7280",
+    "accent": "0F766E",
+    "accent2": "334155",
+    "grid": "E5E7EB",
+    "muted_fill": "CBD5E1",
+    "panel": "F3F4F6",
+    "positive": "0F766E",
+    "negative": "B91C1C",
+    "palette": [
+      "0F766E",
+      "94A3B8",
+      "B91C1C",
+      "334155",
+      "5EEAD4",
+      "CBD5E1"
+    ],
+    "table_header_bg": "1A1D23",
+    "table_header_text": "FFFFFF",
+    "table_band": "F3F4F6",
+    "font_heading": "Arial",
+    "font_body": "Arial",
+    "title_style": "plain",
+    "cover_style": "plain"
+  },
+  "dark": {
+    "bg": "0E1116",
+    "text": "F3F4F6",
+    "muted": "9CA3AF",
+    "accent": "2DD4BF",
+    "accent2": "E5E7EB",
+    "grid": "2A2F37",
+    "muted_fill": "4B5563",
+    "panel": "171B22",
+    "positive": "2DD4BF",
+    "negative": "EF4444",
+    "palette": [
+      "2DD4BF",
+      "6B7280",
+      "EF4444",
+      "E5E7EB",
+      "0F766E",
+      "374151"
+    ],
+    "table_header_bg": "2DD4BF",
+    "table_header_text": "0E1116",
+    "table_band": "171B22",
+    "font_heading": "Arial",
+    "font_body": "Arial",
+    "title_style": "plain",
+    "cover_style": "plain"
+  },
+  "academic_light": {
+    "bg": "FFFFFF",
+    "text": "111827",
+    "muted": "6B7280",
+    "accent": "7F1D1D",
+    "accent2": "374151",
+    "grid": "E5E7EB",
+    "muted_fill": "D1D5DB",
+    "panel": "F9FAFB",
+    "positive": "7F1D1D",
+    "negative": "B91C1C",
+    "palette": [
+      "7F1D1D",
+      "9CA3AF",
+      "B91C1C",
+      "374151",
+      "FCA5A5",
+      "D1D5DB"
+    ],
+    "table_header_bg": "111827",
+    "table_header_text": "FFFFFF",
+    "table_band": "F3F4F6",
+    "font_heading": "Times New Roman",
+    "font_body": "Arial",
+    "title_style": "plain",
+    "cover_style": "plain"
+  },
+  "comet": {
+    "_label": "Comet — deep navy, white accent, big numbers (investor pitch)",
+    "bg": "0B1530",
+    "text": "F1F5FF",
+    "muted": "A3B1D6",
+    "accent": "FFFFFF",
+    "accent2": "5CC8FF",
+    "grid": "22305A",
+    "muted_fill": "3A4A7A",
+    "panel": "132044",
+    "positive": "3DDC97",
+    "negative": "FF6B6B",
+    "palette": [
+      "FFFFFF",
+      "5CC8FF",
+      "8A9BC9",
+      "3DDC97",
+      "FF6B6B",
+      "2B3D70"
+    ],
+    "table_header_bg": "FFFFFF",
+    "table_header_text": "0B1530",
+    "table_band": "132044",
+    "font_heading": "Arial",
+    "font_body": "Arial",
+    "font_numbers": "Arial",
+    "title_style": "bar",
+    "title_size": 28,
+    "big_number_scale": 1.15,
+    "big_number_all_accent": false,
+    "cover_style": "full",
+    "cover_bg": "0B1530",
+    "cover_text": "FFFFFF",
+    "cover_muted": "A3B1D6",
+    "cover_motif": "FFFFFF",
+    "cover_title_size": 44,
+    "fonts": {
+      "zh": {
+        "font_ea": "Microsoft YaHei"
+      }
+    }
+  },
+  "editorial": {
+    "_label": "Editorial — minimal white, serif headings, generous white space (corporate board, analytical memo)",
+    "bg": "FFFFFF",
+    "text": "111111",
+    "muted": "6E6E6E",
+    "accent": "B91C1C",
+    "accent2": "1F2937",
+    "grid": "E7E5E4",
+    "muted_fill": "D6D3D1",
+    "panel": "FAFAF9",
+    "positive": "15803D",
+    "negative": "B91C1C",
+    "palette": [
+      "111111",
+      "B91C1C",
+      "A8A29E",
+      "57534E",
+      "FCA5A5",
+      "E7E5E4"
+    ],
+    "table_header_bg": "FFFFFF",
+    "table_header_text": "111111",
+    "table_band": "FAFAF9",
+    "font_heading": "Georgia",
+    "font_body": "Arial",
+    "title_style": "rule",
+    "title_size": 30,
+    "big_number_scale": 1.0,
+    "cover_style": "plain",
+    "cover_title_size": 44,
+    "fonts": {
+      "zh": {
+        "font_ea": "SimSun"
+      },
+      "ru": {
+        "font_heading": "Georgia"
+      }
+    }
+  },
+  "corporate": {
+    "_label": "Corporate blue — clean, title band, conservative palette (enterprise and public-sector buyers)",
+    "bg": "FFFFFF",
+    "text": "0F172A",
+    "muted": "64748B",
+    "accent": "1D4ED8",
+    "accent2": "0F172A",
+    "grid": "E2E8F0",
+    "muted_fill": "CBD5E1",
+    "panel": "F1F5F9",
+    "positive": "047857",
+    "negative": "B91C1C",
+    "palette": [
+      "1D4ED8",
+      "93C5FD",
+      "0F172A",
+      "64748B",
+      "38BDF8",
+      "CBD5E1"
+    ],
+    "table_header_bg": "1D4ED8",
+    "table_header_text": "FFFFFF",
+    "table_band": "F1F5F9",
+    "font_heading": "Calibri",
+    "font_body": "Calibri",
+    "title_style": "band",
+    "title_band": "1D4ED8",
+    "title_band_text": "FFFFFF",
+    "title_size": 26,
+    "big_number_scale": 0.95,
+    "cover_style": "split",
+    "cover_bg": "1D4ED8",
+    "cover_text": "FFFFFF",
+    "cover_title_size": 40,
+    "fonts": {
+      "zh": {
+        "font_ea": "Microsoft YaHei"
+      }
+    }
+  },
+  "warm": {
+    "_label": "Warm startup — cream background, coral and teal, friendly (SMB customers, angels)",
+    "bg": "FFF8F0",
+    "text": "2B2118",
+    "muted": "7A6A5C",
+    "accent": "DC2626",
+    "accent2": "167D7F",
+    "grid": "F0E2D3",
+    "muted_fill": "E5CFB9",
+    "panel": "FCEEDF",
+    "positive": "167D7F",
+    "negative": "B91C1C",
+    "palette": [
+      "DC2626",
+      "167D7F",
+      "F87171",
+      "7A6A5C",
+      "9AD1D4",
+      "E5CFB9"
+    ],
+    "table_header_bg": "2B2118",
+    "table_header_text": "FFF8F0",
+    "table_band": "FCEEDF",
+    "font_heading": "Segoe UI",
+    "font_body": "Segoe UI",
+    "title_style": "plain",
+    "title_size": 30,
+    "big_number_scale": 1.1,
+    "big_number_all_accent": true,
+    "cover_style": "split",
+    "cover_bg": "DC2626",
+    "cover_text": "FFFFFF",
+    "cover_title_size": 42,
+    "fonts": {
+      "zh": {
+        "font_ea": "Microsoft YaHei"
+      }
+    }
+  },
+  "_doc": "Theme keys: bg, text, muted, accent, accent2, grid, muted_fill, panel, positive, negative, palette (chart series), table_header_bg/text, table_band, font_heading, font_body, font_numbers, fonts{locale:{font_heading,font_body,font_ea}}, title_style plain|rule|bar|band (+title_band, title_band_text), title_size, big_number_scale, big_number_all_accent, cover_style plain|full|split (+cover_bg, cover_text, cover_muted, cover_motif, cover_title_size). Override any key from a project: {\"base\": \"comet\", \"accent\": \"FF8800\"}."
+}

@@ -1,0 +1,83 @@
+{
+  "_template_note": "TEMPLAT dari contoh fiktif Velordoc. Ganti semua teks dan angka dengan data proyek Anda; pertahankan placeholder «{ {path|format} }» yang merujuk ke facts.json. Kunci berawalan '_' diabaikan oleh alat.",
+  "_EXAMPLE_DATA": "PRODUK FIKTIF \"Velordoc\". Semua data dibuat untuk mendemonstrasikan alat; kemiripan dengan perusahaan nyata hanya kebetulan.",
+  "currency": "IDR",
+  "base_year": 2025,
+  "horizon_year": 2030,
+  "primary": "bottom_up",
+  "top_down": {
+    "total_market": 144000000000000.0,
+    "total_market_label": "Pasar ilustratif perangkat lunak penangkapan dan pemrosesan dokumen, 2025",
+    "source": "EXAMPLE",
+    "filters": [
+      {
+        "name": "Porsi belanja untuk pemrosesan dokumen cerdas berbasis AI",
+        "share": 0.14,
+        "level": "TAM",
+        "rationale": "EXAMPLE"
+      },
+      {
+        "name": "Pembeli yang mewajibkan penerapan on-premise",
+        "share": 0.4,
+        "level": "SAM",
+        "rationale": "EXAMPLE"
+      },
+      {
+        "name": "Pangsa yang dapat dicapai hingga 2030",
+        "share": 0.06,
+        "level": "SOM",
+        "rationale": "EXAMPLE"
+      }
+    ]
+  },
+  "bottom_up": {
+    "segments": [
+      {
+        "name": "Bank dan asuransi",
+        "units": 4000,
+        "arpa": 960000000.0,
+        "sam_share": 0.5,
+        "som_share": 0.06,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "Instansi pemerintah dan BUMN",
+        "units": 3000,
+        "arpa": 1280000000.0,
+        "sam_share": 0.6,
+        "som_share": 0.05,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "Grup manufaktur",
+        "units": 12000,
+        "arpa": 480000000.0,
+        "sam_share": 0.35,
+        "som_share": 0.04,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "Logistik dan ritel",
+        "units": 15000,
+        "arpa": 320000000.0,
+        "sam_share": 0.3,
+        "som_share": 0.04,
+        "source": "EXAMPLE"
+      }
+    ]
+  },
+  "growth": {
+    "cagr": {
+      "bear": 0.1,
+      "base": 0.18,
+      "bull": 0.26
+    }
+  },
+  "som_ramp": "s_curve",
+  "som_share_multiplier": {
+    "bear": 0.6,
+    "base": 1.0,
+    "bull": 1.4
+  },
+  "inflation": 0.03
+}

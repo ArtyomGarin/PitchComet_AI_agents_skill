@@ -1,0 +1,74 @@
+{
+  "_template_note": "TEMPLATE copied from the fictional Velordoc example. Replace every text and number with your project's data; keep the «{ {path|format} }» placeholders that point into facts.json. Keys starting with '_' are ignored by the tools.",
+  "_EXAMPLE_DATA": "FICTIONAL PRODUCT \"Velordoc\". All data are invented to demonstrate the tools; any resemblance to real companies is coincidental.",
+  "stage": "pilot",
+  "audience": "investor",
+  "locale": "en",
+  "scores": {
+    "market": {
+      "score": 3.5,
+      "evidence": "B",
+      "note": ""
+    },
+    "problem": {
+      "score": 4.0,
+      "evidence": "B",
+      "note": ""
+    },
+    "trl": {
+      "score": 3.5,
+      "evidence": "A",
+      "note": ""
+    },
+    "moat": {
+      "score": 3.0,
+      "evidence": "B",
+      "note": ""
+    },
+    "team": {
+      "score": 3.5,
+      "evidence": "A",
+      "note": ""
+    },
+    "traction": {
+      "score": 2.5,
+      "evidence": "A",
+      "note": ""
+    },
+    "unit_economics": {
+      "score": 3.0,
+      "evidence": "C",
+      "note": ""
+    },
+    "gtm": {
+      "score": 2.5,
+      "evidence": "C",
+      "note": ""
+    },
+    "regulatory": {
+      "score": 4.0,
+      "evidence": "B",
+      "note": ""
+    },
+    "scalability": {
+      "score": 3.0,
+      "evidence": "C",
+      "note": ""
+    },
+    "risk": {
+      "score": 3.0,
+      "evidence": "B",
+      "note": ""
+    }
+  },
+  "facts": {
+    "runway_months": 14,
+    "top_customer_share": 0.42,
+    "security_attestation": true,
+    "fedramp_path": false,
+    "ai_risk_unassessed": false,
+    "cross_border_data_unassessed": false,
+    "critical_foreign_dependency": false
+  },
+  "deck_slides": 16
+}

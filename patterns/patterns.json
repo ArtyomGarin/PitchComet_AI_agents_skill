@@ -1,0 +1,517 @@
+{
+  "_doc": "Pitch patterns. auto_pitch.py --pattern <id> (or auto-selection from an audience description) changes slide order, deck length, mandatory metrics (checked by qa_check.py --pattern), scoring weights, chart types, tone, what to cut, the call to action and the red-team questions. Slide ids are implemented in tools/pitch_story.py.",
+  "version": 1,
+  "patterns": {
+    "large_investor": {
+      "label_en": "Large investor (growth / late stage fund)",
+      "label_ru": "Крупный инвестор (фонд роста / поздние стадии)",
+      "kind": "investor",
+      "theme": "comet",
+      "report_theme": "light",
+      "audience_keywords": [
+        "fund",
+        "growth",
+        "late stage",
+        "series b",
+        "series c",
+        "pe ",
+        "private equity",
+        "institutional",
+        "ic memo",
+        "investment committee",
+        "фонд",
+        "раунд b",
+        "раунд c",
+        "поздн",
+        "инвестиционный комитет",
+        "институцион",
+        "成长",
+        "基金",
+        "quỹ đầu tư",
+        "dana ventura",
+        "dana pertumbuhan"
+      ],
+      "deck_length": {
+        "min": 15,
+        "max": 20,
+        "target": 18
+      },
+      "tone_en": "numbers first, conservative, every claim with a source or a formula; show downside",
+      "tone_ru": "сначала цифры, консервативно, каждое утверждение с источником или формулой; показать негативный сценарий",
+      "slide_order": [
+        "title",
+        "hook",
+        "problem",
+        "solution",
+        "why_now",
+        "market_sizing",
+        "segments",
+        "market_growth",
+        "competition",
+        "business_model",
+        "unit_economics",
+        "financials",
+        "fin_scenarios",
+        "valuation",
+        "risks",
+        "evidence",
+        "ask",
+        "closing",
+        "improve_deck"
+      ],
+      "mandatory_metrics": [
+        "market.tam_base",
+        "market.sam_base",
+        "market.som_horizon_base",
+        "market.cagr_base",
+        "auto.ue.ltv_cac",
+        "auto.ue.payback",
+        "fin.rule40_last",
+        "fin.npv_base",
+        "fin.irr_base",
+        "fin.moic_base",
+        "auto.val.ev_base"
+      ],
+      "mandatory_terms": [
+        "\\bTAM\\b",
+        "\\bSAM\\b",
+        "\\bSOM\\b",
+        "\\bCAGR\\b",
+        "LTV\\s*/\\s*CAC",
+        "Rule of 40|Правило 40|правило 40|40法则|Quy tắc 40|Aturan 40|Peraturan 40",
+        "\\bIRR\\b",
+        "\\bMOIC\\b"
+      ],
+      "charts": {
+        "market_sizing": "bar",
+        "market_growth": "line_markers",
+        "financials": "column",
+        "fin_scenarios": "table"
+      },
+      "cut_en": [
+        "founder story",
+        "feature lists",
+        "logos without contracts",
+        "vision without numbers"
+      ],
+      "cut_ru": [
+        "история основателя",
+        "списки функций",
+        "логотипы без договоров",
+        "видение без цифр"
+      ],
+      "cta_en": "Decision: term sheet for {{auto.ask|money_mn1}} and a 6-week due diligence on the five numbers above",
+      "cta_ru": "Решение: term sheet на {{auto.ask|money_mn1}} и 6-недельная проверка пяти цифр выше",
+      "scoring": {
+        "audience": "investor",
+        "weights_override": {
+          "traction": 16,
+          "unit_economics": 16,
+          "market": 14,
+          "scalability": 8
+        }
+      },
+      "red_team_en": [
+        "Which of the TAM inputs is sourced and which is a rule of thumb — what happens to SOM if the adoption range is halved?",
+        "What is CAC payback in the bear case and is it still under 24 months?",
+        "Why does the exit multiple deserve the peer median after the private-company discount?",
+        "Which cohort data will replace the benchmark churn within two quarters?",
+        "What breaks if the policy rate stays at the current level for three years?"
+      ],
+      "red_team_ru": [
+        "Какие входы TAM подтверждены источником, а какие — эмпирические правила? Что будет с SOM, если диапазон проникновения вдвое ниже?",
+        "Какой срок окупаемости CAC в негативном сценарии и укладывается ли он в 24 месяца?",
+        "Почему мультипликатор выхода — медиана сопоставимых компаний после дисконта за непубличность?",
+        "Какие когортные данные заменят эталонный отток в ближайшие два квартала?",
+        "Что сломается, если ключевая ставка останется на текущем уровне три года?"
+      ]
+    },
+    "small_investor": {
+      "label_en": "Smaller investor (angel / pre-seed / seed)",
+      "label_ru": "Небольшой инвестор (бизнес-ангел / pre-seed / seed)",
+      "kind": "investor",
+      "theme": "warm",
+      "report_theme": "light",
+      "audience_keywords": [
+        "angel",
+        "seed",
+        "pre-seed",
+        "accelerator",
+        "early stage",
+        "friends",
+        "ангел",
+        "посев",
+        "pre-seed",
+        "акселератор",
+        "ранн",
+        "天使",
+        "种子",
+        "thiên thần",
+        "angel investor",
+        "malaikat"
+      ],
+      "deck_length": {
+        "min": 10,
+        "max": 14,
+        "target": 12
+      },
+      "tone_en": "clear story, one big problem, why this team now; numbers are ranges with confidence",
+      "tone_ru": "понятная история, одна большая проблема, почему эта команда и сейчас; цифры — диапазоны с уверенностью",
+      "slide_order": [
+        "title",
+        "hook",
+        "problem",
+        "solution",
+        "market_sizing",
+        "market_growth",
+        "competition",
+        "business_model",
+        "unit_economics",
+        "gtm",
+        "financials",
+        "ask",
+        "closing",
+        "improve_deck"
+      ],
+      "mandatory_metrics": [
+        "market.tam_base",
+        "market.som_horizon_base",
+        "market.cagr_base",
+        "auto.ue.ltv_cac",
+        "fin.moic_base"
+      ],
+      "mandatory_terms": [
+        "\\bTAM\\b",
+        "\\bSOM\\b",
+        "\\bCAGR\\b",
+        "LTV\\s*/\\s*CAC",
+        "\\bMOIC\\b"
+      ],
+      "charts": {
+        "market_sizing": "bar",
+        "market_growth": "column",
+        "financials": "column"
+      },
+      "cut_en": [
+        "detailed sensitivity tables",
+        "full P&L",
+        "DCF terminal-value maths"
+      ],
+      "cut_ru": [
+        "подробные таблицы чувствительности",
+        "полный P&L",
+        "расчёт терминальной стоимости DCF"
+      ],
+      "cta_en": "Join the round: {{auto.ask|money_mn1}} for 18 months to reach the milestones on the timeline",
+      "cta_ru": "Войти в раунд: {{auto.ask|money_mn1}} на 18 месяцев до вех на дорожной карте",
+      "scoring": {
+        "audience": "investor",
+        "weights_override": {
+          "team": 15,
+          "problem": 14,
+          "market": 14,
+          "traction": 8
+        }
+      },
+      "red_team_en": [
+        "Why will customers switch from their current way of working (spreadsheets, manual work, an incumbent tool)?",
+        "What is the cheapest channel and its CAC in the first 100 customers?",
+        "What milestone makes the next round easy?",
+        "Who on the team has sold to this buyer before?"
+      ],
+      "red_team_ru": [
+        "Почему клиенты откажутся от нынешнего способа работы (таблицы, ручной труд, привычный инструмент)?",
+        "Какой канал самый дешёвый и каков CAC на первых 100 клиентах?",
+        "Какая веха сделает следующий раунд простым?",
+        "Кто в команде уже продавал этому покупателю?"
+      ]
+    },
+    "corporate": {
+      "label_en": "Corporate proposal (enterprise buyer / partner)",
+      "label_ru": "Корпоративное предложение (крупный заказчик / партнёр)",
+      "kind": "customer",
+      "theme": "corporate",
+      "report_theme": "corporate",
+      "audience_keywords": [
+        "corporate",
+        "enterprise",
+        "board",
+        "procurement",
+        "cio",
+        "coo",
+        "partner",
+        "chain",
+        "retailer",
+        "корпорац",
+        "заказчик",
+        "закупк",
+        "правление",
+        "директор по",
+        "сеть",
+        "ритейлер",
+        "партнёр",
+        "企业客户",
+        "采购",
+        "doanh nghiệp",
+        "korporat",
+        "perusahaan"
+      ],
+      "deck_length": {
+        "min": 9,
+        "max": 13,
+        "target": 11
+      },
+      "tone_en": "customer's language: cost, risk, time to value; vendor viability in one slide",
+      "tone_ru": "язык заказчика: затраты, риски, срок получения эффекта; устойчивость поставщика — одним слайдом",
+      "slide_order": [
+        "title",
+        "customer_hook",
+        "customer_problem",
+        "solution",
+        "customer_roi",
+        "tco",
+        "competition",
+        "implementation",
+        "vendor_viability",
+        "risks",
+        "pilot_offer",
+        "improve_deck"
+      ],
+      "mandatory_metrics": [
+        "auto.cust.roi",
+        "auto.cust.payback_months",
+        "auto.cust.tco",
+        "auto.cust.saving_3y"
+      ],
+      "mandatory_terms": [
+        "\\bROI\\b",
+        "\\bTCO\\b",
+        "payback|окупаем|回本|hoàn vốn|balik modal|bayar balik"
+      ],
+      "charts": {
+        "customer_roi": "column",
+        "tco": "bar"
+      },
+      "cut_en": [
+        "investor returns (MOIC, IRR)",
+        "fundraising ask",
+        "valuation"
+      ],
+      "cut_ru": [
+        "доходность инвестора (MOIC, IRR)",
+        "запрос инвестиций",
+        "оценка компании"
+      ],
+      "cta_en": "Decision: an 8-week paid pilot with success criteria agreed upfront",
+      "cta_ru": "Решение: 8-недельный платный пилот с заранее согласованными критериями успеха",
+      "scoring": {
+        "audience": "corporate",
+        "weights_override": {
+          "problem": 16,
+          "regulatory": 10,
+          "risk": 9,
+          "trl": 12
+        }
+      },
+      "red_team_en": [
+        "Which hours saved are measured and which are estimated?",
+        "What does integration with our existing systems cost us?",
+        "What if the vendor disappears — data export and exit plan?",
+        "Who owns the data and where is it stored?"
+      ],
+      "red_team_ru": [
+        "Какая экономия часов измерена, а какая оценена?",
+        "Сколько стоит интеграция с нашими существующими системами?",
+        "Что если поставщик исчезнет — выгрузка данных и план выхода?",
+        "Кому принадлежат данные и где они хранятся?"
+      ]
+    },
+    "smb": {
+      "label_en": "SMB customers (owners of small businesses)",
+      "label_ru": "Клиенты МСП (владельцы малого бизнеса)",
+      "kind": "customer",
+      "theme": "warm",
+      "report_theme": "light",
+      "audience_keywords": [
+        "owner",
+        "small business",
+        "smb",
+        "sme",
+        "shop",
+        "café",
+        "cafe",
+        "salon",
+        "customers",
+        "sales deck",
+        "владел",
+        "малый бизнес",
+        "мсп",
+        "магазин",
+        "кафе",
+        "салон",
+        "клиент",
+        "小店",
+        "店主",
+        "chủ cửa hàng",
+        "pemilik usaha",
+        "pemilik kedai"
+      ],
+      "deck_length": {
+        "min": 6,
+        "max": 9,
+        "target": 8
+      },
+      "tone_en": "simple words, one number per slide: pay X — save Y per month",
+      "tone_ru": "простые слова, одна цифра на слайд: платите X — экономите Y в месяц",
+      "slide_order": [
+        "title",
+        "smb_hook",
+        "customer_problem",
+        "solution",
+        "smb_value",
+        "pricing",
+        "how_to_start",
+        "closing_smb",
+        "improve_deck"
+      ],
+      "mandatory_metrics": [
+        "auto.price_month",
+        "auto.cust.saving_month",
+        "auto.cust.value_ratio",
+        "auto.cust.payback_months"
+      ],
+      "mandatory_terms": [
+        "payback|окупаем|回本|hoàn vốn|balik modal|bayar balik|\\bROI\\b",
+        "/\\s?мес|per month|/month|в месяц|每月|/tháng|/bulan|sebulan"
+      ],
+      "charts": {
+        "smb_value": "column"
+      },
+      "cut_en": [
+        "market sizing",
+        "investor metrics",
+        "jargon (TAM, LTV, CAC)"
+      ],
+      "cut_ru": [
+        "размер рынка",
+        "метрики для инвесторов",
+        "жаргон (TAM, LTV, CAC)"
+      ],
+      "cta_en": "Start a 14-day free trial today — the first result on day one",
+      "cta_ru": "Начните 14-дневный бесплатный период сегодня — первый результат в первый же день",
+      "scoring": {
+        "audience": "corporate",
+        "weights_override": {
+          "problem": 18,
+          "unit_economics": 12,
+          "gtm": 10
+        }
+      },
+      "red_team_en": [
+        "Will my staff actually use it?",
+        "What happens to my data if I stop paying?",
+        "Is there a contract or can I cancel monthly?"
+      ],
+      "red_team_ru": [
+        "Будут ли сотрудники реально этим пользоваться?",
+        "Что будет с данными, если я перестану платить?",
+        "Нужен ли договор или можно отменить помесячно?"
+      ]
+    },
+    "government": {
+      "label_en": "Government / grant (development institution, public programme)",
+      "label_ru": "Государство / грант (институт развития, госпрограмма)",
+      "kind": "public",
+      "theme": "corporate",
+      "report_theme": "corporate",
+      "audience_keywords": [
+        "grant",
+        "government",
+        "ministry",
+        "public",
+        "development institution",
+        "fund for",
+        "грант",
+        "государ",
+        "министерств",
+        "институт развития",
+        "госпрограмм",
+        "фонд содействия",
+        "政府",
+        "补贴",
+        "chính phủ",
+        "hibah",
+        "pemerintah",
+        "geran",
+        "kerajaan"
+      ],
+      "deck_length": {
+        "min": 11,
+        "max": 15,
+        "target": 13
+      },
+      "tone_en": "public effect, compliance and measurable KPIs; no hype",
+      "tone_ru": "общественный эффект, соответствие требованиям и измеримые KPI; без хайпа",
+      "slide_order": [
+        "title",
+        "hook",
+        "problem",
+        "solution",
+        "public_effect",
+        "market_sizing",
+        "market_growth",
+        "customer_roi",
+        "regulatory",
+        "implementation",
+        "financials",
+        "risks",
+        "scorecard",
+        "closing",
+        "improve_deck"
+      ],
+      "mandatory_metrics": [
+        "market.sam_base",
+        "market.cagr_base",
+        "auto.cust.roi",
+        "fin.revenue_last"
+      ],
+      "mandatory_terms": [
+        "\\bSAM\\b",
+        "\\bCAGR\\b",
+        "\\bROI\\b|окупаем|payback"
+      ],
+      "charts": {
+        "market_sizing": "bar",
+        "financials": "column"
+      },
+      "cut_en": [
+        "exit multiples",
+        "aggressive growth claims"
+      ],
+      "cut_ru": [
+        "мультипликаторы выхода",
+        "агрессивные обещания роста"
+      ],
+      "cta_en": "Decision: support the programme application and the KPI set on the scorecard",
+      "cta_ru": "Решение: поддержать заявку в программу и набор KPI из скоркарты",
+      "scoring": {
+        "audience": "government",
+        "weights_override": {
+          "regulatory": 12,
+          "problem": 14
+        }
+      },
+      "red_team_en": [
+        "Which KPI will the programme measure and how?",
+        "Is the software in the required national registries?",
+        "How many jobs or hours does it free up per region?"
+      ],
+      "red_team_ru": [
+        "Какие KPI будет измерять программа и как?",
+        "Включено ли ПО в требуемые реестры?",
+        "Сколько рабочих часов высвобождается на регион?"
+      ]
+    }
+  },
+  "default": "small_investor"
+}

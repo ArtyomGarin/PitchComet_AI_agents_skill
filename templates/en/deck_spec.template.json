@@ -1,0 +1,347 @@
+{
+  "_template_note": "TEMPLATE copied from the fictional Velordoc example. Replace every text and number with your project's data; keep the «{ {path|format} }» placeholders that point into facts.json. Keys starting with '_' are ignored by the tools.",
+  "meta": {
+    "title": "Velordoc — strategic assessment (FICTIONAL EXAMPLE)",
+    "author": "Example Strategy Team",
+    "locale": "en",
+    "currency": "USD",
+    "theme": "light",
+    "slide_numbers": true,
+    "watermark": "EXAMPLE · fictional data"
+  },
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Velordoc: on-premise AI that reads, checks and routes business documents",
+      "subtitle": "Product potential assessment and investment thesis · pilot stage",
+      "author": "Example Strategy Team",
+      "date": "October 2026",
+      "notes": "FICTIONAL EXAMPLE for the PitchComet skill. All figures are invented and computed by the tools in tools/."
+    },
+    {
+      "layout": "big_number",
+      "title": "Potential {{score.total|num0}} of 100: strong problem and market, but too little sales evidence yet",
+      "numbers": [
+        {
+          "value": "{{market.sam_base|money_bn}}",
+          "label": "Serviceable market (SAM), {{market.base_year}}",
+          "context": "bottom-up across 4 segments; top-down within {{market.td_bu_ratio_tam|x1}}"
+        },
+        {
+          "value": "{{fin.revenue_last|money_mn0}}",
+          "label": "Revenue {{fin.end_year}}, base case",
+          "context": "EBITDA positive in {{fin.breakeven_year}}"
+        },
+        {
+          "value": "{{fin.moic_base|x1}}",
+          "label": "Investor MOIC, base case",
+          "context": "IRR {{fin.irr_base|pct0}}; bull case {{fin.moic_bull|x1}}"
+        }
+      ],
+      "source": "example model (market_sizing.py, financial_model.py, scoring.py); fictional data",
+      "notes": "Answer first: total score, serviceable market, base revenue and the investor's return. Details follow."
+    },
+    {
+      "layout": "bullets",
+      "title": "Back-office teams spend 15 minutes per document on manual entry and checks — a bottleneck in finance and procurement",
+      "bullets": [
+        "**32 interviews** with heads of finance operations and procurement (example)",
+        "**15 minutes** per contract or invoice: reading, data entry, cross-checks",
+        "Cloud document services are not allowed for **confidential** records",
+        "Template-based OCR breaks on new layouts: **18% of fields** need rework",
+        "Why now: open-weight language models now run on a single on-premise server"
+      ],
+      "source": "interviews and time-and-motion data from example pilots; fictional data",
+      "notes": "State the problem in the customer's words and in measurable units (minutes, share of fields)."
+    },
+    {
+      "layout": "two_column",
+      "title": "Solution: a local pipeline “classify → extract → validate → route” instead of manual entry",
+      "left": {
+        "heading": "Today",
+        "bullets": [
+          "Manual reading and data entry",
+          "Rules break on new templates",
+          "Checks against ERP done by hand",
+          "Cloud tools blocked by security policy"
+        ]
+      },
+      "right": {
+        "heading": "With Velordoc",
+        "bullets": [
+          "About 3 minutes per document",
+          "Model adapts to new layouts",
+          "Automatic checks against ERP data",
+          "Runs inside the customer's network"
+        ]
+      },
+      "notes": "A live demo on anonymised documents works better than a mock-up here."
+    },
+    {
+      "layout": "chart",
+      "title": "Serviceable market is {{market.sam_base|money_bn}} in {{market.base_year}}; achievable share by {{market.horizon_year}} is {{market.som_horizon_base|money_mn0}}",
+      "chart": {
+        "$ref": "charts.tam_sam_som"
+      },
+      "takeaway": [
+        "TAM {{market.tam_base|money_bn}}: 4 segments × organisations × annual contract",
+        "SAM: only buyers that require private deployment",
+        "Top-down TAM = {{market.tam_td|money_bn}}: gap {{market.td_bu_ratio_tam|x1}}, within the 2x norm"
+      ],
+      "source": "bottom-up estimate (market_sizing.py); fictional data; {{project.units.bn}}",
+      "notes": "Show TAM→SAM→SOM as a funnel; SAM is highlighted. Bottom-up is primary, top-down is a check."
+    },
+    {
+      "layout": "table",
+      "title": "Banks and the public sector make up the largest share of SAM; public buyers pay the highest annual contract",
+      "columns": [
+        "Segment",
+        "Organisations",
+        "Annual contract",
+        "TAM",
+        "SAM",
+        "SOM 2030"
+      ],
+      "rows": {
+        "$ref": "tables.segments"
+      },
+      "col_widths": [
+        4.2,
+        1.6,
+        1.7,
+        1.6,
+        1.6,
+        1.6
+      ],
+      "source": "bottom-up estimate (market_sizing.py); fictional data",
+      "notes": "Each row is a testable assumption: organisations × contract × reachable share × achievable share."
+    },
+    {
+      "layout": "chart",
+      "title": "SAM grows to {{market.sam_horizon_base|money_bn}} by {{market.horizon_year}} at {{market.cagr_base|pct0}} a year (base case)",
+      "chart": {
+        "$ref": "charts.sam_scenarios"
+      },
+      "takeaway": [
+        "Bear: {{market.cagr_bear|pct0}} a year → {{market.sam_horizon_bear|money_bn}}",
+        "Bull: {{market.cagr_bull|pct0}} a year → {{market.sam_horizon_bull|money_bn}}",
+        "Real terms (inflation 2.5%): base growth {{market.real_cagr_base|pct0}}"
+      ],
+      "source": "scenario assumptions of the example (market_sizing.py); nominal values; {{project.units.bn}}",
+      "notes": "Forecasts are always scenarios. Nominal and real growth are shown separately."
+    },
+    {
+      "layout": "big_number",
+      "title": "Pilots: 5× faster processing and field accuracy {{metrics.pilot_accuracy.value|pp0}} above template OCR",
+      "numbers": [
+        {
+          "value": "−{{metrics.pilot_roi.time_reduction|pct0}}",
+          "label": "staff time per document",
+          "context": "15 → 3 minutes, 3 pilots"
+        },
+        {
+          "value": "+{{metrics.pilot_accuracy.value|pp0}}",
+          "label": "field extraction accuracy",
+          "context": "{{metrics.pilot_accuracy.accuracy_model|pct0}} vs {{metrics.pilot_accuracy.accuracy_baseline|pct0}}, 2,000 fields"
+        },
+        {
+          "value": "{{metrics.pilot_roi.value|pct0}}",
+          "label": "customer ROI over 3 years",
+          "context": "payback ≈ {{metrics.pilot_roi.payback_months|num0}} months"
+        }
+      ],
+      "source": "pilot time study and labelled sample (metrics_calc.py: automation_roi, accuracy_vs_baseline); fictional data",
+      "notes": "Outcome-led: the customer's result in the customer's metric, with sample size."
+    },
+    {
+      "layout": "matrix",
+      "title": "Versus alternatives: more accurate than template OCR and, unlike cloud services, runs inside the customer's network",
+      "x_label": "Accuracy on new document layouts",
+      "y_label": "Fit for private deployment",
+      "quadrants": [
+        "",
+        "Target position",
+        "",
+        ""
+      ],
+      "items": [
+        {
+          "name": "Template OCR",
+          "x": 0.3,
+          "y": 0.75
+        },
+        {
+          "name": "Cloud document AI",
+          "x": 0.78,
+          "y": 0.15
+        },
+        {
+          "name": "Outsourced data entry",
+          "x": 0.5,
+          "y": 0.45
+        },
+        {
+          "name": "Velordoc",
+          "x": 0.82,
+          "y": 0.85,
+          "highlight": true
+        }
+      ],
+      "takeaway": [
+        "Moat: labelled corpus of 1.2 million documents and ERP connectors",
+        "Risk: large platforms may ship private-deployment editions within 12–18 months"
+      ],
+      "source": "team's expert assessment; categories of alternatives, not specific companies",
+      "notes": "The matrix is an expert assessment; competitors are named as categories."
+    },
+    {
+      "layout": "scorecard",
+      "title": "Score {{score.total|num0}}/100 (grade {{score.grade}}): main gaps are traction and proven unit economics",
+      "criteria": {
+        "$ref": "tables.scorecard"
+      },
+      "total": {
+        "$ref": "score.total"
+      },
+      "grade": "{{score.grade}}",
+      "grade_label": "{{score.grade_label}}",
+      "range": [
+        {
+          "$ref": "score.range_lo"
+        },
+        {
+          "$ref": "score.range_hi"
+        }
+      ],
+      "source": "scoring.py, profile “pilot / investor”; fictional scores",
+      "notes": "The range reflects evidence quality: assumptions (C) ±1 point, estimates (B) ±0.5."
+    },
+    {
+      "layout": "table",
+      "title": "Base plan: revenue grows from {{fin.revenue_first|money_mn0}} to {{fin.revenue_last|money_mn0}}; EBITDA positive in {{fin.breakeven_year}}",
+      "columns": {
+        "$ref": "tables.pnl_columns"
+      },
+      "rows": {
+        "$ref": "tables.pnl"
+      },
+      "col_widths": [
+        3.6,
+        1.7,
+        1.7,
+        1.7,
+        1.7,
+        1.7
+      ],
+      "source": "financial_model.py, base case; nominal values; fictional data",
+      "notes": "LTV is capped at 5 customer years."
+    },
+    {
+      "layout": "chart",
+      "title": "Wide range of outcomes: {{fin.end_year}} revenue between {{fin.revenue_last_bear|money_mn0}} and {{fin.revenue_last_bull|money_mn0}}",
+      "chart": {
+        "$ref": "charts.revenue_scenarios"
+      },
+      "takeaway": [
+        "Main drivers: new customers and contract size",
+        "Bear: needs an extra round; minimum cash {{fin.min_cash_bear|money_mn0}}",
+        "Bull: EBITDA positive already in {{fin.breakeven_bull}}"
+      ],
+      "source": "financial_model.py, base case; nominal values; fictional data; {{project.units.mn}}",
+      "notes": "Scenarios are multipliers on new customers, contract size and churn."
+    },
+    {
+      "layout": "table",
+      "title": "Investor return {{fin.moic_base|x1}} in the base case is below the 3x venture benchmark; the bull case gives {{fin.moic_bull|x1}}",
+      "columns": [
+        "Scenario",
+        "Revenue 2030",
+        "EBITDA > 0",
+        "NPV at {{fin.discount_rate|pct0}}",
+        "MOIC",
+        "IRR"
+      ],
+      "rows": {
+        "$ref": "tables.fin_scenarios"
+      },
+      "col_widths": [
+        2.6,
+        1.9,
+        1.7,
+        1.9,
+        1.4,
+        1.4
+      ],
+      "highlight_row": 1,
+      "source": "financial_model.py; $5M at $15M pre-money, exit in 2030 at 4x revenue, 15% dilution; fictional data",
+      "notes": "Returns by scenario with explicit entry and exit assumptions; never present the bull case as base."
+    },
+    {
+      "layout": "two_column",
+      "title": "Four key risks are manageable if the first renewals happen before the end of 2027",
+      "left": {
+        "heading": "Risk",
+        "bullets": [
+          "Pilots do not convert into contracts",
+          "Concentration: 42% of revenue from one customer",
+          "Platforms add private-deployment editions",
+          "GPU infrastructure costs rise"
+        ]
+      },
+      "right": {
+        "heading": "Mitigation",
+        "bullets": [
+          "Contract with metric thresholds before each pilot",
+          "Plan: 10 renewals by Q4 2027",
+          "Industry templates and ERP connectors",
+          "Quantised models, CPU fallback"
+        ]
+      },
+      "notes": "One mitigation and one control metric per risk."
+    },
+    {
+      "layout": "timeline",
+      "title": "In 18 months: 10 renewed contracts, compliance milestones done and a first export pilot",
+      "steps": [
+        {
+          "label": "Q4 2026",
+          "title": "Round and team",
+          "text": "$5M; +6 engineers, head of enterprise sales"
+        },
+        {
+          "label": "Q1 2027",
+          "title": "Compliance",
+          "text": "SOC 2 Type II report; AI risk assessment per NIST AI RMF documented"
+        },
+        {
+          "label": "Q2 2027",
+          "title": "Repeatable sales",
+          "text": "5 renewed contracts, sales cycle ≤ 6 months"
+        },
+        {
+          "label": "Q4 2027",
+          "title": "Scale",
+          "text": "10 contracts, NRR ≥ 110%, 2 integrators"
+        },
+        {
+          "label": "Q2 2028",
+          "title": "Export",
+          "text": "Pilot in a neighbouring market; decision on a $4M round"
+        }
+      ],
+      "source": "example team plan; fictional data",
+      "notes": "Dated, verifiable milestones that the team controls."
+    },
+    {
+      "layout": "closing",
+      "title": "Ask: $5M for {{fin.ownership_entry|pct0}} until repeatable sales are proven",
+      "bullets": [
+        "Tranche 1 — $3M now; tranche 2 — $2M after 5 renewed contracts",
+        "Board seat for the investor; quarterly report on 6 metrics",
+        "Decision today: approve the term sheet and a 6-week due diligence"
+      ],
+      "contact": "Contact: project lead · team@example.org (example)",
+      "notes": "One ask, one number, one decision."
+    }
+  ]
+}

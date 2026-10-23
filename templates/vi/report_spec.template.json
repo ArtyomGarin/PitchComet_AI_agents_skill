@@ -1,0 +1,624 @@
+{
+  "_template_note": "MẪU dựa trên ví dụ hư cấu Velordoc. Thay toàn bộ văn bản và số liệu bằng dữ liệu dự án của bạn; giữ các chỗ giữ chỗ «{ {path|format} }» trỏ tới facts.json. Các khóa bắt đầu bằng '_' bị công cụ bỏ qua.",
+  "meta": {
+    "title": "Velordoc: đánh giá tiềm năng sản phẩm và kế hoạch chiến lược",
+    "subtitle": "Báo cáo phân tích · giai đoạn thí điểm · VÍ DỤ HƯ CẤU",
+    "org": "Nhóm phân tích chiến lược (ví dụ)",
+    "author": "Được soạn bằng kỹ năng PitchComet",
+    "date": "Tháng 10/2026",
+    "header": "Velordoc — đánh giá tiềm năng (ví dụ)",
+    "locale": "vi",
+    "currency": "VND",
+    "font_size": 12,
+    "preset": "report",
+    "watermark": "LƯU Ý: mọi dữ liệu về sản phẩm, thị trường và tài chính đều hư cấu, chỉ dùng để minh họa công cụ."
+  },
+  "sources": [
+    {
+      "id": "nasa_trl",
+      "type": "web",
+      "org": "NASA",
+      "title": "Technology Readiness Levels",
+      "container": "NASA",
+      "url": "https://www.nasa.gov/directorates/somd/space-communications-navigation-program/technology-readiness-levels/",
+      "accessed": "2026-10-20",
+      "gost": "Technology Readiness Levels // NASA. URL: https://www.nasa.gov/directorates/somd/space-communications-navigation-program/technology-readiness-levels/ (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "feld",
+      "type": "web",
+      "authors": [
+        "Feld B."
+      ],
+      "title": "The Rule of 40% for a healthy SaaS company",
+      "container": "Feld Thoughts",
+      "date": "2015-02-03",
+      "url": "https://feld.com/archives/2015/02/rule-40-healthy-saas-company/",
+      "accessed": "2026-10-20",
+      "gost": "Feld B. The Rule of 40% For a Healthy SaaS Company // Feld Thoughts. 03.02.2015. URL: https://feld.com/archives/2015/02/rule-40-healthy-saas-company/ (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "sacks",
+      "type": "web",
+      "authors": [
+        "Sacks D."
+      ],
+      "title": "The burn multiple",
+      "container": "Craft Ventures",
+      "url": "https://www.craftventures.com/articles/the-burn-multiple",
+      "accessed": "2026-10-20",
+      "gost": "Sacks D. The Burn Multiple // Craft Ventures. URL: https://www.craftventures.com/articles/the-burn-multiple (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "vn_pdp",
+      "type": "law",
+      "org": "Quốc hội",
+      "title": "Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15",
+      "date": "2025-06-26",
+      "container": "Công báo Chính phủ",
+      "url": "https://congbao.chinhphu.vn/van-ban/luat-so-91-2025-qh15-45578.htm",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "vn_cyber",
+      "type": "law",
+      "org": "Quốc hội",
+      "title": "Luật An ninh mạng số 116/2025/QH15",
+      "date": "2025-12-10",
+      "container": "Cổng TTĐT Chính phủ",
+      "url": "https://vanban.chinhphu.vn/?classid=1&docid=216499&pageid=27160&typegroupid=3",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "vn_dti",
+      "type": "law",
+      "org": "Quốc hội",
+      "title": "Luật Công nghiệp công nghệ số số 71/2025/QH15",
+      "date": "2025-06-14",
+      "container": "Bộ Khoa học và Công nghệ",
+      "url": "https://mst.gov.vn/van-ban-phap-luat/25224.htm",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "example",
+      "type": "dataset",
+      "org": "Nhóm phân tích chiến lược (ví dụ)",
+      "title": "Dữ liệu ví dụ hư cấu “Velordoc”: tệp đầu vào examples/example_vi/*.json và kết quả tính của tools/*.py.",
+      "text": "Dữ liệu ví dụ hư cấu “Velordoc”: tệp đầu vào examples/example_vi/*.json và kết quả tính của tools/*.py.",
+      "gost": "Dữ liệu ví dụ hư cấu “Velordoc”: tệp đầu vào examples/example_vi/*.json và kết quả tính của tools/*.py."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title_page"
+    },
+    {
+      "type": "toc",
+      "levels": 2
+    },
+    {
+      "type": "page_break"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "1. Tóm tắt"
+    },
+    {
+      "type": "paragraph",
+      "text": "**Kết luận.** Tiềm năng sản phẩm đạt **{{score.total|num0}}/100** (hạng {{score.grade}}: {{score.grade_label}}; khoảng {{score.range_lo|num0}}–{{score.range_hi|num0}} khi tính đến chất lượng bằng chứng). Vấn đề và thị trường là điểm mạnh; khoảng trống chính là {{score.top_gaps.0}} và {{score.top_gaps.1}}. Khuyến nghị: đầu tư theo đợt, gắn đợt hai với việc gia hạn hợp đồng thí điểm [[src:example]]."
+    },
+    {
+      "type": "key_figures",
+      "items": [
+        {
+          "value": "{{market.sam_base|money_bn}}",
+          "label": "thị trường phục vụ được (SAM), {{market.base_year}}"
+        },
+        {
+          "value": "{{fin.revenue_last|money_mn0}}",
+          "label": "doanh thu {{fin.end_year}}, kịch bản cơ sở"
+        },
+        {
+          "value": "{{fin.moic_base|x1}}",
+          "label": "MOIC nhà đầu tư, kịch bản cơ sở"
+        },
+        {
+          "value": "{{score.total|num0}}/100",
+          "label": "tổng điểm tiềm năng"
+        }
+      ],
+      "source": "mô hình ví dụ (market_sizing.py, financial_model.py, scoring.py); dữ liệu hư cấu"
+    },
+    {
+      "type": "paragraph",
+      "text": "Bối cảnh: bộ phận tài chính, mua sắm và pháp chế xử lý lượng hợp đồng, hóa đơn và công văn ngày càng lớn. Vướng mắc: dịch vụ đám mây không được dùng cho tài liệu mật, còn xử lý thủ công mất khoảng 15 phút mỗi chứng từ. Câu hỏi: quy trình nội bộ “phân loại → trích xuất → kiểm tra → luân chuyển” có thể trở thành sản phẩm mở rộng được không? Trả lời: có, nếu các thí điểm chuyển thành hợp đồng lặp lại trong 12–18 tháng."
+    },
+    {
+      "type": "callout",
+      "title": "Quyết định cần có:",
+      "text": "phê duyệt khoản đầu tư 125 tỷ ₫ cho {{fin.ownership_entry|pct0}} cổ phần theo hai đợt: 75 tỷ ₫ ngay và 50 tỷ ₫ sau 5 hợp đồng gia hạn."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "2. Vấn đề và bối cảnh"
+    },
+    {
+      "type": "paragraph",
+      "text": "Theo 32 cuộc phỏng vấn và số liệu bấm giờ tại ba thí điểm (dữ liệu ví dụ), mỗi chứng từ cần khoảng 15 phút làm việc: đọc, nhập liệu và đối chiếu với ERP. OCR theo mẫu chỉ tiết kiệm thời gian với mẫu quen thuộc; với mẫu mới, 18% trường phải làm lại [[src:example]]."
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "**Người mua** — trưởng bộ phận tài chính hoặc mua sắm; **người dùng** — chuyên viên văn phòng.",
+        "**Ràng buộc** — chính sách an toàn thông tin cấm gửi tài liệu ra dịch vụ đám mây bên ngoài.",
+        "**Vì sao lúc này** — mô hình ngôn ngữ mở đã chạy được trên một máy chủ nội bộ (báo cáo thực cần dẫn kết quả đo có ngày và nguồn)."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "3. Thị trường"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.1. Phương pháp"
+    },
+    {
+      "type": "paragraph",
+      "text": "Thị trường được ước tính bằng hai cách độc lập. **Từ dưới lên** (chính): số tổ chức trong phân khúc × giá trị hợp đồng năm × tỷ lệ khách hàng tiếp cận được (SAM) × thị phần đạt được (SOM). **Từ trên xuống** (kiểm tra): thị trường minh họa phần mềm xử lý chứng từ × tỷ trọng giải pháp AI × tỷ lệ khách hàng yêu cầu triển khai tại chỗ. Độ lệch TAM là {{market.td_bu_ratio_tam|x1}}, dưới ngưỡng 2 lần buộc phải xem lại giả định."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.2. Ước tính từ dưới lên"
+    },
+    {
+      "type": "table",
+      "caption": "Phân khúc thị trường và ước tính TAM / SAM / SOM, {{market.base_year}}",
+      "columns": [
+        "Phân khúc",
+        "Số tổ chức",
+        "Hợp đồng/năm",
+        "TAM",
+        "SAM",
+        "SOM 2030"
+      ],
+      "rows": {
+        "$ref": "tables.segments"
+      },
+      "col_widths_cm": [
+        4.4,
+        2.2,
+        2.3,
+        2.6,
+        2.6,
+        2.4
+      ],
+      "source": "market_sizing.py tính trên dữ liệu ví dụ hư cấu",
+      "font_size": 10
+    },
+    {
+      "type": "chart",
+      "caption": "Phễu thị trường: TAM, SAM và SOM, {{market.base_year}}, {{project.units.bn}}",
+      "chart": {
+        "$ref": "charts.tam_sam_som"
+      },
+      "height_cm": 6.5,
+      "source": "market_sizing.py tính trên dữ liệu ví dụ hư cấu"
+    },
+    {
+      "type": "paragraph",
+      "text": "Kết quả: TAM = **{{market.tam_base|money_bn}}**, SAM = **{{market.sam_base|money_bn}}**, SOM đến {{market.horizon_year}} theo kịch bản cơ sở — **{{market.som_horizon_base|money_mn0}}**. Ước tính từ trên xuống cho TAM {{market.tam_td|money_bn}} và SAM {{market.sam_td|money_bn}}."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.3. Kịch bản tăng trưởng"
+    },
+    {
+      "type": "table",
+      "caption": "Kịch bản thị trường đến {{market.horizon_year}}",
+      "columns": [
+        "Kịch bản",
+        "CAGR",
+        "TAM 2030",
+        "SAM 2030",
+        "SOM 2030"
+      ],
+      "rows": {
+        "$ref": "tables.market_scenarios"
+      },
+      "source": "giả định kịch bản của ví dụ (market_sizing.py); giá trị danh nghĩa"
+    },
+    {
+      "type": "chart",
+      "caption": "SAM theo kịch bản, {{project.units.bn}}",
+      "chart": {
+        "$ref": "charts.sam_scenarios"
+      },
+      "height_cm": 7,
+      "source": "market_sizing.py tính trên dữ liệu ví dụ hư cấu"
+    },
+    {
+      "type": "paragraph",
+      "text": "Mọi dự báo đều theo giá danh nghĩa. Với giả định lạm phát 3,5%/năm, tăng trưởng SAM thực theo kịch bản cơ sở là {{market.real_cagr_base|pct0}}/năm [[fn:Tăng trưởng thực tính theo phương trình Fisher: (1 + tăng trưởng danh nghĩa) / (1 + lạm phát) − 1. Trong công việc thực tế, dự báo lạm phát phải lấy từ nguồn chính thức có ghi ngày (xem markets/).]]."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "4. Sản phẩm và công nghệ"
+    },
+    {
+      "type": "paragraph",
+      "text": "Sản phẩm là quy trình cài đặt tại chỗ: phân loại chứng từ, trích xuất trường bằng mô hình ngôn ngữ, kiểm tra theo dữ liệu gốc ERP và luân chuyển vào đúng quy trình. Mức sẵn sàng công nghệ được đánh giá là **TRL {{metrics.trl.value}}** theo thang TRL của NASA [[src:nasa_trl]]."
+    },
+    {
+      "type": "table",
+      "caption": "Kết quả thí điểm (dữ liệu hư cấu)",
+      "columns": [
+        "Chỉ số",
+        "Trước",
+        "Sau",
+        "Thay đổi"
+      ],
+      "rows": [
+        [
+          "Thời gian nhân viên mỗi chứng từ",
+          "15 phút",
+          "3 phút",
+          "−{{metrics.pilot_roi.time_reduction|pct0}}"
+        ],
+        [
+          "Độ chính xác trích xuất (n = 2.000)",
+          "{{metrics.pilot_accuracy.accuracy_baseline|pct0}}",
+          "{{metrics.pilot_accuracy.accuracy_model|pct0}}",
+          "+{{metrics.pilot_accuracy.value|pp0}}"
+        ],
+        [
+          "Khoản tiết kiệm của khách hàng/năm",
+          "—",
+          "{{metrics.pilot_roi.net_savings_per_year|money_mn1}}",
+          "ROI {{metrics.pilot_roi.value|pct0}}"
+        ]
+      ],
+      "source": "bấm giờ và mẫu gán nhãn tại thí điểm (metrics_calc.py: automation_roi, accuracy_vs_baseline); dữ liệu hư cấu"
+    },
+    {
+      "type": "paragraph",
+      "text": "Chênh lệch độ chính xác có ý nghĩa thống kê ở mức 95% (khoảng tin cậy của chênh lệch không chứa số 0). Để đạt TRL 7 cần vận hành thường xuyên tại khách hàng ít nhất ba tháng."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "5. Cạnh tranh và rào cản"
+    },
+    {
+      "type": "table",
+      "caption": "So sánh với các phương án (đánh giá chuyên gia, theo nhóm giải pháp)",
+      "columns": [
+        "Phương án",
+        "Mẫu mới",
+        "Tại chỗ",
+        "Đối chiếu ERP",
+        "Thời gian/chứng từ"
+      ],
+      "rows": [
+        [
+          "OCR theo mẫu",
+          "thấp",
+          "có",
+          "một phần",
+          "vài phút"
+        ],
+        [
+          "Dịch vụ AI đám mây",
+          "cao",
+          "không",
+          "một phần",
+          "vài giây"
+        ],
+        [
+          "Thuê ngoài nhập liệu",
+          "trung bình",
+          "một phần",
+          "không",
+          "vài giờ"
+        ],
+        [
+          "Velordoc",
+          "cao",
+          "có",
+          "có",
+          "≈ 3 phút"
+        ]
+      ],
+      "highlight_row": 3,
+      "source": "đánh giá chuyên gia của nhóm; so sánh theo nhóm giải pháp, không phải công ty cụ thể"
+    },
+    {
+      "type": "paragraph",
+      "text": "Rào cản dựa trên kho dữ liệu gán nhãn (1,2 triệu chứng từ trong ví dụ), bộ kết nối với các hệ thống ERP phổ biến và sự gắn kết vào quy trình của khách hàng. Mối đe dọa chính là phiên bản tại chỗ của các nền tảng lớn trong 12–18 tháng."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "6. Mô hình kinh doanh và kinh tế đơn vị"
+    },
+    {
+      "type": "paragraph",
+      "text": "Mô hình là giấy phép năm triển khai tại chỗ (từ {{tables.segments.3.2}} cho logistics đến {{tables.segments.1.2}} cho khu vực công) cộng phí triển khai. Năm {{fin.end_year}}, kịch bản cơ sở cho biên lợi nhuận gộp {{fin.gm_last|pct0}}, LTV/CAC **{{fin.ltv_cac_last|x1}}** và thời gian hoàn vốn CAC {{fin.cac_payback_last|num0}} tháng. Quy tắc 40 (tăng trưởng doanh thu + biên EBITDA) năm {{fin.end_year}} là {{fin.rule40_last|pct0}} [[src:feld]]; burn multiple năm {{fin.start_year}} là {{fin.burn_multiple_first|x1}} [[src:sacks]]."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "7. Kế hoạch tài chính và lợi nhuận"
+    },
+    {
+      "type": "table",
+      "caption": "Kịch bản cơ sở: chỉ tiêu chính, {{fin.start_year}}–{{fin.end_year}}",
+      "columns": {
+        "$ref": "tables.pnl_columns"
+      },
+      "rows": {
+        "$ref": "tables.pnl"
+      },
+      "col_widths_cm": [
+        5.5,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1
+      ],
+      "source": "financial_model.py, kịch bản cơ sở; giá trị danh nghĩa; dữ liệu hư cấu"
+    },
+    {
+      "type": "chart",
+      "caption": "Doanh thu và EBITDA, kịch bản cơ sở, {{project.units.mn}}",
+      "chart": {
+        "$ref": "charts.revenue_ebitda"
+      },
+      "height_cm": 7,
+      "source": "financial_model.py, kịch bản cơ sở; giá trị danh nghĩa; dữ liệu hư cấu"
+    },
+    {
+      "type": "table",
+      "caption": "Các kịch bản: doanh thu, hòa vốn và lợi nhuận nhà đầu tư",
+      "columns": [
+        "Kịch bản",
+        "Doanh thu 2030",
+        "EBITDA > 0",
+        "NPV ở {{fin.discount_rate|pct0}}",
+        "MOIC",
+        "IRR"
+      ],
+      "rows": {
+        "$ref": "tables.fin_scenarios"
+      },
+      "highlight_row": 1,
+      "source": "financial_model.py; đầu tư 125 tỷ ₫ với định giá trước vốn 375 tỷ ₫, thoái vốn 2030 ở 4 lần doanh thu, pha loãng 15%; dữ liệu hư cấu"
+    },
+    {
+      "type": "paragraph",
+      "text": "NPV kịch bản cơ sở ở mức chiết khấu {{fin.discount_rate|pct0}} là **{{fin.npv_base|money_mn0}}**; giá trị cuối kỳ vượt tổng NPV, nên định giá phụ thuộc nhiều vào giả định bội số thoái vốn. MOIC của nhà đầu tư là {{fin.moic_base|x1}} (IRR {{fin.irr_base|pct0}}), thấp hơn chuẩn đầu tư mạo hiểm thông thường; kịch bản lạc quan đạt {{fin.moic_bull|x1}} (IRR {{fin.irr_bull|pct0}}). Ở kịch bản bi quan, tiền mặt tối thiểu giảm còn {{fin.min_cash_bear|money_mn0}}."
+    },
+    {
+      "type": "table",
+      "caption": "Độ nhạy NPV ({{project.units.mn}}) theo giá trị hợp đồng và số khách hàng mới",
+      "columns": {
+        "$ref": "tables.sensitivity_columns"
+      },
+      "rows": {
+        "$ref": "tables.sensitivity"
+      },
+      "source": "financial_model.py, độ lệch so với kịch bản cơ sở"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "8. Chấm điểm tiềm năng"
+    },
+    {
+      "type": "paragraph",
+      "text": "Đánh giá dùng 11 tiêu chí thang 0–5 với trọng số hồ sơ “thí điểm / nhà đầu tư” và hồ sơ thị trường Việt Nam. Mỗi điểm kèm mức bằng chứng: A — đã kiểm chứng, B — ước tính đáng tin cậy, C — giả định. Độ tin cậy bằng chứng là {{score.confidence|pct0}}."
+    },
+    {
+      "type": "scorecard",
+      "caption": "Thẻ điểm tiềm năng (hồ sơ: thí điểm / nhà đầu tư)",
+      "criteria": {
+        "$ref": "tables.scorecard"
+      },
+      "total": {
+        "$ref": "score.total"
+      },
+      "source": "scoring.py, hồ sơ “thí điểm / nhà đầu tư”; điểm hư cấu"
+    },
+    {
+      "type": "chart",
+      "caption": "Điểm theo tiêu chí (0–5)",
+      "chart": {
+        "$ref": "charts.score"
+      },
+      "height_cm": 9,
+      "source": "scoring.py, hồ sơ “thí điểm / nhà đầu tư”; điểm hư cấu"
+    },
+    {
+      "type": "table",
+      "caption": "Tổng điểm theo hồ sơ đối tượng",
+      "columns": [
+        "Đối tượng",
+        "Điểm",
+        "Hạng"
+      ],
+      "rows": {
+        "$ref": "tables.by_audience"
+      },
+      "col_widths_cm": [
+        9.0,
+        3.0,
+        4.0
+      ],
+      "source": "scoring.py: hệ số đối tượng áp lên hồ sơ giai đoạn"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "9. Pháp lý và chủ quyền số"
+    },
+    {
+      "type": "paragraph",
+      "text": "Phạm vi pháp lý của hồ sơ thị trường này: {{score.regulatory_definition}}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Dữ liệu cá nhân trong chứng từ của khách hàng phải được xử lý theo Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15, có hiệu lực từ ngày 01/01/2026 [[src:vn_pdp]]; khi triển khai tại chỗ, dữ liệu không rời khỏi hệ thống của khách hàng. Luật An ninh mạng số 116/2025/QH15 có hiệu lực từ ngày 01/07/2026 [[src:vn_cyber]] đặt ra yêu cầu bảo vệ hệ thống thông tin. Luật Công nghiệp công nghệ số số 71/2025/QH15 [[src:vn_dti]] quy định chính sách ưu đãi cho sản phẩm và doanh nghiệp công nghệ số."
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Trạng thái ví dụ: đang lập hồ sơ đánh giá tác động xử lý dữ liệu cá nhân, dự kiến hoàn tất Q1 2027.",
+        "Triển khai: mặc định tại chỗ, không chuyển dữ liệu ra nước ngoài.",
+        "Lõi xử lý không phụ thuộc API mô hình của bên thứ ba."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "10. Rủi ro và biện pháp"
+    },
+    {
+      "type": "table",
+      "caption": "Danh mục rủi ro chính",
+      "columns": [
+        "Rủi ro",
+        "Khả năng",
+        "Tác động",
+        "Biện pháp",
+        "Chỉ số kiểm soát"
+      ],
+      "rows": [
+        [
+          "Thí điểm không chuyển thành hợp đồng",
+          "trung bình",
+          "cao",
+          "Hợp đồng có ngưỡng chỉ tiêu trước thí điểm",
+          "tỷ lệ gia hạn ≥ 60%"
+        ],
+        [
+          "Tập trung doanh thu (42% từ một khách hàng)",
+          "cao",
+          "trung bình",
+          "10 gia hạn trước Q4 2027",
+          "khách hàng lớn nhất < 25%"
+        ],
+        [
+          "Nền tảng ra phiên bản tại chỗ",
+          "trung bình",
+          "cao",
+          "Mẫu theo ngành, kết nối ERP",
+          "tỷ lệ thắng so với nền tảng"
+        ],
+        [
+          "Chi phí hạ tầng GPU tăng",
+          "trung bình",
+          "trung bình",
+          "Mô hình lượng tử hóa, dự phòng CPU",
+          "giá vốn ≤ 30% doanh thu"
+        ]
+      ],
+      "font_size": 10,
+      "source": "đánh giá chuyên gia của nhóm; so sánh theo nhóm giải pháp, không phải công ty cụ thể"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "11. Lộ trình"
+    },
+    {
+      "type": "numbered",
+      "items": [
+        "Q4 2026 — Gọi vốn và đội ngũ: 125 tỷ ₫; +6 kỹ sư, trưởng bộ phận bán hàng doanh nghiệp",
+        "Q1 2027 — Tuân thủ: Hoàn tất hồ sơ đánh giá tác động dữ liệu cá nhân và phân loại cấp độ an toàn hệ thống",
+        "Q2 2027 — Bán hàng lặp lại: 5 hợp đồng gia hạn, chu kỳ bán ≤ 6 tháng",
+        "Q4 2027 — Mở rộng: 10 hợp đồng, NRR ≥ 110%, 2 nhà tích hợp",
+        "Q2 2028 — Xuất khẩu: Thí điểm tại thị trường lân cận; quyết định vòng 94 tỷ ₫"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "12. Khuyến nghị"
+    },
+    {
+      "type": "numbered",
+      "items": [
+        "Đầu tư theo đợt: đợt hai sau 5 hợp đồng gia hạn.",
+        "Trước khi chốt giao dịch, thu thập dữ liệu thực về tỷ lệ rời bỏ và chi phí thu hút khách hàng (nâng mức bằng chứng kinh tế đơn vị từ C lên B/A).",
+        "Giảm tập trung doanh thu: không khách hàng nào vượt 25% vào cuối năm 2027.",
+        "Đánh giá lại sau 6 tháng với cùng thang điểm; mục tiêu tối thiểu 70 điểm."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Báo cáo theo cấu trúc “kết luận trước”: câu trả lời đi trước, sau đó là lập luận và dữ liệu."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Phụ lục A. Giả định của mô hình"
+    },
+    {
+      "type": "table",
+      "caption": "Giả định chính của mô hình tài chính (kịch bản cơ sở)",
+      "columns": [
+        "Tham số",
+        "Giá trị",
+        "Ghi chú"
+      ],
+      "rows": [
+        [
+          "Khách hàng ban đầu",
+          "3",
+          "thí điểm có trả phí"
+        ],
+        [
+          "Khách hàng mới, 2026–2030",
+          "8 / 16 / 26 / 34 / 40",
+          "kế hoạch bán hàng"
+        ],
+        [
+          "Tỷ lệ rời bỏ/năm",
+          "8%",
+          "ước tính — giả định (C)"
+        ],
+        [
+          "Hợp đồng năm",
+          "1,5 tỷ ₫, +5%/năm",
+          "bình quân danh mục"
+        ],
+        [
+          "Giá vốn",
+          "30% doanh thu",
+          "hạ tầng GPU và hỗ trợ"
+        ],
+        [
+          "Tỷ lệ chiết khấu",
+          "{{fin.discount_rate|pct0}}",
+          "giả định ví dụ; thông lệ thị trường xem markets/"
+        ],
+        [
+          "Thuế suất",
+          "20%",
+          "giả định ví dụ; cần đối chiếu luật hiện hành"
+        ]
+      ],
+      "source": "financial_model.py, kịch bản cơ sở; giá trị danh nghĩa; dữ liệu hư cấu"
+    },
+    {
+      "type": "sources"
+    }
+  ]
+}

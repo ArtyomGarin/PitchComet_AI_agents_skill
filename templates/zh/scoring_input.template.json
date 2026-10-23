@@ -1,0 +1,74 @@
+{
+  "_template_note": "模板，基于虚构示例 Velordoc。请用本项目数据替换全部文字和数字；保留指向 facts.json 的 「{ {路径|格式} }」 占位符。以“_”开头的键会被工具忽略。",
+  "_EXAMPLE_DATA": "虚构产品“Velordoc”。所有数据均为演示工具而编造，与真实公司如有雷同纯属巧合。",
+  "stage": "pilot",
+  "audience": "investor",
+  "locale": "zh",
+  "scores": {
+    "market": {
+      "score": 3.5,
+      "evidence": "B",
+      "note": ""
+    },
+    "problem": {
+      "score": 4.0,
+      "evidence": "B",
+      "note": ""
+    },
+    "trl": {
+      "score": 3.5,
+      "evidence": "A",
+      "note": ""
+    },
+    "moat": {
+      "score": 3.0,
+      "evidence": "B",
+      "note": ""
+    },
+    "team": {
+      "score": 3.5,
+      "evidence": "A",
+      "note": ""
+    },
+    "traction": {
+      "score": 2.5,
+      "evidence": "A",
+      "note": ""
+    },
+    "unit_economics": {
+      "score": 3.0,
+      "evidence": "C",
+      "note": ""
+    },
+    "gtm": {
+      "score": 2.5,
+      "evidence": "C",
+      "note": ""
+    },
+    "regulatory": {
+      "score": 4.0,
+      "evidence": "B",
+      "note": ""
+    },
+    "scalability": {
+      "score": 3.0,
+      "evidence": "C",
+      "note": ""
+    },
+    "risk": {
+      "score": 3.0,
+      "evidence": "B",
+      "note": ""
+    }
+  },
+  "facts": {
+    "runway_months": 14,
+    "top_customer_share": 0.42,
+    "xinchuang_adapted": true,
+    "mlps_certified": true,
+    "genai_filing_missing": false,
+    "cross_border_data_unassessed": false,
+    "critical_foreign_dependency": false
+  },
+  "deck_slides": 16
+}

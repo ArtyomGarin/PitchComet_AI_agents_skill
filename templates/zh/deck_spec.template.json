@@ -1,0 +1,347 @@
+{
+  "_template_note": "模板，基于虚构示例 Velordoc。请用本项目数据替换全部文字和数字；保留指向 facts.json 的 「{ {路径|格式} }」 占位符。以“_”开头的键会被工具忽略。",
+  "meta": {
+    "title": "Velordoc 战略评估（虚构示例）",
+    "author": "示例战略分析团队",
+    "locale": "zh",
+    "currency": "CNY",
+    "theme": "light",
+    "slide_numbers": true,
+    "watermark": "示例 · 虚构数据"
+  },
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Velordoc：本地部署的AI，自动阅读、核验并流转业务单据",
+      "subtitle": "产品潜力评估与投资论点 · 试点阶段",
+      "author": "示例战略分析团队",
+      "date": "2026年10月",
+      "notes": "PitchComet技能的虚构示例。所有数字均为编造，并由tools/中的工具计算。"
+    },
+    {
+      "layout": "big_number",
+      "title": "潜力得分{{score.total|num0}}分：问题与市场扎实，但销售证据仍不足",
+      "numbers": [
+        {
+          "value": "{{market.sam_base|money_bn}}",
+          "label": "可服务市场（SAM），{{market.base_year}}年",
+          "context": "4个细分市场自下而上测算；自上而下偏差{{market.td_bu_ratio_tam|x1}}"
+        },
+        {
+          "value": "{{fin.revenue_last|money_mn0}}",
+          "label": "{{fin.end_year}}年营业收入（基准情景）",
+          "context": "{{fin.breakeven_year}}年EBITDA转正"
+        },
+        {
+          "value": "{{fin.moic_base|x1}}",
+          "label": "投资人MOIC（基准情景）",
+          "context": "IRR {{fin.irr_base|pct0}}；乐观情景{{fin.moic_bull|x1}}"
+        }
+      ],
+      "source": "示例模型（market_sizing.py、financial_model.py、scoring.py）；虚构数据",
+      "notes": "结论先行：综合得分、可服务市场、基准收入和投资回报，细节随后展开。"
+    },
+    {
+      "layout": "bullets",
+      "title": "后台人员每份单据需15分钟手工录入与核对，成为财务和采购的瓶颈",
+      "bullets": [
+        "对财务运营与采购负责人进行了**32次访谈**（示例）",
+        "每份合同或发票需**15分钟**：阅读、录入、交叉核对",
+        "涉密与**敏感**单据不得使用云端服务",
+        "模板OCR遇到新版式失效：**18%的字段**需返工",
+        "时机：开源大模型已可在单台本地服务器运行"
+      ],
+      "source": "示例试点的访谈与工时测定；虚构数据",
+      "notes": "用客户的语言和可度量单位（分钟、字段占比）描述问题。"
+    },
+    {
+      "layout": "two_column",
+      "title": "方案：以本地“分类→抽取→校验→流转”流水线替代手工录入",
+      "left": {
+        "heading": "现状",
+        "bullets": [
+          "人工阅读与录入",
+          "新模板导致规则失效",
+          "人工与ERP对账",
+          "安全策略禁止使用云端"
+        ]
+      },
+      "right": {
+        "heading": "使用Velordoc",
+        "bullets": [
+          "每份单据约3分钟",
+          "模型自适应新版式",
+          "自动与ERP数据核对",
+          "部署在客户内网"
+        ]
+      },
+      "notes": "此处宜用脱敏单据现场演示，而非原型图。"
+    },
+    {
+      "layout": "chart",
+      "title": "{{market.base_year}}年可服务市场{{market.sam_base|money_bn}}，{{market.horizon_year}}年可获得份额{{market.som_horizon_base|money_mn0}}",
+      "chart": {
+        "$ref": "charts.tam_sam_som"
+      },
+      "takeaway": [
+        "TAM {{market.tam_base|money_bn}}：4个细分×机构数×年合同额",
+        "SAM：仅计入要求私有化部署的客户",
+        "自上而下TAM为{{market.tam_td|money_bn}}，偏差{{market.td_bu_ratio_tam|x1}}，在2倍以内"
+      ],
+      "source": "自下而上测算（market_sizing.py）；虚构数据; {{project.units.bn}}",
+      "notes": "以漏斗展示TAM→SAM→SOM，突出SAM。自下而上为主，自上而下为校验。"
+    },
+    {
+      "layout": "table",
+      "title": "银行和政府占SAM比重最大，政府客户的年合同额最高",
+      "columns": [
+        "细分市场",
+        "机构数",
+        "年合同额",
+        "TAM",
+        "SAM",
+        "2030年SOM"
+      ],
+      "rows": {
+        "$ref": "tables.segments"
+      },
+      "col_widths": [
+        4.2,
+        1.6,
+        1.7,
+        1.6,
+        1.6,
+        1.6
+      ],
+      "source": "自下而上测算（market_sizing.py）；虚构数据",
+      "notes": "每一行都是可检验的假设：机构数×合同额×可触达占比×可获得份额。"
+    },
+    {
+      "layout": "chart",
+      "title": "基准情景下SAM年增{{market.cagr_base|pct0}}，{{market.horizon_year}}年达{{market.sam_horizon_base|money_bn}}",
+      "chart": {
+        "$ref": "charts.sam_scenarios"
+      },
+      "takeaway": [
+        "悲观：年增{{market.cagr_bear|pct0}} → {{market.sam_horizon_bear|money_bn}}",
+        "乐观：年增{{market.cagr_bull|pct0}} → {{market.sam_horizon_bull|money_bn}}",
+        "扣除通胀（1%）后基准实际增速{{market.real_cagr_base|pct0}}"
+      ],
+      "source": "示例情景假设（market_sizing.py）；名义值; {{project.units.bn}}",
+      "notes": "预测始终以情景呈现，名义值与实际值分开列示。"
+    },
+    {
+      "layout": "big_number",
+      "title": "试点：处理速度提升5倍，字段准确率比模板OCR高{{metrics.pilot_accuracy.value|pp0}}",
+      "numbers": [
+        {
+          "value": "−{{metrics.pilot_roi.time_reduction|pct0}}",
+          "label": "单份单据人工时间",
+          "context": "15→3分钟，3个试点"
+        },
+        {
+          "value": "+{{metrics.pilot_accuracy.value|pp0}}",
+          "label": "字段抽取准确率",
+          "context": "{{metrics.pilot_accuracy.accuracy_model|pct0}}对比{{metrics.pilot_accuracy.accuracy_baseline|pct0}}，2,000个字段"
+        },
+        {
+          "value": "{{metrics.pilot_roi.value|pct0}}",
+          "label": "客户3年投资回报率",
+          "context": "回收期约{{metrics.pilot_roi.payback_months|num0}}个月"
+        }
+      ],
+      "source": "试点工时测定与标注样本（metrics_calc.py：automation_roi、accuracy_vs_baseline）；虚构数据",
+      "notes": "以客户自身指标呈现结果，并注明样本量。"
+    },
+    {
+      "layout": "matrix",
+      "title": "对比替代方案：比模板OCR更准确，且与云服务不同，可在客户内网运行",
+      "x_label": "新版式单据的准确率",
+      "y_label": "私有化部署适配度",
+      "quadrants": [
+        "",
+        "目标定位",
+        "",
+        ""
+      ],
+      "items": [
+        {
+          "name": "模板OCR",
+          "x": 0.3,
+          "y": 0.75
+        },
+        {
+          "name": "云端文档AI服务",
+          "x": 0.78,
+          "y": 0.15
+        },
+        {
+          "name": "外包录入",
+          "x": 0.5,
+          "y": 0.45
+        },
+        {
+          "name": "Velordoc",
+          "x": 0.82,
+          "y": 0.85,
+          "highlight": true
+        }
+      ],
+      "takeaway": [
+        "壁垒：120万份标注单据语料与ERP连接器",
+        "风险：大型平台可能在12–18个月内推出私有化版本"
+      ],
+      "source": "团队专家评估；以方案类别而非具体公司比较",
+      "notes": "矩阵为专家评估；竞争对手以类别呈现。"
+    },
+    {
+      "layout": "scorecard",
+      "title": "综合得分{{score.total|num0}}分（{{score.grade}}级）：主要短板为市场验证和单位经济",
+      "criteria": {
+        "$ref": "tables.scorecard"
+      },
+      "total": {
+        "$ref": "score.total"
+      },
+      "grade": "{{score.grade}}",
+      "grade_label": "{{score.grade_label}}",
+      "range": [
+        {
+          "$ref": "score.range_lo"
+        },
+        {
+          "$ref": "score.range_hi"
+        }
+      ],
+      "source": "scoring.py，“试点/投资机构”权重；虚构评分",
+      "notes": "区间反映证据质量：假设（C）±1分，估计（B）±0.5分。"
+    },
+    {
+      "layout": "table",
+      "title": "基准计划：收入由{{fin.revenue_first|money_mn0}}增至{{fin.revenue_last|money_mn0}}，{{fin.breakeven_year}}年EBITDA转正",
+      "columns": {
+        "$ref": "tables.pnl_columns"
+      },
+      "rows": {
+        "$ref": "tables.pnl"
+      },
+      "col_widths": [
+        3.6,
+        1.7,
+        1.7,
+        1.7,
+        1.7,
+        1.7
+      ],
+      "source": "financial_model.py，基准情景；名义值；虚构数据",
+      "notes": "LTV按5年客户生命周期封顶。"
+    },
+    {
+      "layout": "chart",
+      "title": "情景区间较宽：{{fin.end_year}}年收入介于{{fin.revenue_last_bear|money_mn0}}与{{fin.revenue_last_bull|money_mn0}}之间",
+      "chart": {
+        "$ref": "charts.revenue_scenarios"
+      },
+      "takeaway": [
+        "主要驱动：新增客户数与合同额",
+        "悲观：需追加融资，最低现金{{fin.min_cash_bear|money_mn0}}",
+        "乐观：{{fin.breakeven_bull}}年即实现EBITDA转正"
+      ],
+      "source": "financial_model.py，基准情景；名义值；虚构数据; {{project.units.mn}}",
+      "notes": "情景为新增客户、合同额和流失率的乘数。"
+    },
+    {
+      "layout": "table",
+      "title": "基准情景投资回报{{fin.moic_base|x1}}，低于3倍风投基准；乐观情景为{{fin.moic_bull|x1}}",
+      "columns": [
+        "情景",
+        "2030年收入",
+        "EBITDA转正",
+        "NPV（{{fin.discount_rate|pct0}}）",
+        "MOIC",
+        "IRR"
+      ],
+      "rows": {
+        "$ref": "tables.fin_scenarios"
+      },
+      "col_widths": [
+        2.6,
+        1.9,
+        1.7,
+        1.9,
+        1.4,
+        1.4
+      ],
+      "highlight_row": 1,
+      "source": "financial_model.py；投前估值1亿元时投资3,500万元，2030年按4倍收入退出，后续稀释15%；虚构数据",
+      "notes": "分情景列示回报并明确进入和退出假设；不可将乐观情景当作基准。"
+    },
+    {
+      "layout": "two_column",
+      "title": "若2027年底前实现首批续约，四项关键风险可控",
+      "left": {
+        "heading": "风险",
+        "bullets": [
+          "试点未能转化为合同",
+          "集中度：42%收入来自单一客户",
+          "平台推出私有化版本",
+          "GPU基础设施成本上升"
+        ]
+      },
+      "right": {
+        "heading": "应对",
+        "bullets": [
+          "试点前签订含指标门槛的合同",
+          "计划：2027年四季度前续约10家",
+          "行业模板与ERP连接器",
+          "量化模型，CPU备用方案"
+        ]
+      },
+      "notes": "每项风险对应一项措施和一个监控指标。"
+    },
+    {
+      "layout": "timeline",
+      "title": "18个月目标：续约10家、完成合规节点、启动首个海外试点",
+      "steps": [
+        {
+          "label": "2026年四季度",
+          "title": "融资与团队",
+          "text": "3,500万元；新增6名工程师和企业销售负责人"
+        },
+        {
+          "label": "2027年一季度",
+          "title": "合规",
+          "text": "完成等保2.0测评与信创适配认证"
+        },
+        {
+          "label": "2027年二季度",
+          "title": "可复制销售",
+          "text": "续约5家，销售周期≤6个月"
+        },
+        {
+          "label": "2027年四季度",
+          "title": "规模化",
+          "text": "10份合同，NRR≥110%，2家集成商"
+        },
+        {
+          "label": "2028年二季度",
+          "title": "出海",
+          "text": "周边市场试点；决定2,625万元融资"
+        }
+      ],
+      "source": "示例团队计划；虚构数据",
+      "notes": "里程碑须有日期、可核实，且由团队可控。"
+    },
+    {
+      "layout": "closing",
+      "title": "融资需求：以{{fin.ownership_entry|pct0}}股权融资3,500万元，直至验证可复制销售",
+      "bullets": [
+        "第一期2,100万元立即到位；第二期1,400万元在续约5家后到位",
+        "投资人获董事会席位；按季度报告6项指标",
+        "今日决策：批准投资条款清单及6周尽职调查"
+      ],
+      "contact": "联系人：项目负责人 · team@example.org（示例）",
+      "notes": "一个诉求、一个数字、一个决策。"
+    }
+  ]
+}

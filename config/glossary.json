@@ -1,0 +1,1319 @@
+{
+ "_doc": "Plain-language definitions of every metric PitchComet can put on a slide or in a report. build_pptx inserts a glossary slide (or two) right after the title slide and build_docx a glossary section before the first heading, listing only the metrics that the document actually shows (detected with 'abbr' = case-sensitive tokens and 'words' = case-insensitive regexes per locale; 'all' applies to every locale, English words are always checked too). 'implies' adds related metrics a reader needs (LTV/CAC → LTV, CAC). qa_check fails a deck or report whose glossary is missing or does not cover a shown metric. Set meta.glossary = false in a spec to switch it off for non-pitch documents. Write definitions natively for each locale, one sentence, no jargon.",
+ "version": 1,
+ "per_slide": 12,
+ "labels": {
+  "title": {
+   "ru": "Что значат цифры",
+   "en": "What the numbers mean",
+   "zh": "这些数字是什么意思",
+   "vi": "Các con số có nghĩa là gì",
+   "id": "Arti angka-angka ini",
+   "ms": "Maksud angka-angka ini"
+  },
+  "continued": {
+   "ru": "(продолжение)",
+   "en": "(continued)",
+   "zh": "（续）",
+   "vi": "(tiếp)",
+   "id": "(lanjutan)",
+   "ms": "(sambungan)"
+  },
+  "source": {
+   "ru": "Источник: упрощённые определения PitchComet (config/glossary.json)",
+   "en": "Source: simplified PitchComet definitions (config/glossary.json)",
+   "zh": "资料来源：PitchComet简化定义（config/glossary.json）",
+   "vi": "Nguồn: định nghĩa đơn giản hóa của PitchComet (config/glossary.json)",
+   "id": "Sumber: definisi sederhana PitchComet (config/glossary.json)",
+   "ms": "Sumber: takrifan ringkas PitchComet (config/glossary.json)"
+  },
+  "notes": {
+   "ru": "Здесь показатели объяснены простыми словами. Точные формулы и допущения приведены в отчёте.",
+   "en": "The metrics in plain words. Exact formulas and assumptions are in the report.",
+   "zh": "用通俗的话解释各项指标。具体公式和假设见报告。",
+   "vi": "Giải thích các chỉ số bằng lời đơn giản. Công thức và giả định cụ thể có trong báo cáo.",
+   "id": "Penjelasan indikator dengan bahasa sederhana. Rumus dan asumsi lengkap ada di laporan.",
+   "ms": "Penjelasan penunjuk dalam bahasa mudah. Formula dan andaian penuh ada dalam laporan."
+  },
+  "intro": {
+   "ru": "Ниже простыми словами объяснены показатели, которые встречаются в этом отчёте. Точные формулы приведены в разделах с расчётами.",
+   "en": "Below, the metrics used in this report are explained in plain words. Exact formulas are given in the sections with the calculations.",
+   "zh": "下面用通俗的话解释本报告中出现的指标，具体公式见各计算章节。",
+   "vi": "Dưới đây là giải thích bằng lời đơn giản cho các chỉ số dùng trong báo cáo này. Công thức cụ thể nằm trong các phần tính toán.",
+   "id": "Berikut penjelasan sederhana untuk indikator yang dipakai dalam laporan ini. Rumus lengkap ada di bagian perhitungan.",
+   "ms": "Berikut penjelasan mudah bagi penunjuk yang digunakan dalam laporan ini. Formula penuh terdapat dalam bahagian pengiraan."
+  },
+  "col_term": {
+   "ru": "Показатель",
+   "en": "Metric",
+   "zh": "指标",
+   "vi": "Chỉ số",
+   "id": "Indikator",
+   "ms": "Penunjuk"
+  },
+  "col_def": {
+   "ru": "Что это значит",
+   "en": "What it means",
+   "zh": "含义",
+   "vi": "Ý nghĩa",
+   "id": "Artinya",
+   "ms": "Maksudnya"
+  }
+ },
+ "metrics": [
+  {
+   "id": "tam",
+   "abbr": [
+    "TAM"
+   ],
+   "words": {
+    "en": [
+     "total addressable market"
+    ],
+    "zh": [
+     "潜在市场总量",
+     "总可触达市场"
+    ]
+   },
+   "term": {
+    "ru": "TAM",
+    "en": "TAM",
+    "zh": "TAM",
+    "vi": "TAM",
+    "id": "TAM",
+    "ms": "TAM"
+   },
+   "def": {
+    "ru": "Сколько денег в год потратили бы на такой продукт все возможные покупатели.",
+    "en": "How much money all possible customers would spend on this kind of product in a year.",
+    "zh": "所有可能的客户每年会在这类产品上花多少钱。",
+    "vi": "Tổng số tiền mà mọi khách hàng có thể có sẽ chi cho loại sản phẩm này trong một năm.",
+    "id": "Total uang yang akan dibelanjakan semua calon pelanggan untuk produk sejenis ini dalam setahun.",
+    "ms": "Jumlah wang yang akan dibelanjakan oleh semua bakal pelanggan untuk produk jenis ini dalam setahun."
+   }
+  },
+  {
+   "id": "sam",
+   "abbr": [
+    "SAM"
+   ],
+   "words": {
+    "en": [
+     "serviceable addressable market",
+     "serviceable market"
+    ],
+    "zh": [
+     "可服务市场"
+    ],
+    "vi": [
+     "thị trường phục vụ được"
+    ],
+    "id": [
+     "pasar yang dapat dilayani"
+    ],
+    "ms": [
+     "pasaran yang boleh dilayani"
+    ]
+   },
+   "term": {
+    "ru": "SAM",
+    "en": "SAM",
+    "zh": "SAM",
+    "vi": "SAM",
+    "id": "SAM",
+    "ms": "SAM"
+   },
+   "def": {
+    "ru": "Часть TAM, которую мы реально можем обслужить с нашим продуктом, ценой и странами.",
+    "en": "The part of TAM we can actually serve with our product, price and countries.",
+    "zh": "TAM中我们凭现有产品、价格和覆盖国家真正能服务到的那一部分。",
+    "vi": "Phần của TAM mà chúng tôi thực sự phục vụ được với sản phẩm, mức giá và các quốc gia hiện có.",
+    "id": "Bagian dari TAM yang benar-benar bisa kami layani dengan produk, harga, dan negara yang kami jangkau.",
+    "ms": "Bahagian TAM yang benar-benar boleh kami layani dengan produk, harga dan negara yang kami liputi."
+   }
+  },
+  {
+   "id": "som",
+   "abbr": [
+    "SOM"
+   ],
+   "words": {
+    "en": [
+     "serviceable obtainable market",
+     "obtainable market"
+    ],
+    "zh": [
+     "可获得份额",
+     "可获得市场"
+    ],
+    "vi": [
+     "thị phần đạt được"
+    ],
+    "id": [
+     "pangsa yang dapat dicapai"
+    ],
+    "ms": [
+     "bahagian yang boleh dicapai"
+    ]
+   },
+   "term": {
+    "ru": "SOM",
+    "en": "SOM",
+    "zh": "SOM",
+    "vi": "SOM",
+    "id": "SOM",
+    "ms": "SOM"
+   },
+   "def": {
+    "ru": "Часть SAM, которую мы можем реально занять за несколько лет.",
+    "en": "The part of SAM we can realistically win in the next few years.",
+    "zh": "SAM中我们在未来几年里有把握拿下的那一部分。",
+    "vi": "Phần của SAM mà chúng tôi có thể giành được một cách thực tế trong vài năm tới.",
+    "id": "Bagian dari SAM yang realistis bisa kami raih dalam beberapa tahun ke depan.",
+    "ms": "Bahagian SAM yang secara realistik boleh kami peroleh dalam beberapa tahun akan datang."
+   }
+  },
+  {
+   "id": "cagr",
+   "abbr": [
+    "CAGR"
+   ],
+   "words": {
+    "ru": [
+     "среднегодов\\w* темп"
+    ],
+    "zh": [
+     "复合年增长率",
+     "年复合增长率"
+    ],
+    "vi": [
+     "tăng trưởng kép"
+    ],
+    "id": [
+     "pertumbuhan majemuk"
+    ],
+    "ms": [
+     "pertumbuhan kompaun"
+    ]
+   },
+   "term": {
+    "ru": "CAGR",
+    "en": "CAGR",
+    "zh": "CAGR",
+    "vi": "CAGR",
+    "id": "CAGR",
+    "ms": "CAGR"
+   },
+   "def": {
+    "ru": "Средний рост за год: на сколько процентов в среднем ежегодно растёт показатель.",
+    "en": "Average yearly growth: by how many percent a figure grows each year on average.",
+    "zh": "平均每年增长多少：某个数字每年平均增长的百分比。",
+    "vi": "Mức tăng trung bình mỗi năm: một chỉ số tăng bao nhiêu phần trăm mỗi năm.",
+    "id": "Rata-rata pertumbuhan per tahun: berapa persen sebuah angka naik setiap tahunnya.",
+    "ms": "Purata pertumbuhan setahun: berapa peratus sesuatu angka meningkat setiap tahun."
+   }
+  },
+  {
+   "id": "unit_economics",
+   "abbr": [],
+   "words": {
+    "en": [
+     "unit economics"
+    ],
+    "ru": [
+     "юнит-экономик"
+    ],
+    "zh": [
+     "单位经济"
+    ],
+    "vi": [
+     "kinh tế đơn vị"
+    ],
+    "id": [
+     "ekonomi unit",
+     "unit ekonomi"
+    ],
+    "ms": [
+     "ekonomi unit",
+     "unit ekonomi"
+    ]
+   },
+   "term": {
+    "ru": "Юнит-экономика",
+    "en": "Unit economics",
+    "zh": "单位经济",
+    "vi": "Kinh tế đơn vị",
+    "id": "Ekonomi unit",
+    "ms": "Ekonomi unit"
+   },
+   "def": {
+    "ru": "Приносит ли один клиент больше денег, чем стоит его привлечь и обслужить.",
+    "en": "Whether one customer brings in more money than it costs to win and serve them.",
+    "zh": "一个客户带来的钱，是否多于获取和服务他的成本。",
+    "vi": "Một khách hàng có mang lại nhiều tiền hơn chi phí để có và phục vụ họ hay không.",
+    "id": "Apakah satu pelanggan menghasilkan uang lebih banyak daripada biaya untuk mendapatkan dan melayaninya.",
+    "ms": "Sama ada seorang pelanggan membawa lebih banyak wang berbanding kos untuk mendapatkan dan melayaninya."
+   }
+  },
+  {
+   "id": "arpa",
+   "abbr": [
+    "ARPA",
+    "ARPU"
+   ],
+   "words": {
+    "zh": [
+     "客单价"
+    ]
+   },
+   "term": {
+    "ru": "ARPA",
+    "en": "ARPA",
+    "zh": "ARPA（客单价）",
+    "vi": "ARPA",
+    "id": "ARPA",
+    "ms": "ARPA"
+   },
+   "def": {
+    "ru": "Сколько в среднем платит нам один клиент в месяц или в год.",
+    "en": "The average amount one customer pays us per month or per year.",
+    "zh": "平均每个客户每月或每年付给我们多少钱。",
+    "vi": "Số tiền trung bình một khách hàng trả cho chúng tôi mỗi tháng hoặc mỗi năm.",
+    "id": "Rata-rata yang dibayar satu pelanggan kepada kami per bulan atau per tahun.",
+    "ms": "Purata jumlah yang dibayar oleh seorang pelanggan kepada kami sebulan atau setahun."
+   }
+  },
+  {
+   "id": "arr",
+   "abbr": [
+    "ARR"
+   ],
+   "words": {},
+   "term": {
+    "ru": "ARR",
+    "en": "ARR",
+    "zh": "ARR",
+    "vi": "ARR",
+    "id": "ARR",
+    "ms": "ARR"
+   },
+   "def": {
+    "ru": "Годовая выручка по подпискам, если клиенты продлят их ещё на год.",
+    "en": "Yearly subscription revenue, assuming customers keep renewing.",
+    "zh": "按年计算的订阅收入，假设客户会继续续费。",
+    "vi": "Doanh thu thuê bao tính theo năm, giả định khách hàng tiếp tục gia hạn.",
+    "id": "Pendapatan langganan dalam setahun, dengan anggapan pelanggan terus memperpanjang.",
+    "ms": "Hasil langganan setahun, dengan andaian pelanggan terus memperbaharui langganan."
+   }
+  },
+  {
+   "id": "mrr",
+   "abbr": [
+    "MRR"
+   ],
+   "words": {},
+   "term": {
+    "ru": "MRR",
+    "en": "MRR",
+    "zh": "MRR",
+    "vi": "MRR",
+    "id": "MRR",
+    "ms": "MRR"
+   },
+   "def": {
+    "ru": "Выручка по подпискам за месяц.",
+    "en": "Subscription revenue for one month.",
+    "zh": "每月的订阅收入。",
+    "vi": "Doanh thu thuê bao mỗi tháng.",
+    "id": "Pendapatan langganan per bulan.",
+    "ms": "Hasil langganan sebulan."
+   }
+  },
+  {
+   "id": "gross_margin",
+   "abbr": [],
+   "words": {
+    "en": [
+     "gross margin"
+    ],
+    "ru": [
+     "валов\\w* марж"
+    ],
+    "zh": [
+     "毛利率"
+    ],
+    "vi": [
+     "biên lợi nhuận gộp"
+    ],
+    "id": [
+     "margin kotor"
+    ],
+    "ms": [
+     "margin kasar"
+    ]
+   },
+   "term": {
+    "ru": "Валовая маржа",
+    "en": "Gross margin",
+    "zh": "毛利率",
+    "vi": "Biên lợi nhuận gộp",
+    "id": "Margin kotor",
+    "ms": "Margin kasar"
+   },
+   "def": {
+    "ru": "Какая доля каждой продажи остаётся после прямых затрат на предоставление продукта.",
+    "en": "The share of each sale left after paying the direct costs of delivering the product.",
+    "zh": "每笔销售收入扣除交付产品的直接成本后剩下的比例。",
+    "vi": "Phần còn lại của mỗi đồng doanh thu sau khi trừ chi phí trực tiếp để cung cấp sản phẩm.",
+    "id": "Bagian dari setiap penjualan yang tersisa setelah dikurangi biaya langsung untuk menyediakan produk.",
+    "ms": "Bahagian setiap jualan yang tinggal selepas ditolak kos langsung untuk menyediakan produk."
+   }
+  },
+  {
+   "id": "churn",
+   "abbr": [],
+   "words": {
+    "en": [
+     "\\bchurn"
+    ],
+    "ru": [
+     "\\bотток"
+    ],
+    "zh": [
+     "流失率",
+     "客户流失"
+    ],
+    "vi": [
+     "rời bỏ"
+    ],
+    "id": [
+     "\\bchurn"
+    ],
+    "ms": [
+     "\\bchurn"
+    ]
+   },
+   "term": {
+    "ru": "Отток",
+    "en": "Churn",
+    "zh": "流失率",
+    "vi": "Tỷ lệ rời bỏ",
+    "id": "Churn",
+    "ms": "Kadar churn"
+   },
+   "def": {
+    "ru": "Доля клиентов, которые перестают платить за месяц или за год.",
+    "en": "The share of customers who stop paying in a month or a year.",
+    "zh": "一个月或一年内停止付费的客户所占比例。",
+    "vi": "Tỷ lệ khách hàng ngừng trả tiền trong một tháng hoặc một năm.",
+    "id": "Persentase pelanggan yang berhenti membayar dalam sebulan atau setahun.",
+    "ms": "Peratusan pelanggan yang berhenti membayar dalam sebulan atau setahun."
+   }
+  },
+  {
+   "id": "nrr",
+   "abbr": [
+    "NRR"
+   ],
+   "words": {},
+   "term": {
+    "ru": "NRR",
+    "en": "NRR",
+    "zh": "NRR",
+    "vi": "NRR",
+    "id": "NRR",
+    "ms": "NRR"
+   },
+   "def": {
+    "ru": "Сколько выручки от прошлогодних клиентов осталось в этом году с учётом расширений и потерь. Больше 100% значит, что они платят больше.",
+    "en": "Revenue kept from last year's customers this year, counting upgrades and losses; over 100% means they now spend more.",
+    "zh": "去年的老客户今年还带来多少收入（算上加购和流失）；超过100%说明他们花得更多了。",
+    "vi": "Doanh thu từ khách hàng cũ năm nay so với năm trước, đã tính phần mua thêm và phần mất đi; trên 100% nghĩa là họ chi nhiều hơn.",
+    "id": "Pendapatan dari pelanggan lama tahun ini dibanding tahun lalu, termasuk tambahan dan yang hilang; di atas 100% berarti mereka belanja lebih banyak.",
+    "ms": "Hasil daripada pelanggan sedia ada tahun ini berbanding tahun lalu, termasuk tambahan dan kehilangan; melebihi 100% bermakna mereka berbelanja lebih."
+   }
+  },
+  {
+   "id": "cac",
+   "abbr": [
+    "CAC"
+   ],
+   "words": {
+    "ru": [
+     "стоимост\\w* привлечения"
+    ],
+    "zh": [
+     "获客成本"
+    ],
+    "vi": [
+     "chi phí thu hút khách"
+    ],
+    "id": [
+     "biaya akuisisi"
+    ],
+    "ms": [
+     "kos pemerolehan"
+    ]
+   },
+   "term": {
+    "ru": "CAC",
+    "en": "CAC",
+    "zh": "CAC（获客成本）",
+    "vi": "CAC",
+    "id": "CAC",
+    "ms": "CAC"
+   },
+   "def": {
+    "ru": "Сколько мы тратим на рекламу и продажи, чтобы получить одного нового клиента.",
+    "en": "How much we spend on marketing and sales to win one new customer.",
+    "zh": "为获得一个新客户，我们在营销和销售上花的钱。",
+    "vi": "Số tiền chi cho tiếp thị và bán hàng để có thêm một khách hàng mới.",
+    "id": "Biaya pemasaran dan penjualan untuk mendapatkan satu pelanggan baru.",
+    "ms": "Kos pemasaran dan jualan untuk mendapatkan seorang pelanggan baharu."
+   }
+  },
+  {
+   "id": "ltv",
+   "abbr": [
+    "LTV"
+   ],
+   "words": {
+    "en": [
+     "lifetime value"
+    ],
+    "zh": [
+     "客户终身价值"
+    ]
+   },
+   "term": {
+    "ru": "LTV",
+    "en": "LTV",
+    "zh": "LTV",
+    "vi": "LTV",
+    "id": "LTV",
+    "ms": "LTV"
+   },
+   "def": {
+    "ru": "Сколько прибыли приносит один клиент за всё время, пока он с нами.",
+    "en": "How much profit one customer brings over the whole time they stay with us.",
+    "zh": "一个客户在合作期间总共为我们带来的利润。",
+    "vi": "Tổng lợi nhuận một khách hàng mang lại trong suốt thời gian sử dụng sản phẩm.",
+    "id": "Total laba yang diberikan satu pelanggan selama ia memakai produk kami.",
+    "ms": "Jumlah keuntungan yang dibawa oleh seorang pelanggan sepanjang tempoh dia menggunakan produk kami."
+   }
+  },
+  {
+   "id": "ltv_cac",
+   "abbr": [],
+   "words": {
+    "all": [
+     "LTV\\s*/\\s*CAC"
+    ]
+   },
+   "term": {
+    "ru": "LTV/CAC",
+    "en": "LTV/CAC",
+    "zh": "LTV/CAC",
+    "vi": "LTV/CAC",
+    "id": "LTV/CAC",
+    "ms": "LTV/CAC"
+   },
+   "def": {
+    "ru": "Во сколько раз прибыль от клиента больше затрат на его привлечение. Хорошим считается 3 и выше.",
+    "en": "How many times a customer's lifetime profit covers the cost of winning them; 3 or more is usually healthy.",
+    "zh": "客户带来的利润是获客成本的几倍；一般3倍以上算健康。",
+    "vi": "Lợi nhuận từ một khách hàng gấp bao nhiêu lần chi phí để có họ; từ 3 lần trở lên thường là tốt.",
+    "id": "Berapa kali laba dari pelanggan menutup biaya untuk mendapatkannya; 3 kali atau lebih biasanya sehat.",
+    "ms": "Berapa kali keuntungan daripada pelanggan menampung kos mendapatkannya; 3 kali atau lebih biasanya sihat."
+   },
+   "implies": [
+    "ltv",
+    "cac"
+   ]
+  },
+  {
+   "id": "payback",
+   "abbr": [],
+   "words": {
+    "en": [
+     "payback"
+    ],
+    "ru": [
+     "окупаемост"
+    ],
+    "zh": [
+     "回收期",
+     "回本"
+    ],
+    "vi": [
+     "hoàn vốn"
+    ],
+    "id": [
+     "payback",
+     "balik modal"
+    ],
+    "ms": [
+     "tempoh pulangan",
+     "bayar balik"
+    ]
+   },
+   "term": {
+    "ru": "Окупаемость",
+    "en": "Payback",
+    "zh": "回收期",
+    "vi": "Thời gian hoàn vốn",
+    "id": "Payback",
+    "ms": "Tempoh pulangan"
+   },
+   "def": {
+    "ru": "Через сколько месяцев вернутся потраченные деньги: для нас затраты на клиента, для клиента цена продукта.",
+    "en": "How many months until the money spent comes back: for us, the cost of winning a customer; for the customer, the price.",
+    "zh": "花出去的钱多少个月能赚回来：对我们是获客成本，对客户是购买费用。",
+    "vi": "Sau bao nhiêu tháng thì số tiền đã chi được thu lại: với chúng tôi là chi phí có khách hàng, với khách hàng là giá sản phẩm.",
+    "id": "Berapa bulan sampai uang yang dikeluarkan kembali: bagi kami biaya mendapatkan pelanggan, bagi pelanggan harga produk.",
+    "ms": "Berapa bulan sehingga wang yang dibelanjakan kembali: bagi kami kos mendapatkan pelanggan, bagi pelanggan harga produk."
+   }
+  },
+  {
+   "id": "roi",
+   "abbr": [
+    "ROI"
+   ],
+   "words": {
+    "ru": [
+     "возврат\\w* инвестиций"
+    ],
+    "zh": [
+     "投资回报率"
+    ]
+   },
+   "term": {
+    "ru": "ROI",
+    "en": "ROI",
+    "zh": "ROI（投资回报率）",
+    "vi": "ROI",
+    "id": "ROI",
+    "ms": "ROI"
+   },
+   "def": {
+    "ru": "Сколько клиент выигрывает по сравнению с тем, что заплатил за продукт, за вычетом затрат.",
+    "en": "How much the customer gains compared with what they paid for the product, after subtracting the cost.",
+    "zh": "客户扣除花费后，比付出的钱多赚了多少。",
+    "vi": "Khách hàng được lợi bao nhiêu so với số tiền đã trả cho sản phẩm, sau khi trừ chi phí.",
+    "id": "Berapa keuntungan pelanggan dibanding uang yang dibayarkan untuk produk, setelah dikurangi biayanya.",
+    "ms": "Berapa banyak pelanggan untung berbanding wang yang dibayar untuk produk, selepas ditolak kosnya."
+   }
+  },
+  {
+   "id": "tco",
+   "abbr": [
+    "TCO"
+   ],
+   "words": {
+    "en": [
+     "total cost of ownership"
+    ],
+    "ru": [
+     "совокупн\\w* стоимост\\w* владения"
+    ],
+    "zh": [
+     "总拥有成本"
+    ],
+    "vi": [
+     "tổng chi phí sở hữu"
+    ],
+    "id": [
+     "total biaya kepemilikan"
+    ],
+    "ms": [
+     "jumlah kos pemilikan"
+    ]
+   },
+   "term": {
+    "ru": "TCO",
+    "en": "TCO",
+    "zh": "TCO（总拥有成本）",
+    "vi": "TCO",
+    "id": "TCO",
+    "ms": "TCO"
+   },
+   "def": {
+    "ru": "Полная стоимость использования продукта: цена, внедрение, обучение и время сотрудников.",
+    "en": "The full cost of using the product: price plus setup, training and staff time.",
+    "zh": "使用产品的全部花费：价格加上部署、培训和员工投入的时间。",
+    "vi": "Toàn bộ chi phí sử dụng sản phẩm: giá, triển khai, đào tạo và thời gian của nhân viên.",
+    "id": "Biaya penuh memakai produk: harga, pemasangan, pelatihan, dan waktu karyawan.",
+    "ms": "Kos penuh menggunakan produk: harga, pemasangan, latihan dan masa pekerja."
+   }
+  },
+  {
+   "id": "ebitda",
+   "abbr": [
+    "EBITDA"
+   ],
+   "words": {},
+   "term": {
+    "ru": "EBITDA",
+    "en": "EBITDA",
+    "zh": "EBITDA",
+    "vi": "EBITDA",
+    "id": "EBITDA",
+    "ms": "EBITDA"
+   },
+   "def": {
+    "ru": "Прибыль от основной работы до процентов, налогов и износа оборудования. Показывает, зарабатывает ли сам бизнес.",
+    "en": "Operating profit before interest, taxes and wear of equipment: does the business itself make money.",
+    "zh": "扣除利息、税和设备折旧之前的经营利润，看业务本身是否赚钱。",
+    "vi": "Lợi nhuận từ hoạt động chính trước lãi vay, thuế và khấu hao: bản thân việc kinh doanh có lãi hay không.",
+    "id": "Laba dari kegiatan utama sebelum bunga, pajak, dan penyusutan: apakah bisnisnya sendiri menghasilkan uang.",
+    "ms": "Keuntungan operasi sebelum faedah, cukai dan susut nilai: adakah perniagaan itu sendiri menjana wang."
+   }
+  },
+  {
+   "id": "fcf",
+   "abbr": [
+    "FCF"
+   ],
+   "words": {
+    "en": [
+     "free cash flow"
+    ],
+    "ru": [
+     "свободн\\w* денежн\\w* поток"
+    ],
+    "zh": [
+     "自由现金流"
+    ],
+    "vi": [
+     "dòng tiền tự do"
+    ],
+    "id": [
+     "arus kas bebas"
+    ],
+    "ms": [
+     "aliran tunai bebas"
+    ]
+   },
+   "term": {
+    "ru": "Свободный денежный поток",
+    "en": "Free cash flow",
+    "zh": "自由现金流",
+    "vi": "Dòng tiền tự do",
+    "id": "Arus kas bebas",
+    "ms": "Aliran tunai bebas"
+   },
+   "def": {
+    "ru": "Сколько денег остаётся за год после всех расходов и вложений.",
+    "en": "Cash left in a year after paying all expenses and investments.",
+    "zh": "一年内付完所有开支和投资后剩下的现金。",
+    "vi": "Tiền còn lại trong năm sau khi trả mọi chi phí và khoản đầu tư.",
+    "id": "Uang tunai yang tersisa dalam setahun setelah semua biaya dan investasi dibayar.",
+    "ms": "Wang tunai yang tinggal dalam setahun selepas semua perbelanjaan dan pelaburan dibayar."
+   }
+  },
+  {
+   "id": "breakeven",
+   "abbr": [],
+   "words": {
+    "en": [
+     "break-?even"
+    ],
+    "ru": [
+     "безубыточн"
+    ],
+    "zh": [
+     "盈亏平衡"
+    ],
+    "vi": [
+     "hòa vốn"
+    ],
+    "id": [
+     "titik impas"
+    ],
+    "ms": [
+     "pulang modal"
+    ]
+   },
+   "term": {
+    "ru": "Безубыточность",
+    "en": "Break-even",
+    "zh": "盈亏平衡",
+    "vi": "Điểm hòa vốn",
+    "id": "Titik impas",
+    "ms": "Titik pulang modal"
+   },
+   "def": {
+    "ru": "Момент, когда доходы начинают покрывать все расходы.",
+    "en": "The moment when income starts to cover all expenses.",
+    "zh": "收入开始覆盖全部支出的那个时点。",
+    "vi": "Thời điểm thu nhập bắt đầu đủ bù mọi chi phí.",
+    "id": "Saat pemasukan mulai menutup semua pengeluaran.",
+    "ms": "Saat pendapatan mula menampung semua perbelanjaan."
+   }
+  },
+  {
+   "id": "burn",
+   "abbr": [],
+   "words": {
+    "en": [
+     "\\bburn\\b",
+     "burn rate"
+    ],
+    "ru": [
+     "\\bburn\\b",
+     "сжигани\\w* денег"
+    ],
+    "zh": [
+     "烧钱",
+     "现金消耗"
+    ],
+    "vi": [
+     "đốt tiền"
+    ],
+    "id": [
+     "\\bburn\\b"
+    ],
+    "ms": [
+     "\\bburn\\b",
+     "pembakaran tunai"
+    ]
+   },
+   "term": {
+    "ru": "Burn rate",
+    "en": "Burn rate",
+    "zh": "烧钱速度",
+    "vi": "Tốc độ đốt tiền",
+    "id": "Burn rate",
+    "ms": "Kadar pembakaran tunai"
+   },
+   "def": {
+    "ru": "Сколько денег компания тратит в месяц сверх того, что зарабатывает.",
+    "en": "How much cash the company spends per month above what it earns.",
+    "zh": "公司每月比收入多花出去的现金。",
+    "vi": "Số tiền công ty chi mỗi tháng vượt quá số tiền kiếm được.",
+    "id": "Berapa banyak uang yang dihabiskan perusahaan per bulan melebihi pendapatannya.",
+    "ms": "Berapa banyak wang yang dibelanjakan syarikat sebulan melebihi pendapatannya."
+   }
+  },
+  {
+   "id": "runway",
+   "abbr": [],
+   "words": {
+    "en": [
+     "\\brunway"
+    ],
+    "ru": [
+     "\\brunway",
+     "запас\\w* денег"
+    ],
+    "zh": [
+     "现金跑道"
+    ],
+    "vi": [
+     "\\brunway"
+    ],
+    "id": [
+     "\\brunway"
+    ],
+    "ms": [
+     "\\brunway"
+    ]
+   },
+   "term": {
+    "ru": "Запас денег (runway)",
+    "en": "Runway",
+    "zh": "现金跑道",
+    "vi": "Runway",
+    "id": "Runway",
+    "ms": "Runway"
+   },
+   "def": {
+    "ru": "На сколько месяцев компании хватит имеющихся денег.",
+    "en": "How many months the company can operate on the money it has.",
+    "zh": "公司手头的钱还能支撑多少个月。",
+    "vi": "Số tháng công ty còn hoạt động được với số tiền đang có.",
+    "id": "Berapa bulan perusahaan bisa berjalan dengan uang yang dimiliki sekarang.",
+    "ms": "Berapa bulan syarikat boleh beroperasi dengan wang yang ada."
+   }
+  },
+  {
+   "id": "rule_of_40",
+   "abbr": [],
+   "words": {
+    "en": [
+     "rule of 40"
+    ],
+    "ru": [
+     "правил\\w* 40"
+    ],
+    "zh": [
+     "40法则"
+    ],
+    "vi": [
+     "quy tắc 40"
+    ],
+    "id": [
+     "rule of 40",
+     "aturan 40"
+    ],
+    "ms": [
+     "peraturan 40",
+     "rule of 40"
+    ]
+   },
+   "term": {
+    "ru": "Правило 40",
+    "en": "Rule of 40",
+    "zh": "40法则",
+    "vi": "Quy tắc 40",
+    "id": "Rule of 40",
+    "ms": "Peraturan 40"
+   },
+   "def": {
+    "ru": "Темп роста плюс рентабельность. Для компании, которая делает программы, хорошим считается результат от 40%.",
+    "en": "Growth rate plus profit margin; for a software company 40% or more is seen as a good balance.",
+    "zh": "增长率加利润率；软件公司达到40%以上通常被认为增长与盈利较为平衡。",
+    "vi": "Tốc độ tăng trưởng cộng biên lợi nhuận; với công ty phần mềm, từ 40% trở lên được xem là cân bằng tốt.",
+    "id": "Laju pertumbuhan ditambah margin laba; untuk perusahaan perangkat lunak, 40% atau lebih dianggap seimbang.",
+    "ms": "Kadar pertumbuhan dicampur margin keuntungan; bagi syarikat perisian, 40% atau lebih dianggap seimbang."
+   }
+  },
+  {
+   "id": "discount_rate",
+   "abbr": [],
+   "words": {
+    "en": [
+     "discount rate"
+    ],
+    "ru": [
+     "ставк\\w* дисконт"
+    ],
+    "zh": [
+     "折现率",
+     "贴现率"
+    ],
+    "vi": [
+     "tỷ lệ chiết khấu"
+    ],
+    "id": [
+     "tingkat diskonto"
+    ],
+    "ms": [
+     "kadar diskaun"
+    ]
+   },
+   "term": {
+    "ru": "Ставка дисконтирования",
+    "en": "Discount rate",
+    "zh": "折现率",
+    "vi": "Tỷ lệ chiết khấu",
+    "id": "Tingkat diskonto",
+    "ms": "Kadar diskaun"
+   },
+   "def": {
+    "ru": "Плата за ожидание денег в год: чем выше риск, тем меньше сегодня стоят будущие деньги.",
+    "en": "The yearly price of waiting for money: the higher the risk, the less future money is worth today.",
+    "zh": "等待资金的年度代价：风险越高，未来的钱放到今天越不值钱。",
+    "vi": "Cái giá của việc chờ tiền mỗi năm: rủi ro càng cao, tiền trong tương lai càng kém giá trị so với hôm nay.",
+    "id": "Harga menunggu uang per tahun: makin tinggi risikonya, makin kecil nilai uang masa depan saat ini.",
+    "ms": "Harga menunggu wang setahun: semakin tinggi risiko, semakin rendah nilai wang masa depan pada hari ini."
+   }
+  },
+  {
+   "id": "npv",
+   "abbr": [
+    "NPV"
+   ],
+   "words": {
+    "ru": [
+     "\\bЧДД\\b"
+    ],
+    "zh": [
+     "净现值"
+    ]
+   },
+   "term": {
+    "ru": "NPV",
+    "en": "NPV",
+    "zh": "NPV（净现值）",
+    "vi": "NPV",
+    "id": "NPV",
+    "ms": "NPV"
+   },
+   "def": {
+    "ru": "Сколько стоят все будущие денежные потоки в сегодняшних деньгах за вычетом вложений. Больше нуля значит, что проект окупается.",
+    "en": "What all future cash flows are worth in today's money minus the investment; above zero means the project pays off.",
+    "zh": "把未来所有现金流折算成今天的钱再减去投入；大于零说明项目划算。",
+    "vi": "Giá trị hôm nay của mọi dòng tiền tương lai trừ đi khoản đầu tư; lớn hơn 0 nghĩa là dự án có lời.",
+    "id": "Nilai hari ini dari semua arus kas masa depan dikurangi investasi; di atas nol berarti proyeknya menguntungkan.",
+    "ms": "Nilai hari ini bagi semua aliran tunai masa depan ditolak pelaburan; melebihi sifar bermakna projek itu berbaloi."
+   }
+  },
+  {
+   "id": "irr",
+   "abbr": [
+    "IRR"
+   ],
+   "words": {
+    "ru": [
+     "\\bВНД\\b"
+    ],
+    "zh": [
+     "内部收益率"
+    ]
+   },
+   "term": {
+    "ru": "IRR",
+    "en": "IRR",
+    "zh": "IRR（内部收益率）",
+    "vi": "IRR",
+    "id": "IRR",
+    "ms": "IRR"
+   },
+   "def": {
+    "ru": "Средняя годовая доходность вложений. Её сравнивают с доходностью более надёжных вариантов.",
+    "en": "The average yearly return the investment earns; compare it with safer options.",
+    "zh": "这笔投资平均每年的收益率，可与更稳妥的投资相比较。",
+    "vi": "Mức sinh lời trung bình mỗi năm của khoản đầu tư; so sánh với các kênh an toàn hơn.",
+    "id": "Rata-rata imbal hasil per tahun dari investasi; bandingkan dengan pilihan yang lebih aman.",
+    "ms": "Purata pulangan setahun daripada pelaburan; bandingkan dengan pilihan yang lebih selamat."
+   }
+  },
+  {
+   "id": "moic",
+   "abbr": [
+    "MOIC"
+   ],
+   "words": {},
+   "term": {
+    "ru": "MOIC",
+    "en": "MOIC",
+    "zh": "MOIC",
+    "vi": "MOIC",
+    "id": "MOIC",
+    "ms": "MOIC"
+   },
+   "def": {
+    "ru": "Во сколько раз вырастут деньги инвестора: 3x значит, что каждый вложенный рубль вернётся тремя.",
+    "en": "How many times the investor's money grows: 3x means each dollar invested comes back as three.",
+    "zh": "投资人的钱会变成几倍：3倍表示每投入1元最终收回3元。",
+    "vi": "Tiền của nhà đầu tư tăng lên bao nhiêu lần: 3 lần nghĩa là mỗi đồng bỏ ra thu về ba đồng.",
+    "id": "Berapa kali uang investor berlipat: 3x berarti setiap rupiah yang ditanam kembali menjadi tiga.",
+    "ms": "Berapa kali ganda wang pelabur bertambah: 3x bermakna setiap ringgit yang dilabur kembali menjadi tiga."
+   }
+  },
+  {
+   "id": "pre_money",
+   "abbr": [],
+   "words": {
+    "en": [
+     "pre-money"
+    ],
+    "ru": [
+     "pre-money",
+     "до раунда",
+     "оценк\\w* до сделки"
+    ],
+    "zh": [
+     "投前估值"
+    ],
+    "vi": [
+     "định giá trước vốn",
+     "pre-money"
+    ],
+    "id": [
+     "pra-dana",
+     "pre-money"
+    ],
+    "ms": [
+     "pra-wang",
+     "pre-money"
+    ]
+   },
+   "term": {
+    "ru": "Pre-money",
+    "en": "Pre-money",
+    "zh": "投前估值",
+    "vi": "Định giá trước vốn",
+    "id": "Valuasi pra-dana",
+    "ms": "Penilaian pra-wang"
+   },
+   "def": {
+    "ru": "Сколько стоит компания до прихода новых денег.",
+    "en": "What the company is worth before the new money comes in.",
+    "zh": "新资金进来之前公司值多少钱。",
+    "vi": "Giá trị công ty trước khi nhận khoản đầu tư mới.",
+    "id": "Nilai perusahaan sebelum uang baru masuk.",
+    "ms": "Nilai syarikat sebelum wang baharu masuk."
+   }
+  },
+  {
+   "id": "post_money",
+   "abbr": [],
+   "words": {
+    "en": [
+     "post-money"
+    ],
+    "ru": [
+     "post-money",
+     "после раунда",
+     "оценк\\w* после сделки"
+    ],
+    "zh": [
+     "投后估值"
+    ],
+    "vi": [
+     "định giá sau vốn",
+     "post-money"
+    ],
+    "id": [
+     "pasca-dana",
+     "post-money"
+    ],
+    "ms": [
+     "pasca-wang",
+     "post-money"
+    ]
+   },
+   "term": {
+    "ru": "Post-money",
+    "en": "Post-money",
+    "zh": "投后估值",
+    "vi": "Định giá sau vốn",
+    "id": "Valuasi pasca-dana",
+    "ms": "Penilaian pasca-wang"
+   },
+   "def": {
+    "ru": "Стоимость компании сразу после раунда: pre-money плюс новые инвестиции.",
+    "en": "Company value right after the round: pre-money plus the new investment.",
+    "zh": "融资完成后公司的价值：投前估值加上新投资。",
+    "vi": "Giá trị công ty ngay sau vòng gọi vốn: định giá trước vốn cộng khoản đầu tư mới.",
+    "id": "Nilai perusahaan tepat setelah putaran pendanaan: valuasi pra-dana ditambah investasi baru.",
+    "ms": "Nilai syarikat sejurus selepas pusingan pembiayaan: penilaian pra-wang ditambah pelaburan baharu."
+   }
+  },
+  {
+   "id": "dilution",
+   "abbr": [],
+   "words": {
+    "en": [
+     "dilution"
+    ],
+    "ru": [
+     "размыв",
+     "размыти"
+    ],
+    "zh": [
+     "稀释"
+    ],
+    "vi": [
+     "pha loãng"
+    ],
+    "id": [
+     "dilusi"
+    ],
+    "ms": [
+     "pencairan"
+    ]
+   },
+   "term": {
+    "ru": "Размытие доли",
+    "en": "Dilution",
+    "zh": "稀释",
+    "vi": "Pha loãng",
+    "id": "Dilusi",
+    "ms": "Pencairan"
+   },
+   "def": {
+    "ru": "Насколько уменьшается доля основателей и прежних инвесторов при выпуске новых акций.",
+    "en": "How much the founders' and earlier investors' share shrinks when new shares are issued.",
+    "zh": "发行新股后，创始人和早期投资人的持股比例下降多少。",
+    "vi": "Tỷ lệ sở hữu của nhà sáng lập và nhà đầu tư cũ giảm bao nhiêu khi phát hành cổ phần mới.",
+    "id": "Seberapa besar porsi saham pendiri dan investor lama mengecil saat saham baru diterbitkan.",
+    "ms": "Sejauh mana pegangan saham pengasas dan pelabur terdahulu mengecil apabila saham baharu diterbitkan."
+   }
+  },
+  {
+   "id": "ev_revenue",
+   "abbr": [],
+   "words": {
+    "all": [
+     "EV\\s*/\\s*(?:Sales|Revenue|S\\b)"
+    ],
+    "en": [
+     "revenue multiple",
+     "\\d\\s?x revenue"
+    ],
+    "ru": [
+     "мультипликатор",
+     "\\dx выручк",
+     "× выручк"
+    ],
+    "zh": [
+     "倍收入",
+     "收入倍数",
+     "市销率"
+    ],
+    "vi": [
+     "lần doanh thu",
+     "bội số doanh thu"
+    ],
+    "id": [
+     "\\dx pendapatan",
+     "kelipatan pendapatan"
+    ],
+    "ms": [
+     "\\dx hasil",
+     "gandaan hasil"
+    ]
+   },
+   "term": {
+    "ru": "EV/Sales",
+    "en": "EV/Sales",
+    "zh": "EV/Sales（市销率）",
+    "vi": "EV/Sales",
+    "id": "EV/Sales",
+    "ms": "EV/Sales"
+   },
+   "def": {
+    "ru": "Сколько годовых выручек платят за похожие компании. По этому множителю оценивают стоимость.",
+    "en": "How many years of revenue buyers pay for similar companies; used to estimate value.",
+    "zh": "同类公司的价值相当于几年的收入，用来估算公司价值。",
+    "vi": "Giá trị các công ty tương tự bằng bao nhiêu năm doanh thu; dùng để ước tính giá trị.",
+    "id": "Berapa tahun pendapatan yang dibayar untuk perusahaan sejenis; dipakai untuk memperkirakan nilai.",
+    "ms": "Berapa tahun hasil yang dibayar untuk syarikat serupa; digunakan untuk menganggar nilai."
+   }
+  },
+  {
+   "id": "dcf",
+   "abbr": [
+    "DCF"
+   ],
+   "words": {
+    "en": [
+     "discounted cash flow"
+    ],
+    "ru": [
+     "дисконтированн\\w* денежн"
+    ],
+    "zh": [
+     "现金流折现"
+    ],
+    "vi": [
+     "chiết khấu dòng tiền"
+    ],
+    "id": [
+     "arus kas terdiskonto"
+    ],
+    "ms": [
+     "aliran tunai terdiskaun"
+    ]
+   },
+   "term": {
+    "ru": "DCF",
+    "en": "DCF",
+    "zh": "DCF（现金流折现）",
+    "vi": "DCF",
+    "id": "DCF",
+    "ms": "DCF"
+   },
+   "def": {
+    "ru": "Оценка компании через сумму её будущих денежных потоков в сегодняшних деньгах.",
+    "en": "Valuing a company by adding up its future cash flows converted into today's money.",
+    "zh": "把公司未来的现金流折算成今天的钱并加总，以此估值。",
+    "vi": "Định giá công ty bằng cách cộng các dòng tiền tương lai đã quy về giá trị hôm nay.",
+    "id": "Menilai perusahaan dengan menjumlahkan arus kas masa depannya dalam nilai uang hari ini.",
+    "ms": "Menilai syarikat dengan menjumlahkan aliran tunai masa depannya dalam nilai wang hari ini."
+   }
+  },
+  {
+   "id": "trl",
+   "abbr": [
+    "TRL"
+   ],
+   "words": {
+    "ru": [
+     "уров\\w* готовности технолог"
+    ],
+    "zh": [
+     "技术成熟度"
+    ],
+    "vi": [
+     "mức sẵn sàng công nghệ"
+    ],
+    "id": [
+     "kesiapterapan"
+    ],
+    "ms": [
+     "kesediaan teknologi"
+    ]
+   },
+   "term": {
+    "ru": "TRL",
+    "en": "TRL",
+    "zh": "TRL（技术成熟度）",
+    "vi": "TRL",
+    "id": "TRL",
+    "ms": "TRL"
+   },
+   "def": {
+    "ru": "Готовность технологии по шкале от 1 (идея) до 9 (проверена в реальной работе).",
+    "en": "Technology readiness on a scale from 1 (idea) to 9 (proven in real use).",
+    "zh": "技术准备程度，从1（想法）到9（已在实际使用中验证）。",
+    "vi": "Mức sẵn sàng của công nghệ, từ 1 (ý tưởng) đến 9 (đã được chứng minh khi dùng thực tế).",
+    "id": "Kesiapan teknologi pada skala 1 (gagasan) sampai 9 (terbukti dalam pemakaian nyata).",
+    "ms": "Tahap kesediaan teknologi pada skala 1 (idea) hingga 9 (terbukti dalam penggunaan sebenar)."
+   }
+  },
+  {
+   "id": "score",
+   "abbr": [],
+   "words": {
+    "all": [
+     "\\b\\d{1,3}\\s?/\\s?100\\b"
+    ],
+    "en": [
+     "out of 100",
+     "potential score"
+    ],
+    "ru": [
+     "из 100\\b",
+     "оценк\\w* потенциала"
+    ],
+    "zh": [
+     "满分100",
+     "潜力得分",
+     "综合得分"
+    ],
+    "vi": [
+     "trên 100",
+     "điểm tiềm năng"
+    ],
+    "id": [
+     "dari 100",
+     "skor potensi"
+    ],
+    "ms": [
+     "daripada 100",
+     "skor potensi"
+    ]
+   },
+   "term": {
+    "ru": "Оценка потенциала",
+    "en": "Potential score",
+    "zh": "潜力得分",
+    "vi": "Điểm tiềm năng",
+    "id": "Skor potensi",
+    "ms": "Skor potensi"
+   },
+   "def": {
+    "ru": "Наша общая оценка шансов продукта от 0 до 100, собранная из взвешенных критериев.",
+    "en": "Our overall 0 to 100 rating of the product's chances, built from weighted criteria.",
+    "zh": "我们根据加权标准对产品前景给出的0到100分综合评分。",
+    "vi": "Điểm tổng hợp từ 0 đến 100 về triển vọng sản phẩm, dựa trên các tiêu chí có trọng số.",
+    "id": "Penilaian keseluruhan kami dari 0 sampai 100 atas peluang produk, berdasarkan kriteria berbobot.",
+    "ms": "Penilaian keseluruhan kami dari 0 hingga 100 terhadap peluang produk, berdasarkan kriteria berwajaran."
+   }
+  }
+ ]
+}

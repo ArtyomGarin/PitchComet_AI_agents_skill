@@ -1,0 +1,1637 @@
+{
+  "version": "2.0",
+  "scale": {
+    "min": 0,
+    "max": 5,
+    "note": "0 = no evidence / absent; 5 = best-in-class with verified evidence. Half points allowed.",
+    "note_zh": "0 = 无证据/不存在；5 = 同类最佳且有可核实证据。允许半分。",
+    "note_ru": "0 — нет подтверждений / отсутствует; 5 — лучший в классе, с проверяемыми доказательствами. Допустимы половинные баллы."
+  },
+  "evidence_levels": {
+    "A": {
+      "label_en": "verified (audited data, signed contracts, logs, peer-reviewed)",
+      "label_ru": "подтверждено (аудит, договоры, логи, рецензируемые данные)",
+      "confidence": 1.0,
+      "label_zh": "已核实（审计数据、已签合同、日志、同行评审）",
+      "label_vi": "đã kiểm chứng (dữ liệu kiểm toán, hợp đồng đã ký, log, công bố có phản biện)",
+      "label_id": "terverifikasi (data audit, kontrak bertanda tangan, log, kajian sejawat)",
+      "label_ms": "disahkan (data diaudit, kontrak ditandatangani, log, kajian rakan setara)"
+    },
+    "B": {
+      "label_en": "credible estimate (pilot data, LOIs, reputable third-party source)",
+      "label_ru": "обоснованная оценка (пилоты, LOI, надёжный внешний источник)",
+      "confidence": 0.75,
+      "label_zh": "可信估计（试点数据、意向书、可靠第三方来源）",
+      "label_vi": "ước tính đáng tin cậy (dữ liệu thí điểm, LOI, nguồn bên thứ ba uy tín)",
+      "label_id": "estimasi kredibel (data pilot, LOI, sumber pihak ketiga tepercaya)",
+      "label_ms": "anggaran boleh dipercayai (data perintis, LOI, sumber pihak ketiga yang dipercayai)"
+    },
+    "C": {
+      "label_en": "assumption / founder claim",
+      "label_ru": "допущение / заявление команды",
+      "confidence": 0.4,
+      "label_zh": "假设 / 团队自述",
+      "label_vi": "giả định / tuyên bố của đội ngũ",
+      "label_id": "asumsi / klaim tim",
+      "label_ms": "andaian / dakwaan pasukan"
+    }
+  },
+  "criteria": [
+    {
+      "id": "market",
+      "name_en": "Market size & growth",
+      "name_ru": "Размер и рост рынка",
+      "weight": 14,
+      "rationale": "Caps the upside; every audience asks 'how big can this get'. Highest single weight because every other criterion is multiplied by the size of the prize. Absolute SAM thresholds are set per market profile (currency-specific).",
+      "anchors_en": [
+        "no identifiable paying market",
+        "very small SAM or shrinking market",
+        "small SAM, growth < 5%/yr",
+        "mid-size SAM, growth 5–15%",
+        "large SAM or growth 15–30%, bottom-up confirmed",
+        "very large SAM and growth > 20%, triangulated top-down + bottom-up"
+      ],
+      "anchors_ru": [
+        "нет платящего рынка",
+        "очень малый SAM или рынок сжимается",
+        "малый SAM, рост < 5%/год",
+        "средний SAM, рост 5–15%",
+        "крупный SAM или рост 15–30%, подтверждено снизу вверх",
+        "очень крупный SAM и рост > 20%, триангуляция сверху и снизу"
+      ],
+      "red_flags": [
+        "TAM quoted from a generic 'global AI market' figure",
+        "no bottom-up check",
+        "CAGR from a single press release"
+      ],
+      "name_zh": "市场规模与增长",
+      "anchors_zh": [
+        "无可识别的付费市场",
+        "SAM很小或市场萎缩",
+        "SAM较小，年增长 < 5%",
+        "SAM中等，年增长 5–15%",
+        "SAM较大或年增长 15–30%，自下而上已验证",
+        "SAM很大且年增长 > 20%，自上而下与自下而上交叉验证"
+      ],
+      "name_vi": "Quy mô và tăng trưởng thị trường",
+      "name_id": "Ukuran dan pertumbuhan pasar",
+      "name_ms": "Saiz dan pertumbuhan pasaran"
+    },
+    {
+      "id": "problem",
+      "name_en": "Problem severity & willingness to pay",
+      "name_ru": "Острота проблемы и готовность платить",
+      "weight": 12,
+      "rationale": "Painful, budgeted problems shorten sales cycles; 'nice-to-have' kills B2B and B2G products regardless of tech quality.",
+      "anchors_en": [
+        "problem not validated",
+        "anecdotal pain, no budget owner",
+        "pain confirmed in < 10 interviews, unclear budget",
+        "≥ 20 interviews, named budget owner, workaround cost quantified",
+        "customers pay for workarounds today; quantified loss > 10x price",
+        "mission-critical / regulatory mandate; customers pre-pay or co-fund"
+      ],
+      "anchors_ru": [
+        "проблема не проверена",
+        "единичные свидетельства, нет владельца бюджета",
+        "боль подтверждена < 10 интервью, бюджет неясен",
+        "≥ 20 интервью, известен владелец бюджета, оценена стоимость обходных решений",
+        "клиенты уже платят за обходные решения; потери > 10× цены",
+        "критично для миссии / требование регулятора; клиенты предоплачивают или софинансируют"
+      ],
+      "red_flags": [
+        "problem described only in the team's words",
+        "buyer ≠ user and buyer not interviewed"
+      ],
+      "name_zh": "问题严重性与付费意愿",
+      "anchors_zh": [
+        "问题未经验证",
+        "零星反馈，无预算负责人",
+        "< 10 次访谈确认痛点，预算不明",
+        "≥ 20 次访谈，明确预算负责人，替代方案成本已量化",
+        "客户目前已为替代方案付费；量化损失 > 价格的10倍",
+        "关键业务 / 监管强制要求；客户预付或共同出资"
+      ],
+      "name_vi": "Mức độ cấp thiết của vấn đề và sẵn lòng chi trả",
+      "name_id": "Urgensi masalah dan kesediaan membayar",
+      "name_ms": "Keterukan masalah dan kesediaan membayar"
+    },
+    {
+      "id": "trl",
+      "name_en": "Product / technology maturity (TRL/УГТ)",
+      "name_ru": "Зрелость продукта и технологии (УГТ/TRL)",
+      "weight": 10,
+      "rationale": "Separates research from product. Mapped to the TRL scale (and national equivalents, e.g. ГОСТ Р 58048-2017 in Russia) so that grant committees and corporates read it the same way.",
+      "anchors_en": [
+        "TRL 1–2: concept only",
+        "TRL 3: proof of concept",
+        "TRL 4–5: validation in a relevant environment",
+        "TRL 6: prototype demonstrated with real data",
+        "TRL 7–8: system in customer operation, qualified",
+        "TRL 9: proven in routine operation at several customers"
+      ],
+      "anchors_ru": [
+        "УГТ 1–2: только концепция",
+        "УГТ 3: подтверждена работоспособность (PoC)",
+        "УГТ 4–5: проверка в условиях, близких к реальным",
+        "УГТ 6: прототип на реальных данных",
+        "УГТ 7–8: система в эксплуатации у заказчика, квалифицирована",
+        "УГТ 9: штатная эксплуатация у нескольких заказчиков"
+      ],
+      "red_flags": [
+        "demo is scripted / not on customer data",
+        "claimed TRL above evidence"
+      ],
+      "name_zh": "产品与技术成熟度（TRL）",
+      "anchors_zh": [
+        "TRL 1–2：仅有概念",
+        "TRL 3：原理验证（PoC）",
+        "TRL 4–5：在相关环境中验证",
+        "TRL 6：基于真实数据的原型演示",
+        "TRL 7–8：系统在客户环境运行并通过鉴定",
+        "TRL 9：在多个客户处常态化运行"
+      ],
+      "name_vi": "Độ trưởng thành sản phẩm / công nghệ (TRL)",
+      "name_id": "Kematangan produk / teknologi (TRL)",
+      "name_ms": "Kematangan produk / teknologi (TRL)"
+    },
+    {
+      "id": "moat",
+      "name_en": "Differentiation, moat & IP",
+      "name_ru": "Отличие, защищённость, ИС",
+      "weight": 10,
+      "rationale": "Determines whether margins survive competition from big platforms and open-source models.",
+      "anchors_en": [
+        "commodity; easily replicated",
+        "feature-level difference only",
+        "better on 1–2 measured dimensions vs. alternatives",
+        "measured advantage + proprietary data or workflow lock-in",
+        "several reinforcing moats (data, integrations, certifications, registered IP)",
+        "structural moat: network effects / exclusive data / regulation-backed position"
+      ],
+      "anchors_ru": [
+        "товарный продукт, легко копируется",
+        "отличия на уровне функций",
+        "лучше по 1–2 измеренным параметрам",
+        "измеренное преимущество + собственные данные или встроенность в процессы",
+        "несколько взаимоусиливающих барьеров (данные, интеграции, сертификаты, зарегистрированная ИС)",
+        "структурный барьер: сетевые эффекты / эксклюзивные данные / позиция, закреплённая регулированием"
+      ],
+      "red_flags": [
+        "thin wrapper over a third-party model without a proprietary data advantage",
+        "'no competitors' claim"
+      ],
+      "name_zh": "差异化、壁垒与知识产权",
+      "anchors_zh": [
+        "同质化产品，易被复制",
+        "仅功能层面差异",
+        "在1–2个可测量维度上优于替代方案",
+        "可测量的优势 + 专有数据或流程嵌入",
+        "多重相互强化的壁垒（数据、集成、资质认证、已登记知识产权）",
+        "结构性壁垒：网络效应 / 独家数据 / 受监管保护的地位"
+      ],
+      "name_vi": "Khác biệt, rào cản và sở hữu trí tuệ",
+      "name_id": "Diferensiasi, keunggulan bertahan dan HKI",
+      "name_ms": "Pembezaan, kelebihan daya saing dan HKI"
+    },
+    {
+      "id": "team",
+      "name_en": "Team & execution capability",
+      "name_ru": "Команда и способность исполнять",
+      "weight": 10,
+      "rationale": "Early-stage outcomes track team quality; government and academic audiences also weigh institutional backing.",
+      "anchors_en": [
+        "no dedicated team",
+        "part-time team, key skills missing",
+        "core technical team, no commercial lead",
+        "complete core team, relevant domain track record",
+        "team has shipped & sold similar products; advisors with access",
+        "repeat founders / leading research group + proven commercial executives"
+      ],
+      "anchors_ru": [
+        "нет выделенной команды",
+        "частичная занятость, нет ключевых компетенций",
+        "есть техническое ядро, нет коммерческого лидера",
+        "полное ядро команды, опыт в отрасли",
+        "команда уже выводила и продавала похожие продукты",
+        "серийные основатели / ведущая исследовательская группа + доказанные коммерческие руководители"
+      ],
+      "red_flags": [
+        "single point of failure (one developer)",
+        "no one owns sales"
+      ],
+      "name_zh": "团队与执行能力",
+      "anchors_zh": [
+        "无专职团队",
+        "兼职团队，缺少关键能力",
+        "有技术核心，无商业负责人",
+        "核心团队完整，具备行业经验",
+        "团队曾交付并销售过类似产品；顾问可提供渠道",
+        "连续创业者 / 领先研究团队 + 经过验证的商业管理者"
+      ],
+      "name_vi": "Đội ngũ và năng lực thực thi",
+      "name_id": "Tim dan kemampuan eksekusi",
+      "name_ms": "Pasukan dan keupayaan pelaksanaan"
+    },
+    {
+      "id": "traction",
+      "name_en": "Traction & evidence",
+      "name_ru": "Тракшн и доказательства",
+      "weight": 10,
+      "rationale": "Converts claims into evidence: users, revenue, pilots, LOIs, retention.",
+      "anchors_en": [
+        "none",
+        "waitlist / interest only",
+        "1–2 unpaid pilots or LOIs",
+        "paid pilots or ≥ 3 LOIs; usage data",
+        "recurring revenue, ≥ 5 paying customers, retention data",
+        "fast-growing recurring revenue (> 2x YoY) with NRR ≥ 110%"
+      ],
+      "anchors_ru": [
+        "нет",
+        "лист ожидания / интерес",
+        "1–2 бесплатных пилота или LOI",
+        "платные пилоты или ≥ 3 LOI; данные использования",
+        "регулярная выручка, ≥ 5 платящих клиентов, данные удержания",
+        "быстрый рост регулярной выручки (> 2× г/г) при NRR ≥ 110%"
+      ],
+      "red_flags": [
+        "pilots that never convert",
+        "vanity metrics (registrations, downloads) without usage"
+      ],
+      "name_zh": "市场验证与证据",
+      "anchors_zh": [
+        "无",
+        "仅有等候名单 / 意向",
+        "1–2个免费试点或意向书",
+        "付费试点或 ≥ 3份意向书；有使用数据",
+        "经常性收入，≥ 5家付费客户，有留存数据",
+        "经常性收入快速增长（同比 > 2倍），NRR ≥ 110%"
+      ],
+      "name_vi": "Sức kéo và bằng chứng",
+      "name_id": "Traksi dan bukti",
+      "name_ms": "Daya tarikan dan bukti"
+    },
+    {
+      "id": "unit_economics",
+      "name_en": "Business model & unit economics",
+      "name_ru": "Бизнес-модель и юнит-экономика",
+      "weight": 9,
+      "rationale": "Shows growth will create rather than burn value: gross margin, LTV/CAC, payback.",
+      "anchors_en": [
+        "no model",
+        "pricing undefined",
+        "pricing defined, margins unknown",
+        "GM ≥ 50%, LTV/CAC estimated ≥ 2",
+        "GM ≥ 70%, LTV/CAC ≥ 3, payback ≤ 18 mo (measured)",
+        "GM ≥ 80%, LTV/CAC ≥ 5, payback ≤ 12 mo, burn multiple < 1.5"
+      ],
+      "anchors_ru": [
+        "модели нет",
+        "цена не определена",
+        "цена есть, маржа неизвестна",
+        "ВМ ≥ 50%, оценочно LTV/CAC ≥ 2",
+        "ВМ ≥ 70%, LTV/CAC ≥ 3, окупаемость ≤ 18 мес. (измерено)",
+        "ВМ ≥ 80%, LTV/CAC ≥ 5, окупаемость ≤ 12 мес., burn multiple < 1,5"
+      ],
+      "red_flags": [
+        "LTV computed with < 2% monthly churn assumption without data",
+        "inference/compute costs ignored in COGS"
+      ],
+      "name_zh": "商业模式与单位经济",
+      "anchors_zh": [
+        "无商业模式",
+        "定价未确定",
+        "已定价，毛利未知",
+        "毛利率 ≥ 50%，估算 LTV/CAC ≥ 2",
+        "毛利率 ≥ 70%，LTV/CAC ≥ 3，回收期 ≤ 18个月（实测）",
+        "毛利率 ≥ 80%，LTV/CAC ≥ 5，回收期 ≤ 12个月，烧钱倍数 < 1.5"
+      ],
+      "name_vi": "Mô hình kinh doanh và kinh tế đơn vị",
+      "name_id": "Model bisnis dan unit ekonomi",
+      "name_ms": "Model perniagaan dan ekonomi unit"
+    },
+    {
+      "id": "gtm",
+      "name_en": "Go-to-market & channels",
+      "name_ru": "Выход на рынок и каналы",
+      "weight": 7,
+      "rationale": "B2B/B2G sales cycles are long; a named channel (integrator, marketplace, procurement route) matters more than ads.",
+      "anchors_en": [
+        "no plan",
+        "generic plan ('marketing, partners')",
+        "target segment and ICP defined",
+        "repeatable first channel identified, sales cycle measured",
+        "2+ working channels, partner/integrator agreements, procurement route clear",
+        "efficient scalable engine (magic number > 0.75), land-and-expand proven"
+      ],
+      "anchors_ru": [
+        "плана нет",
+        "общий план («маркетинг, партнёры»)",
+        "определены сегмент и ICP",
+        "найден первый повторяемый канал, измерен цикл сделки",
+        "2+ рабочих канала, соглашения с интеграторами, ясен путь закупки",
+        "масштабируемая машина продаж (magic number > 0,75), доказан land-and-expand"
+      ],
+      "red_flags": [
+        "relying on a single anchor customer",
+        "no understanding of public/enterprise procurement rules"
+      ],
+      "name_zh": "市场进入与渠道",
+      "anchors_zh": [
+        "无计划",
+        "笼统计划（“营销、合作伙伴”）",
+        "已明确目标细分市场和理想客户画像",
+        "找到首个可复制渠道，已测量销售周期",
+        "2个以上有效渠道，与集成商签约，采购路径清晰",
+        "高效可扩展的销售体系（magic number > 0.75），已验证“先落地后扩展”"
+      ],
+      "name_vi": "Chiến lược thâm nhập thị trường và kênh",
+      "name_id": "Strategi masuk pasar dan kanal",
+      "name_ms": "Strategi kemasukan pasaran dan saluran"
+    },
+    {
+      "id": "regulatory",
+      "name_en": "Regulatory & sovereignty fit",
+      "name_ru": "Регуляторика и технологический суверенитет",
+      "weight": 7,
+      "rationale": "Data-protection, security certification and supply-chain sovereignty requirements are entry tickets for public-sector, regulated and critical-infrastructure buyers. The concrete regimes differ by market and are defined in market_profiles.",
+      "anchors_en": [
+        "blocked: critical dependency on a component that cannot be used in the target market, no substitute",
+        "major compliance gaps",
+        "compliance path known, not started",
+        "compliance in progress, controllable stack",
+        "meets data & security requirements of target buyers",
+        "full compliance + certifications + listed in sector / policy programmes"
+      ],
+      "anchors_ru": [
+        "заблокировано: критическая зависимость от компонента, недоступного на целевом рынке, без замены",
+        "серьёзные несоответствия требованиям",
+        "путь соответствия известен, не начат",
+        "соответствие в процессе, контролируемый стек",
+        "соответствует требованиям к данным и ИБ целевых заказчиков",
+        "полное соответствие + сертификаты + включено в отраслевые / государственные программы"
+      ],
+      "red_flags": [
+        "third-party cloud/LLM API in the critical path where buyers require local processing",
+        "personal data processed outside the permitted jurisdiction"
+      ],
+      "name_zh": "合规与技术自主",
+      "anchors_zh": [
+        "受阻：关键组件依赖外部且无替代",
+        "存在重大合规缺口",
+        "合规路径已知，尚未启动",
+        "合规进行中，技术栈可控",
+        "满足目标客户的数据与安全要求",
+        "合规完备 + 资质认证 + 纳入行业或政策项目"
+      ],
+      "name_vi": "Tuân thủ pháp lý và chủ quyền công nghệ",
+      "name_id": "Regulasi dan kedaulatan teknologi",
+      "name_ms": "Kawal selia dan kedaulatan teknologi"
+    },
+    {
+      "id": "scalability",
+      "name_en": "Scalability & export potential",
+      "name_ru": "Масштабируемость и экспорт",
+      "weight": 5,
+      "rationale": "Measures the option value beyond the first market: replicability across sectors and accessible export markets (defined per market profile).",
+      "anchors_en": [
+        "custom project each time",
+        "heavy customization per client",
+        "configurable product, single sector",
+        "multi-sector product, marginal cost per client low",
+        "localized for ≥ 1 export market, partner identified",
+        "proven export revenue or platform/marketplace economics"
+      ],
+      "anchors_ru": [
+        "каждый раз заказная разработка",
+        "тяжёлая кастомизация под клиента",
+        "настраиваемый продукт, одна отрасль",
+        "мультиотраслевой продукт, низкие предельные затраты",
+        "локализация для ≥ 1 экспортного рынка, есть партнёр",
+        "доказанная экспортная выручка или платформенная экономика"
+      ],
+      "red_flags": [
+        "export plan to markets where local compliance blocks distribution"
+      ],
+      "name_zh": "可扩展性与出海潜力",
+      "anchors_zh": [
+        "每次都是定制项目",
+        "每个客户需大量定制",
+        "可配置产品，单一行业",
+        "多行业产品，单客户边际成本低",
+        "已针对 ≥ 1个海外市场本地化，并有合作伙伴",
+        "已有海外收入或平台型经济"
+      ],
+      "name_vi": "Khả năng mở rộng và xuất khẩu",
+      "name_id": "Skalabilitas dan potensi ekspor",
+      "name_ms": "Kebolehskalaan dan potensi eksport"
+    },
+    {
+      "id": "risk",
+      "name_en": "Risk profile (5 = low risk)",
+      "name_ru": "Профиль рисков (5 = низкий риск)",
+      "weight": 6,
+      "rationale": "Inverse criterion: concentration, dependency, technology, financing and regulatory risk after mitigants.",
+      "anchors_en": [
+        "existential risks unmitigated",
+        "several high risks, weak mitigants",
+        "high risks with plausible mitigants",
+        "medium residual risk, mitigants funded",
+        "low residual risk, diversified customers & suppliers",
+        "minimal residual risk, contractual protections, cash > 24 mo"
+      ],
+      "anchors_ru": [
+        "экзистенциальные риски без мер",
+        "несколько высоких рисков, слабые меры",
+        "высокие риски с правдоподобными мерами",
+        "средний остаточный риск, меры профинансированы",
+        "низкий остаточный риск, диверсификация клиентов и поставщиков",
+        "минимальный остаточный риск, договорная защита, денег > 24 мес."
+      ],
+      "red_flags": [
+        "runway < 6 months",
+        "> 50% revenue from one customer"
+      ],
+      "name_zh": "风险状况（5 = 低风险）",
+      "anchors_zh": [
+        "存在未缓解的生存性风险",
+        "多项高风险，缓解措施薄弱",
+        "高风险但有可行的缓解措施",
+        "中等剩余风险，缓解措施已有资金保障",
+        "剩余风险低，客户和供应商分散",
+        "剩余风险极低，有合同保护，现金可支撑 > 24个月"
+      ],
+      "name_vi": "Mức độ rủi ro (5 = rủi ro thấp)",
+      "name_id": "Profil risiko (5 = risiko rendah)",
+      "name_ms": "Profil risiko (5 = risiko rendah)"
+    }
+  ],
+  "stage_profiles": {
+    "_note": "Absolute weights per stage (each sums to 100). 'default' equals the criterion weights above.",
+    "default": {
+      "market": 14,
+      "problem": 12,
+      "trl": 10,
+      "moat": 10,
+      "team": 10,
+      "traction": 10,
+      "unit_economics": 9,
+      "gtm": 7,
+      "regulatory": 7,
+      "scalability": 5,
+      "risk": 6
+    },
+    "idea": {
+      "market": 16,
+      "problem": 16,
+      "trl": 6,
+      "moat": 10,
+      "team": 16,
+      "traction": 4,
+      "unit_economics": 5,
+      "gtm": 7,
+      "regulatory": 7,
+      "scalability": 6,
+      "risk": 7
+    },
+    "prototype": {
+      "market": 14,
+      "problem": 13,
+      "trl": 12,
+      "moat": 11,
+      "team": 13,
+      "traction": 7,
+      "unit_economics": 6,
+      "gtm": 7,
+      "regulatory": 7,
+      "scalability": 5,
+      "risk": 5
+    },
+    "pilot": {
+      "market": 13,
+      "problem": 11,
+      "trl": 11,
+      "moat": 10,
+      "team": 9,
+      "traction": 13,
+      "unit_economics": 10,
+      "gtm": 8,
+      "regulatory": 7,
+      "scalability": 4,
+      "risk": 4
+    },
+    "growth": {
+      "market": 12,
+      "problem": 8,
+      "trl": 6,
+      "moat": 10,
+      "team": 8,
+      "traction": 16,
+      "unit_economics": 15,
+      "gtm": 10,
+      "regulatory": 6,
+      "scalability": 6,
+      "risk": 3
+    }
+  },
+  "audience_multipliers": {
+    "_note": "Multiplied into the stage profile, then renormalized to 100.",
+    "neutral": {},
+    "investor": {
+      "market": 1.2,
+      "traction": 1.2,
+      "unit_economics": 1.3,
+      "scalability": 1.2,
+      "regulatory": 0.8,
+      "trl": 0.9
+    },
+    "government": {
+      "regulatory": 1.6,
+      "trl": 1.2,
+      "team": 1.1,
+      "risk": 1.1,
+      "market": 0.9,
+      "unit_economics": 0.6,
+      "scalability": 1.1
+    },
+    "corporate": {
+      "problem": 1.3,
+      "trl": 1.3,
+      "gtm": 1.1,
+      "regulatory": 1.2,
+      "unit_economics": 0.8,
+      "market": 0.8,
+      "moat": 0.9
+    },
+    "academic": {
+      "trl": 1.3,
+      "moat": 1.4,
+      "team": 1.3,
+      "market": 0.7,
+      "unit_economics": 0.5,
+      "gtm": 0.6,
+      "traction": 0.7
+    }
+  },
+  "grade_bands": [
+    {
+      "min": 80,
+      "grade": "A",
+      "label_en": "strong — prioritise / invest",
+      "label_ru": "сильный — приоритет / инвестировать",
+      "label_zh": "强 — 优先 / 投资",
+      "label_vi": "mạnh — ưu tiên / đầu tư",
+      "label_id": "kuat — prioritaskan / investasikan",
+      "label_ms": "kukuh — utamakan / labur"
+    },
+    {
+      "min": 65,
+      "grade": "B",
+      "label_en": "promising — invest with conditions",
+      "label_ru": "перспективный — поддержать с условиями",
+      "label_zh": "有潜力 — 有条件支持",
+      "label_vi": "triển vọng — đầu tư có điều kiện",
+      "label_id": "menjanjikan — investasi bersyarat",
+      "label_ms": "berpotensi — labur dengan syarat"
+    },
+    {
+      "min": 50,
+      "grade": "C",
+      "label_en": "conditional — close specific gaps first",
+      "label_ru": "условный — сначала усилить конкретные слабые места",
+      "label_zh": "有条件 — 先补齐具体短板",
+      "label_vi": "có điều kiện — cần khắc phục khoảng trống cụ thể trước",
+      "label_id": "bersyarat — tutup celah spesifik terlebih dahulu",
+      "label_ms": "bersyarat — tutup jurang khusus dahulu"
+    },
+    {
+      "min": 35,
+      "grade": "D",
+      "label_en": "weak — rework thesis",
+      "label_ru": "слабый — переработать концепцию",
+      "label_zh": "弱 — 重新梳理思路",
+      "label_vi": "yếu — xây dựng lại luận điểm",
+      "label_id": "lemah — susun ulang tesis",
+      "label_ms": "lemah — susun semula tesis"
+    },
+    {
+      "min": 0,
+      "grade": "E",
+      "label_en": "not viable now",
+      "label_ru": "сейчас нежизнеспособен",
+      "label_zh": "目前不可行",
+      "label_vi": "hiện chưa khả thi",
+      "label_id": "belum layak saat ini",
+      "label_ms": "tidak berdaya maju buat masa ini"
+    }
+  ],
+  "red_flag_rules": [
+    {
+      "id": "critical_gap",
+      "type": "score_below_with_weight",
+      "score_max": 1,
+      "weight_min": 9,
+      "severity": "high",
+      "message_en": "Critical gap: a heavily weighted criterion scores ≤ 1",
+      "message_ru": "Критическое слабое место: критерий с большим весом оценён ≤ 1",
+      "message_zh": "关键短板：高权重维度得分 ≤ 1",
+      "message_vi": "Khoảng trống nghiêm trọng: tiêu chí có trọng số lớn đạt ≤ 1 điểm",
+      "message_id": "Celah kritis: kriteria berbobot besar bernilai ≤ 1",
+      "message_ms": "Jurang kritikal: kriteria berwajaran tinggi mendapat skor ≤ 1"
+    },
+    {
+      "id": "trl_stage_mismatch",
+      "type": "stage_trl",
+      "stages": [
+        "pilot",
+        "growth"
+      ],
+      "trl_score_max": 2,
+      "severity": "high",
+      "message_en": "Stage claimed (pilot/growth) inconsistent with low TRL score",
+      "message_ru": "Заявленная стадия (пилот/рост) не соответствует низкой УГТ",
+      "message_zh": "所述阶段（试点/增长）与较低的技术成熟度不符",
+      "message_vi": "Giai đoạn công bố (thí điểm/tăng trưởng) không khớp với TRL thấp",
+      "message_id": "Tahap yang diklaim (pilot/pertumbuhan) tidak sesuai dengan TRL rendah",
+      "message_ms": "Peringkat yang didakwa (perintis/pertumbuhan) tidak selaras dengan TRL rendah"
+    },
+    {
+      "id": "ltv_cac",
+      "type": "fact_below",
+      "fact": "ltv_cac",
+      "threshold": 1.0,
+      "severity": "high",
+      "message_en": "LTV/CAC < 1: growth destroys value",
+      "message_ru": "LTV/CAC < 1: рост уничтожает стоимость",
+      "message_zh": "LTV/CAC < 1：增长在毁灭价值",
+      "message_vi": "LTV/CAC < 1: tăng trưởng phá hủy giá trị",
+      "message_id": "LTV/CAC < 1: pertumbuhan menghancurkan nilai",
+      "message_ms": "LTV/CAC < 1: pertumbuhan memusnahkan nilai"
+    },
+    {
+      "id": "ltv_cac_soft",
+      "type": "fact_below",
+      "fact": "ltv_cac",
+      "threshold": 3.0,
+      "severity": "medium",
+      "message_en": "LTV/CAC below 3",
+      "message_ru": "LTV/CAC ниже 3",
+      "message_zh": "LTV/CAC 低于 3",
+      "message_vi": "LTV/CAC dưới 3",
+      "message_id": "LTV/CAC di bawah 3",
+      "message_ms": "LTV/CAC di bawah 3"
+    },
+    {
+      "id": "runway",
+      "type": "fact_below",
+      "fact": "runway_months",
+      "threshold": 6,
+      "severity": "high",
+      "message_en": "Runway < 6 months",
+      "message_ru": "Запас денег < 6 месяцев",
+      "message_zh": "现金跑道 < 6个月",
+      "message_vi": "Thời gian duy trì tiền mặt < 6 tháng",
+      "message_id": "Runway kas < 6 bulan",
+      "message_ms": "Tempoh tunai bertahan < 6 bulan"
+    },
+    {
+      "id": "concentration",
+      "type": "fact_above",
+      "fact": "top_customer_share",
+      "threshold": 0.5,
+      "severity": "medium",
+      "message_en": "> 50% of revenue from one customer",
+      "message_ru": "> 50% выручки от одного клиента",
+      "message_zh": "单一客户贡献 > 50% 收入",
+      "message_vi": "> 50% doanh thu từ một khách hàng",
+      "message_id": "> 50% pendapatan dari satu pelanggan",
+      "message_ms": "> 50% hasil daripada satu pelanggan"
+    },
+    {
+      "id": "registry_gov",
+      "type": "fact_false_for_audience",
+      "fact": "registry_eligible",
+      "audiences": [
+        "government",
+        "corporate"
+      ],
+      "severity": "high",
+      "message_en": "Not eligible for the Russian Software Register while targeting state/critical-infrastructure buyers",
+      "message_ru": "Нет возможности включения в реестр российского ПО при ориентации на госзаказчиков / КИИ",
+      "message_zh": "面向俄罗斯政府/关键信息基础设施客户，但无法列入俄罗斯软件登记册",
+      "markets": [
+        "ru"
+      ],
+      "message_vi": "Không đủ điều kiện vào Danh mục phần mềm Nga khi nhắm tới khách hàng nhà nước Nga",
+      "message_id": "Tidak memenuhi syarat registri perangkat lunak Rusia untuk pembeli pemerintah Rusia",
+      "message_ms": "Tidak layak untuk daftar perisian Rusia bagi pembeli kerajaan Rusia"
+    },
+    {
+      "id": "low_confidence",
+      "type": "confidence_below",
+      "threshold": 0.6,
+      "severity": "medium",
+      "message_en": "Evidence confidence < 60%: most scores rest on assumptions",
+      "message_ru": "Достоверность оценок < 60%: большинство баллов основано на допущениях",
+      "message_zh": "证据可信度 < 60%：多数评分基于假设",
+      "message_vi": "Độ tin cậy bằng chứng < 60%: phần lớn điểm dựa trên giả định",
+      "message_id": "Keyakinan bukti < 60%: sebagian besar skor berbasis asumsi",
+      "message_ms": "Keyakinan bukti < 60%: kebanyakan skor berasaskan andaian"
+    },
+    {
+      "id": "foreign_dependency",
+      "type": "fact_true",
+      "fact": "critical_foreign_dependency",
+      "severity": "high",
+      "message_en": "Critical dependency on an external or restrictable component in the core path",
+      "message_ru": "Критическая зависимость от внешнего или потенциально недоступного компонента в ядре решения",
+      "message_zh": "核心路径存在对外部或可能受限组件的关键依赖",
+      "message_vi": "Phụ thuộc nghiêm trọng vào thành phần bên ngoài hoặc có thể bị hạn chế trong lõi giải pháp",
+      "message_id": "Ketergantungan kritis pada komponen eksternal atau yang dapat dibatasi di jalur inti",
+      "message_ms": "Kebergantungan kritikal pada komponen luaran atau yang boleh disekat dalam laluan teras"
+    },
+    {
+      "id": "xinchuang_gov",
+      "type": "fact_false_for_audience",
+      "fact": "xinchuang_adapted",
+      "audiences": [
+        "government",
+        "corporate"
+      ],
+      "severity": "high",
+      "markets": [
+        "zh"
+      ],
+      "message_en": "Not adapted to the domestic IT stack (Xinchuang) while targeting government / SOE buyers",
+      "message_ru": "Нет адаптации к отечественному ИТ-стеку (синьчуан) при ориентации на госзаказчиков / госкомпании КНР",
+      "message_zh": "面向政府/国企客户，但未完成信创适配",
+      "message_vi": "Not adapted to the domestic IT stack (Xinchuang) while targeting government / SOE buyers",
+      "message_id": "Not adapted to the domestic IT stack (Xinchuang) while targeting government / SOE buyers",
+      "message_ms": "Not adapted to the domestic IT stack (Xinchuang) while targeting government / SOE buyers"
+    },
+    {
+      "id": "mlps_gov",
+      "type": "fact_false_for_audience",
+      "fact": "mlps_certified",
+      "audiences": [
+        "government",
+        "corporate"
+      ],
+      "severity": "medium",
+      "markets": [
+        "zh"
+      ],
+      "message_en": "No MLPS 2.0 (Dengbao) assessment for a system sold to government / critical buyers",
+      "message_ru": "Нет оценки по MLPS 2.0 (дэнбао) для системы, продаваемой госзаказчикам",
+      "message_zh": "面向政府/关键行业客户的系统尚未完成等保2.0测评",
+      "message_vi": "No MLPS 2.0 (Dengbao) assessment for a system sold to government / critical buyers",
+      "message_id": "No MLPS 2.0 (Dengbao) assessment for a system sold to government / critical buyers",
+      "message_ms": "No MLPS 2.0 (Dengbao) assessment for a system sold to government / critical buyers"
+    },
+    {
+      "id": "genai_filing",
+      "type": "fact_true",
+      "fact": "genai_filing_missing",
+      "severity": "high",
+      "markets": [
+        "zh"
+      ],
+      "message_en": "Public-facing generative-AI service without the required algorithm / service filing",
+      "message_ru": "Публичный сервис генеративного ИИ без обязательной регистрации алгоритма / сервиса",
+      "message_zh": "面向公众的生成式人工智能服务尚未完成算法备案/服务备案",
+      "message_vi": "Public-facing generative-AI service without the required algorithm / service filing",
+      "message_id": "Public-facing generative-AI service without the required algorithm / service filing",
+      "message_ms": "Public-facing generative-AI service without the required algorithm / service filing"
+    },
+    {
+      "id": "cross_border_data",
+      "type": "fact_true",
+      "fact": "cross_border_data_unassessed",
+      "severity": "high",
+      "markets": [
+        "zh",
+        "ru",
+        "en",
+        "vn",
+        "id",
+        "my"
+      ],
+      "message_en": "Cross-border transfer of personal data without the required assessment / legal basis",
+      "message_ru": "Трансграничная передача персональных данных без необходимой оценки / правового основания",
+      "message_zh": "个人信息出境未完成规定的评估或未具备合法依据",
+      "message_vi": "Chuyển dữ liệu cá nhân ra nước ngoài khi chưa có đánh giá / cơ sở pháp lý cần thiết",
+      "message_id": "Transfer data pribadi lintas batas tanpa penilaian / dasar hukum yang diwajibkan",
+      "message_ms": "Pemindahan data peribadi rentas sempadan tanpa penilaian / asas undang-undang yang diperlukan"
+    },
+    {
+      "id": "enterprise_security",
+      "type": "fact_false_for_audience",
+      "fact": "security_attestation",
+      "audiences": [
+        "corporate",
+        "investor"
+      ],
+      "severity": "medium",
+      "markets": [
+        "en"
+      ],
+      "message_en": "No SOC 2 / ISO 27001 attestation (or credible plan) while selling to enterprises",
+      "message_ru": "Нет аттестации SOC 2 / ISO 27001 (или реалистичного плана) при продажах корпорациям",
+      "message_zh": "面向企业客户销售，但无 SOC 2 / ISO 27001 认证（或可信计划）",
+      "message_vi": "No SOC 2 / ISO 27001 attestation (or credible plan) while selling to enterprises",
+      "message_id": "No SOC 2 / ISO 27001 attestation (or credible plan) while selling to enterprises",
+      "message_ms": "No SOC 2 / ISO 27001 attestation (or credible plan) while selling to enterprises"
+    },
+    {
+      "id": "fedramp_gov",
+      "type": "fact_false_for_audience",
+      "fact": "fedramp_path",
+      "audiences": [
+        "government"
+      ],
+      "severity": "medium",
+      "markets": [
+        "en"
+      ],
+      "message_en": "Targeting US federal buyers without a FedRAMP authorization path for the cloud offering",
+      "message_ru": "Ориентация на федеральных заказчиков США без пути авторизации FedRAMP для облачной версии",
+      "message_zh": "面向美国联邦客户，但云服务无 FedRAMP 授权路径",
+      "message_vi": "Targeting US federal buyers without a FedRAMP authorization path for the cloud offering",
+      "message_id": "Targeting US federal buyers without a FedRAMP authorization path for the cloud offering",
+      "message_ms": "Targeting US federal buyers without a FedRAMP authorization path for the cloud offering"
+    },
+    {
+      "id": "ai_risk",
+      "type": "fact_true",
+      "fact": "ai_risk_unassessed",
+      "severity": "medium",
+      "markets": [
+        "en"
+      ],
+      "message_en": "AI features sold to enterprise or federal buyers without a documented AI risk assessment (e.g. NIST AI RMF)",
+      "message_ru": "ИИ-функции продаются корпоративным или федеральным заказчикам США без документированной оценки рисков ИИ (напр. NIST AI RMF)",
+      "message_zh": "向美国企业或联邦客户销售AI功能，但未形成书面的AI风险评估（如 NIST AI RMF）",
+      "message_vi": "AI features sold to enterprise or federal buyers without a documented AI risk assessment (e.g. NIST AI RMF)",
+      "message_id": "AI features sold to enterprise or federal buyers without a documented AI risk assessment (e.g. NIST AI RMF)",
+      "message_ms": "AI features sold to enterprise or federal buyers without a documented AI risk assessment (e.g. NIST AI RMF)"
+    },
+    {
+      "id": "vn_pdp_dossier",
+      "type": "fact_false_for_audience",
+      "fact": "pdp_impact_assessment",
+      "audiences": [
+        "investor",
+        "government",
+        "corporate",
+        "academic",
+        "neutral"
+      ],
+      "severity": "medium",
+      "markets": [
+        "vn"
+      ],
+      "message_en": "No personal-data processing impact assessment dossier (Vietnam PDP Law 91/2025/QH15)",
+      "message_ru": "Нет досье оценки воздействия обработки персональных данных (закон Вьетнама 91/2025/QH15)",
+      "message_zh": "未编制个人数据处理影响评估档案（越南第91/2025/QH15号法律）",
+      "message_vi": "Chưa lập hồ sơ đánh giá tác động xử lý dữ liệu cá nhân (Luật 91/2025/QH15)",
+      "message_id": "Belum ada dokumen penilaian dampak pemrosesan data pribadi (UU Vietnam 91/2025/QH15)",
+      "message_ms": "Tiada dokumen penilaian impak pemprosesan data peribadi (Undang-undang Vietnam 91/2025/QH15)"
+    },
+    {
+      "id": "id_pse",
+      "type": "fact_false_for_audience",
+      "fact": "pse_registered",
+      "audiences": [
+        "investor",
+        "government",
+        "corporate",
+        "academic",
+        "neutral"
+      ],
+      "severity": "high",
+      "markets": [
+        "id"
+      ],
+      "message_en": "Electronic system operator (PSE) registration missing for a service offered in Indonesia",
+      "message_ru": "Нет регистрации оператора электронной системы (PSE) для сервиса в Индонезии",
+      "message_zh": "在印度尼西亚提供服务但未完成电子系统运营者（PSE）登记",
+      "message_vi": "Chưa đăng ký nhà vận hành hệ thống điện tử (PSE) cho dịch vụ tại Indonesia",
+      "message_id": "Belum terdaftar sebagai Penyelenggara Sistem Elektronik (PSE) untuk layanan di Indonesia",
+      "message_ms": "Pendaftaran pengendali sistem elektronik (PSE) tiada bagi perkhidmatan di Indonesia"
+    },
+    {
+      "id": "id_tkdn",
+      "type": "fact_false_for_audience",
+      "fact": "tkdn_certified",
+      "audiences": [
+        "government",
+        "corporate"
+      ],
+      "severity": "high",
+      "markets": [
+        "id"
+      ],
+      "message_en": "No TKDN (local content) certificate while targeting government / SOE procurement",
+      "message_ru": "Нет сертификата TKDN (локальное содержание) при ориентации на госзакупки / госкомпании",
+      "message_zh": "面向政府/国企采购但无 TKDN（本地成分）证书",
+      "message_vi": "Chưa có chứng nhận TKDN (tỷ lệ nội địa) khi nhắm tới mua sắm của chính phủ / DNNN Indonesia",
+      "message_id": "Belum memiliki sertifikat TKDN saat menyasar pengadaan pemerintah / BUMN",
+      "message_ms": "Tiada sijil TKDN (kandungan tempatan) semasa menyasarkan perolehan kerajaan / BUMN"
+    },
+    {
+      "id": "my_pdpa",
+      "type": "fact_false_for_audience",
+      "fact": "pdpa_compliant",
+      "audiences": [
+        "investor",
+        "government",
+        "corporate",
+        "academic",
+        "neutral"
+      ],
+      "severity": "medium",
+      "markets": [
+        "my"
+      ],
+      "message_en": "PDPA 2010 (as amended in 2024) compliance not evidenced (e.g. DPO, breach notification, processor obligations)",
+      "message_ru": "Не подтверждено соответствие PDPA 2010 (с поправками 2024 г.): DPO, уведомление об утечках, обязанности обработчика",
+      "message_zh": "未证明符合《2010年个人数据保护法》（2024年修订）（如数据保护官、泄露通知、处理者义务）",
+      "message_vi": "Chưa chứng minh tuân thủ PDPA 2010 (sửa đổi 2024): DPO, thông báo vi phạm, nghĩa vụ bên xử lý",
+      "message_id": "Kepatuhan PDPA 2010 (amandemen 2024) belum dibuktikan (DPO, notifikasi pelanggaran, kewajiban prosesor)",
+      "message_ms": "Pematuhan PDPA 2010 (pindaan 2024) belum dibuktikan (DPO, pemberitahuan pelanggaran, kewajipan pemproses)"
+    }
+  ],
+  "deck_sections": [
+    {
+      "id": "answer",
+      "name_en": "Executive answer / thesis",
+      "name_ru": "Главный вывод / тезис",
+      "name_zh": "核心结论 / 论点",
+      "name_vi": "Kết luận chính / luận điểm",
+      "name_id": "Jawaban utama / tesis",
+      "name_ms": "Jawapan utama / tesis"
+    },
+    {
+      "id": "problem",
+      "name_en": "Problem & why now",
+      "name_ru": "Проблема и почему сейчас",
+      "name_zh": "问题与时机",
+      "name_vi": "Vấn đề và vì sao là lúc này",
+      "name_id": "Masalah dan mengapa sekarang",
+      "name_ms": "Masalah dan mengapa sekarang"
+    },
+    {
+      "id": "solution",
+      "name_en": "Solution / product & demo",
+      "name_ru": "Решение / продукт и демо",
+      "name_zh": "解决方案 / 产品与演示",
+      "name_vi": "Giải pháp / sản phẩm và demo",
+      "name_id": "Solusi / produk dan demo",
+      "name_ms": "Penyelesaian / produk dan demo"
+    },
+    {
+      "id": "market",
+      "name_en": "Market sizing",
+      "name_ru": "Рынок (TAM/SAM/SOM)",
+      "name_zh": "市场规模（TAM/SAM/SOM）",
+      "name_vi": "Quy mô thị trường",
+      "name_id": "Ukuran pasar",
+      "name_ms": "Saiz pasaran"
+    },
+    {
+      "id": "tech",
+      "name_en": "Technology & TRL",
+      "name_ru": "Технология и УГТ",
+      "name_zh": "技术与成熟度",
+      "name_vi": "Công nghệ và TRL",
+      "name_id": "Teknologi dan TRL",
+      "name_ms": "Teknologi dan TRL"
+    },
+    {
+      "id": "traction",
+      "name_en": "Traction & evidence",
+      "name_ru": "Тракшн и доказательства",
+      "name_zh": "市场验证与证据",
+      "name_vi": "Sức kéo và bằng chứng",
+      "name_id": "Traksi dan bukti",
+      "name_ms": "Daya tarikan dan bukti"
+    },
+    {
+      "id": "economics",
+      "name_en": "Business model & unit economics",
+      "name_ru": "Бизнес-модель и юнит-экономика",
+      "name_zh": "商业模式与单位经济",
+      "name_vi": "Mô hình kinh doanh và kinh tế đơn vị",
+      "name_id": "Model bisnis dan unit ekonomi",
+      "name_ms": "Model perniagaan dan ekonomi unit"
+    },
+    {
+      "id": "competition",
+      "name_en": "Competition & moat",
+      "name_ru": "Конкуренты и барьеры",
+      "name_zh": "竞争与壁垒",
+      "name_vi": "Cạnh tranh và rào cản",
+      "name_id": "Persaingan dan keunggulan",
+      "name_ms": "Persaingan dan kelebihan"
+    },
+    {
+      "id": "gtm",
+      "name_en": "Go-to-market",
+      "name_ru": "Выход на рынок",
+      "name_zh": "市场进入",
+      "name_vi": "Thâm nhập thị trường",
+      "name_id": "Strategi masuk pasar",
+      "name_ms": "Strategi kemasukan pasaran"
+    },
+    {
+      "id": "financials",
+      "name_en": "Financial plan & returns",
+      "name_ru": "Финплан и доходность",
+      "name_zh": "财务计划与回报",
+      "name_vi": "Kế hoạch tài chính và lợi nhuận",
+      "name_id": "Rencana keuangan dan imbal hasil",
+      "name_ms": "Pelan kewangan dan pulangan"
+    },
+    {
+      "id": "team",
+      "name_en": "Team",
+      "name_ru": "Команда",
+      "name_zh": "团队",
+      "name_vi": "Đội ngũ",
+      "name_id": "Tim",
+      "name_ms": "Pasukan"
+    },
+    {
+      "id": "regulatory",
+      "name_en": "Regulation & sovereignty",
+      "name_ru": "Регуляторика и суверенитет",
+      "name_zh": "合规与自主可控",
+      "name_vi": "Pháp lý và chủ quyền",
+      "name_id": "Regulasi dan kedaulatan",
+      "name_ms": "Kawal selia dan kedaulatan"
+    },
+    {
+      "id": "risks",
+      "name_en": "Risks & mitigants",
+      "name_ru": "Риски и меры",
+      "name_zh": "风险与应对",
+      "name_vi": "Rủi ro và biện pháp",
+      "name_id": "Risiko dan mitigasi",
+      "name_ms": "Risiko dan mitigasi"
+    },
+    {
+      "id": "roadmap",
+      "name_en": "Roadmap & milestones",
+      "name_ru": "Дорожная карта",
+      "name_zh": "路线图与里程碑",
+      "name_vi": "Lộ trình và cột mốc",
+      "name_id": "Peta jalan dan tonggak",
+      "name_ms": "Peta jalan dan pencapaian"
+    },
+    {
+      "id": "ask",
+      "name_en": "Ask / decision required",
+      "name_ru": "Запрос / требуемое решение",
+      "name_zh": "融资需求 / 决策事项",
+      "name_vi": "Đề xuất / quyết định cần có",
+      "name_id": "Permintaan / keputusan yang diperlukan",
+      "name_ms": "Permintaan / keputusan diperlukan"
+    }
+  ],
+  "deck_weights": {
+    "_note": "Relative importance (sums to 100) of each section per audience; used to allocate slides and review effort.",
+    "investor": {
+      "answer": 8,
+      "problem": 8,
+      "solution": 8,
+      "market": 10,
+      "tech": 4,
+      "traction": 12,
+      "economics": 10,
+      "competition": 7,
+      "gtm": 6,
+      "financials": 10,
+      "team": 7,
+      "regulatory": 2,
+      "risks": 3,
+      "roadmap": 2,
+      "ask": 3
+    },
+    "government": {
+      "answer": 8,
+      "problem": 10,
+      "solution": 7,
+      "market": 6,
+      "tech": 10,
+      "traction": 5,
+      "economics": 3,
+      "competition": 5,
+      "gtm": 4,
+      "financials": 6,
+      "team": 8,
+      "regulatory": 12,
+      "risks": 6,
+      "roadmap": 7,
+      "ask": 3
+    },
+    "corporate": {
+      "answer": 8,
+      "problem": 12,
+      "solution": 12,
+      "market": 4,
+      "tech": 10,
+      "traction": 8,
+      "economics": 6,
+      "competition": 5,
+      "gtm": 6,
+      "financials": 4,
+      "team": 5,
+      "regulatory": 7,
+      "risks": 5,
+      "roadmap": 5,
+      "ask": 3
+    },
+    "academic": {
+      "answer": 8,
+      "problem": 10,
+      "solution": 8,
+      "market": 4,
+      "tech": 16,
+      "traction": 4,
+      "economics": 2,
+      "competition": 8,
+      "gtm": 2,
+      "financials": 3,
+      "team": 10,
+      "regulatory": 4,
+      "risks": 6,
+      "roadmap": 10,
+      "ask": 5
+    }
+  },
+  "market_profiles": {
+    "_note": "A market profile adapts the model to a jurisdiction: it redefines the Regulation & sovereignty criterion, sets currency-specific SAM anchors, multiplies weights (applied after stage × audience, then renormalized) and enables market-specific red-flag rules (rules carry a 'markets' list). Select with payload 'market' (defaults to the locale's market: ru→ru, en→en, zh→zh, vi→vn, id→id, ms→my). Thresholds are heuristics for scoring, not market statistics.",
+    "ru": {
+      "name_en": "Russia",
+      "name_ru": "Россия",
+      "name_zh": "俄罗斯",
+      "currency": "RUB",
+      "weight_multipliers": {
+        "regulatory": 1.15
+      },
+      "criteria": {
+        "market": {
+          "anchors_en": [
+            "no identifiable paying market",
+            "SAM < RUB 0.5 bn or shrinking",
+            "SAM RUB 0.5–2 bn, growth < 5%/yr",
+            "SAM RUB 2–10 bn, growth 5–15%",
+            "SAM RUB 10–50 bn or growth 15–30%, bottom-up confirmed",
+            "SAM > RUB 50 bn and growth > 20%, triangulated"
+          ],
+          "anchors_ru": [
+            "нет платящего рынка",
+            "SAM < 0,5 млрд ₽ или рынок сжимается",
+            "SAM 0,5–2 млрд ₽, рост < 5%/год",
+            "SAM 2–10 млрд ₽, рост 5–15%",
+            "SAM 10–50 млрд ₽ или рост 15–30%, подтверждено снизу вверх",
+            "SAM > 50 млрд ₽ и рост > 20%, триангуляция сверху и снизу"
+          ],
+          "anchors_zh": [
+            "无可识别的付费市场",
+            "SAM < 5亿卢布或市场萎缩",
+            "SAM 5–20亿卢布，年增长 < 5%",
+            "SAM 20–100亿卢布，年增长 5–15%",
+            "SAM 100–500亿卢布或年增长 15–30%，自下而上已验证",
+            "SAM > 500亿卢布且年增长 > 20%，交叉验证"
+          ]
+        },
+        "regulatory": {
+          "name_en": "Regulation & technological sovereignty (RU)",
+          "name_ru": "Регуляторика и технологический суверенитет",
+          "name_zh": "合规与技术主权（俄罗斯）",
+          "definition_en": "Unified Register of Russian Software (Government Decree No. 1236 of 16.11.2015), personal-data law 152-FZ (incl. localisation), critical information infrastructure law 187-FZ (KII), FSTEC/FSB certification where applicable, public procurement under 44-FZ / 223-FZ.",
+          "definition_ru": "Единый реестр российского ПО (ПП РФ № 1236 от 16.11.2015), 152-ФЗ «О персональных данных» (в т.ч. локализация), 187-ФЗ о безопасности КИИ, сертификация ФСТЭК/ФСБ при необходимости, закупки по 44-ФЗ / 223-ФЗ.",
+          "definition_zh": "俄罗斯软件统一登记册（俄联邦政府2015年第1236号决议）、第152号联邦法《个人数据法》（含本地化）、第187号联邦法（关键信息基础设施）、必要时的FSTEC/FSB认证、第44号/第223号联邦法采购规则。",
+          "anchors_en": [
+            "blocked: dependency on unavailable/foreign components with no substitute",
+            "major compliance gaps",
+            "compliance path known, not started",
+            "in progress (registry application, 152-FZ compliance), domestic stack",
+            "in the Russian Software Register; meets data & security requirements of target buyers",
+            "registry + certifications + listed in import-substitution / industrial programmes"
+          ],
+          "anchors_ru": [
+            "заблокировано: критическая зависимость от иностранных компонентов без замены",
+            "серьёзные несоответствия требованиям",
+            "путь соответствия известен, не начат",
+            "в процессе (заявка в реестр, 152-ФЗ), отечественный стек",
+            "в реестре российского ПО; соответствует требованиям к данным и ИБ целевых заказчиков",
+            "реестр + сертификаты + включено в планы импортозамещения / отраслевые программы"
+          ],
+          "anchors_zh": [
+            "受阻：关键依赖受制裁/外国组件且无替代",
+            "存在重大合规缺口",
+            "合规路径已知，尚未启动",
+            "进行中（申请列入登记册、152号法合规），本国技术栈",
+            "已列入俄罗斯软件登记册；满足目标客户的数据与安全要求",
+            "登记册 + 认证 + 纳入进口替代/产业规划"
+          ],
+          "name_vi": "Regulation & technological sovereignty (RU)",
+          "name_id": "Regulation & technological sovereignty (RU)",
+          "name_ms": "Regulation & technological sovereignty (RU)"
+        },
+        "scalability": {
+          "rationale": "Export option value: EAEU and other accessible markets."
+        }
+      },
+      "facts": [
+        "registry_eligible",
+        "critical_foreign_dependency",
+        "cross_border_data_unassessed"
+      ],
+      "guide": "markets/ru.md",
+      "name_vi": "Nga",
+      "name_id": "Rusia",
+      "name_ms": "Rusia"
+    },
+    "en": {
+      "name_en": "United States",
+      "name_ru": "США",
+      "name_zh": "美国",
+      "currency": "USD",
+      "weight_multipliers": {
+        "regulatory": 0.85
+      },
+      "criteria": {
+        "market": {
+          "anchors_en": [
+            "no identifiable paying market",
+            "SAM < $10M or shrinking",
+            "SAM $10–50M, growth < 5%/yr",
+            "SAM $50–250M, growth 5–15%",
+            "SAM $250M–1B or growth 15–30%, bottom-up confirmed",
+            "SAM > $1B and growth > 20%, triangulated"
+          ],
+          "anchors_ru": [
+            "нет платящего рынка",
+            "SAM < $10 млн или рынок сжимается",
+            "SAM $10–50 млн, рост < 5%/год",
+            "SAM $50–250 млн, рост 5–15%",
+            "SAM $250 млн–1 млрд или рост 15–30%, подтверждено снизу вверх",
+            "SAM > $1 млрд и рост > 20%, триангуляция"
+          ],
+          "anchors_zh": [
+            "无可识别的付费市场",
+            "SAM < 1000万美元或市场萎缩",
+            "SAM 1000万–5000万美元，年增长 < 5%",
+            "SAM 5000万–2.5亿美元，年增长 5–15%",
+            "SAM 2.5亿–10亿美元或年增长 15–30%，自下而上已验证",
+            "SAM > 10亿美元且年增长 > 20%，交叉验证"
+          ]
+        },
+        "regulatory": {
+          "name_en": "Regulatory, security & compliance fit (US)",
+          "name_ru": "Регуляторика, ИБ и комплаенс (США)",
+          "name_zh": "合规与安全（美国）",
+          "definition_en": "State privacy laws (e.g. California CCPA as amended by the CPRA), SOC 2 / ISO/IEC 27001 attestations expected by enterprise buyers, FedRAMP for cloud services sold to US federal agencies, AI risk management (voluntary NIST AI RMF), sector rules (e.g. HIPAA).",
+          "definition_ru": "Законы штатов о персональных данных (напр. CCPA Калифорнии с поправками CPRA), аттестации SOC 2 / ISO/IEC 27001 для корпоративных заказчиков, FedRAMP для облачных сервисов федеральным ведомствам США, управление рисками ИИ (добровольная рамка NIST AI RMF), отраслевые правила (напр. HIPAA).",
+          "definition_zh": "州级隐私法（如经 CPRA 修订的加州 CCPA）、企业客户期望的 SOC 2 / ISO/IEC 27001 认证、面向美国联邦机构云服务的 FedRAMP、AI 风险管理（自愿性 NIST AI RMF）、行业规则（如 HIPAA）。",
+          "anchors_en": [
+            "blocked: product cannot meet a mandatory requirement of the target segment (e.g. sector rule)",
+            "major gaps (no privacy programme or service-provider terms, no security programme)",
+            "compliance roadmap defined, not started",
+            "privacy programme in place, SOC 2 Type I / ISO 27001 in progress",
+            "SOC 2 Type II or ISO 27001 certified; AI risk assessment documented",
+            "certifications + FedRAMP / sector authorizations; compliance used as a sales advantage"
+          ],
+          "anchors_ru": [
+            "заблокировано: продукт не может выполнить обязательное требование сегмента (напр. отраслевое правило)",
+            "серьёзные несоответствия (нет программы защиты данных и условий для поставщика услуг, нет программы ИБ)",
+            "дорожная карта комплаенса есть, не начата",
+            "программа защиты данных есть, SOC 2 Type I / ISO 27001 в процессе",
+            "SOC 2 Type II или сертификат ISO 27001; оценка рисков ИИ задокументирована",
+            "сертификаты + FedRAMP / отраслевые авторизации; комплаенс — преимущество в продажах"
+          ],
+          "anchors_zh": [
+            "受阻：产品无法满足目标细分市场的强制要求（如受出口管制、行业规则）",
+            "重大缺口（无隐私合规体系或服务提供商条款、无安全体系）",
+            "已制定合规路线图，尚未启动",
+            "已建立隐私合规体系，SOC 2 Type I / ISO 27001 进行中",
+            "已获 SOC 2 Type II 或 ISO 27001 认证；已记录 AI 风险评估",
+            "认证 + FedRAMP/行业授权；合规成为销售优势"
+          ],
+          "name_vi": "Regulatory, security & compliance fit (US)",
+          "name_id": "Regulatory, security & compliance fit (US)",
+          "name_ms": "Regulatory, security & compliance fit (US)"
+        },
+        "scalability": {
+          "rationale": "Expansion across US states and sectors; state privacy laws and data residency."
+        }
+      },
+      "facts": [
+        "security_attestation",
+        "fedramp_path",
+        "ai_risk_unassessed",
+        "cross_border_data_unassessed",
+        "critical_foreign_dependency"
+      ],
+      "guide": "markets/en.md",
+      "name_vi": "Hoa Kỳ",
+      "name_id": "Amerika Serikat",
+      "name_ms": "Amerika Syarikat"
+    },
+    "zh": {
+      "name_en": "Mainland China",
+      "name_ru": "Материковый Китай",
+      "name_zh": "中国大陆",
+      "currency": "CNY",
+      "weight_multipliers": {
+        "regulatory": 1.25,
+        "gtm": 1.1
+      },
+      "criteria": {
+        "market": {
+          "anchors_en": [
+            "no identifiable paying market",
+            "SAM < CNY 50M or shrinking",
+            "SAM CNY 50–200M, growth < 5%/yr",
+            "SAM CNY 200M–1B, growth 5–15%",
+            "SAM CNY 1–5B or growth 15–30%, bottom-up confirmed",
+            "SAM > CNY 5B and growth > 20%, triangulated"
+          ],
+          "anchors_ru": [
+            "нет платящего рынка",
+            "SAM < 50 млн юаней или рынок сжимается",
+            "SAM 50–200 млн юаней, рост < 5%/год",
+            "SAM 200 млн–1 млрд юаней, рост 5–15%",
+            "SAM 1–5 млрд юаней или рост 15–30%, подтверждено снизу вверх",
+            "SAM > 5 млрд юаней и рост > 20%, триангуляция"
+          ],
+          "anchors_zh": [
+            "无可识别的付费市场",
+            "SAM < 5000万元或市场萎缩",
+            "SAM 5000万–2亿元，年增长 < 5%",
+            "SAM 2亿–10亿元，年增长 5–15%",
+            "SAM 10亿–50亿元或年增长 15–30%，自下而上已验证",
+            "SAM > 50亿元且年增长 > 20%，交叉验证"
+          ]
+        },
+        "regulatory": {
+          "name_en": "Compliance & self-reliance (CN)",
+          "name_ru": "Комплаенс и технологическая самостоятельность (КНР)",
+          "name_zh": "合规与自主可控",
+          "definition_en": "Cybersecurity Law (2016), Data Security Law (2021), Personal Information Protection Law (PIPL, 2021) incl. cross-border transfer rules; Interim Measures for Generative AI Services (2023) and algorithm filing; MLPS 2.0 (Dengbao, GB/T 22239-2019); Xinchuang adaptation to domestic chips/OS/databases for government and SOE buyers.",
+          "definition_ru": "Закон о кибербезопасности (2016), Закон о безопасности данных (2021), Закон о защите персональной информации (PIPL, 2021) с правилами трансграничной передачи; Временные меры по управлению сервисами генеративного ИИ (2023) и регистрация алгоритмов; MLPS 2.0 (дэнбао, GB/T 22239-2019); адаптация к отечественному стеку «синьчуан» для госзаказчиков и госкомпаний.",
+          "definition_zh": "《网络安全法》（2016）、《数据安全法》（2021）、《个人信息保护法》（2021，含数据出境规则）；《生成式人工智能服务管理暂行办法》（2023）及算法备案；网络安全等级保护2.0（GB/T 22239-2019）；面向党政机关和国企客户的信创适配（国产芯片/操作系统/数据库）。",
+          "anchors_en": [
+            "blocked: core dependency that cannot be offered in mainland China, or data must leave China without a lawful route",
+            "major gaps (no PIPL basis, no MLPS assessment)",
+            "compliance path known, not started",
+            "PIPL compliance in place; MLPS assessment / algorithm filing in progress; Xinchuang adaptation started",
+            "MLPS level met, filings completed, Xinchuang compatibility certified with major domestic stacks",
+            "full compliance + listed in government / industry catalogues; aligned with policy programmes"
+          ],
+          "anchors_ru": [
+            "заблокировано: ключевая зависимость недоступна в КНР или данные должны покидать КНР без законного пути",
+            "серьёзные несоответствия (нет основания по PIPL, нет оценки MLPS)",
+            "путь соответствия известен, не начат",
+            "соответствие PIPL есть; оценка MLPS / регистрация алгоритма в процессе; начата адаптация «синьчуан»",
+            "уровень MLPS подтверждён, регистрации завершены, совместимость с основными отечественными стеками сертифицирована",
+            "полное соответствие + включение в государственные / отраслевые каталоги; соответствие политическим программам"
+          ],
+          "anchors_zh": [
+            "受阻：核心依赖无法在中国大陆提供，或数据须出境且无合法路径",
+            "重大缺口（无个人信息处理合法依据、未做等保测评）",
+            "合规路径已知，尚未启动",
+            "已落实个人信息保护合规；等保测评/算法备案进行中；已启动信创适配",
+            "已通过相应等保级别，备案完成，已与主流国产软硬件完成兼容认证",
+            "全面合规 + 进入政府/行业目录；与政策方向高度契合"
+          ],
+          "name_vi": "Compliance & self-reliance (CN)",
+          "name_id": "Compliance & self-reliance (CN)",
+          "name_ms": "Compliance & self-reliance (CN)"
+        },
+        "scalability": {
+          "rationale": "Replication across provinces and industries; going-abroad (出海) requires separate data-export and overseas compliance work."
+        }
+      },
+      "facts": [
+        "xinchuang_adapted",
+        "mlps_certified",
+        "genai_filing_missing",
+        "cross_border_data_unassessed",
+        "critical_foreign_dependency"
+      ],
+      "guide": "markets/zh.md",
+      "name_vi": "Trung Quốc đại lục",
+      "name_id": "Tiongkok daratan",
+      "name_ms": "China tanah besar"
+    },
+    "vn": {
+      "name_en": "Vietnam",
+      "name_ru": "Вьетнам",
+      "name_zh": "越南",
+      "name_vi": "Việt Nam",
+      "name_id": "Vietnam",
+      "name_ms": "Vietnam",
+      "currency": "VND",
+      "weight_multipliers": {
+        "regulatory": 1.15,
+        "gtm": 1.05
+      },
+      "criteria": {
+        "market": {
+          "anchors_en": [
+            "no identifiable paying market",
+            "SAM < VND 200 bn or shrinking",
+            "SAM VND 200 bn–1,000 bn, growth < 5%/yr",
+            "SAM VND 1,000–5,000 bn, growth 5–15%",
+            "SAM VND 5,000–25,000 bn or growth 15–30%, bottom-up confirmed",
+            "SAM > VND 25,000 bn and growth > 20%, triangulated"
+          ],
+          "anchors_vi": [
+            "không có thị trường trả tiền",
+            "SAM < 200 tỷ ₫ hoặc thị trường thu hẹp",
+            "SAM 200–1.000 tỷ ₫, tăng trưởng < 5%/năm",
+            "SAM 1.000–5.000 tỷ ₫, tăng trưởng 5–15%",
+            "SAM 5.000–25.000 tỷ ₫ hoặc tăng trưởng 15–30%, đã kiểm chứng từ dưới lên",
+            "SAM > 25.000 tỷ ₫ và tăng trưởng > 20%, đối chiếu từ trên xuống và từ dưới lên"
+          ]
+        },
+        "regulatory": {
+          "name_en": "Regulation & digital sovereignty (VN)",
+          "name_ru": "Регуляторика и цифровой суверенитет (Вьетнам)",
+          "name_zh": "合规与数字主权（越南）",
+          "name_vi": "Tuân thủ pháp lý và chủ quyền số",
+          "name_id": "Regulasi dan kedaulatan digital (VN)",
+          "name_ms": "Kawal selia dan kedaulatan digital (VN)",
+          "definition_en": "Law on Personal Data Protection No. 91/2025/QH15 (in force 1 Jan 2026; detailed by Decree 356/2025/ND-CP, which replaced Decree 13/2023/ND-CP) incl. impact-assessment dossiers for processing and cross-border transfer; Law on Cybersecurity No. 116/2025/QH15 (in force 1 Jul 2026, replacing the 2018 Cybersecurity Law and the 2015 Law on Cyberinformation Security) incl. information-system security levels; Law on Digital Technology Industry No. 71/2025/QH15 (incentives for digital-technology products and enterprises); Law on Artificial Intelligence No. 134/2025/QH15; public procurement under the Law on Bidding No. 22/2023/QH15.",
+          "definition_vi": "Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15 (hiệu lực 01/01/2026; Nghị định 356/2025/NĐ-CP quy định chi tiết, thay thế Nghị định 13/2023/NĐ-CP), bao gồm hồ sơ đánh giá tác động xử lý và chuyển dữ liệu ra nước ngoài; Luật An ninh mạng số 116/2025/QH15 (hiệu lực 01/07/2026, thay thế Luật An ninh mạng 2018 và Luật An toàn thông tin mạng 2015); Luật Công nghiệp công nghệ số số 71/2025/QH15; Luật Trí tuệ nhân tạo số 134/2025/QH15; đấu thầu theo Luật Đấu thầu số 22/2023/QH15.",
+          "anchors_en": [
+            "blocked: data or core component cannot lawfully be used/processed for the target customers",
+            "major gaps (no PDP impact-assessment dossier, no security-level classification)",
+            "compliance path known, not started",
+            "PDP dossiers prepared; information-system security level determined; local deployment option",
+            "PDP and cybersecurity obligations met for target buyers; recognised as a digital-technology product/enterprise where relevant",
+            "full compliance + listed in national / ministry digital-transformation programmes"
+          ],
+          "anchors_vi": [
+            "bị chặn: dữ liệu hoặc thành phần lõi không thể sử dụng/xử lý hợp pháp cho khách hàng mục tiêu",
+            "khoảng trống lớn (chưa có hồ sơ đánh giá tác động dữ liệu cá nhân, chưa phân loại cấp độ an toàn)",
+            "đã biết lộ trình tuân thủ, chưa bắt đầu",
+            "đã lập hồ sơ dữ liệu cá nhân; đã xác định cấp độ an toàn hệ thống; có phương án triển khai tại chỗ",
+            "đáp ứng nghĩa vụ dữ liệu cá nhân và an ninh mạng của khách hàng mục tiêu; được công nhận sản phẩm/doanh nghiệp công nghệ số khi phù hợp",
+            "tuân thủ đầy đủ + nằm trong chương trình chuyển đổi số quốc gia / bộ ngành"
+          ]
+        },
+        "scalability": {
+          "rationale": "Expansion across provinces and ASEAN markets; cross-border data transfers require PDP dossiers."
+        }
+      },
+      "facts": [
+        "pdp_impact_assessment",
+        "cross_border_data_unassessed",
+        "critical_foreign_dependency"
+      ],
+      "guide": "markets/vn.md"
+    },
+    "id": {
+      "name_en": "Indonesia",
+      "name_ru": "Индонезия",
+      "name_zh": "印度尼西亚",
+      "name_vi": "Indonesia",
+      "name_id": "Indonesia",
+      "name_ms": "Indonesia",
+      "currency": "IDR",
+      "weight_multipliers": {
+        "regulatory": 1.15,
+        "gtm": 1.1
+      },
+      "criteria": {
+        "market": {
+          "anchors_en": [
+            "no identifiable paying market",
+            "SAM < IDR 100 bn or shrinking",
+            "SAM IDR 100–500 bn, growth < 5%/yr",
+            "SAM IDR 500 bn–2.5 tn, growth 5–15%",
+            "SAM IDR 2.5–12 tn or growth 15–30%, bottom-up confirmed",
+            "SAM > IDR 12 tn and growth > 20%, triangulated"
+          ],
+          "anchors_id": [
+            "tidak ada pasar yang membayar",
+            "SAM < Rp100 miliar atau pasar menyusut",
+            "SAM Rp100–500 miliar, pertumbuhan < 5%/tahun",
+            "SAM Rp500 miliar–2,5 triliun, pertumbuhan 5–15%",
+            "SAM Rp2,5–12 triliun atau pertumbuhan 15–30%, terkonfirmasi bottom-up",
+            "SAM > Rp12 triliun dan pertumbuhan > 20%, triangulasi"
+          ]
+        },
+        "regulatory": {
+          "name_en": "Regulation, local content & sovereignty (ID)",
+          "name_ru": "Регуляторика, локальное содержание и суверенитет (Индонезия)",
+          "name_zh": "合规、本地成分与主权（印尼）",
+          "name_vi": "Pháp lý, nội địa hóa và chủ quyền (ID)",
+          "name_id": "Regulasi, TKDN dan kedaulatan",
+          "name_ms": "Kawal selia, kandungan tempatan dan kedaulatan (ID)",
+          "definition_en": "Personal Data Protection Law No. 27/2022 (UU PDP; two-year adjustment period ended Oct 2024); registration as an electronic system operator (PSE) under MR 5/2020 via OSS with the Ministry of Communication and Digital (Komdigi, formerly Kominfo); GR 71/2019 on electronic systems (data-placement rules for public-scope operators); local content (TKDN) certification for government and SOE procurement (Perpres 46/2025, Permenperin 35/2025).",
+          "definition_id": "UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi (masa penyesuaian dua tahun berakhir Oktober 2024); pendaftaran Penyelenggara Sistem Elektronik (PSE) berdasarkan Permenkominfo 5/2020 melalui OSS di Kementerian Komunikasi dan Digital (Komdigi); PP 71/2019 tentang PSTE (penempatan data bagi PSE lingkup publik); sertifikasi TKDN untuk pengadaan pemerintah dan BUMN (Perpres 46/2025, Permenperin 35/2025).",
+          "anchors_en": [
+            "blocked: cannot register as PSE or meet data-placement rules for target buyers",
+            "major gaps (no UU PDP programme, no PSE registration)",
+            "compliance path known, not started",
+            "PSE registered; UU PDP programme in place; TKDN assessment started",
+            "TKDN certified at the level required by target tenders; data and security requirements met",
+            "full compliance + listed in e-catalogue / government programmes"
+          ],
+          "anchors_id": [
+            "terblokir: tidak dapat terdaftar sebagai PSE atau memenuhi aturan penempatan data bagi pembeli sasaran",
+            "celah besar (belum ada program UU PDP, belum terdaftar PSE)",
+            "jalur kepatuhan diketahui, belum dimulai",
+            "terdaftar PSE; program UU PDP berjalan; penilaian TKDN dimulai",
+            "sertifikat TKDN sesuai tingkat yang disyaratkan tender sasaran; persyaratan data dan keamanan terpenuhi",
+            "patuh penuh + tercantum di e-katalog / program pemerintah"
+          ]
+        },
+        "scalability": {
+          "rationale": "Expansion across islands/provinces and ASEAN; local partner and Bahasa Indonesia localisation usually required."
+        }
+      },
+      "facts": [
+        "pse_registered",
+        "tkdn_certified",
+        "cross_border_data_unassessed",
+        "critical_foreign_dependency"
+      ],
+      "guide": "markets/id.md"
+    },
+    "my": {
+      "name_en": "Malaysia",
+      "name_ru": "Малайзия",
+      "name_zh": "马来西亚",
+      "name_vi": "Malaysia",
+      "name_id": "Malaysia",
+      "name_ms": "Malaysia",
+      "currency": "MYR",
+      "weight_multipliers": {
+        "regulatory": 1.0
+      },
+      "criteria": {
+        "market": {
+          "anchors_en": [
+            "no identifiable paying market",
+            "SAM < RM 30M or shrinking",
+            "SAM RM 30–150M, growth < 5%/yr",
+            "SAM RM 150–750M, growth 5–15%",
+            "SAM RM 750M–3.5B or growth 15–30%, bottom-up confirmed",
+            "SAM > RM 3.5B and growth > 20%, triangulated"
+          ],
+          "anchors_ms": [
+            "tiada pasaran yang membayar",
+            "SAM < RM30 juta atau pasaran mengecut",
+            "SAM RM30–150 juta, pertumbuhan < 5%/tahun",
+            "SAM RM150–750 juta, pertumbuhan 5–15%",
+            "SAM RM750 juta–3.5 bilion atau pertumbuhan 15–30%, disahkan bawah ke atas",
+            "SAM > RM3.5 bilion dan pertumbuhan > 20%, triangulasi"
+          ]
+        },
+        "regulatory": {
+          "name_en": "Regulation & digital trust (MY)",
+          "name_ru": "Регуляторика и цифровое доверие (Малайзия)",
+          "name_zh": "合规与数字信任（马来西亚）",
+          "name_vi": "Pháp lý và niềm tin số (MY)",
+          "name_id": "Regulasi dan kepercayaan digital (MY)",
+          "name_ms": "Kawal selia dan kepercayaan digital",
+          "definition_en": "Personal Data Protection Act 2010 (Act 709) as amended by Act A1727 (2024; phased commencement 1 Jan, 1 Apr and 1 Jun 2025): data controllers and processors, DPO appointment, breach notification, data portability, cross-border transfer; Cyber Security Act 2024 (Act 854, in force 26 Aug 2024) for national critical information infrastructure (NCII) entities, overseen by NACSA; sector rules (e.g. Bank Negara Malaysia RMiT for financial institutions); Malaysia Digital (MD, formerly MSC Malaysia) status for incentives.",
+          "definition_ms": "Akta Perlindungan Data Peribadi 2010 (Akta 709) sebagaimana dipinda oleh Akta A1727 (2024; berkuat kuasa berperingkat 1 Jan, 1 Apr dan 1 Jun 2025): pengawal dan pemproses data, pelantikan DPO, pemberitahuan pelanggaran data, kemudahalihan data, pemindahan rentas sempadan; Akta Keselamatan Siber 2024 (Akta 854, berkuat kuasa 26 Ogos 2024) bagi entiti NCII di bawah NACSA; peraturan sektor (cth. RMiT Bank Negara Malaysia); status Malaysia Digital (MD, dahulu MSC Malaysia) untuk insentif.",
+          "anchors_en": [
+            "blocked: cannot meet a mandatory requirement of the target sector (e.g. NCII or RMiT obligations)",
+            "major gaps (no PDPA programme, no security controls)",
+            "compliance path known, not started",
+            "PDPA programme incl. DPO and breach process; security controls in progress",
+            "meets PDPA, sector (e.g. RMiT) and NCII-customer requirements; MD status where relevant",
+            "full compliance + certifications + listed in government / GLC digital programmes"
+          ],
+          "anchors_ms": [
+            "disekat: tidak dapat memenuhi keperluan mandatori sektor sasaran (cth. kewajipan NCII atau RMiT)",
+            "jurang besar (tiada program PDPA, tiada kawalan keselamatan)",
+            "laluan pematuhan diketahui, belum bermula",
+            "program PDPA termasuk DPO dan proses pelanggaran data; kawalan keselamatan sedang dilaksanakan",
+            "memenuhi PDPA, keperluan sektor (cth. RMiT) dan pelanggan NCII; status MD jika berkaitan",
+            "pematuhan penuh + pensijilan + tersenarai dalam program digital kerajaan / GLC"
+          ]
+        },
+        "scalability": {
+          "rationale": "Expansion to ASEAN from a Malaysian base; MD status and regional partners support export."
+        }
+      },
+      "facts": [
+        "pdpa_compliant",
+        "cross_border_data_unassessed",
+        "critical_foreign_dependency"
+      ],
+      "guide": "markets/my.md"
+    }
+  }
+}

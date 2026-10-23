@@ -1,0 +1,618 @@
+{
+  "_template_note": "TEMPLAT daripada contoh rekaan Velordoc. Gantikan semua teks dan angka dengan data projek anda; kekalkan pemegang tempat «{ {path|format} }» yang merujuk kepada facts.json. Kunci bermula dengan '_' diabaikan oleh alat.",
+  "meta": {
+    "title": "Velordoc: penilaian potensi produk dan pelan strategik",
+    "subtitle": "Laporan analitik · peringkat perintis · CONTOH REKAAN",
+    "org": "Pasukan analisis strategi (contoh)",
+    "author": "Disediakan dengan kemahiran PitchComet",
+    "date": "Oktober 2026",
+    "header": "Velordoc — penilaian potensi (contoh)",
+    "locale": "ms",
+    "currency": "MYR",
+    "font_size": 12,
+    "preset": "report",
+    "watermark": "PERHATIAN: semua data produk, pasaran dan kewangan adalah rekaan dan hanya untuk menunjukkan alat."
+  },
+  "sources": [
+    {
+      "id": "nasa_trl",
+      "type": "web",
+      "org": "NASA",
+      "title": "Technology Readiness Levels",
+      "container": "NASA",
+      "url": "https://www.nasa.gov/directorates/somd/space-communications-navigation-program/technology-readiness-levels/",
+      "accessed": "2026-10-20",
+      "gost": "Technology Readiness Levels // NASA. URL: https://www.nasa.gov/directorates/somd/space-communications-navigation-program/technology-readiness-levels/ (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "feld",
+      "type": "web",
+      "authors": [
+        "Feld B."
+      ],
+      "title": "The Rule of 40% for a healthy SaaS company",
+      "container": "Feld Thoughts",
+      "date": "2015-02-03",
+      "url": "https://feld.com/archives/2015/02/rule-40-healthy-saas-company/",
+      "accessed": "2026-10-20",
+      "gost": "Feld B. The Rule of 40% For a Healthy SaaS Company // Feld Thoughts. 03.02.2015. URL: https://feld.com/archives/2015/02/rule-40-healthy-saas-company/ (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "sacks",
+      "type": "web",
+      "authors": [
+        "Sacks D."
+      ],
+      "title": "The burn multiple",
+      "container": "Craft Ventures",
+      "url": "https://www.craftventures.com/articles/the-burn-multiple",
+      "accessed": "2026-10-20",
+      "gost": "Sacks D. The Burn Multiple // Craft Ventures. URL: https://www.craftventures.com/articles/the-burn-multiple (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "my_pdpa",
+      "type": "web",
+      "org": "Jabatan Perlindungan Data Peribadi",
+      "title": "Personal Data Protection (Amendment) Act 2024",
+      "url": "https://www.pdp.gov.my/ppdpv1/en/akta/personal-data-protection-amendment-act-2024/",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "my_csa",
+      "type": "web",
+      "org": "NACSA",
+      "title": "Cyber Security Act 2024 (Act 854)",
+      "url": "https://nacsa.gov.my/act854.php",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "my_md",
+      "type": "web",
+      "org": "MDEC",
+      "title": "Malaysia Digital — tax incentive",
+      "url": "https://www.mdec.my/malaysiadigital/tax-incentive",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "example",
+      "type": "dataset",
+      "org": "Pasukan analisis strategi (contoh)",
+      "title": "Data contoh rekaan “Velordoc”: fail input examples/example_ms/*.json dan pengiraan tools/*.py.",
+      "text": "Data contoh rekaan “Velordoc”: fail input examples/example_ms/*.json dan pengiraan tools/*.py.",
+      "gost": "Data contoh rekaan “Velordoc”: fail input examples/example_ms/*.json dan pengiraan tools/*.py."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title_page"
+    },
+    {
+      "type": "toc",
+      "levels": 2
+    },
+    {
+      "type": "page_break"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "1. Ringkasan eksekutif"
+    },
+    {
+      "type": "paragraph",
+      "text": "**Jawapan.** Potensi produk ialah **{{score.total|num0}} daripada 100** (gred {{score.grade}}: {{score.grade_label}}; julat {{score.range_lo|num0}}–{{score.range_hi|num0}} dengan mengambil kira kualiti bukti). Masalah dan pasaran adalah kekuatan; jurang utama ialah {{score.top_gaps.0}} dan {{score.top_gaps.1}}. Cadangan: melabur secara berperingkat, dengan tranche kedua dikaitkan dengan pembaharuan kontrak perintis [[src:example]]."
+    },
+    {
+      "type": "key_figures",
+      "items": [
+        {
+          "value": "{{market.sam_base|money_bn}}",
+          "label": "pasaran boleh dilayan (SAM), {{market.base_year}}"
+        },
+        {
+          "value": "{{fin.revenue_last|money_mn0}}",
+          "label": "hasil {{fin.end_year}}, senario asas"
+        },
+        {
+          "value": "{{fin.moic_base|x1}}",
+          "label": "MOIC pelabur, senario asas"
+        },
+        {
+          "value": "{{score.total|num0}}/100",
+          "label": "skor potensi"
+        }
+      ],
+      "source": "model contoh (market_sizing.py, financial_model.py, scoring.py); data rekaan"
+    },
+    {
+      "type": "paragraph",
+      "text": "Situasi: pasukan kewangan, perolehan dan perundangan memproses aliran kontrak, invois dan surat yang semakin bertambah. Komplikasi: perkhidmatan awan tidak dibenarkan untuk dokumen sulit, dan pemprosesan manual mengambil kira-kira 15 minit setiap dokumen. Soalan: bolehkah aliran tempatan “klasifikasi → ekstrak → sahkan → hala” menjadi produk yang boleh diskala? Jawapan: ya, jika perintis menjadi kontrak berulang dalam 12–18 bulan."
+    },
+    {
+      "type": "callout",
+      "title": "Keputusan diperlukan:",
+      "text": "luluskan pelaburan RM22 juta untuk {{fin.ownership_entry|pct0}} ekuiti dalam dua tranche: RM14 juta sekarang dan RM9 juta selepas 5 kontrak diperbaharui."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "2. Masalah dan konteks"
+    },
+    {
+      "type": "paragraph",
+      "text": "Berdasarkan 32 temu bual dan kajian masa di tiga perintis (data contoh), satu dokumen memerlukan kira-kira 15 minit kerja kakitangan: membaca, memasukkan data dan menyemak silang dengan ERP. OCR berasaskan templat hanya menjimatkan masa pada format yang dikenali; pada format baharu 18% medan perlu dibuat semula [[src:example]]."
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "**Pembeli** — ketua operasi kewangan atau perolehan; **pengguna** — pegawai pejabat belakang.",
+        "**Kekangan** — dasar keselamatan maklumat melarang penghantaran dokumen ke perkhidmatan awan luar.",
+        "**Mengapa sekarang** — model bahasa terbuka kini boleh berjalan pada satu pelayan tempatan (dalam laporan sebenar, sokong dengan penanda aras bertarikh dan bersumber)."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "3. Pasaran"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.1. Kaedah"
+    },
+    {
+      "type": "paragraph",
+      "text": "Pasaran dianggar dengan dua cara bebas. **Bawah ke atas** (utama): bilangan organisasi setiap segmen × nilai kontrak tahunan × bahagian pembeli yang boleh dicapai (SAM) × bahagian yang boleh diperoleh (SOM). **Atas ke bawah** (semakan): pasaran ilustratif perisian pemprosesan dokumen × bahagian penyelesaian AI × bahagian pembeli yang mewajibkan pemasangan di premis. Perbezaan TAM ialah {{market.td_bu_ratio_tam|x1}}, di bawah ambang 2x yang memerlukan andaian disemak semula."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.2. Anggaran bawah ke atas"
+    },
+    {
+      "type": "table",
+      "caption": "Segmen pasaran dan anggaran TAM / SAM / SOM, {{market.base_year}}",
+      "columns": [
+        "Segmen",
+        "Organisasi",
+        "Kontrak tahunan",
+        "TAM",
+        "SAM",
+        "SOM 2030"
+      ],
+      "rows": {
+        "$ref": "tables.segments"
+      },
+      "col_widths_cm": [
+        4.4,
+        2.2,
+        2.3,
+        2.6,
+        2.6,
+        2.4
+      ],
+      "source": "market_sizing.py pada data contoh rekaan",
+      "font_size": 10
+    },
+    {
+      "type": "chart",
+      "caption": "Corong pasaran: TAM, SAM dan SOM, {{market.base_year}}, {{project.units.bn}}",
+      "chart": {
+        "$ref": "charts.tam_sam_som"
+      },
+      "height_cm": 6.5,
+      "source": "market_sizing.py pada data contoh rekaan"
+    },
+    {
+      "type": "paragraph",
+      "text": "Keputusan: TAM = **{{market.tam_base|money_bn}}**, SAM = **{{market.sam_base|money_bn}}**, SOM menjelang {{market.horizon_year}} dalam senario asas — **{{market.som_horizon_base|money_mn0}}**. Anggaran atas ke bawah memberikan TAM {{market.tam_td|money_bn}} dan SAM {{market.sam_td|money_bn}}."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.3. Senario pertumbuhan"
+    },
+    {
+      "type": "table",
+      "caption": "Senario pasaran hingga {{market.horizon_year}}",
+      "columns": [
+        "Senario",
+        "CAGR",
+        "TAM 2030",
+        "SAM 2030",
+        "SOM 2030"
+      ],
+      "rows": {
+        "$ref": "tables.market_scenarios"
+      },
+      "source": "andaian senario contoh (market_sizing.py); nilai nominal"
+    },
+    {
+      "type": "chart",
+      "caption": "SAM mengikut senario, {{project.units.bn}}",
+      "chart": {
+        "$ref": "charts.sam_scenarios"
+      },
+      "height_cm": 7,
+      "source": "market_sizing.py pada data contoh rekaan"
+    },
+    {
+      "type": "paragraph",
+      "text": "Semua unjuran adalah nominal. Dengan andaian inflasi 2.5% setahun, pertumbuhan benar SAM dalam senario asas ialah {{market.real_cagr_base|pct0}} setahun [[fn:Pertumbuhan benar menggunakan persamaan Fisher: (1 + pertumbuhan nominal) / (1 + inflasi) − 1. Dalam kerja sebenar, ambil unjuran inflasi daripada sumber rasmi bertarikh (lihat markets/).]]."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "4. Produk dan teknologi"
+    },
+    {
+      "type": "paragraph",
+      "text": "Produk ialah aliran yang dipasang secara tempatan: klasifikasi dokumen, ekstrak medan dengan model bahasa, pengesahan terhadap data induk ERP dan penghalaan ke aliran kerja yang betul. Kesediaan teknologi dinilai pada **TRL {{metrics.trl.value}}** mengikut skala TRL NASA [[src:nasa_trl]]."
+    },
+    {
+      "type": "table",
+      "caption": "Keputusan perintis (data rekaan)",
+      "columns": [
+        "Metrik",
+        "Sebelum",
+        "Selepas",
+        "Perubahan"
+      ],
+      "rows": [
+        [
+          "Masa kakitangan setiap dokumen",
+          "15 minit",
+          "3 minit",
+          "−{{metrics.pilot_roi.time_reduction|pct0}}"
+        ],
+        [
+          "Ketepatan ekstrak medan (n = 2,000)",
+          "{{metrics.pilot_accuracy.accuracy_baseline|pct0}}",
+          "{{metrics.pilot_accuracy.accuracy_model|pct0}}",
+          "+{{metrics.pilot_accuracy.value|pp0}}"
+        ],
+        [
+          "Penjimatan pelanggan setahun",
+          "—",
+          "{{metrics.pilot_roi.net_savings_per_year|money_mn1}}",
+          "ROI {{metrics.pilot_roi.value|pct0}}"
+        ]
+      ],
+      "source": "kajian masa dan sampel berlabel perintis (metrics_calc.py: automation_roi, accuracy_vs_baseline); data rekaan"
+    },
+    {
+      "type": "paragraph",
+      "text": "Perbezaan ketepatan adalah signifikan secara statistik pada tahap 95% (selang keyakinan perbezaan tidak merangkumi sifar). Untuk mencapai TRL 7, operasi rutin di pelanggan sekurang-kurangnya tiga bulan diperlukan."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "5. Persaingan dan kelebihan"
+    },
+    {
+      "type": "table",
+      "caption": "Perbandingan dengan alternatif (penilaian pakar, kategori penyelesaian)",
+      "columns": [
+        "Alternatif",
+        "Format baharu",
+        "Di premis",
+        "Semakan ERP",
+        "Masa setiap dokumen"
+      ],
+      "rows": [
+        [
+          "OCR templat",
+          "rendah",
+          "ya",
+          "sebahagian",
+          "minit"
+        ],
+        [
+          "Perkhidmatan AI awan",
+          "tinggi",
+          "tidak",
+          "sebahagian",
+          "saat"
+        ],
+        [
+          "Penyumberan luar",
+          "sederhana",
+          "sebahagian",
+          "tidak",
+          "jam"
+        ],
+        [
+          "Velordoc",
+          "tinggi",
+          "ya",
+          "ya",
+          "≈ 3 minit"
+        ]
+      ],
+      "highlight_row": 3,
+      "source": "penilaian pakar pasukan; perbandingan mengikut kategori penyelesaian, bukan syarikat tertentu"
+    },
+    {
+      "type": "paragraph",
+      "text": "Kelebihan bergantung pada korpus berlabel (1.2 juta dokumen dalam contoh), penyambung kepada sistem ERP biasa dan penyepaduan dalam aliran kerja pelanggan. Ancaman utama ialah edisi di premis daripada platform besar dalam 12–18 bulan."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "6. Model perniagaan dan ekonomi unit"
+    },
+    {
+      "type": "paragraph",
+      "text": "Model ialah lesen tahunan di premis (daripada {{tables.segments.3.2}} untuk logistik hingga {{tables.segments.1.2}} untuk sektor awam) serta pelaksanaan. Pada {{fin.end_year}}, senario asas menunjukkan margin kasar {{fin.gm_last|pct0}}, LTV/CAC **{{fin.ltv_cac_last|x1}}** dan tempoh pulangan CAC {{fin.cac_payback_last|num0}} bulan. Rule of 40 (pertumbuhan hasil + margin EBITDA) pada {{fin.end_year}} ialah {{fin.rule40_last|pct0}} [[src:feld]]; burn multiple pada {{fin.start_year}} ialah {{fin.burn_multiple_first|x1}} [[src:sacks]]."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "7. Pelan kewangan dan pulangan"
+    },
+    {
+      "type": "table",
+      "caption": "Senario asas: angka utama, {{fin.start_year}}–{{fin.end_year}}",
+      "columns": {
+        "$ref": "tables.pnl_columns"
+      },
+      "rows": {
+        "$ref": "tables.pnl"
+      },
+      "col_widths_cm": [
+        5.5,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1
+      ],
+      "source": "financial_model.py, senario asas; nilai nominal; data rekaan"
+    },
+    {
+      "type": "chart",
+      "caption": "Hasil dan EBITDA, senario asas, {{project.units.mn}}",
+      "chart": {
+        "$ref": "charts.revenue_ebitda"
+      },
+      "height_cm": 7,
+      "source": "financial_model.py, senario asas; nilai nominal; data rekaan"
+    },
+    {
+      "type": "table",
+      "caption": "Senario: hasil, pulang modal dan pulangan pelabur",
+      "columns": [
+        "Senario",
+        "Hasil 2030",
+        "EBITDA > 0",
+        "NPV pada {{fin.discount_rate|pct0}}",
+        "MOIC",
+        "IRR"
+      ],
+      "rows": {
+        "$ref": "tables.fin_scenarios"
+      },
+      "highlight_row": 1,
+      "source": "financial_model.py; pelaburan RM22 juta pada penilaian pra-wang RM68 juta, keluar 2030 pada 4x hasil, pencairan 15%; data rekaan"
+    },
+    {
+      "type": "paragraph",
+      "text": "NPV senario asas pada kadar diskaun {{fin.discount_rate|pct0}} ialah **{{fin.npv_base|money_mn0}}**; nilai terminal melebihi jumlah NPV, maka penilaian sangat bergantung pada andaian gandaan keluar. MOIC pelabur {{fin.moic_base|x1}} (IRR {{fin.irr_base|pct0}}), di bawah tanda aras teroka biasa; senario optimis memberikan {{fin.moic_bull|x1}} (IRR {{fin.irr_bull|pct0}}). Dalam senario pesimis, tunai minimum jatuh kepada {{fin.min_cash_bear|money_mn0}}."
+    },
+    {
+      "type": "table",
+      "caption": "Kepekaan NPV ({{project.units.mn}}) terhadap nilai kontrak dan pelanggan baharu",
+      "columns": {
+        "$ref": "tables.sensitivity_columns"
+      },
+      "rows": {
+        "$ref": "tables.sensitivity"
+      },
+      "source": "financial_model.py, sisihan daripada senario asas"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "8. Skor potensi"
+    },
+    {
+      "type": "paragraph",
+      "text": "Penilaian menggunakan 11 kriteria berskala 0–5 dengan wajaran profil “perintis / pelabur” dan profil pasaran Malaysia. Setiap skor mempunyai tahap bukti: A — disahkan, B — anggaran boleh dipercayai, C — andaian. Keyakinan bukti ialah {{score.confidence|pct0}}."
+    },
+    {
+      "type": "scorecard",
+      "caption": "Kad skor potensi (profil: perintis / pelabur)",
+      "criteria": {
+        "$ref": "tables.scorecard"
+      },
+      "total": {
+        "$ref": "score.total"
+      },
+      "source": "scoring.py, profil “perintis / pelabur”; skor rekaan"
+    },
+    {
+      "type": "chart",
+      "caption": "Skor mengikut kriteria (0–5)",
+      "chart": {
+        "$ref": "charts.score"
+      },
+      "height_cm": 9,
+      "source": "scoring.py, profil “perintis / pelabur”; skor rekaan"
+    },
+    {
+      "type": "table",
+      "caption": "Skor keseluruhan mengikut profil khalayak",
+      "columns": [
+        "Khalayak",
+        "Skor",
+        "Gred"
+      ],
+      "rows": {
+        "$ref": "tables.by_audience"
+      },
+      "col_widths_cm": [
+        9.0,
+        3.0,
+        4.0
+      ],
+      "source": "scoring.py: pengganda khalayak pada profil peringkat"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "9. Kawal selia dan kepercayaan digital"
+    },
+    {
+      "type": "paragraph",
+      "text": "Skop kawal selia bagi profil pasaran ini: {{score.regulatory_definition}}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Data peribadi dalam dokumen pelanggan tertakluk kepada Akta Perlindungan Data Peribadi 2010 sebagaimana dipinda oleh Akta A1727 pada 2024, termasuk kewajipan pengawal dan pemproses data [[src:my_pdpa]]. Pelanggan yang merupakan entiti infrastruktur maklumat kritikal negara (NCII) tertakluk kepada Akta Keselamatan Siber 2024 (Akta 854) [[src:my_csa]]. Status Malaysia Digital (dahulu MSC Malaysia) daripada MDEC memberi akses kepada insentif tertentu [[src:my_md]]."
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Status contoh: DPO dilantik; proses pemberitahuan pelanggaran data sedang diuji.",
+        "Pemasangan: di premis secara lalai, data kekal dalam rangkaian pelanggan.",
+        "Tiada API model pihak ketiga dalam laluan pemprosesan teras."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "10. Risiko dan mitigasi"
+    },
+    {
+      "type": "table",
+      "caption": "Daftar risiko utama",
+      "columns": [
+        "Risiko",
+        "Kebarangkalian",
+        "Impak",
+        "Mitigasi",
+        "Metrik kawalan"
+      ],
+      "rows": [
+        [
+          "Perintis tidak menjadi kontrak",
+          "sederhana",
+          "tinggi",
+          "Kontrak dengan ambang metrik sebelum perintis",
+          "kadar pembaharuan ≥ 60%"
+        ],
+        [
+          "Tumpuan hasil (42% daripada satu pelanggan)",
+          "tinggi",
+          "sederhana",
+          "10 pembaharuan sebelum S4 2027",
+          "pelanggan terbesar < 25%"
+        ],
+        [
+          "Platform melancarkan edisi di premis",
+          "sederhana",
+          "tinggi",
+          "Templat industri, penyambung ERP",
+          "kadar kemenangan berbanding platform"
+        ],
+        [
+          "Kos infrastruktur GPU meningkat",
+          "sederhana",
+          "sederhana",
+          "Model terkuantum, sandaran CPU",
+          "kos hasil ≤ 30% hasil"
+        ]
+      ],
+      "font_size": 10,
+      "source": "penilaian pakar pasukan; perbandingan mengikut kategori penyelesaian, bukan syarikat tertentu"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "11. Peta jalan"
+    },
+    {
+      "type": "numbered",
+      "items": [
+        "S4 2026 — Pembiayaan dan pasukan: RM22 juta; +6 jurutera, ketua jualan korporat",
+        "S1 2027 — Pematuhan: Program PDPA lengkap (DPO, proses pelanggaran data); permohonan status MD",
+        "S2 2027 — Jualan berulang: 5 kontrak diperbaharui, kitaran ≤ 6 bulan",
+        "S4 2027 — Skala: 10 kontrak, NRR ≥ 110%, 2 penyepadu",
+        "S2 2028 — Eksport: Perintis di pasaran jiran; keputusan pusingan RM17 juta"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "12. Cadangan"
+    },
+    {
+      "type": "numbered",
+      "items": [
+        "Melabur secara berperingkat: tranche kedua selepas 5 kontrak diperbaharui.",
+        "Sebelum penutupan, dapatkan data sebenar kadar pelanggan berhenti dan kos pemerolehan (naikkan tahap bukti ekonomi unit daripada C kepada B/A).",
+        "Kurangkan tumpuan hasil: tiada pelanggan melebihi 25% menjelang akhir 2027.",
+        "Ulang penilaian dalam 6 bulan dengan rubrik yang sama; sasaran skor sekurang-kurangnya 70."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Laporan menggunakan struktur “jawapan dahulu”: jawapan dahulu, kemudian hujah dan data."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Lampiran A. Andaian model"
+    },
+    {
+      "type": "table",
+      "caption": "Andaian utama model kewangan (senario asas)",
+      "columns": [
+        "Parameter",
+        "Nilai",
+        "Catatan"
+      ],
+      "rows": [
+        [
+          "Pelanggan permulaan",
+          "3",
+          "perintis berbayar"
+        ],
+        [
+          "Pelanggan baharu, 2026–2030",
+          "8 / 16 / 26 / 34 / 40",
+          "pelan jualan"
+        ],
+        [
+          "Kadar berhenti setahun",
+          "8%",
+          "anggaran — andaian (C)"
+        ],
+        [
+          "Kontrak tahunan",
+          "RM270.0 ribu, +5% setahun",
+          "purata portfolio"
+        ],
+        [
+          "Kos hasil",
+          "30% hasil",
+          "infrastruktur GPU dan sokongan"
+        ],
+        [
+          "Kadar diskaun",
+          "{{fin.discount_rate|pct0}}",
+          "andaian contoh; amalan pasaran lihat markets/"
+        ],
+        [
+          "Kadar cukai",
+          "24%",
+          "andaian contoh; semak undang-undang semasa"
+        ]
+      ],
+      "source": "financial_model.py, senario asas; nilai nominal; data rekaan"
+    },
+    {
+      "type": "sources"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "_template_note": "TEMPLATE copied from the fictional Velordoc example. Replace every text and number with your project's data; keep the «{ {path|format} }» placeholders that point into facts.json. Keys starting with '_' are ignored by the tools.",
+  "_EXAMPLE_DATA": "FICTIONAL PRODUCT \"Velordoc\". All data are invented to demonstrate the tools; any resemblance to real companies is coincidental.",
+  "name": "Velordoc",
+  "locale": "en",
+  "currency": "USD",
+  "market": "market_input.json",
+  "finance": "finance_input.json",
+  "scoring": "scoring_input.json",
+  "report_spec": "report_spec.json",
+  "deck_spec": "deck_spec.json",
+  "out_dir": "output",
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "render": true,
+  "key_facts": [
+    {
+      "path": "market.sam_base",
+      "fmt": "money_bn"
+    },
+    {
+      "path": "market.som_horizon_base",
+      "fmt": "money_mn0"
+    },
+    {
+      "path": "market.cagr_base",
+      "fmt": "pct0"
+    },
+    {
+      "path": "fin.revenue_last",
+      "fmt": "money_mn0"
+    },
+    {
+      "path": "fin.moic_base",
+      "fmt": "x1"
+    },
+    {
+      "path": "fin.irr_base",
+      "fmt": "pct0"
+    },
+    {
+      "path": "fin.ltv_cac_last",
+      "fmt": "x1"
+    },
+    {
+      "path": "score.total",
+      "fmt": "num0"
+    },
+    {
+      "path": "metrics.pilot_roi.value",
+      "fmt": "pct0"
+    }
+  ],
+  "metrics": {
+    "calcs": [
+      {
+        "id": "pilot_roi",
+        "fn": "automation_roi",
+        "args": {
+          "tasks_per_year": 20000,
+          "minutes_before": 15,
+          "minutes_after": 3,
+          "hourly_cost": 30,
+          "solution_cost_per_year": 60000.0,
+          "implementation_cost": 35000.0,
+          "adoption_rate": 1.0,
+          "years": 3
+        }
+      },
+      {
+        "id": "pilot_accuracy",
+        "fn": "accuracy_vs_baseline",
+        "args": {
+          "model_correct": 1880,
+          "baseline_correct": 1640,
+          "n": 2000
+        }
+      },
+      {
+        "id": "trl",
+        "fn": "trl_assess",
+        "args": {
+          "evidence": {
+            "trl1": true,
+            "trl2": true,
+            "trl3": true,
+            "trl4": true,
+            "trl5": true,
+            "trl6": true,
+            "trl7": false
+          }
+        }
+      }
+    ]
+  }
+}

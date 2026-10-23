@@ -1,0 +1,118 @@
+{
+  "_template_note": "TEMPLAT dari contoh fiktif Velordoc. Ganti semua teks dan angka dengan data proyek Anda; pertahankan placeholder «{ {path|format} }» yang merujuk ke facts.json. Kunci berawalan '_' diabaikan oleh alat.",
+  "_EXAMPLE_DATA": "PRODUK FIKTIF \"Velordoc\". Semua data dibuat untuk mendemonstrasikan alat; kemiripan dengan perusahaan nyata hanya kebetulan.",
+  "currency": "IDR",
+  "start_year": 2026,
+  "years": 5,
+  "revenue": {
+    "customers_start": 3,
+    "new_customers": [
+      8,
+      16,
+      26,
+      34,
+      40
+    ],
+    "churn_annual": 0.08,
+    "arpa_start": 960000000.0,
+    "arpa_growth": 0.05,
+    "other_revenue": [
+      6400000000,
+      8000000000,
+      8800000000,
+      8000000000,
+      7200000000
+    ]
+  },
+  "costs": {
+    "cogs_pct": 0.3,
+    "rd": [
+      25600000000,
+      28800000000,
+      32000000000,
+      34400000000,
+      36800000000
+    ],
+    "sm_pct": 0.28,
+    "ga": [
+      6400000000,
+      7600000000,
+      8800000000,
+      10000000000,
+      11200000000
+    ],
+    "capex": [
+      9600000000,
+      6000000000,
+      6000000000,
+      7200000000,
+      8000000000
+    ]
+  },
+  "working_capital_pct": 0.12,
+  "tax_rate": 0.22,
+  "cash_start": 12000000000.0,
+  "funding": [
+    {
+      "year": 2026,
+      "amount": 80000000000.0
+    },
+    {
+      "year": 2028,
+      "amount": 60000000000.0
+    }
+  ],
+  "discount_rate": 0.22,
+  "terminal": {
+    "method": "exit_multiple",
+    "multiple": 4.0,
+    "metric": "revenue"
+  },
+  "investor": {
+    "investment": 80000000000.0,
+    "pre_money": 240000000000.0,
+    "entry_year": 2026,
+    "exit_year": 2030,
+    "exit_multiple": 4.0,
+    "exit_metric": "revenue",
+    "later_dilution": 0.15
+  },
+  "scenarios": {
+    "bear": {
+      "new_customers_mult": 0.6,
+      "arpa_mult": 0.9,
+      "churn_annual": 0.15,
+      "exit_multiple": 2.5
+    },
+    "base": {},
+    "bull": {
+      "new_customers_mult": 1.3,
+      "arpa_mult": 1.1,
+      "churn_annual": 0.06,
+      "exit_multiple": 5.0
+    }
+  },
+  "sensitivity": {
+    "output": "npv",
+    "x": {
+      "param": "arpa_mult",
+      "values": [
+        0.8,
+        0.9,
+        1.0,
+        1.1,
+        1.2
+      ]
+    },
+    "y": {
+      "param": "new_customers_mult",
+      "values": [
+        0.6,
+        0.8,
+        1.0,
+        1.2,
+        1.4
+      ]
+    }
+  }
+}

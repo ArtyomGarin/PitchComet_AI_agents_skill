@@ -1,0 +1,118 @@
+{
+  "_template_note": "TEMPLAT daripada contoh rekaan Velordoc. Gantikan semua teks dan angka dengan data projek anda; kekalkan pemegang tempat «{ {path|format} }» yang merujuk kepada facts.json. Kunci bermula dengan '_' diabaikan oleh alat.",
+  "_EXAMPLE_DATA": "PRODUK REKAAN \"Velordoc\". Semua data direka untuk menunjukkan alat; sebarang persamaan dengan syarikat sebenar adalah kebetulan.",
+  "currency": "MYR",
+  "start_year": 2026,
+  "years": 5,
+  "revenue": {
+    "customers_start": 3,
+    "new_customers": [
+      8,
+      16,
+      26,
+      34,
+      40
+    ],
+    "churn_annual": 0.08,
+    "arpa_start": 270000.0,
+    "arpa_growth": 0.05,
+    "other_revenue": [
+      1800000,
+      2250000,
+      2475000,
+      2250000,
+      2025000
+    ]
+  },
+  "costs": {
+    "cogs_pct": 0.3,
+    "rd": [
+      7200000,
+      8100000,
+      9000000,
+      9675000,
+      10350000
+    ],
+    "sm_pct": 0.28,
+    "ga": [
+      1800000,
+      2137500,
+      2475000,
+      2812500,
+      3150000
+    ],
+    "capex": [
+      2700000,
+      1687500,
+      1687500,
+      2025000,
+      2250000
+    ]
+  },
+  "working_capital_pct": 0.12,
+  "tax_rate": 0.24,
+  "cash_start": 3375000.0,
+  "funding": [
+    {
+      "year": 2026,
+      "amount": 22500000.0
+    },
+    {
+      "year": 2028,
+      "amount": 16875000.0
+    }
+  ],
+  "discount_rate": 0.18,
+  "terminal": {
+    "method": "exit_multiple",
+    "multiple": 4.0,
+    "metric": "revenue"
+  },
+  "investor": {
+    "investment": 22500000.0,
+    "pre_money": 67500000.0,
+    "entry_year": 2026,
+    "exit_year": 2030,
+    "exit_multiple": 4.0,
+    "exit_metric": "revenue",
+    "later_dilution": 0.15
+  },
+  "scenarios": {
+    "bear": {
+      "new_customers_mult": 0.6,
+      "arpa_mult": 0.9,
+      "churn_annual": 0.15,
+      "exit_multiple": 2.5
+    },
+    "base": {},
+    "bull": {
+      "new_customers_mult": 1.3,
+      "arpa_mult": 1.1,
+      "churn_annual": 0.06,
+      "exit_multiple": 5.0
+    }
+  },
+  "sensitivity": {
+    "output": "npv",
+    "x": {
+      "param": "arpa_mult",
+      "values": [
+        0.8,
+        0.9,
+        1.0,
+        1.1,
+        1.2
+      ]
+    },
+    "y": {
+      "param": "new_customers_mult",
+      "values": [
+        0.6,
+        0.8,
+        1.0,
+        1.2,
+        1.4
+      ]
+    }
+  }
+}

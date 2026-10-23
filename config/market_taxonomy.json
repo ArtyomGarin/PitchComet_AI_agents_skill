@@ -1,0 +1,989 @@
+{
+  "_note": "Heuristic taxonomy used by product_profiler.py and market_definer.py. Keywords are matched case-insensitively on the product description. Buyer industries use ISIC Rev.4 section letters; map them to the national classification of the market (see 'classifications'). Extend freely.",
+  "classifications": {
+    "ru": {
+      "name": "ОКВЭД 2 (ОК 029-2014, КДЕС Ред. 2)",
+      "note": "section letters follow NACE Rev. 2 / ISIC Rev.4"
+    },
+    "en": {
+      "name": "NAICS 2022 (United States)",
+      "note": "map ISIC sections to NAICS sectors (e.g. G → 42, 44-45; I → 72)"
+    },
+    "zh": {
+      "name": "GB/T 4754-2017 国民经济行业分类",
+      "note": "门类 letters differ from ISIC; map by description"
+    },
+    "vn": {
+      "name": "VSIC 2018 (Quyết định 27/2018/QĐ-TTg)",
+      "note": "sections follow ISIC Rev.4"
+    },
+    "id": {
+      "name": "KBLI 2020",
+      "note": "categories follow ISIC Rev.4"
+    },
+    "my": {
+      "name": "MSIC 2008",
+      "note": "sections follow ISIC Rev.4"
+    }
+  },
+  "isic_sections": {
+    "A": "Agriculture, forestry and fishing",
+    "B": "Mining and quarrying",
+    "C": "Manufacturing",
+    "D": "Electricity, gas, steam and air conditioning supply",
+    "E": "Water supply; sewerage, waste management",
+    "F": "Construction",
+    "G": "Wholesale and retail trade; repair of motor vehicles",
+    "H": "Transportation and storage",
+    "I": "Accommodation and food service activities",
+    "J": "Information and communication",
+    "K": "Financial and insurance activities",
+    "L": "Real estate activities",
+    "M": "Professional, scientific and technical activities",
+    "N": "Administrative and support service activities",
+    "O": "Public administration and defence",
+    "P": "Education",
+    "Q": "Human health and social work activities",
+    "R": "Arts, entertainment and recreation",
+    "S": "Other service activities"
+  },
+  "categories": {
+    "workforce_management": {
+      "label_en": "Workforce management (shift scheduling, time & attendance)",
+      "label_ru": "Управление персоналом на сменах (графики, учёт времени)",
+      "keywords": [
+        "shift",
+        "schedule",
+        "scheduling",
+        "rota",
+        "roster",
+        "time tracking",
+        "timesheet",
+        "attendance",
+        "workforce",
+        "hourly staff",
+        "смен",
+        "график",
+        "табел",
+        "учёт рабочего времени",
+        "учет рабочего времени",
+        "персонал",
+        "排班",
+        "考勤",
+        "ca làm",
+        "chấm công",
+        "jadwal shift",
+        "absensi",
+        "syif",
+        "kehadiran"
+      ],
+      "buyer_industries": [
+        "G",
+        "I",
+        "Q",
+        "N",
+        "H"
+      ],
+      "unit": "location",
+      "unit_ru": "точка (магазин, кафе)",
+      "price_metric": "per location or per employee per month",
+      "value_drivers": [
+        "manager hours spent on scheduling",
+        "overtime and overstaffing",
+        "payroll errors",
+        "no-shows"
+      ],
+      "buyer_roles": [
+        "owner / general manager",
+        "operations director",
+        "HR / payroll"
+      ],
+      "user_roles": [
+        "store or shift manager",
+        "hourly employee"
+      ]
+    },
+    "document_ai": {
+      "label_en": "Intelligent document processing",
+      "label_ru": "Интеллектуальная обработка документов",
+      "keywords": [
+        "document",
+        "ocr",
+        "invoice",
+        "contract",
+        "extraction",
+        "документ",
+        "счёт",
+        "счет-фактур",
+        "распознаван",
+        "文档",
+        "发票",
+        "tài liệu",
+        "hóa đơn",
+        "dokumen",
+        "faktur"
+      ],
+      "buyer_industries": [
+        "K",
+        "O",
+        "C",
+        "H",
+        "G"
+      ],
+      "unit": "organisation",
+      "unit_ru": "организация",
+      "price_metric": "per document or per year",
+      "value_drivers": [
+        "minutes per document",
+        "error rate",
+        "compliance"
+      ],
+      "buyer_roles": [
+        "CFO / finance operations",
+        "CIO"
+      ],
+      "user_roles": [
+        "back-office specialist"
+      ]
+    },
+    "crm_sales": {
+      "label_en": "CRM and sales automation",
+      "label_ru": "CRM и автоматизация продаж",
+      "keywords": [
+        "crm",
+        "lead",
+        "pipeline",
+        "sales team",
+        "deal",
+        "воронк",
+        "лид",
+        "сделк",
+        "продаж",
+        "客户管理",
+        "销售",
+        "khách hàng tiềm năng",
+        "penjualan",
+        "jualan"
+      ],
+      "buyer_industries": [
+        "G",
+        "M",
+        "J",
+        "L",
+        "K"
+      ],
+      "unit": "company",
+      "unit_ru": "компания",
+      "price_metric": "per user per month",
+      "value_drivers": [
+        "conversion rate",
+        "sales cycle",
+        "rep productivity"
+      ],
+      "buyer_roles": [
+        "head of sales",
+        "owner"
+      ],
+      "user_roles": [
+        "sales rep"
+      ]
+    },
+    "hr_recruiting": {
+      "label_en": "HR, recruiting and onboarding",
+      "label_ru": "HR, подбор и адаптация",
+      "keywords": [
+        "recruit",
+        "hiring",
+        "candidate",
+        "onboarding",
+        "hr ",
+        "подбор",
+        "найм",
+        "кандидат",
+        "вакан",
+        "招聘",
+        "tuyển dụng",
+        "rekrutmen",
+        "pengambilan"
+      ],
+      "buyer_industries": [
+        "G",
+        "I",
+        "C",
+        "N",
+        "J"
+      ],
+      "unit": "company",
+      "unit_ru": "компания",
+      "price_metric": "per employee or per vacancy",
+      "value_drivers": [
+        "time to hire",
+        "cost per hire",
+        "attrition"
+      ],
+      "buyer_roles": [
+        "HR director"
+      ],
+      "user_roles": [
+        "recruiter",
+        "hiring manager"
+      ]
+    },
+    "accounting_finance": {
+      "label_en": "Accounting, invoicing and finance automation",
+      "label_ru": "Бухгалтерия, счета и финансовая автоматизация",
+      "keywords": [
+        "accounting",
+        "bookkeeping",
+        "invoice",
+        "expense",
+        "payroll",
+        "бухгалт",
+        "расход",
+        "зарплат",
+        "отчётност",
+        "会计",
+        "财务",
+        "kế toán",
+        "akuntansi",
+        "perakaunan"
+      ],
+      "buyer_industries": [
+        "G",
+        "M",
+        "C",
+        "F",
+        "I"
+      ],
+      "unit": "company",
+      "unit_ru": "компания",
+      "price_metric": "per company per month",
+      "value_drivers": [
+        "hours of bookkeeping",
+        "late fees",
+        "errors"
+      ],
+      "buyer_roles": [
+        "owner",
+        "CFO / accountant"
+      ],
+      "user_roles": [
+        "accountant"
+      ]
+    },
+    "inventory_erp": {
+      "label_en": "Inventory, ERP and operations",
+      "label_ru": "Склад, ERP и операционное управление",
+      "keywords": [
+        "inventory",
+        "warehouse",
+        "stock",
+        "erp",
+        "supply",
+        "склад",
+        "остатк",
+        "закуп",
+        "库存",
+        "仓库",
+        "kho",
+        "gudang",
+        "inventori"
+      ],
+      "buyer_industries": [
+        "G",
+        "C",
+        "H",
+        "I"
+      ],
+      "unit": "company",
+      "unit_ru": "компания",
+      "price_metric": "per location or per user",
+      "value_drivers": [
+        "stock-outs",
+        "write-offs",
+        "working capital"
+      ],
+      "buyer_roles": [
+        "operations director",
+        "owner"
+      ],
+      "user_roles": [
+        "warehouse staff",
+        "buyer"
+      ]
+    },
+    "retail_pos": {
+      "label_en": "Point of sale and retail operations",
+      "label_ru": "Кассы и операционное управление розницей",
+      "keywords": [
+        "pos",
+        "point of sale",
+        "checkout",
+        "cash register",
+        "касс",
+        "чек",
+        "收银",
+        "bán hàng",
+        "kasir",
+        "juruwang"
+      ],
+      "buyer_industries": [
+        "G",
+        "I"
+      ],
+      "unit": "location",
+      "unit_ru": "точка продаж",
+      "price_metric": "per terminal per month",
+      "value_drivers": [
+        "checkout speed",
+        "shrinkage",
+        "loyalty"
+      ],
+      "buyer_roles": [
+        "owner",
+        "retail operations"
+      ],
+      "user_roles": [
+        "cashier"
+      ]
+    },
+    "ecommerce_marketing": {
+      "label_en": "E-commerce and marketing automation",
+      "label_ru": "Электронная коммерция и маркетинг",
+      "keywords": [
+        "e-commerce",
+        "ecommerce",
+        "online store",
+        "marketing",
+        "campaign",
+        "email",
+        "seo",
+        "интернет-магазин",
+        "маркетинг",
+        "рассылк",
+        "电商",
+        "营销",
+        "thương mại điện tử",
+        "pemasaran",
+        "pemasaran digital"
+      ],
+      "buyer_industries": [
+        "G",
+        "M",
+        "J",
+        "I"
+      ],
+      "unit": "company",
+      "unit_ru": "компания",
+      "price_metric": "per month by contacts or orders",
+      "value_drivers": [
+        "conversion",
+        "customer acquisition cost",
+        "repeat purchases"
+      ],
+      "buyer_roles": [
+        "marketing lead",
+        "owner"
+      ],
+      "user_roles": [
+        "marketer"
+      ]
+    },
+    "customer_support": {
+      "label_en": "Customer support and contact centre",
+      "label_ru": "Поддержка клиентов и контакт-центр",
+      "keywords": [
+        "support",
+        "helpdesk",
+        "ticket",
+        "chatbot",
+        "contact center",
+        "call center",
+        "поддержк",
+        "обращени",
+        "чат-бот",
+        "客服",
+        "hỗ trợ khách hàng",
+        "layanan pelanggan",
+        "khidmat pelanggan"
+      ],
+      "buyer_industries": [
+        "K",
+        "G",
+        "J",
+        "H",
+        "D"
+      ],
+      "unit": "company",
+      "unit_ru": "компания",
+      "price_metric": "per agent per month",
+      "value_drivers": [
+        "handle time",
+        "first-contact resolution",
+        "agent headcount"
+      ],
+      "buyer_roles": [
+        "head of customer service"
+      ],
+      "user_roles": [
+        "support agent"
+      ]
+    },
+    "devtools": {
+      "label_en": "Developer tools and DevOps",
+      "label_ru": "Инструменты разработчика и DevOps",
+      "keywords": [
+        "developer",
+        "devops",
+        "api",
+        "ci/cd",
+        "code",
+        "deployment",
+        "разработчик",
+        "код",
+        "деплой",
+        "开发者",
+        "lập trình",
+        "pengembang",
+        "pembangun"
+      ],
+      "buyer_industries": [
+        "J",
+        "K",
+        "M"
+      ],
+      "unit": "company",
+      "unit_ru": "компания",
+      "price_metric": "per developer seat per month",
+      "value_drivers": [
+        "developer hours",
+        "incident time",
+        "release frequency"
+      ],
+      "buyer_roles": [
+        "CTO",
+        "engineering manager"
+      ],
+      "user_roles": [
+        "developer"
+      ]
+    },
+    "cybersecurity": {
+      "label_en": "Cybersecurity",
+      "label_ru": "Информационная безопасность",
+      "keywords": [
+        "security",
+        "threat",
+        "siem",
+        "vulnerability",
+        "phishing",
+        "безопасност",
+        "угроз",
+        "уязвим",
+        "安全",
+        "an ninh mạng",
+        "keamanan siber",
+        "keselamatan siber"
+      ],
+      "buyer_industries": [
+        "K",
+        "O",
+        "D",
+        "J",
+        "Q"
+      ],
+      "unit": "organisation",
+      "unit_ru": "организация",
+      "price_metric": "per endpoint or per year",
+      "value_drivers": [
+        "incident cost avoided",
+        "compliance",
+        "analyst hours"
+      ],
+      "buyer_roles": [
+        "CISO"
+      ],
+      "user_roles": [
+        "security analyst"
+      ]
+    },
+    "data_analytics": {
+      "label_en": "Data analytics and BI",
+      "label_ru": "Аналитика данных и BI",
+      "keywords": [
+        "analytics",
+        "dashboard",
+        "bi ",
+        "report",
+        "forecast",
+        "аналитик",
+        "дашборд",
+        "отчёт",
+        "прогноз",
+        "数据分析",
+        "phân tích",
+        "analitik",
+        "analitik data"
+      ],
+      "buyer_industries": [
+        "G",
+        "K",
+        "C",
+        "J"
+      ],
+      "unit": "company",
+      "unit_ru": "компания",
+      "price_metric": "per user per month",
+      "value_drivers": [
+        "analyst hours",
+        "decision speed",
+        "forecast accuracy"
+      ],
+      "buyer_roles": [
+        "CFO",
+        "head of analytics"
+      ],
+      "user_roles": [
+        "analyst",
+        "manager"
+      ]
+    },
+    "edtech": {
+      "label_en": "Education technology",
+      "label_ru": "Образовательные технологии",
+      "keywords": [
+        "learning",
+        "course",
+        "student",
+        "school",
+        "training",
+        "lms",
+        "обучени",
+        "курс",
+        "студент",
+        "школ",
+        "教育",
+        "学习",
+        "giáo dục",
+        "pendidikan",
+        "pembelajaran"
+      ],
+      "buyer_industries": [
+        "P",
+        "N"
+      ],
+      "unit": "institution or learner",
+      "unit_ru": "учреждение или учащийся",
+      "price_metric": "per learner per year",
+      "value_drivers": [
+        "learning outcomes",
+        "teacher time",
+        "completion"
+      ],
+      "buyer_roles": [
+        "school head",
+        "L&D lead"
+      ],
+      "user_roles": [
+        "student",
+        "teacher"
+      ]
+    },
+    "healthtech": {
+      "label_en": "Health technology",
+      "label_ru": "Медицинские технологии",
+      "keywords": [
+        "patient",
+        "clinic",
+        "medical",
+        "health",
+        "doctor",
+        "пациент",
+        "клиник",
+        "медицин",
+        "врач",
+        "医疗",
+        "患者",
+        "bệnh nhân",
+        "pasien",
+        "klinik",
+        "pesakit"
+      ],
+      "buyer_industries": [
+        "Q"
+      ],
+      "unit": "clinic",
+      "unit_ru": "клиника",
+      "price_metric": "per clinician per month",
+      "value_drivers": [
+        "clinician time",
+        "no-shows",
+        "claim errors"
+      ],
+      "buyer_roles": [
+        "clinic owner",
+        "chief medical officer"
+      ],
+      "user_roles": [
+        "doctor",
+        "nurse",
+        "front desk"
+      ]
+    },
+    "logistics": {
+      "label_en": "Logistics and fleet",
+      "label_ru": "Логистика и автопарк",
+      "keywords": [
+        "delivery",
+        "fleet",
+        "route",
+        "logistics",
+        "courier",
+        "доставк",
+        "маршрут",
+        "логистик",
+        "автопарк",
+        "物流",
+        "配送",
+        "giao hàng",
+        "logistik",
+        "penghantaran"
+      ],
+      "buyer_industries": [
+        "H",
+        "G",
+        "C"
+      ],
+      "unit": "company",
+      "unit_ru": "компания",
+      "price_metric": "per vehicle per month",
+      "value_drivers": [
+        "fuel",
+        "on-time delivery",
+        "driver hours"
+      ],
+      "buyer_roles": [
+        "logistics director"
+      ],
+      "user_roles": [
+        "dispatcher",
+        "driver"
+      ]
+    },
+    "legal": {
+      "label_en": "Legal technology",
+      "label_ru": "Юридические технологии",
+      "keywords": [
+        "legal",
+        "lawyer",
+        "compliance",
+        "contract review",
+        "юрист",
+        "юридическ",
+        "договор",
+        "法律",
+        "pháp lý",
+        "hukum",
+        "undang-undang"
+      ],
+      "buyer_industries": [
+        "M",
+        "K",
+        "O"
+      ],
+      "unit": "organisation",
+      "unit_ru": "организация",
+      "price_metric": "per lawyer seat per month",
+      "value_drivers": [
+        "lawyer hours",
+        "risk",
+        "turnaround time"
+      ],
+      "buyer_roles": [
+        "general counsel"
+      ],
+      "user_roles": [
+        "lawyer"
+      ]
+    },
+    "fintech_payments": {
+      "label_en": "Payments and fintech",
+      "label_ru": "Платежи и финтех",
+      "keywords": [
+        "payment",
+        "wallet",
+        "lending",
+        "loan",
+        "card",
+        "платеж",
+        "платёж",
+        "кредит",
+        "кошел",
+        "支付",
+        "thanh toán",
+        "pembayaran",
+        "bayaran"
+      ],
+      "buyer_industries": [
+        "K",
+        "G"
+      ],
+      "unit": "merchant or account",
+      "unit_ru": "мерчант или счёт",
+      "price_metric": "take rate on volume",
+      "value_drivers": [
+        "fees",
+        "conversion",
+        "fraud"
+      ],
+      "buyer_roles": [
+        "CFO",
+        "owner"
+      ],
+      "user_roles": [
+        "consumer",
+        "merchant"
+      ]
+    },
+    "ai_assistant": {
+      "label_en": "AI assistant / copilot for knowledge work",
+      "label_ru": "ИИ-ассистент для офисной работы",
+      "keywords": [
+        "ai assistant",
+        "copilot",
+        "llm",
+        "chatgpt-like",
+        "generative",
+        "ии-ассистент",
+        "нейросет",
+        "языков",
+        "智能助手",
+        "大模型",
+        "trợ lý ai",
+        "asisten ai",
+        "pembantu ai"
+      ],
+      "buyer_industries": [
+        "J",
+        "K",
+        "M",
+        "O",
+        "C"
+      ],
+      "unit": "employee seat",
+      "unit_ru": "рабочее место",
+      "price_metric": "per seat per month",
+      "value_drivers": [
+        "hours saved per employee",
+        "quality",
+        "speed"
+      ],
+      "buyer_roles": [
+        "CIO",
+        "COO"
+      ],
+      "user_roles": [
+        "office employee"
+      ]
+    }
+  },
+  "buyer_keywords": {
+    "smb": [
+      "small business",
+      "smb",
+      "sme",
+      "owner",
+      "cafe",
+      "café",
+      "shop",
+      "store",
+      "salon",
+      "малый бизнес",
+      "малого бизнеса",
+      "мсп",
+      "кафе",
+      "магазин",
+      "салон",
+      "владел",
+      "中小企业",
+      "小店",
+      "doanh nghiệp nhỏ",
+      "umkm",
+      "ukm",
+      "pks",
+      "perniagaan kecil"
+    ],
+    "mid_market": [
+      "mid-market",
+      "midsize",
+      "chain",
+      "network of",
+      "сеть",
+      "сети",
+      "средний бизнес",
+      "连锁",
+      "chuỗi",
+      "jaringan",
+      "rangkaian"
+    ],
+    "enterprise": [
+      "enterprise",
+      "corporate",
+      "large companies",
+      "bank",
+      "holding",
+      "government",
+      "ministry",
+      "корпорац",
+      "крупн",
+      "банк",
+      "госсектор",
+      "холдинг",
+      "大型企业",
+      "政府",
+      "doanh nghiệp lớn",
+      "perusahaan besar",
+      "korporat",
+      "kerajaan"
+    ],
+    "consumer": [
+      "consumer",
+      "b2c",
+      "users",
+      "people who",
+      "personal",
+      "потребител",
+      "пользовател",
+      "для людей",
+      "个人用户",
+      "người dùng",
+      "pengguna",
+      "pengguna individu"
+    ]
+  },
+  "pricing_keywords": {
+    "subscription": [
+      "subscription",
+      "per month",
+      "/month",
+      "monthly",
+      "saas",
+      "подписк",
+      "в месяц",
+      "/мес",
+      "ежемесяч",
+      "订阅",
+      "每月",
+      "thuê bao",
+      "langganan",
+      "per bulan",
+      "langganan bulanan",
+      "sebulan"
+    ],
+    "per_seat": [
+      "per user",
+      "per seat",
+      "per employee",
+      "за пользовател",
+      "за сотрудник",
+      "за место",
+      "每用户",
+      "mỗi người dùng",
+      "per pengguna"
+    ],
+    "usage": [
+      "per request",
+      "per document",
+      "pay as you go",
+      "usage-based",
+      "за запрос",
+      "за документ",
+      "按量",
+      "theo lượt",
+      "per transaksi"
+    ],
+    "license": [
+      "license",
+      "licence",
+      "perpetual",
+      "on-premise licence",
+      "лиценз",
+      "许可",
+      "giấy phép",
+      "lisensi",
+      "lesen"
+    ],
+    "freemium": [
+      "free plan",
+      "freemium",
+      "free tier",
+      "бесплатн",
+      "免费",
+      "miễn phí",
+      "gratis",
+      "percuma"
+    ],
+    "transaction_fee": [
+      "commission",
+      "take rate",
+      "fee per transaction",
+      "комисси",
+      "佣金",
+      "phí giao dịch",
+      "komisi",
+      "komisen"
+    ]
+  },
+  "deployment_keywords": {
+    "cloud_saas": [
+      "cloud",
+      "saas",
+      "web app",
+      "browser",
+      "облак",
+      "веб",
+      "云",
+      "đám mây",
+      "cloud",
+      "awan",
+      "web dashboard",
+      "web-based",
+      "online service",
+      "веб-кабинет",
+      "личный кабинет",
+      "облачн",
+      "онлайн-сервис"
+    ],
+    "mobile_app": [
+      "mobile app",
+      "ios",
+      "android",
+      "smartphone",
+      "мобильн",
+      "приложени",
+      "移动",
+      "ứng dụng di động",
+      "aplikasi seluler",
+      "aplikasi mudah alih"
+    ],
+    "on_premise": [
+      "on-premise",
+      "on-prem",
+      "self-hosted",
+      "local server",
+      "локальн",
+      "на сервере заказчика",
+      "контур",
+      "本地部署",
+      "tại chỗ",
+      "on-premise"
+    ],
+    "hybrid": [
+      "hybrid",
+      "гибрид",
+      "混合",
+      "lai",
+      "hibrida"
+    ]
+  }
+}

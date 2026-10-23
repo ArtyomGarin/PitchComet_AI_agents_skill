@@ -1,0 +1,83 @@
+{
+  "_template_note": "模板，基于虚构示例 Velordoc。请用本项目数据替换全部文字和数字；保留指向 facts.json 的 「{ {路径|格式} }」 占位符。以“_”开头的键会被工具忽略。",
+  "_EXAMPLE_DATA": "虚构产品“Velordoc”。所有数据均为演示工具而编造，与真实公司如有雷同纯属巧合。",
+  "currency": "CNY",
+  "base_year": 2025,
+  "horizon_year": 2030,
+  "primary": "bottom_up",
+  "top_down": {
+    "total_market": 63000000000.0,
+    "total_market_label": "单据采集与处理软件的示意性市场，2025年",
+    "source": "EXAMPLE",
+    "filters": [
+      {
+        "name": "基于AI的智能文档处理支出占比",
+        "share": 0.14,
+        "level": "TAM",
+        "rationale": "EXAMPLE"
+      },
+      {
+        "name": "要求本地化/私有化部署的客户",
+        "share": 0.4,
+        "level": "SAM",
+        "rationale": "EXAMPLE"
+      },
+      {
+        "name": "2030年可实现份额",
+        "share": 0.06,
+        "level": "SOM",
+        "rationale": "EXAMPLE"
+      }
+    ]
+  },
+  "bottom_up": {
+    "segments": [
+      {
+        "name": "银行与保险",
+        "units": 4000,
+        "arpa": 420000.0,
+        "sam_share": 0.5,
+        "som_share": 0.06,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "政府机关与国有企业",
+        "units": 3000,
+        "arpa": 560000.0,
+        "sam_share": 0.6,
+        "som_share": 0.05,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "制造业集团",
+        "units": 12000,
+        "arpa": 210000.0,
+        "sam_share": 0.35,
+        "som_share": 0.04,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "物流与零售",
+        "units": 15000,
+        "arpa": 140000.0,
+        "sam_share": 0.3,
+        "som_share": 0.04,
+        "source": "EXAMPLE"
+      }
+    ]
+  },
+  "growth": {
+    "cagr": {
+      "bear": 0.1,
+      "base": 0.18,
+      "bull": 0.26
+    }
+  },
+  "som_ramp": "s_curve",
+  "som_share_multiplier": {
+    "bear": 0.6,
+    "base": 1.0,
+    "bull": 1.4
+  },
+  "inflation": 0.01
+}

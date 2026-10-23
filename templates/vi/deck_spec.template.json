@@ -1,0 +1,347 @@
+{
+  "_template_note": "MẪU dựa trên ví dụ hư cấu Velordoc. Thay toàn bộ văn bản và số liệu bằng dữ liệu dự án của bạn; giữ các chỗ giữ chỗ «{ {path|format} }» trỏ tới facts.json. Các khóa bắt đầu bằng '_' bị công cụ bỏ qua.",
+  "meta": {
+    "title": "Velordoc — đánh giá chiến lược (VÍ DỤ HƯ CẤU)",
+    "author": "Nhóm phân tích chiến lược (ví dụ)",
+    "locale": "vi",
+    "currency": "VND",
+    "theme": "light",
+    "slide_numbers": true,
+    "watermark": "VÍ DỤ · dữ liệu hư cấu"
+  },
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Velordoc: AI triển khai tại chỗ, tự đọc, kiểm tra và luân chuyển chứng từ doanh nghiệp",
+      "subtitle": "Đánh giá tiềm năng sản phẩm và luận điểm đầu tư · giai đoạn thí điểm",
+      "author": "Nhóm phân tích chiến lược (ví dụ)",
+      "date": "Tháng 10/2026",
+      "notes": "VÍ DỤ HƯ CẤU cho kỹ năng PitchComet. Mọi số liệu đều được tạo ra và tính bằng công cụ trong tools/."
+    },
+    {
+      "layout": "big_number",
+      "title": "Tiềm năng {{score.total|num0}}/100: vấn đề và thị trường mạnh, nhưng bằng chứng bán hàng còn ít",
+      "numbers": [
+        {
+          "value": "{{market.sam_base|money_bn}}",
+          "label": "Thị trường phục vụ được (SAM), {{market.base_year}}",
+          "context": "từ dưới lên theo 4 phân khúc; từ trên xuống lệch {{market.td_bu_ratio_tam|x1}}"
+        },
+        {
+          "value": "{{fin.revenue_last|money_mn0}}",
+          "label": "Doanh thu {{fin.end_year}}, kịch bản cơ sở",
+          "context": "EBITDA dương từ {{fin.breakeven_year}}"
+        },
+        {
+          "value": "{{fin.moic_base|x1}}",
+          "label": "MOIC của nhà đầu tư, kịch bản cơ sở",
+          "context": "IRR {{fin.irr_base|pct0}}; lạc quan {{fin.moic_bull|x1}}"
+        }
+      ],
+      "source": "mô hình ví dụ (market_sizing.py, financial_model.py, scoring.py); dữ liệu hư cấu",
+      "notes": "Kết luận trước: tổng điểm, thị trường, doanh thu và lợi nhuận nhà đầu tư; chi tiết ở sau."
+    },
+    {
+      "layout": "bullets",
+      "title": "Nhân viên văn phòng mất 15 phút cho mỗi chứng từ để nhập và đối chiếu thủ công — điểm nghẽn của tài chính và mua sắm",
+      "bullets": [
+        "**32 cuộc phỏng vấn** với lãnh đạo tài chính và mua sắm (ví dụ)",
+        "**15 phút** cho mỗi hợp đồng hoặc hóa đơn: đọc, nhập, đối chiếu",
+        "Dịch vụ đám mây không được dùng cho tài liệu **mật**",
+        "OCR theo mẫu lỗi khi gặp mẫu mới: **18% trường** phải làm lại",
+        "Vì sao lúc này: mô hình ngôn ngữ mở đã chạy được trên một máy chủ nội bộ"
+      ],
+      "source": "phỏng vấn và bấm giờ tại các thí điểm ví dụ; dữ liệu hư cấu",
+      "notes": "Mô tả vấn đề bằng lời của khách hàng và đơn vị đo được (phút, tỷ lệ trường)."
+    },
+    {
+      "layout": "two_column",
+      "title": "Giải pháp: phân loại → trích xuất → kiểm tra → luân chuyển, thay nhập liệu thủ công",
+      "left": {
+        "heading": "Hiện nay",
+        "bullets": [
+          "Đọc và nhập liệu thủ công",
+          "Quy tắc lỗi khi có mẫu mới",
+          "Đối chiếu ERP bằng tay",
+          "Chính sách bảo mật cấm đám mây"
+        ]
+      },
+      "right": {
+        "heading": "Với Velordoc",
+        "bullets": [
+          "Khoảng 3 phút mỗi chứng từ",
+          "Mô hình thích ứng mẫu mới",
+          "Tự động đối chiếu dữ liệu ERP",
+          "Chạy trong mạng nội bộ khách hàng"
+        ]
+      },
+      "notes": "Nên demo trực tiếp trên chứng từ đã ẩn danh thay vì bản phác thảo."
+    },
+    {
+      "layout": "chart",
+      "title": "Thị trường phục vụ được đạt {{market.sam_base|money_bn}} năm {{market.base_year}}; thị phần đạt được đến {{market.horizon_year}} là {{market.som_horizon_base|money_mn0}}",
+      "chart": {
+        "$ref": "charts.tam_sam_som"
+      },
+      "takeaway": [
+        "TAM {{market.tam_base|money_bn}}: 4 phân khúc × số tổ chức × giá trị hợp đồng năm",
+        "SAM: chỉ khách hàng yêu cầu triển khai tại chỗ",
+        "TAM từ trên xuống = {{market.tam_td|money_bn}}: lệch {{market.td_bu_ratio_tam|x1}}, trong ngưỡng 2 lần"
+      ],
+      "source": "ước tính từ dưới lên (market_sizing.py); dữ liệu hư cấu; {{project.units.bn}}",
+      "notes": "TAM→SAM→SOM dạng phễu; nhấn mạnh SAM. Từ dưới lên là chính, từ trên xuống để kiểm tra."
+    },
+    {
+      "layout": "table",
+      "title": "Ngân hàng và khu vực công chiếm phần lớn SAM, hợp đồng nhà nước có giá trị cao nhất",
+      "columns": [
+        "Phân khúc",
+        "Số tổ chức",
+        "Hợp đồng/năm",
+        "TAM",
+        "SAM",
+        "SOM 2030"
+      ],
+      "rows": {
+        "$ref": "tables.segments"
+      },
+      "col_widths": [
+        4.2,
+        1.6,
+        1.7,
+        1.6,
+        1.6,
+        1.6
+      ],
+      "source": "ước tính từ dưới lên (market_sizing.py); dữ liệu hư cấu",
+      "notes": "Mỗi dòng là một giả định kiểm chứng được."
+    },
+    {
+      "layout": "chart",
+      "title": "SAM tăng lên {{market.sam_horizon_base|money_bn}} vào {{market.horizon_year}} với mức tăng {{market.cagr_base|pct0}}/năm (kịch bản cơ sở)",
+      "chart": {
+        "$ref": "charts.sam_scenarios"
+      },
+      "takeaway": [
+        "Bi quan: {{market.cagr_bear|pct0}}/năm → {{market.sam_horizon_bear|money_bn}}",
+        "Lạc quan: {{market.cagr_bull|pct0}}/năm → {{market.sam_horizon_bull|money_bn}}",
+        "Theo giá thực (lạm phát 3,5%): tăng trưởng cơ sở {{market.real_cagr_base|pct0}}"
+      ],
+      "source": "giả định kịch bản của ví dụ (market_sizing.py); giá trị danh nghĩa; {{project.units.bn}}",
+      "notes": "Dự báo luôn theo kịch bản; tách danh nghĩa và thực."
+    },
+    {
+      "layout": "big_number",
+      "title": "Thí điểm: xử lý nhanh gấp 5 lần, độ chính xác trích xuất cao hơn OCR theo mẫu {{metrics.pilot_accuracy.value|pp0}}",
+      "numbers": [
+        {
+          "value": "−{{metrics.pilot_roi.time_reduction|pct0}}",
+          "label": "thời gian nhân viên mỗi chứng từ",
+          "context": "15 → 3 phút, 3 thí điểm"
+        },
+        {
+          "value": "+{{metrics.pilot_accuracy.value|pp0}}",
+          "label": "độ chính xác trích xuất trường",
+          "context": "{{metrics.pilot_accuracy.accuracy_model|pct0}} so với {{metrics.pilot_accuracy.accuracy_baseline|pct0}}, 2.000 trường"
+        },
+        {
+          "value": "{{metrics.pilot_roi.value|pct0}}",
+          "label": "ROI của khách hàng sau 3 năm",
+          "context": "hoàn vốn ≈ {{metrics.pilot_roi.payback_months|num0}} tháng"
+        }
+      ],
+      "source": "bấm giờ và mẫu gán nhãn tại thí điểm (metrics_calc.py: automation_roi, accuracy_vs_baseline); dữ liệu hư cấu",
+      "notes": "Kết quả theo chỉ số của khách hàng, kèm cỡ mẫu."
+    },
+    {
+      "layout": "matrix",
+      "title": "Chính xác hơn OCR theo mẫu và, khác dịch vụ đám mây, chạy trong mạng khách hàng",
+      "x_label": "Độ chính xác trên mẫu chứng từ mới",
+      "y_label": "Mức phù hợp triển khai tại chỗ",
+      "quadrants": [
+        "",
+        "Vị trí mục tiêu",
+        "",
+        ""
+      ],
+      "items": [
+        {
+          "name": "OCR theo mẫu",
+          "x": 0.3,
+          "y": 0.75
+        },
+        {
+          "name": "AI đám mây",
+          "x": 0.78,
+          "y": 0.15
+        },
+        {
+          "name": "Thuê nhập liệu",
+          "x": 0.5,
+          "y": 0.45
+        },
+        {
+          "name": "Velordoc",
+          "x": 0.82,
+          "y": 0.85,
+          "highlight": true
+        }
+      ],
+      "takeaway": [
+        "Rào cản: kho 1,2 triệu chứng từ đã gán nhãn và bộ kết nối ERP",
+        "Rủi ro: nền tảng lớn có thể ra phiên bản tại chỗ trong 12–18 tháng"
+      ],
+      "source": "đánh giá chuyên gia của nhóm; so sánh theo nhóm giải pháp, không phải công ty cụ thể",
+      "notes": "Ma trận là đánh giá chuyên gia; đối thủ được nêu theo nhóm."
+    },
+    {
+      "layout": "scorecard",
+      "title": "Tổng điểm {{score.total|num0}}/100 (hạng {{score.grade}}): khoảng trống chính là sức kéo và kinh tế đơn vị đã kiểm chứng",
+      "criteria": {
+        "$ref": "tables.scorecard"
+      },
+      "total": {
+        "$ref": "score.total"
+      },
+      "grade": "{{score.grade}}",
+      "grade_label": "{{score.grade_label}}",
+      "range": [
+        {
+          "$ref": "score.range_lo"
+        },
+        {
+          "$ref": "score.range_hi"
+        }
+      ],
+      "source": "scoring.py, hồ sơ “thí điểm / nhà đầu tư”; điểm hư cấu",
+      "notes": "Khoảng điểm phản ánh chất lượng bằng chứng: giả định (C) ±1, ước tính (B) ±0,5."
+    },
+    {
+      "layout": "table",
+      "title": "Kế hoạch cơ sở: doanh thu tăng từ {{fin.revenue_first|money_mn0}} lên {{fin.revenue_last|money_mn0}}; EBITDA dương từ {{fin.breakeven_year}}",
+      "columns": {
+        "$ref": "tables.pnl_columns"
+      },
+      "rows": {
+        "$ref": "tables.pnl"
+      },
+      "col_widths": [
+        3.6,
+        1.7,
+        1.7,
+        1.7,
+        1.7,
+        1.7
+      ],
+      "source": "financial_model.py, kịch bản cơ sở; giá trị danh nghĩa; dữ liệu hư cấu",
+      "notes": "LTV giới hạn ở 5 năm vòng đời khách hàng."
+    },
+    {
+      "layout": "chart",
+      "title": "Biên độ kịch bản rộng: doanh thu {{fin.end_year}} từ {{fin.revenue_last_bear|money_mn0}} đến {{fin.revenue_last_bull|money_mn0}}",
+      "chart": {
+        "$ref": "charts.revenue_scenarios"
+      },
+      "takeaway": [
+        "Động lực chính: số khách hàng mới và giá trị hợp đồng",
+        "Bi quan: cần thêm vòng gọi vốn; tiền mặt tối thiểu {{fin.min_cash_bear|money_mn0}}",
+        "Lạc quan: EBITDA dương ngay từ {{fin.breakeven_bull}}"
+      ],
+      "source": "financial_model.py, kịch bản cơ sở; giá trị danh nghĩa; dữ liệu hư cấu; {{project.units.mn}}",
+      "notes": "Kịch bản là hệ số nhân lên khách hàng mới, giá trị hợp đồng và tỷ lệ rời bỏ."
+    },
+    {
+      "layout": "table",
+      "title": "Nhà đầu tư nhận {{fin.moic_base|x1}} ở kịch bản cơ sở, {{fin.moic_bull|x1}} ở kịch bản lạc quan",
+      "columns": [
+        "Kịch bản",
+        "Doanh thu 2030",
+        "EBITDA > 0",
+        "NPV ở {{fin.discount_rate|pct0}}",
+        "MOIC",
+        "IRR"
+      ],
+      "rows": {
+        "$ref": "tables.fin_scenarios"
+      },
+      "col_widths": [
+        2.6,
+        1.9,
+        1.7,
+        1.9,
+        1.4,
+        1.4
+      ],
+      "highlight_row": 1,
+      "source": "financial_model.py; đầu tư 125 tỷ ₫ với định giá trước vốn 375 tỷ ₫, thoái vốn 2030 ở 4 lần doanh thu, pha loãng 15%; dữ liệu hư cấu",
+      "notes": "Lợi nhuận theo kịch bản với giả định vào/ra rõ ràng; không coi lạc quan là cơ sở."
+    },
+    {
+      "layout": "two_column",
+      "title": "Bốn rủi ro chính kiểm soát được nếu các gia hạn hợp đồng đầu tiên diễn ra trước cuối năm 2027",
+      "left": {
+        "heading": "Rủi ro",
+        "bullets": [
+          "Thí điểm không chuyển thành hợp đồng",
+          "Tập trung: 42% doanh thu từ một khách hàng",
+          "Nền tảng ra phiên bản tại chỗ",
+          "Chi phí hạ tầng GPU tăng"
+        ]
+      },
+      "right": {
+        "heading": "Biện pháp",
+        "bullets": [
+          "Hợp đồng có ngưỡng chỉ tiêu trước thí điểm",
+          "Kế hoạch: 10 gia hạn trước Q4 2027",
+          "Mẫu theo ngành và kết nối ERP",
+          "Mô hình lượng tử hóa, dự phòng CPU"
+        ]
+      },
+      "notes": "Mỗi rủi ro một biện pháp và một chỉ số kiểm soát."
+    },
+    {
+      "layout": "timeline",
+      "title": "Trong 18 tháng: 10 hợp đồng gia hạn, hoàn tất các mốc tuân thủ và thí điểm xuất khẩu đầu tiên",
+      "steps": [
+        {
+          "label": "Q4 2026",
+          "title": "Gọi vốn và đội ngũ",
+          "text": "125 tỷ ₫; +6 kỹ sư, trưởng bộ phận bán hàng doanh nghiệp"
+        },
+        {
+          "label": "Q1 2027",
+          "title": "Tuân thủ",
+          "text": "Hoàn tất hồ sơ đánh giá tác động dữ liệu cá nhân và phân loại cấp độ an toàn hệ thống"
+        },
+        {
+          "label": "Q2 2027",
+          "title": "Bán hàng lặp lại",
+          "text": "5 hợp đồng gia hạn, chu kỳ bán ≤ 6 tháng"
+        },
+        {
+          "label": "Q4 2027",
+          "title": "Mở rộng",
+          "text": "10 hợp đồng, NRR ≥ 110%, 2 nhà tích hợp"
+        },
+        {
+          "label": "Q2 2028",
+          "title": "Xuất khẩu",
+          "text": "Thí điểm tại thị trường lân cận; quyết định vòng 94 tỷ ₫"
+        }
+      ],
+      "source": "kế hoạch của nhóm ví dụ; dữ liệu hư cấu",
+      "notes": "Mốc có ngày, kiểm chứng được và do nhóm kiểm soát."
+    },
+    {
+      "layout": "closing",
+      "title": "Đề xuất: 125 tỷ ₫ cho {{fin.ownership_entry|pct0}} cổ phần đến khi chứng minh bán hàng lặp lại",
+      "bullets": [
+        "Đợt 1 — 75 tỷ ₫ ngay; đợt 2 — 50 tỷ ₫ sau 5 hợp đồng gia hạn",
+        "Nhà đầu tư có ghế trong HĐQT; báo cáo quý theo 6 chỉ số",
+        "Quyết định hôm nay: phê duyệt term sheet và thẩm định 6 tuần"
+      ],
+      "contact": "Liên hệ: trưởng dự án · team@example.org (ví dụ)",
+      "notes": "Một đề xuất, một con số, một quyết định."
+    }
+  ]
+}

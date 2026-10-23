@@ -1,0 +1,621 @@
+{
+  "_template_note": "模板，基于虚构示例 Velordoc。请用本项目数据替换全部文字和数字；保留指向 facts.json 的 「{ {路径|格式} }」 占位符。以“_”开头的键会被工具忽略。",
+  "meta": {
+    "title": "Velordoc：产品潜力评估与战略规划",
+    "subtitle": "分析报告 · 试点阶段 · 虚构示例",
+    "org": "示例战略分析团队",
+    "author": "使用 PitchComet 技能编制",
+    "date": "2026年10月",
+    "header": "Velordoc 潜力评估（示例）",
+    "locale": "zh",
+    "currency": "CNY",
+    "font_size": 12,
+    "preset": "report",
+    "watermark": "注意：所有产品、市场和财务数据均为虚构，仅用于演示工具。"
+  },
+  "sources": [
+    {
+      "id": "nasa_trl",
+      "type": "web",
+      "org": "NASA",
+      "title": "Technology Readiness Levels",
+      "container": "NASA",
+      "url": "https://www.nasa.gov/directorates/somd/space-communications-navigation-program/technology-readiness-levels/",
+      "accessed": "2026-10-20",
+      "gost": "Technology Readiness Levels // NASA. URL: https://www.nasa.gov/directorates/somd/space-communications-navigation-program/technology-readiness-levels/ (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "feld",
+      "type": "web",
+      "authors": [
+        "Feld B."
+      ],
+      "title": "The Rule of 40% for a healthy SaaS company",
+      "container": "Feld Thoughts",
+      "date": "2015-02-03",
+      "url": "https://feld.com/archives/2015/02/rule-40-healthy-saas-company/",
+      "accessed": "2026-10-20",
+      "gost": "Feld B. The Rule of 40% For a Healthy SaaS Company // Feld Thoughts. 03.02.2015. URL: https://feld.com/archives/2015/02/rule-40-healthy-saas-company/ (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "sacks",
+      "type": "web",
+      "authors": [
+        "Sacks D."
+      ],
+      "title": "The burn multiple",
+      "container": "Craft Ventures",
+      "url": "https://www.craftventures.com/articles/the-burn-multiple",
+      "accessed": "2026-10-20",
+      "gost": "Sacks D. The Burn Multiple // Craft Ventures. URL: https://www.craftventures.com/articles/the-burn-multiple (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "pipl",
+      "type": "law",
+      "org": "全国人民代表大会常务委员会",
+      "title": "中华人民共和国个人信息保护法",
+      "date": "2021-08-20",
+      "url": "http://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "genai",
+      "type": "law",
+      "org": "国家互联网信息办公室等",
+      "title": "生成式人工智能服务管理暂行办法",
+      "date": "2023-07-13",
+      "url": "https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "gbt22239",
+      "type": "standard",
+      "org": "国家市场监督管理总局, 国家标准化管理委员会",
+      "title": "GB/T 22239-2019 信息安全技术 网络安全等级保护基本要求",
+      "year": 2019,
+      "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=BAFB47E8874764186BDB7865E8344DAF",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "example",
+      "type": "dataset",
+      "org": "示例战略分析团队",
+      "title": "虚构示例“Velordoc”数据：examples/example_zh/*.json 输入文件及 tools/*.py 计算结果。",
+      "text": "虚构示例“Velordoc”数据：examples/example_zh/*.json 输入文件及 tools/*.py 计算结果。",
+      "gost": "虚构示例“Velordoc”数据：examples/example_zh/*.json 输入文件及 tools/*.py 计算结果。"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title_page"
+    },
+    {
+      "type": "toc",
+      "levels": 2
+    },
+    {
+      "type": "page_break"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "一、摘要"
+    },
+    {
+      "type": "paragraph",
+      "text": "**结论。** 产品潜力评分为**{{score.total|num0}}分（满分100）**（{{score.grade}}级：{{score.grade_label}}；考虑证据质量后的区间为{{score.range_lo|num0}}–{{score.range_hi|num0}}）。问题和市场是优势，主要短板是{{score.top_gaps.0}}和{{score.top_gaps.1}}。建议分期投资，第二期与试点合同续约挂钩[[src:example]]。"
+    },
+    {
+      "type": "key_figures",
+      "items": [
+        {
+          "value": "{{market.sam_base|money_bn}}",
+          "label": "{{market.base_year}}年可服务市场（SAM）"
+        },
+        {
+          "value": "{{fin.revenue_last|money_mn0}}",
+          "label": "{{fin.end_year}}年收入（基准情景）"
+        },
+        {
+          "value": "{{fin.moic_base|x1}}",
+          "label": "投资人MOIC（基准情景）"
+        },
+        {
+          "value": "{{score.total|num0}}/100",
+          "label": "潜力综合得分"
+        }
+      ],
+      "source": "示例模型（market_sizing.py、financial_model.py、scoring.py）；虚构数据"
+    },
+    {
+      "type": "paragraph",
+      "text": "背景：财务、采购和法务部门处理的合同、发票和函件日益增多。冲突：涉密单据不能使用云端服务，而手工处理每份约需15分钟。问题：本地化的“分类→抽取→校验→流转”流水线能否成为可规模化的产品？答案：可以，前提是试点能在12–18个月内转化为可复制的合同。"
+    },
+    {
+      "type": "callout",
+      "title": "需要的决策：",
+      "text": "批准以{{fin.ownership_entry|pct0}}股权投资3,500万元，分两期：2,100万元立即到位，1,400万元在续约5家后到位。"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "二、问题与背景"
+    },
+    {
+      "type": "paragraph",
+      "text": "根据32次访谈和三个试点的工时测定（示例数据），处理一份单据约需15分钟人工：阅读、录入以及与ERP核对。模板OCR只在已知版式上节省时间；遇到新版式时18%的字段需要返工[[src:example]]。"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "**购买方**为财务运营或采购负责人；**使用者**为后台专员。",
+        "**约束**：信息安全策略禁止将单据发送至外部云服务。",
+        "**时机**：开源大模型已可在单台本地服务器上运行（正式报告中须以注明日期和来源的基准测试佐证）。"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "三、市场"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "（一）测算方法"
+    },
+    {
+      "type": "paragraph",
+      "text": "市场采用两种独立方法测算。**自下而上**（主方法）：细分市场机构数×年合同额×可触达客户占比（SAM）×可获得份额（SOM）。**自上而下**（校验）：示意性单据处理软件市场×AI方案占比×要求私有化部署的客户占比。两种方法的TAM偏差为{{market.td_bu_ratio_tam|x1}}，低于需要重新审视假设的2倍阈值。"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "（二）自下而上测算"
+    },
+    {
+      "type": "table",
+      "caption": "细分市场及TAM/SAM/SOM测算（{{market.base_year}}年）",
+      "columns": [
+        "细分市场",
+        "机构数",
+        "年合同额",
+        "TAM",
+        "SAM",
+        "2030年SOM"
+      ],
+      "rows": {
+        "$ref": "tables.segments"
+      },
+      "col_widths_cm": [
+        4.4,
+        2.2,
+        2.3,
+        2.6,
+        2.6,
+        2.4
+      ],
+      "source": "market_sizing.py基于虚构示例数据计算",
+      "font_size": 10
+    },
+    {
+      "type": "chart",
+      "caption": "市场漏斗：TAM、SAM、SOM（{{market.base_year}}年，{{project.units.bn}}）",
+      "chart": {
+        "$ref": "charts.tam_sam_som"
+      },
+      "height_cm": 6.5,
+      "source": "market_sizing.py基于虚构示例数据计算"
+    },
+    {
+      "type": "paragraph",
+      "text": "结果：TAM为**{{market.tam_base|money_bn}}**，SAM为**{{market.sam_base|money_bn}}**，基准情景下{{market.horizon_year}}年SOM为**{{market.som_horizon_base|money_mn0}}**。自上而下测算得到TAM {{market.tam_td|money_bn}}、SAM {{market.sam_td|money_bn}}。"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "（三）增长情景"
+    },
+    {
+      "type": "table",
+      "caption": "至{{market.horizon_year}}年的市场情景",
+      "columns": [
+        "情景",
+        "年复合增长率",
+        "2030年TAM",
+        "2030年SAM",
+        "2030年SOM"
+      ],
+      "rows": {
+        "$ref": "tables.market_scenarios"
+      },
+      "source": "示例情景假设（market_sizing.py）；名义值"
+    },
+    {
+      "type": "chart",
+      "caption": "各情景SAM（{{project.units.bn}}）",
+      "chart": {
+        "$ref": "charts.sam_scenarios"
+      },
+      "height_cm": 7,
+      "source": "market_sizing.py基于虚构示例数据计算"
+    },
+    {
+      "type": "paragraph",
+      "text": "所有预测均为名义值。假设年通胀率为1%，基准情景下SAM的实际年增速为{{market.real_cagr_base|pct0}}[[fn:实际增速按费雪方程计算：（1+名义增速）/（1+通胀率）−1。实际工作中通胀预测应取自注明日期的官方来源（见markets/）。]]。"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "四、产品与技术"
+    },
+    {
+      "type": "paragraph",
+      "text": "产品为本地部署的流水线：单据分类、基于大模型的字段抽取、依据ERP主数据校验并流转至相应流程。技术成熟度按NASA TRL量表评定为**TRL {{metrics.trl.value}}**（“{{metrics.trl.label_zh}}”）[[src:nasa_trl]]。"
+    },
+    {
+      "type": "table",
+      "caption": "试点结果（虚构数据）",
+      "columns": [
+        "指标",
+        "之前",
+        "之后",
+        "变化"
+      ],
+      "rows": [
+        [
+          "单份单据人工时间",
+          "15分钟",
+          "3分钟",
+          "−{{metrics.pilot_roi.time_reduction|pct0}}"
+        ],
+        [
+          "字段抽取准确率（n=2,000）",
+          "{{metrics.pilot_accuracy.accuracy_baseline|pct0}}",
+          "{{metrics.pilot_accuracy.accuracy_model|pct0}}",
+          "+{{metrics.pilot_accuracy.value|pp0}}"
+        ],
+        [
+          "客户每年节省",
+          "—",
+          "{{metrics.pilot_roi.net_savings_per_year|money_mn1}}",
+          "ROI {{metrics.pilot_roi.value|pct0}}"
+        ]
+      ],
+      "source": "试点工时测定与标注样本（metrics_calc.py：automation_roi、accuracy_vs_baseline）；虚构数据"
+    },
+    {
+      "type": "paragraph",
+      "text": "准确率差异在95%置信水平上显著（差值的置信区间不包含零）。要达到TRL 7，需在客户处常态化运行至少三个月。"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "五、竞争格局与壁垒"
+    },
+    {
+      "type": "table",
+      "caption": "与替代方案对比（专家评估，按方案类别）",
+      "columns": [
+        "替代方案",
+        "新版式",
+        "私有化部署",
+        "ERP核对",
+        "单份耗时"
+      ],
+      "rows": [
+        [
+          "模板OCR",
+          "低",
+          "是",
+          "部分",
+          "分钟级"
+        ],
+        [
+          "云端文档AI服务",
+          "高",
+          "否",
+          "部分",
+          "秒级"
+        ],
+        [
+          "外包录入",
+          "中",
+          "部分",
+          "否",
+          "小时级"
+        ],
+        [
+          "Velordoc",
+          "高",
+          "是",
+          "是",
+          "约3分钟"
+        ]
+      ],
+      "highlight_row": 3,
+      "source": "团队专家评估；以方案类别而非具体公司比较"
+    },
+    {
+      "type": "paragraph",
+      "text": "壁垒来自标注语料（示例中为120万份单据）、主流ERP系统连接器以及与客户流程的深度嵌入。主要威胁是大型平台在12–18个月内推出私有化版本。"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "六、商业模式与单位经济"
+    },
+    {
+      "type": "paragraph",
+      "text": "商业模式为本地部署年度许可（物流客户{{tables.segments.3.2}}起，政府客户{{tables.segments.1.2}}）加实施费。基准情景下{{fin.end_year}}年毛利率{{fin.gm_last|pct0}}，LTV/CAC为**{{fin.ltv_cac_last|x1}}**，获客成本回收期{{fin.cac_payback_last|num0}}个月。{{fin.end_year}}年“40法则”（收入增速+EBITDA利润率）为{{fin.rule40_last|pct0}}[[src:feld]]；{{fin.start_year}}年烧钱倍数为{{fin.burn_multiple_first|x1}}[[src:sacks]]。"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "七、财务计划与回报"
+    },
+    {
+      "type": "table",
+      "caption": "基准情景主要指标（{{fin.start_year}}–{{fin.end_year}}年）",
+      "columns": {
+        "$ref": "tables.pnl_columns"
+      },
+      "rows": {
+        "$ref": "tables.pnl"
+      },
+      "col_widths_cm": [
+        5.5,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1
+      ],
+      "source": "financial_model.py，基准情景；名义值；虚构数据"
+    },
+    {
+      "type": "chart",
+      "caption": "营业收入与EBITDA，基准情景（{{project.units.mn}}）",
+      "chart": {
+        "$ref": "charts.revenue_ebitda"
+      },
+      "height_cm": 7,
+      "source": "financial_model.py，基准情景；名义值；虚构数据"
+    },
+    {
+      "type": "table",
+      "caption": "各情景：收入、盈亏平衡与投资回报",
+      "columns": [
+        "情景",
+        "2030年收入",
+        "EBITDA转正",
+        "NPV（{{fin.discount_rate|pct0}}）",
+        "MOIC",
+        "IRR"
+      ],
+      "rows": {
+        "$ref": "tables.fin_scenarios"
+      },
+      "highlight_row": 1,
+      "source": "financial_model.py；投前估值1亿元时投资3,500万元，2030年按4倍收入退出，后续稀释15%；虚构数据"
+    },
+    {
+      "type": "paragraph",
+      "text": "按{{fin.discount_rate|pct0}}折现，基准情景NPV为**{{fin.npv_base|money_mn0}}**；终值超过NPV总额，因此估值高度依赖退出倍数假设。投资人MOIC为{{fin.moic_base|x1}}（IRR {{fin.irr_base|pct0}}），低于典型风投基准；乐观情景为{{fin.moic_bull|x1}}（IRR {{fin.irr_bull|pct0}}）。悲观情景下最低现金余额为{{fin.min_cash_bear|money_mn0}}。"
+    },
+    {
+      "type": "table",
+      "caption": "NPV（{{project.units.mn}}）对合同额与新增客户数的敏感性",
+      "columns": {
+        "$ref": "tables.sensitivity_columns"
+      },
+      "rows": {
+        "$ref": "tables.sensitivity"
+      },
+      "source": "financial_model.py，相对基准情景的偏离"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "八、潜力评分"
+    },
+    {
+      "type": "paragraph",
+      "text": "评估采用11个维度、0–5分制，使用“试点/投资机构”权重和“中国大陆”市场配置。每项评分标注证据等级：A为已核实，B为可信估计，C为假设。证据可信度为{{score.confidence|pct0}}。"
+    },
+    {
+      "type": "scorecard",
+      "caption": "潜力评分卡（权重：试点/投资机构）",
+      "criteria": {
+        "$ref": "tables.scorecard"
+      },
+      "total": {
+        "$ref": "score.total"
+      },
+      "source": "scoring.py，“试点/投资机构”权重；虚构评分"
+    },
+    {
+      "type": "chart",
+      "caption": "各维度得分（0–5）",
+      "chart": {
+        "$ref": "charts.score"
+      },
+      "height_cm": 9,
+      "source": "scoring.py，“试点/投资机构”权重；虚构评分"
+    },
+    {
+      "type": "table",
+      "caption": "不同受众配置下的综合得分",
+      "columns": [
+        "受众",
+        "得分",
+        "等级"
+      ],
+      "rows": {
+        "$ref": "tables.by_audience"
+      },
+      "col_widths_cm": [
+        9.0,
+        3.0,
+        4.0
+      ],
+      "source": "scoring.py：受众系数作用于阶段权重"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "九、合规与自主可控"
+    },
+    {
+      "type": "paragraph",
+      "text": "本市场配置的监管范围：{{score.regulatory_definition}}"
+    },
+    {
+      "type": "paragraph",
+      "text": "客户单据中包含的个人信息须依照《个人信息保护法》处理[[src:pipl]]；Velordoc在客户本地部署，数据不出客户内网。若面向公众提供生成式人工智能服务，须遵守《生成式人工智能服务管理暂行办法》并履行相应备案[[src:genai]]；本产品为企业内部部署，不直接面向公众。面向政府和关键行业客户的信息系统通常须按GB/T 22239-2019开展等级保护测评[[src:gbt22239]]。"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "示例状态：等保测评进行中，预计2027年一季度完成。",
+        "技术栈：已完成与国产操作系统和数据库的兼容测试，模型在客户内网运行。",
+        "核心流程不依赖境外云端大模型接口。"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "十、风险与应对"
+    },
+    {
+      "type": "table",
+      "caption": "关键风险清单",
+      "columns": [
+        "风险",
+        "可能性",
+        "影响",
+        "应对措施",
+        "监控指标"
+      ],
+      "rows": [
+        [
+          "试点未转化为合同",
+          "中",
+          "高",
+          "试点前签订含指标门槛的合同",
+          "续约率≥60%"
+        ],
+        [
+          "收入集中（42%来自单一客户）",
+          "高",
+          "中",
+          "2027年四季度前续约10家",
+          "最大客户占比<25%"
+        ],
+        [
+          "平台推出私有化版本",
+          "中",
+          "高",
+          "行业模板与ERP连接器",
+          "对平台的赢单率"
+        ],
+        [
+          "GPU基础设施成本上升",
+          "中",
+          "中",
+          "量化模型，CPU备用方案",
+          "营业成本≤收入的30%"
+        ]
+      ],
+      "font_size": 10,
+      "source": "团队专家评估；以方案类别而非具体公司比较"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "十一、路线图"
+    },
+    {
+      "type": "numbered",
+      "items": [
+        "2026年四季度 — 融资与团队: 3,500万元；新增6名工程师和企业销售负责人",
+        "2027年一季度 — 合规: 完成等保2.0测评与信创适配认证",
+        "2027年二季度 — 可复制销售: 续约5家，销售周期≤6个月",
+        "2027年四季度 — 规模化: 10份合同，NRR≥110%，2家集成商",
+        "2028年二季度 — 出海: 周边市场试点；决定2,625万元融资"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "十二、建议"
+    },
+    {
+      "type": "numbered",
+      "items": [
+        "分期投资：第二期在续约5家后到位。",
+        "交割前取得实际流失率与获客成本数据（将单位经济评分的证据等级由C提升至B/A）。",
+        "降低收入集中度：2027年底前单一客户占比不超过25%。",
+        "6个月后按同一评分体系复评，目标得分不低于70分。"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "本报告采用“结论先行”结构：先给出答案，再列出论据和数据。"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "附录A 模型假设"
+    },
+    {
+      "type": "table",
+      "caption": "财务模型主要假设（基准情景）",
+      "columns": [
+        "参数",
+        "取值",
+        "说明"
+      ],
+      "rows": [
+        [
+          "期初客户数",
+          "3",
+          "付费试点"
+        ],
+        [
+          "新增客户（2026–2030年）",
+          "8 / 16 / 26 / 34 / 40",
+          "销售计划"
+        ],
+        [
+          "年流失率",
+          "8%",
+          "估计值，属假设（C）"
+        ],
+        [
+          "年合同额",
+          "42.0万元，年增5%",
+          "组合平均"
+        ],
+        [
+          "营业成本",
+          "收入的30%",
+          "GPU基础设施与运维"
+        ],
+        [
+          "折现率",
+          "{{fin.discount_rate|pct0}}",
+          "示例假设；本地惯例见markets/"
+        ],
+        [
+          "税率",
+          "15%",
+          "示例假设；须核对现行法规"
+        ]
+      ],
+      "source": "financial_model.py，基准情景；名义值；虚构数据"
+    },
+    {
+      "type": "sources"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "_template_note": "TEMPLATE copied from the fictional Velordoc example. Replace every text and number with your project's data; keep the «{ {path|format} }» placeholders that point into facts.json. Keys starting with '_' are ignored by the tools.",
+  "_EXAMPLE_DATA": "FICTIONAL PRODUCT \"Velordoc\". All data are invented to demonstrate the tools; any resemblance to real companies is coincidental.",
+  "currency": "USD",
+  "base_year": 2025,
+  "horizon_year": 2030,
+  "primary": "bottom_up",
+  "top_down": {
+    "total_market": 9000000000.0,
+    "total_market_label": "Illustrative market for document capture and processing software, 2025",
+    "source": "EXAMPLE",
+    "filters": [
+      {
+        "name": "Share of spend on AI-based intelligent document processing",
+        "share": 0.14,
+        "level": "TAM",
+        "rationale": "EXAMPLE"
+      },
+      {
+        "name": "Buyers requiring on-premise / private deployment",
+        "share": 0.4,
+        "level": "SAM",
+        "rationale": "EXAMPLE"
+      },
+      {
+        "name": "Achievable share by 2030",
+        "share": 0.06,
+        "level": "SOM",
+        "rationale": "EXAMPLE"
+      }
+    ]
+  },
+  "bottom_up": {
+    "segments": [
+      {
+        "name": "Banks & insurers",
+        "units": 4000,
+        "arpa": 60000.0,
+        "sam_share": 0.5,
+        "som_share": 0.06,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "Public agencies & state-owned firms",
+        "units": 3000,
+        "arpa": 80000.0,
+        "sam_share": 0.6,
+        "som_share": 0.05,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "Manufacturing groups",
+        "units": 12000,
+        "arpa": 30000.0,
+        "sam_share": 0.35,
+        "som_share": 0.04,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "Logistics & retail",
+        "units": 15000,
+        "arpa": 20000.0,
+        "sam_share": 0.3,
+        "som_share": 0.04,
+        "source": "EXAMPLE"
+      }
+    ]
+  },
+  "growth": {
+    "cagr": {
+      "bear": 0.1,
+      "base": 0.18,
+      "bull": 0.26
+    }
+  },
+  "som_ramp": "s_curve",
+  "som_share_multiplier": {
+    "bear": 0.6,
+    "base": 1.0,
+    "bull": 1.4
+  },
+  "inflation": 0.025
+}

@@ -1,0 +1,72 @@
+{
+  "_template_note": "MẪU dựa trên ví dụ hư cấu Velordoc. Thay toàn bộ văn bản và số liệu bằng dữ liệu dự án của bạn; giữ các chỗ giữ chỗ «{ {path|format} }» trỏ tới facts.json. Các khóa bắt đầu bằng '_' bị công cụ bỏ qua.",
+  "_EXAMPLE_DATA": "SẢN PHẨM HƯ CẤU \"Velordoc\". Mọi dữ liệu đều được tạo ra để minh họa công cụ; mọi sự trùng hợp với công ty thực tế là ngẫu nhiên.",
+  "stage": "pilot",
+  "audience": "investor",
+  "locale": "vi",
+  "scores": {
+    "market": {
+      "score": 3.5,
+      "evidence": "B",
+      "note": ""
+    },
+    "problem": {
+      "score": 4.0,
+      "evidence": "B",
+      "note": ""
+    },
+    "trl": {
+      "score": 3.5,
+      "evidence": "A",
+      "note": ""
+    },
+    "moat": {
+      "score": 3.0,
+      "evidence": "B",
+      "note": ""
+    },
+    "team": {
+      "score": 3.5,
+      "evidence": "A",
+      "note": ""
+    },
+    "traction": {
+      "score": 2.5,
+      "evidence": "A",
+      "note": ""
+    },
+    "unit_economics": {
+      "score": 3.0,
+      "evidence": "C",
+      "note": ""
+    },
+    "gtm": {
+      "score": 2.5,
+      "evidence": "C",
+      "note": ""
+    },
+    "regulatory": {
+      "score": 4.0,
+      "evidence": "B",
+      "note": ""
+    },
+    "scalability": {
+      "score": 3.0,
+      "evidence": "C",
+      "note": ""
+    },
+    "risk": {
+      "score": 3.0,
+      "evidence": "B",
+      "note": ""
+    }
+  },
+  "facts": {
+    "runway_months": 14,
+    "top_customer_share": 0.42,
+    "pdp_impact_assessment": true,
+    "cross_border_data_unassessed": false,
+    "critical_foreign_dependency": false
+  },
+  "deck_slides": 16
+}

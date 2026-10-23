@@ -1,0 +1,72 @@
+{
+  "_template_note": "TEMPLAT daripada contoh rekaan Velordoc. Gantikan semua teks dan angka dengan data projek anda; kekalkan pemegang tempat «{ {path|format} }» yang merujuk kepada facts.json. Kunci bermula dengan '_' diabaikan oleh alat.",
+  "_EXAMPLE_DATA": "PRODUK REKAAN \"Velordoc\". Semua data direka untuk menunjukkan alat; sebarang persamaan dengan syarikat sebenar adalah kebetulan.",
+  "stage": "pilot",
+  "audience": "investor",
+  "locale": "ms",
+  "scores": {
+    "market": {
+      "score": 3.5,
+      "evidence": "B",
+      "note": ""
+    },
+    "problem": {
+      "score": 4.0,
+      "evidence": "B",
+      "note": ""
+    },
+    "trl": {
+      "score": 3.5,
+      "evidence": "A",
+      "note": ""
+    },
+    "moat": {
+      "score": 3.0,
+      "evidence": "B",
+      "note": ""
+    },
+    "team": {
+      "score": 3.5,
+      "evidence": "A",
+      "note": ""
+    },
+    "traction": {
+      "score": 2.5,
+      "evidence": "A",
+      "note": ""
+    },
+    "unit_economics": {
+      "score": 3.0,
+      "evidence": "C",
+      "note": ""
+    },
+    "gtm": {
+      "score": 2.5,
+      "evidence": "C",
+      "note": ""
+    },
+    "regulatory": {
+      "score": 4.0,
+      "evidence": "B",
+      "note": ""
+    },
+    "scalability": {
+      "score": 3.0,
+      "evidence": "C",
+      "note": ""
+    },
+    "risk": {
+      "score": 3.0,
+      "evidence": "B",
+      "note": ""
+    }
+  },
+  "facts": {
+    "runway_months": 14,
+    "top_customer_share": 0.42,
+    "pdpa_compliant": true,
+    "cross_border_data_unassessed": false,
+    "critical_foreign_dependency": false
+  },
+  "deck_slides": 16
+}

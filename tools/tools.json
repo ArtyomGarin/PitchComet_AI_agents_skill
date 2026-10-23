@@ -1,0 +1,1800 @@
+{
+  "skill": "PitchComet",
+  "version": "0.1b0",
+  "python": ">=3.10",
+  "tools": [
+    {
+      "name": "metrics_calc",
+      "file": "metrics_calc.py",
+      "description": "~50 business, SaaS, valuation, technology and R&D metrics (CAGR, NRR, LTV/CAC, burn multiple, Rule of 40, NPV/IRR/MOIC, DCF, CAPM/WACC, real rate/deflate, Wright's law, Bass, TRL, automation ROI, accuracy vs baseline...). Each returns value + unit + formula + interpretation; customer-side ROI / payback / NPV (customer_roi), TCO vs the current way (customer_tco) and SMB monthly value (smb_monthly_value).",
+      "cli": [
+        "python metrics_calc.py list",
+        "python metrics_calc.py <metric> --json '{...}'",
+        "python metrics_calc.py batch --input calcs.json",
+        "python tools/metrics_calc.py ... --locale ru|en|zh|vi|id|ms"
+      ],
+      "import": "from metrics_calc import METRICS, run_batch, cagr, irr, ...",
+      "input_schema": {
+        "oneOf": [
+          {
+            "description": "single metric: keyword arguments of the function (see `list`)",
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "calcs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "fn": {
+                      "type": "string"
+                    },
+                    "args": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "fn",
+                    "args"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "calcs"
+            ]
+          }
+        ]
+      },
+      "output": "{metric, value, unit, formula, interpretation, inputs, ...extra} or {results:{id: metric_result | {error}}}"
+    },
+    {
+      "name": "market_sizing",
+      "file": "market_sizing.py",
+      "description": "TAM/SAM/SOM top-down and bottom-up, triangulation with >2x divergence warning, CAGR scenario projections, S-curve SOM ramp, real (deflated) values, chart-ready series.",
+      "cli": [
+        "python market_sizing.py --input market.json [--out result.json]",
+        "python tools/market_sizing.py ... --locale ru|en|zh|vi|id|ms"
+      ],
+      "import": "from market_sizing import size_market, top_down, bottom_up, triangulate, project",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string"
+          },
+          "base_year": {
+            "type": "integer"
+          },
+          "horizon_year": {
+            "type": "integer"
+          },
+          "top_down": {
+            "type": "object",
+            "properties": {
+              "total_market": {
+                "type": "number"
+              },
+              "total_market_label": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "filters": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "share": {
+                      "type": "number"
+                    },
+                    "level": {
+                      "enum": [
+                        "TAM",
+                        "SAM",
+                        "SOM"
+                      ]
+                    },
+                    "rationale": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "share",
+                    "level"
+                  ]
+                }
+              }
+            }
+          },
+          "bottom_up": {
+            "type": "object",
+            "properties": {
+              "segments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "units": {
+                      "type": "number"
+                    },
+                    "arpa": {
+                      "type": "number"
+                    },
+                    "sam_share": {
+                      "type": "number"
+                    },
+                    "som_share": {
+                      "type": "number"
+                    },
+                    "source": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "units",
+                    "arpa"
+                  ]
+                }
+              }
+            }
+          },
+          "growth": {
+            "type": "object",
+            "properties": {
+              "cagr": {
+                "type": "object",
+                "properties": {
+                  "bear": {
+                    "type": "number"
+                  },
+                  "base": {
+                    "type": "number"
+                  },
+                  "bull": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "som_ramp": {
+            "enum": [
+              "s_curve",
+              "linear"
+            ]
+          },
+          "som_share_multiplier": {
+            "type": "object"
+          },
+          "inflation": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "base_year",
+          "horizon_year"
+        ]
+      },
+      "output": "{currency, primary_method, base_year, horizon_year, base:{TAM,SAM,SOM}, top_down, bottom_up, triangulation:{ratios, warnings}, projection:{bear|base|bull: yearly series incl. real}, warnings, charts, assumptions}"
+    },
+    {
+      "name": "financial_model",
+      "file": "financial_model.py",
+      "description": "5-year P&L, cash, unit economics (CAC, LTV capped at 5y, payback), Rule of 40, burn multiple; project NPV (exit multiple or Gordon) and IRR; investor MOIC/IRR with dilution; bear/base/bull scenarios; 2-D sensitivity grid.",
+      "cli": [
+        "python financial_model.py --input finance.json [--out result.json]",
+        "python tools/financial_model.py ... --locale ru|en|zh|vi|id|ms"
+      ],
+      "import": "from financial_model import build, run_model, run_scenarios, sensitivity",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string"
+          },
+          "start_year": {
+            "type": "integer"
+          },
+          "years": {
+            "type": "integer"
+          },
+          "revenue": {
+            "type": "object",
+            "properties": {
+              "customers_start": {
+                "type": "number"
+              },
+              "new_customers": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "churn_annual": {
+                "type": "number"
+              },
+              "arpa_start": {
+                "type": "number"
+              },
+              "arpa_growth": {
+                "type": "number"
+              },
+              "other_revenue": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "costs": {
+            "type": "object",
+            "properties": {
+              "cogs_pct": {
+                "type": "number"
+              },
+              "rd": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "sm_pct": {
+                "type": "number"
+              },
+              "sm": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "ga": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "capex": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "working_capital_pct": {
+            "type": "number"
+          },
+          "tax_rate": {
+            "type": "number"
+          },
+          "cash_start": {
+            "type": "number"
+          },
+          "funding": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "year": {
+                  "type": "integer"
+                },
+                "amount": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "discount_rate": {
+            "type": "number"
+          },
+          "terminal": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "enum": [
+                  "exit_multiple",
+                  "gordon"
+                ]
+              },
+              "multiple": {
+                "type": "number"
+              },
+              "metric": {
+                "type": "string"
+              },
+              "growth": {
+                "type": "number"
+              }
+            }
+          },
+          "investor": {
+            "type": "object",
+            "properties": {
+              "investment": {
+                "type": "number"
+              },
+              "pre_money": {
+                "type": "number"
+              },
+              "entry_year": {
+                "type": "integer"
+              },
+              "exit_year": {
+                "type": "integer"
+              },
+              "exit_multiple": {
+                "type": "number"
+              },
+              "exit_metric": {
+                "type": "string"
+              },
+              "later_dilution": {
+                "type": "number"
+              }
+            }
+          },
+          "scenarios": {
+            "type": "object"
+          },
+          "sensitivity": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "start_year",
+          "years",
+          "revenue",
+          "costs"
+        ]
+      },
+      "output": "{currency, base:{years, rows:[per-year P&L/cash/unit economics], summary:{revenue_first, revenue_last, revenue_cagr, ebitda_breakeven_year, min_cash, funding_gap, npv, pv_terminal, tv_share, project_irr, ltv_cac_last, cac_payback_last, moic, investor_irr, ...}, investor, warnings, params}, scenarios:{bear|base|bull:{summary, rows}}, sensitivity:{x, y, grid}, charts}"
+    },
+    {
+      "name": "scoring",
+      "file": "scoring.py",
+      "description": "Weighted 0-100 development-potential score from an anchored 0-5 rubric (11 criteria); stage profiles x audience multipliers; evidence-based range and confidence; grade; automatic red flags (incl. Russian software registry for B2G); deck slide allocation.",
+      "cli": [
+        "python scoring.py --input scores.json",
+        "python scoring.py profiles",
+        "python scoring.py template",
+        "python tools/scoring.py ... --locale ru|en|zh|vi|id|ms"
+      ],
+      "import": "from scoring import score, load_model, weights_for, allocate_slides, profiles",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "stage": {
+            "enum": [
+              "default",
+              "idea",
+              "prototype",
+              "pilot",
+              "growth"
+            ]
+          },
+          "audience": {
+            "enum": [
+              "neutral",
+              "investor",
+              "government",
+              "corporate",
+              "academic"
+            ]
+          },
+          "model": {
+            "type": "string"
+          },
+          "weights_override": {
+            "type": "object"
+          },
+          "scores": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "score": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 5
+                },
+                "evidence": {
+                  "enum": [
+                    "A",
+                    "B",
+                    "C"
+                  ]
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "score"
+              ]
+            }
+          },
+          "facts": {
+            "type": "object",
+            "properties": {
+              "ltv_cac": {
+                "type": "number"
+              },
+              "runway_months": {
+                "type": "number"
+              },
+              "registry_eligible": {
+                "type": "boolean"
+              },
+              "top_customer_share": {
+                "type": "number"
+              },
+              "critical_foreign_dependency": {
+                "type": "boolean"
+              }
+            }
+          },
+          "deck_slides": {
+            "type": "integer"
+          },
+          "locale": {
+            "enum": [
+              "ru",
+              "en",
+              "zh",
+              "vi",
+              "id",
+              "ms"
+            ],
+            "description": "Locale: number/date/currency formats, labels, fonts, citation style."
+          },
+          "market": {
+            "enum": [
+              "ru",
+              "en",
+              "zh",
+              "vn",
+              "id",
+              "my"
+            ],
+            "description": "Market profile: weight multipliers, regulation & sovereignty definition, market red flags. Default derived from locale."
+          }
+        },
+        "required": [
+          "scores"
+        ]
+      },
+      "output": "{stage, audience, language, total, range:[lo,hi], grade, grade_label, confidence, weights, breakdown:[{id,name,weight,score,evidence,contribution}], red_flags, top_strengths, top_gaps, chart, scorecard, deck_allocation}"
+    },
+    {
+      "name": "build_docx",
+      "file": "build_docx.py",
+      "description": "Analytical report .docx from JSON or Markdown: title page, TOC field, headings, lists, tables with captions/sources, NATIVE Word charts (DrawingML + embedded xlsx), key figures, call-outs, scorecard, real footnotes (GOST R 7.0.100 style) or numeric refs, bibliography; default Times New Roman; 'gost' preset. Inserts the plain-language glossary automatically (slide 2 / section before the first heading) with only the metrics the document shows; meta.glossary=false switches it off.",
+      "cli": [
+        "python build_docx.py --input report_spec.json --out report.docx [--facts facts.json] [--font 'PT Serif']",
+        "python build_docx.py --markdown report.md --meta meta.json --out report.docx",
+        "python tools/build_docx.py ... --locale ru|en|zh|vi|id|ms"
+      ],
+      "import": "from build_docx import build_docx, ReportBuilder, markdown_to_blocks",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "subtitle": {
+                "type": "string"
+              },
+              "org": {
+                "type": "string"
+              },
+              "author": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              },
+              "font": {
+                "type": "string"
+              },
+              "font_size": {
+                "type": "number"
+              },
+              "preset": {
+                "enum": [
+                  "report",
+                  "gost"
+                ]
+              },
+              "citation_style": {
+                "enum": [
+                  "footnotes",
+                  "numeric"
+                ]
+              },
+              "accent": {
+                "type": "string"
+              },
+              "watermark": {
+                "type": "string"
+              },
+              "facts": {
+                "type": "string"
+              },
+              "locale": {
+                "enum": [
+                  "ru",
+                  "en",
+                  "zh",
+                  "vi",
+                  "id",
+                  "ms"
+                ],
+                "description": "Locale: number/date/currency formats, labels, fonts, citation style."
+              }
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "gost": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "accessed": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          },
+          "blocks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "enum": [
+                    "title_page",
+                    "toc",
+                    "page_break",
+                    "heading",
+                    "paragraph",
+                    "bullets",
+                    "numbered",
+                    "table",
+                    "key_figures",
+                    "callout",
+                    "scorecard",
+                    "chart",
+                    "sources"
+                  ]
+                },
+                "text": {
+                  "type": "string"
+                },
+                "level": {
+                  "type": "integer"
+                },
+                "items": {
+                  "type": "array"
+                },
+                "caption": {
+                  "type": "string"
+                },
+                "columns": {
+                  "type": "array"
+                },
+                "rows": {
+                  "type": "array"
+                },
+                "source": {
+                  "type": "string"
+                },
+                "col_widths_cm": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "chart": {
+                  "type": "object",
+                  "description": "charts_common chart spec",
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "column",
+                        "bar",
+                        "stacked_column",
+                        "stacked_bar",
+                        "stacked_column_100",
+                        "line",
+                        "line_markers",
+                        "area",
+                        "pie",
+                        "doughnut",
+                        "waterfall",
+                        "scatter"
+                      ]
+                    },
+                    "categories": {
+                      "type": "array"
+                    },
+                    "series": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "values": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "values"
+                        ]
+                      }
+                    },
+                    "number_format": {
+                      "type": "string"
+                    },
+                    "scale": {
+                      "type": "number"
+                    },
+                    "highlight_index": {
+                      "type": "integer"
+                    },
+                    "data_labels": {
+                      "type": "boolean"
+                    },
+                    "legend": {
+                      "type": "boolean"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "label_last_only": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "series"
+                  ]
+                }
+              },
+              "required": [
+                "type"
+              ]
+            }
+          }
+        },
+        "required": [
+          "blocks"
+        ]
+      },
+      "output": "writes .docx; returns/prints {path, charts, tables, footnotes, words}"
+    },
+    {
+      "name": "build_pptx",
+      "file": "build_pptx.py",
+      "description": "Minimalist 16:9 strategic deck .pptx: 12 layouts (title, section, statement, bullets, big_number, chart, table, two_column, timeline, scorecard, matrix, closing), native charts with embedded Excel, source line, page numbers, speaker notes, light/dark/academic themes, text-fit estimation. Inserts the plain-language glossary automatically (slide 2 / section before the first heading) with only the metrics the document shows; meta.glossary=false switches it off.",
+      "cli": [
+        "python build_pptx.py --input deck_spec.json --out deck.pptx [--theme dark] [--facts facts.json]",
+        "python tools/build_pptx.py ... --locale ru|en|zh|vi|id|ms",
+        "themes: light, dark, academic_light, comet, editorial, corporate, warm (config/themes.json)"
+      ],
+      "import": "from build_pptx import build_pptx, DeckBuilder",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "author": {
+                "type": "string"
+              },
+              "theme": {
+                "oneOf": [
+                  {
+                    "enum": [
+                      "light",
+                      "dark",
+                      "academic_light"
+                    ]
+                  },
+                  {
+                    "type": "object"
+                  }
+                ]
+              },
+              "font_heading": {
+                "type": "string"
+              },
+              "font_body": {
+                "type": "string"
+              },
+              "slide_numbers": {
+                "type": "boolean"
+              },
+              "watermark": {
+                "type": "string"
+              },
+              "facts": {
+                "type": "string"
+              },
+              "locale": {
+                "enum": [
+                  "ru",
+                  "en",
+                  "zh",
+                  "vi",
+                  "id",
+                  "ms"
+                ],
+                "description": "Locale: number/date/currency formats, labels, fonts, citation style."
+              }
+            }
+          },
+          "slides": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "layout": {
+                  "enum": [
+                    "title",
+                    "section",
+                    "statement",
+                    "bullets",
+                    "big_number",
+                    "chart",
+                    "table",
+                    "two_column",
+                    "timeline",
+                    "scorecard",
+                    "matrix",
+                    "closing"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "string"
+                },
+                "notes": {
+                  "type": "string"
+                },
+                "chart": {
+                  "type": "object",
+                  "description": "charts_common chart spec",
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "column",
+                        "bar",
+                        "stacked_column",
+                        "stacked_bar",
+                        "stacked_column_100",
+                        "line",
+                        "line_markers",
+                        "area",
+                        "pie",
+                        "doughnut",
+                        "waterfall",
+                        "scatter"
+                      ]
+                    },
+                    "categories": {
+                      "type": "array"
+                    },
+                    "series": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "values": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "values"
+                        ]
+                      }
+                    },
+                    "number_format": {
+                      "type": "string"
+                    },
+                    "scale": {
+                      "type": "number"
+                    },
+                    "highlight_index": {
+                      "type": "integer"
+                    },
+                    "data_labels": {
+                      "type": "boolean"
+                    },
+                    "legend": {
+                      "type": "boolean"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "label_last_only": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "series"
+                  ]
+                },
+                "bullets": {
+                  "type": "array"
+                },
+                "numbers": {
+                  "type": "array"
+                },
+                "takeaway": {
+                  "type": "array"
+                }
+              },
+              "required": [
+                "layout",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "slides"
+        ]
+      },
+      "output": "writes .pptx; returns {path, slides, charts, fit_warnings}"
+    },
+    {
+      "name": "glossary",
+      "file": "glossary.py",
+      "description": "Plain-language 'What the numbers mean' glossary. Detects which metrics a deck or report shows (TAM, SAM, SOM, CAGR, LTV, CAC, LTV/CAC, payback, gross margin, churn, NRR, Rule of 40, NPV, IRR, MOIC, pre/post-money, ROI, TCO and more; config/glossary.json, six locales) and builds the glossary slide(s) and report section. build_pptx and build_docx call it automatically; qa_check fails a document whose glossary is missing or incomplete.",
+      "cli": [
+        "python tools/glossary.py list --locale ru",
+        "python tools/glossary.py detect --pptx deck.pptx --locale en",
+        "python tools/glossary.py detect --text \"LTV/CAC 5x\" --locale en"
+      ],
+      "import": "from glossary import detect, entries, slide_specs",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "cmd": {
+            "enum": [
+              "list",
+              "detect"
+            ]
+          },
+          "locale": {
+            "enum": [
+              "ru",
+              "en",
+              "zh",
+              "vi",
+              "id",
+              "ms"
+            ]
+          },
+          "pptx": {
+            "type": "string"
+          },
+          "docx": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "cmd"
+        ]
+      },
+      "output_schema": {
+        "type": "array",
+        "description": "list: [{id, term, text}]; detect: metric ids in glossary order"
+      }
+    },
+    {
+      "name": "qa_check",
+      "file": "qa_check.py",
+      "description": "QA for deck + report: text overflow, off-slide shapes, fonts < 10 pt, label titles, missing sources on data slides/tables/charts, charts as images, missing workbooks, density, placeholders, dummy text, hype phrases, notes; cross-document consistency of key facts. Exit code 1 on errors. Completeness gate (default on): errors when market sizing (TAM/SAM/SOM), CAGR or unit economics is missing, when a customer pattern lacks ROI/payback, when gap placeholders (\"no data\", \"TBD\", \"нет данных\", \"数据缺口\"…) appear, or when a pattern's mandatory terms are absent. Flags --pattern, --no-completeness. Glossary gate: errors when the 'What the numbers mean' slide/section is missing or does not explain a metric shown (--no-glossary to skip).",
+      "cli": [
+        "python qa_check.py --pptx deck.pptx --docx report.docx --facts facts.json [--locale en] [--out qa.json]",
+        "python qa_check.py --pptx deck.pptx --docx report.docx --pattern smb"
+      ],
+      "import": "from qa_check import run_qa",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "pptx": {
+            "type": "string"
+          },
+          "docx": {
+            "type": "string"
+          },
+          "facts": {
+            "type": "string"
+          },
+          "key_facts": {
+            "type": "string"
+          },
+          "banned": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "font": {
+            "type": "string"
+          },
+          "locale": {
+            "enum": [
+              "ru",
+              "en",
+              "zh",
+              "vi",
+              "id",
+              "ms"
+            ],
+            "description": "Locale: number/date/currency formats, labels, fonts, citation style."
+          }
+        }
+      },
+      "output": "{pptx:{stats}, docx:{stats}, consistency:{...}, findings:[{severity,where,check,message}], summary:{errors,warnings,info,pass}}"
+    },
+    {
+      "name": "agent_tools",
+      "file": "agent_tools.py",
+      "description": "Six high-level agent tools (pitchcomet_plan, pitchcomet_build, pitchcomet_pipeline, pitchcomet_qa, pitchcomet_metric, pitchcomet_glossary) with JSON Schemas for function calling and a dispatcher that runs the CLIs.",
+      "cli": [
+        "python tools/agent_tools.py schemas [--format functions|mcp]",
+        "python tools/agent_tools.py call <tool> --args '{...}'"
+      ],
+      "import": "from agent_tools import TOOLS, schemas, call_tool",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "pitchcomet_plan",
+              "pitchcomet_build",
+              "pitchcomet_pipeline",
+              "pitchcomet_qa",
+              "pitchcomet_metric",
+              "pitchcomet_glossary"
+            ]
+          },
+          "args": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "output": "{ok, returncode, command, stdout, stderr, json?}"
+    },
+    {
+      "name": "mcp_server",
+      "file": "mcp_server.py",
+      "description": "Minimal Model Context Protocol server over stdio (JSON-RPC 2.0, newline-delimited; initialize, ping, tools/list, tools/call) exposing the agent_tools tools. No dependencies.",
+      "cli": [
+        "python tools/mcp_server.py"
+      ],
+      "import": "from mcp_server import handle, serve",
+      "input_schema": {
+        "type": "object",
+        "description": "JSON-RPC 2.0 messages on stdin"
+      },
+      "output": "JSON-RPC 2.0 responses on stdout"
+    },
+    {
+      "name": "run_pipeline",
+      "file": "run_pipeline.py",
+      "description": "End-to-end: market → finance → scoring (all 4 audiences) → facts.json → report.docx + deck.pptx (+ dark) → QA → PDF/PNG renders → pipeline_summary.json.",
+      "cli": [
+        "python run_pipeline.py --project project.json",
+        "python tools/run_pipeline.py ... --locale ru|en|zh|vi|id|ms",
+        "... --theme comet --theme editorial [--pattern corporate]"
+      ],
+      "import": "from run_pipeline import run, build_facts",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "market": {
+            "type": "string"
+          },
+          "finance": {
+            "type": "string"
+          },
+          "scoring": {
+            "type": "string"
+          },
+          "report_spec": {
+            "type": "string"
+          },
+          "deck_spec": {
+            "type": "string"
+          },
+          "out_dir": {
+            "type": "string"
+          },
+          "themes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "render": {
+            "type": "boolean"
+          },
+          "key_facts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "fmt": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "metrics": {
+            "type": "object"
+          },
+          "locale": {
+            "enum": [
+              "ru",
+              "en",
+              "zh",
+              "vi",
+              "id",
+              "ms"
+            ],
+            "description": "Locale: number/date/currency formats, labels, fonts, citation style."
+          },
+          "market_profile": {
+            "enum": [
+              "ru",
+              "en",
+              "zh",
+              "vn",
+              "id",
+              "my"
+            ],
+            "description": "Market profile for scoring; default derived from locale."
+          }
+        },
+        "required": [
+          "market",
+          "finance",
+          "scoring",
+          "report_spec",
+          "deck_spec"
+        ]
+      },
+      "output": "files in out_dir + pipeline_summary.json {outputs, qa:{light,dark}, renders}"
+    },
+    {
+      "name": "render_preview",
+      "file": "render_preview.py",
+      "description": "Render .pptx/.docx to PDF (LibreOffice) and PNG pages (pdftoppm) plus a contact sheet for visual QA.",
+      "cli": [
+        "python render_preview.py deck.pptx --outdir renders/deck [--dpi 80] [--pages 1,5]"
+      ],
+      "import": "from render_preview import render",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "outdir": {
+            "type": "string"
+          },
+          "dpi": {
+            "type": "integer"
+          },
+          "pages": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        },
+        "required": [
+          "file",
+          "outdir"
+        ]
+      },
+      "output": "{pdf, pages:[png paths], contact_sheet}"
+    },
+    {
+      "name": "new_project",
+      "file": "new_project.py",
+      "description": "Scaffold a new project folder from templates/ (working copies of the example inputs and specs).",
+      "cli": [
+        "python new_project.py --dir my_product [--name 'My product'] [--locale en]"
+      ],
+      "import": "from new_project import scaffold",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "dir": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "locale": {
+            "enum": [
+              "ru",
+              "en",
+              "zh",
+              "vi",
+              "id",
+              "ms"
+            ],
+            "description": "Locale: number/date/currency formats, labels, fonts, citation style."
+          }
+        },
+        "required": [
+          "dir"
+        ]
+      },
+      "output": "{dir, written, next}"
+    },
+    {
+      "name": "gen_scoring_doc",
+      "file": "gen_scoring_doc.py",
+      "description": "Regenerate scoring_model.md from config/scoring_model.json (weights, anchors, stage x audience matrix, deck weights).",
+      "cli": [
+        "python gen_scoring_doc.py [--stdout]"
+      ],
+      "import": "from gen_scoring_doc import build",
+      "input_schema": {
+        "type": "object",
+        "properties": {}
+      },
+      "output": "writes ../scoring_model.md"
+    },
+    {
+      "name": "fmt_utils",
+      "file": "fmt_utils.py",
+      "description": "Locale-aware number, percent, pp, multiple and money formatting for ru/en/zh/vi/id/ms (e.g. 3,0 млрд ₽; $3.0B; 30.0亿元; 3,0 nghìn tỷ ₫; Rp3,0 triliun; RM3.0 bilion); facts placeholders {{path|fmt}} and {\"$ref\": path}.",
+      "cli": [],
+      "import": "from fmt_utils import format_value, resolve_placeholders, fmt_money, fmt_pct",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "fmt": {
+            "type": "string",
+            "description": "int | numN | pctN | ppN | xN | money[_k|_mn|_bn|_tn][N] | raw | auto"
+          },
+          "ctx": {
+            "type": "object",
+            "properties": {
+              "currency": {
+                "type": "string"
+              },
+              "locale": {
+                "enum": [
+                  "ru",
+                  "en",
+                  "zh",
+                  "vi",
+                  "id",
+                  "ms"
+                ],
+                "description": "Locale: number/date/currency formats, labels, fonts, citation style."
+              }
+            }
+          }
+        }
+      },
+      "output": "formatted string"
+    },
+    {
+      "name": "textfit",
+      "file": "textfit.py",
+      "description": "Estimate text lines/height for a box and the largest font that fits (used by build_pptx and qa_check).",
+      "cli": [],
+      "import": "from textfit import fits, fit_font_size, text_height_in",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "size_pt": {
+            "type": "number"
+          },
+          "width_in": {
+            "type": "number"
+          },
+          "height_in": {
+            "type": "number"
+          }
+        }
+      },
+      "output": "bool / float"
+    },
+    {
+      "name": "citations",
+      "module": "tools/citations.py",
+      "description": "Bibliographic references and in-text citations: GOST R 7.0.5-2008 (ru), APA 7 / Chicago author-date (en, vi, id, ms), GB/T 7714-2015 (zh).",
+      "cli": [
+        "python tools/citations.py --style gost|apa|chicago|gbt7714 --input sources.json"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "web",
+              "law",
+              "standard",
+              "article",
+              "book",
+              "report",
+              "dataset"
+            ]
+          },
+          "authors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "org": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "container": {
+            "type": "string"
+          },
+          "year": {
+            "type": "integer"
+          },
+          "date": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "accessed": {
+            "type": "string"
+          },
+          "gost": {
+            "type": "string",
+            "description": "optional preformatted GOST string"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    },
+    {
+      "name": "locales",
+      "module": "tools/locales.py",
+      "description": "Locale definitions (separators, scale words, currency style, fonts, citation style, captions, labels, months) and market profiles; norm_locale, norm_market, fmt_date.",
+      "cli": [],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "locale": {
+            "enum": [
+              "ru",
+              "en",
+              "zh",
+              "vi",
+              "id",
+              "ms"
+            ],
+            "description": "Locale: number/date/currency formats, labels, fonts, citation style."
+          }
+        }
+      }
+    },
+    {
+      "name": "ooxml_clean",
+      "module": "tools/ooxml_clean.py",
+      "description": "Post-save clean-up of docx/pptx packages and embedded workbooks: removes theme script fonts unrelated to the supported locales and normalises the East Asian theme language (zh-CN for zh, absent otherwise). Called automatically by build_docx and build_pptx.",
+      "cli": [
+        "python tools/ooxml_clean.py FILE [--locale zh]"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "locale": {
+            "enum": [
+              "ru",
+              "en",
+              "zh",
+              "vi",
+              "id",
+              "ms"
+            ]
+          }
+        },
+        "required": [
+          "file"
+        ]
+      }
+    },
+    {
+      "name": "product_profiler",
+      "file": "product_profiler.py",
+      "description": "Reads a short product description (any of the 6 locales) and infers a structured profile: category (18-category taxonomy), buyer segment, buyer industries (ISIC), user roles, value drivers, pricing unit and model, price points, deployment, geography, currency, AI intensity, stage and traction. Every field carries a status: from_text, inferred, default or to_confirm.",
+      "cli": [
+        "python product_profiler.py --text-file product.md --market ru --out profile.json",
+        "python product_profiler.py --json '{\"text\": \"...\"}'"
+      ],
+      "import": "from product_profiler import profile",
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "market": {
+            "enum": [
+              "ru",
+              "en",
+              "zh",
+              "vn",
+              "id",
+              "my"
+            ]
+          },
+          "overrides": {
+            "type": "object",
+            "description": "profile fields to force, e.g. {\"category\": \"workforce_management\"}"
+          }
+        }
+      },
+      "output": "{profile:{...}, checklist:[{field, value, status, evidence}], to_confirm:[field], coverage:{from_text, inferred, default}}"
+    },
+    {
+      "name": "market_definer",
+      "file": "market_definer.py",
+      "description": "Turns a profile into a market definition: national classification codes (ОКВЭД 2 / NAICS / GB/T 4754 / VSIC / KBLI / MSIC mapped to ISIC Rev.4), segments (size band × buyer industry), ICP, a research plan with ledger keys and fallback estimation methods, web-search queries in the market's language plus English, and the official sources table from markets/<market>.md.",
+      "cli": [
+        "python market_definer.py --input profile.json --market ru --year 2026 --out market_definition.json"
+      ],
+      "import": "from market_definer import define",
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "profile"
+        ],
+        "properties": {
+          "profile": {
+            "type": "object",
+            "description": "output of product_profiler.profile"
+          },
+          "market": {
+            "enum": [
+              "ru",
+              "en",
+              "zh",
+              "vn",
+              "id",
+              "my"
+            ]
+          },
+          "year": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": "{definition, segments:[{id, name, size_band, isic, unit}], icp, research_plan:[{key, what, primary, fallback}], queries:{locale:[...]}, official_sources:[{need, source, url}]}"
+    },
+    {
+      "name": "research_ledger",
+      "file": "research_ledger.py",
+      "description": "Evidence ledger for every number: a sourced fact needs a link; an estimate needs a method/formula, a low–base–high range and a confidence. Validates, deduplicates, normalises currency (meta.fx) and price year (meta.inflation), resolves conflicts (sourced > confidence > official source > newer; conflict flag when spread > 10%), exports flattened values, a ledger table and citation records.",
+      "cli": [
+        "python research_ledger.py new --currency RUB --year 2026 --out ledger.json",
+        "python research_ledger.py add -i ledger.json --json '{fact}'",
+        "python research_ledger.py validate -i ledger.json",
+        "python research_ledger.py export -i ledger.json --currency RUB --year 2026"
+      ],
+      "import": "from research_ledger import new_ledger, add_fact, validate, resolve, export",
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "facts"
+        ],
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "currency": {
+                "type": "string"
+              },
+              "base_year": {
+                "type": "integer"
+              },
+              "fx": {
+                "type": "object",
+                "description": "{\"USD/RUB\": 90}"
+              },
+              "inflation": {
+                "type": "object",
+                "description": "{\"RUB\": {\"2026\": 0.056}}"
+              }
+            }
+          },
+          "facts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "key",
+                "value",
+                "type",
+                "confidence"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "key": {
+                  "type": "string",
+                  "description": "ledger key, e.g. count.smb_G, industry.growth, wage.monthly"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                },
+                "currency": {
+                  "type": "string"
+                },
+                "year": {
+                  "type": "integer"
+                },
+                "geo": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "sourced",
+                    "estimate"
+                  ]
+                },
+                "confidence": {
+                  "enum": [
+                    "high",
+                    "medium",
+                    "low"
+                  ]
+                },
+                "source_url": {
+                  "type": "string",
+                  "description": "required when type = sourced"
+                },
+                "source_name": {
+                  "type": "string"
+                },
+                "retrieved": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "method": {
+                  "type": "string",
+                  "description": "required when type = estimate"
+                },
+                "formula": {
+                  "type": "string"
+                },
+                "inputs": {
+                  "type": "object"
+                },
+                "range": {
+                  "type": "object",
+                  "properties": {
+                    "low": {
+                      "type": "number"
+                    },
+                    "base": {
+                      "type": "number"
+                    },
+                    "high": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": "export: {validation:{ok, errors, warnings}, values:{key_with_underscores: value}, conflicts, sources, table, warnings, stats:{sourced, estimates}}"
+    },
+    {
+      "name": "estimator",
+      "file": "estimator.py",
+      "description": "Labeled estimates with formula, range and confidence: safe formula evaluation over ranged inputs (low/base/high), benchmark ranges (config/benchmarks.json, rules of thumb), TAM/SAM/SOM top-down, bottom-up and value-based, triangulation with a consistency verdict, CAGR from drivers, value-based price, unit economics (CAC from payback, LTV, LTV/CAC), valuation by comparables with a private-company discount. Every result can be written to the ledger as an estimate.",
+      "cli": [
+        "python estimator.py benchmarks",
+        "python estimator.py benchmark --json '{\"segment\": \"smb\", \"metric\": \"monthly_logo_churn\"}'",
+        "python estimator.py unit_economics --json '{\"segment\": \"smb\", \"arpa_month\": 1400}'",
+        "python estimator.py expr --json '{\"formula\": \"a * b\", \"inputs\": {\"a\": {\"low\": 1, \"base\": 2, \"high\": 3}, \"b\": 10}}'",
+        "python estimator.py <top_down|bottom_up|value_theory|triangulate|cagr_from_drivers|value_price|comparables> --input args.json"
+      ],
+      "import": "from estimator import expr, bottom_up, top_down, value_theory, triangulate, cagr_from_drivers, unit_economics, comparables",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "formula": {
+            "type": "string"
+          },
+          "inputs": {
+            "type": "object",
+            "description": "name → number or {low, base, high}"
+          },
+          "segments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "units": {},
+                "price": {},
+                "serviceable": {},
+                "obtainable": {}
+              }
+            }
+          },
+          "segment": {
+            "enum": [
+              "smb",
+              "mid_market",
+              "enterprise",
+              "consumer"
+            ]
+          },
+          "arpa_month": {
+            "type": "number"
+          },
+          "ai": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": "{low, base, high, formula, confidence, fact:{ledger estimate}} — triangulate adds {ratio, verdict: consistent|acceptable|inconsistent}"
+    },
+    {
+      "name": "auto_pitch",
+      "file": "auto_pitch.py",
+      "description": "Autonomous mode, one command: brief → profile → market definition → research plan (stop with --plan-only so the agent can research) → ledger + estimates → TAM/SAM/SOM (3 methods), CAGR, price, unit economics, customer ROI/TCO, financial model, NPV/IRR/MOIC, Rule of 40, valuation → pitch pattern (explicit or auto from audience) → deck(s) + report → QA. Never stops at missing data; logs every estimate in ledger_full.json and lists only a short to-confirm set.",
+      "cli": [
+        "python auto_pitch.py --brief brief.json --plan-only",
+        "python auto_pitch.py --brief brief.json [--pattern large_investor|small_investor|corporate|smb|government|auto] [--theme comet --theme warm] [--locale ru] [--out DIR] [--render]"
+      ],
+      "import": "from auto_pitch import run, compute, select_pattern",
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "text",
+          "market"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string",
+            "description": "short product description"
+          },
+          "market": {
+            "enum": [
+              "ru",
+              "en",
+              "zh",
+              "vn",
+              "id",
+              "my"
+            ]
+          },
+          "locale": {
+            "enum": [
+              "ru",
+              "en",
+              "zh",
+              "vi",
+              "id",
+              "ms"
+            ]
+          },
+          "pattern": {
+            "enum": [
+              "auto",
+              "large_investor",
+              "small_investor",
+              "corporate",
+              "smb",
+              "government"
+            ]
+          },
+          "audience": {
+            "type": "string"
+          },
+          "themes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ledger": {
+            "type": "string",
+            "description": "path to ledger.json (optional; offline draft without it)"
+          },
+          "fictional": {
+            "type": "boolean"
+          },
+          "segments": {
+            "type": "array"
+          },
+          "story": {
+            "type": "object"
+          },
+          "assumptions": {
+            "type": "object"
+          },
+          "base_year": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": "out dir: profile.json, market_definition.json, research_plan.json, ledger_full.json, auto_facts.json, facts.json, deck*.pptx, report.docx, qa_<theme>.json, auto_summary.json {pattern, qa, key_numbers, to_confirm}"
+    },
+    {
+      "name": "pitch_story",
+      "file": "pitch_story.py",
+      "description": "Narrative engine for auto_pitch: builds deck_spec and report_spec from computed facts for a pitch pattern (slide order from patterns.json), ru and en wording (other locales fall back to English), category story packs, default speaker notes per slide and an appendix that keeps every slide figure in the report.",
+      "cli": [
+        "(library; used by auto_pitch.py)"
+      ],
+      "import": "from pitch_story import build_specs",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "ctx": {
+            "type": "object"
+          },
+          "pattern": {
+            "type": "object"
+          },
+          "locale": {
+            "enum": [
+              "ru",
+              "en",
+              "zh",
+              "vi",
+              "id",
+              "ms"
+            ]
+          }
+        }
+      },
+      "output": "(deck_spec, report_spec)"
+    }
+  ],
+  "locales": [
+    "ru",
+    "en",
+    "zh",
+    "vi",
+    "id",
+    "ms"
+  ],
+  "market_profiles": [
+    "ru",
+    "en",
+    "zh",
+    "vn",
+    "id",
+    "my"
+  ],
+  "patterns": "patterns/patterns.json: large_investor, small_investor, corporate, smb, government",
+  "themes": [
+    "light",
+    "dark",
+    "academic_light",
+    "comet",
+    "editorial",
+    "corporate",
+    "warm"
+  ]
+}

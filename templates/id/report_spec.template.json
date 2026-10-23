@@ -1,0 +1,633 @@
+{
+  "_template_note": "TEMPLAT dari contoh fiktif Velordoc. Ganti semua teks dan angka dengan data proyek Anda; pertahankan placeholder «{ {path|format} }» yang merujuk ke facts.json. Kunci berawalan '_' diabaikan oleh alat.",
+  "meta": {
+    "title": "Velordoc: penilaian potensi produk dan rencana strategis",
+    "subtitle": "Laporan analitis · tahap pilot · CONTOH FIKTIF",
+    "org": "Tim analisis strategi (contoh)",
+    "author": "Disusun dengan skill PitchComet",
+    "date": "Oktober 2026",
+    "header": "Velordoc — penilaian potensi (contoh)",
+    "locale": "id",
+    "currency": "IDR",
+    "font_size": 12,
+    "preset": "report",
+    "watermark": "CATATAN: semua data produk, pasar, dan keuangan bersifat fiktif dan hanya untuk mendemonstrasikan alat."
+  },
+  "sources": [
+    {
+      "id": "nasa_trl",
+      "type": "web",
+      "org": "NASA",
+      "title": "Technology Readiness Levels",
+      "container": "NASA",
+      "url": "https://www.nasa.gov/directorates/somd/space-communications-navigation-program/technology-readiness-levels/",
+      "accessed": "2026-10-20",
+      "gost": "Technology Readiness Levels // NASA. URL: https://www.nasa.gov/directorates/somd/space-communications-navigation-program/technology-readiness-levels/ (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "feld",
+      "type": "web",
+      "authors": [
+        "Feld B."
+      ],
+      "title": "The Rule of 40% for a healthy SaaS company",
+      "container": "Feld Thoughts",
+      "date": "2015-02-03",
+      "url": "https://feld.com/archives/2015/02/rule-40-healthy-saas-company/",
+      "accessed": "2026-10-20",
+      "gost": "Feld B. The Rule of 40% For a Healthy SaaS Company // Feld Thoughts. 03.02.2015. URL: https://feld.com/archives/2015/02/rule-40-healthy-saas-company/ (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "sacks",
+      "type": "web",
+      "authors": [
+        "Sacks D."
+      ],
+      "title": "The burn multiple",
+      "container": "Craft Ventures",
+      "url": "https://www.craftventures.com/articles/the-burn-multiple",
+      "accessed": "2026-10-20",
+      "gost": "Sacks D. The Burn Multiple // Craft Ventures. URL: https://www.craftventures.com/articles/the-burn-multiple (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "id_pdp",
+      "type": "law",
+      "org": "Republik Indonesia",
+      "title": "Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi",
+      "year": 2022,
+      "container": "JDIH BPK",
+      "url": "https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "id_pse",
+      "type": "law",
+      "org": "Kementerian Komunikasi dan Informatika",
+      "title": "Peraturan Menteri Komunikasi dan Informatika Nomor 5 Tahun 2020 tentang Penyelenggara Sistem Elektronik Lingkup Privat",
+      "year": 2020,
+      "container": "JDIH Komdigi",
+      "url": "https://jdih.komdigi.go.id/produk_hukum/unduh/id/759/t/peraturan+menteri+komunikasi+dan+informatika+nomor+5+tahun+2020",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "id_pp71",
+      "type": "law",
+      "org": "Republik Indonesia",
+      "title": "Peraturan Pemerintah Nomor 71 Tahun 2019 tentang Penyelenggaraan Sistem dan Transaksi Elektronik",
+      "year": 2019,
+      "container": "JDIH Komdigi",
+      "url": "https://jdih.komdigi.go.id/index.php/produk_hukum/view/id/695/t/peraturan+pemerintah+nomor+71+tahun+2019",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "id_tkdn",
+      "type": "law",
+      "org": "Republik Indonesia",
+      "title": "Peraturan Presiden Nomor 46 Tahun 2025 tentang Perubahan Kedua atas Perpres 16/2018 tentang Pengadaan Barang/Jasa Pemerintah",
+      "year": 2025,
+      "url": "https://kemenkopmk.go.id/sites/default/files/perpres46.pdf",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "example",
+      "type": "dataset",
+      "org": "Tim analisis strategi (contoh)",
+      "title": "Data contoh fiktif “Velordoc”: berkas masukan examples/example_id/*.json dan perhitungan tools/*.py.",
+      "text": "Data contoh fiktif “Velordoc”: berkas masukan examples/example_id/*.json dan perhitungan tools/*.py.",
+      "gost": "Data contoh fiktif “Velordoc”: berkas masukan examples/example_id/*.json dan perhitungan tools/*.py."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title_page"
+    },
+    {
+      "type": "toc",
+      "levels": 2
+    },
+    {
+      "type": "page_break"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "1. Ringkasan eksekutif"
+    },
+    {
+      "type": "paragraph",
+      "text": "**Jawaban.** Potensi produk bernilai **{{score.total|num0}} dari 100** (kelas {{score.grade}}: {{score.grade_label}}; rentang {{score.range_lo|num0}}–{{score.range_hi|num0}} dengan mempertimbangkan kualitas bukti). Masalah dan pasar adalah kekuatan; celah utama adalah {{score.top_gaps.0}} dan {{score.top_gaps.1}}. Rekomendasi: berinvestasi bertahap, dengan tahap kedua dikaitkan pada perpanjangan kontrak pilot [[src:example]]."
+    },
+    {
+      "type": "key_figures",
+      "items": [
+        {
+          "value": "{{market.sam_base|money_bn}}",
+          "label": "pasar yang dapat dilayani (SAM), {{market.base_year}}"
+        },
+        {
+          "value": "{{fin.revenue_last|money_mn0}}",
+          "label": "pendapatan {{fin.end_year}}, skenario dasar"
+        },
+        {
+          "value": "{{fin.moic_base|x1}}",
+          "label": "MOIC investor, skenario dasar"
+        },
+        {
+          "value": "{{score.total|num0}}/100",
+          "label": "skor potensi"
+        }
+      ],
+      "source": "model contoh (market_sizing.py, financial_model.py, scoring.py); data fiktif"
+    },
+    {
+      "type": "paragraph",
+      "text": "Situasi: tim keuangan, pengadaan, dan hukum memproses arus kontrak, faktur, dan surat yang terus bertambah. Komplikasi: layanan cloud tidak diizinkan untuk dokumen rahasia, dan pemrosesan manual memakan sekitar 15 menit per dokumen. Pertanyaan: dapatkah alur lokal “klasifikasi → ekstraksi → validasi → penerusan” menjadi produk yang dapat diskalakan? Jawaban: ya, jika pilot berlanjut menjadi kontrak berulang dalam 12–18 bulan."
+    },
+    {
+      "type": "callout",
+      "title": "Keputusan yang diperlukan:",
+      "text": "menyetujui investasi Rp80 miliar untuk {{fin.ownership_entry|pct0}} saham dalam dua tahap: Rp48 miliar sekarang dan Rp32 miliar setelah 5 kontrak diperpanjang."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "2. Masalah dan konteks"
+    },
+    {
+      "type": "paragraph",
+      "text": "Berdasarkan 32 wawancara dan studi waktu di tiga pilot (data contoh), satu dokumen memerlukan sekitar 15 menit kerja staf: membaca, input data, dan pencocokan dengan ERP. OCR berbasis templat hanya menghemat waktu pada format yang dikenal; pada format baru 18% kolom harus dikerjakan ulang [[src:example]]."
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "**Pembeli** — kepala operasi keuangan atau pengadaan; **pengguna** — staf back-office.",
+        "**Kendala** — kebijakan keamanan informasi melarang pengiriman dokumen ke layanan cloud eksternal.",
+        "**Mengapa sekarang** — model bahasa terbuka kini dapat berjalan di satu server lokal (dalam laporan nyata, dukung dengan hasil uji bertanggal dan bersumber)."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "3. Pasar"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.1. Metode"
+    },
+    {
+      "type": "paragraph",
+      "text": "Pasar diestimasi dengan dua cara independen. **Bottom-up** (utama): jumlah organisasi per segmen × nilai kontrak tahunan × porsi pembeli terjangkau (SAM) × pangsa yang dapat dicapai (SOM). **Top-down** (pemeriksaan): pasar ilustratif perangkat lunak pemrosesan dokumen × porsi solusi AI × porsi pembeli yang mewajibkan on-premise. Selisih TAM {{market.td_bu_ratio_tam|x1}}, di bawah ambang 2x yang mengharuskan asumsi ditinjau ulang."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.2. Estimasi bottom-up"
+    },
+    {
+      "type": "table",
+      "caption": "Segmen pasar dan estimasi TAM / SAM / SOM, {{market.base_year}}",
+      "columns": [
+        "Segmen",
+        "Organisasi",
+        "Kontrak tahunan",
+        "TAM",
+        "SAM",
+        "SOM 2030"
+      ],
+      "rows": {
+        "$ref": "tables.segments"
+      },
+      "col_widths_cm": [
+        4.4,
+        2.2,
+        2.3,
+        2.6,
+        2.6,
+        2.4
+      ],
+      "source": "market_sizing.py pada data contoh fiktif",
+      "font_size": 10
+    },
+    {
+      "type": "chart",
+      "caption": "Corong pasar: TAM, SAM dan SOM, {{market.base_year}}, {{project.units.bn}}",
+      "chart": {
+        "$ref": "charts.tam_sam_som"
+      },
+      "height_cm": 6.5,
+      "source": "market_sizing.py pada data contoh fiktif"
+    },
+    {
+      "type": "paragraph",
+      "text": "Hasil: TAM = **{{market.tam_base|money_bn}}**, SAM = **{{market.sam_base|money_bn}}**, SOM hingga {{market.horizon_year}} pada skenario dasar — **{{market.som_horizon_base|money_mn0}}**. Estimasi top-down memberi TAM {{market.tam_td|money_bn}} dan SAM {{market.sam_td|money_bn}}."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.3. Skenario pertumbuhan"
+    },
+    {
+      "type": "table",
+      "caption": "Skenario pasar hingga {{market.horizon_year}}",
+      "columns": [
+        "Skenario",
+        "CAGR",
+        "TAM 2030",
+        "SAM 2030",
+        "SOM 2030"
+      ],
+      "rows": {
+        "$ref": "tables.market_scenarios"
+      },
+      "source": "asumsi skenario contoh (market_sizing.py); nilai nominal"
+    },
+    {
+      "type": "chart",
+      "caption": "SAM per skenario, {{project.units.bn}}",
+      "chart": {
+        "$ref": "charts.sam_scenarios"
+      },
+      "height_cm": 7,
+      "source": "market_sizing.py pada data contoh fiktif"
+    },
+    {
+      "type": "paragraph",
+      "text": "Semua proyeksi bersifat nominal. Dengan asumsi inflasi 3% per tahun, pertumbuhan riil SAM pada skenario dasar adalah {{market.real_cagr_base|pct0}} per tahun [[fn:Pertumbuhan riil memakai persamaan Fisher: (1 + pertumbuhan nominal) / (1 + inflasi) − 1. Dalam praktik, ambil proyeksi inflasi dari sumber resmi bertanggal (lihat markets/).]]."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "4. Produk dan teknologi"
+    },
+    {
+      "type": "paragraph",
+      "text": "Produk adalah alur yang dipasang lokal: klasifikasi dokumen, ekstraksi kolom dengan model bahasa, validasi terhadap data induk ERP, dan penerusan ke alur kerja yang tepat. Kesiapan teknologi dinilai **TRL {{metrics.trl.value}}** pada skala TRL NASA [[src:nasa_trl]]."
+    },
+    {
+      "type": "table",
+      "caption": "Hasil pilot (data fiktif)",
+      "columns": [
+        "Metrik",
+        "Sebelum",
+        "Sesudah",
+        "Perubahan"
+      ],
+      "rows": [
+        [
+          "Waktu staf per dokumen",
+          "15 menit",
+          "3 menit",
+          "−{{metrics.pilot_roi.time_reduction|pct0}}"
+        ],
+        [
+          "Akurasi ekstraksi kolom (n = 2.000)",
+          "{{metrics.pilot_accuracy.accuracy_baseline|pct0}}",
+          "{{metrics.pilot_accuracy.accuracy_model|pct0}}",
+          "+{{metrics.pilot_accuracy.value|pp0}}"
+        ],
+        [
+          "Penghematan pelanggan per tahun",
+          "—",
+          "{{metrics.pilot_roi.net_savings_per_year|money_mn1}}",
+          "ROI {{metrics.pilot_roi.value|pct0}}"
+        ]
+      ],
+      "source": "studi waktu dan sampel berlabel dari pilot (metrics_calc.py: automation_roi, accuracy_vs_baseline); data fiktif"
+    },
+    {
+      "type": "paragraph",
+      "text": "Perbedaan akurasi signifikan secara statistik pada tingkat 95% (interval kepercayaan selisih tidak mencakup nol). Untuk mencapai TRL 7 diperlukan operasi rutin di pelanggan minimal tiga bulan."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "5. Persaingan dan keunggulan"
+    },
+    {
+      "type": "table",
+      "caption": "Perbandingan dengan alternatif (penilaian ahli, kategori solusi)",
+      "columns": [
+        "Alternatif",
+        "Format baru",
+        "On-premise",
+        "Cek ERP",
+        "Waktu per dokumen"
+      ],
+      "rows": [
+        [
+          "OCR templat",
+          "rendah",
+          "ya",
+          "sebagian",
+          "menit"
+        ],
+        [
+          "Layanan AI cloud",
+          "tinggi",
+          "tidak",
+          "sebagian",
+          "detik"
+        ],
+        [
+          "Alih daya input",
+          "sedang",
+          "sebagian",
+          "tidak",
+          "jam"
+        ],
+        [
+          "Velordoc",
+          "tinggi",
+          "ya",
+          "ya",
+          "≈ 3 menit"
+        ]
+      ],
+      "highlight_row": 3,
+      "source": "penilaian ahli tim; perbandingan per kategori solusi, bukan perusahaan tertentu"
+    },
+    {
+      "type": "paragraph",
+      "text": "Keunggulan bertumpu pada korpus berlabel (1,2 juta dokumen dalam contoh), konektor ke sistem ERP umum, dan keterikatan pada alur kerja pelanggan. Ancaman utama adalah edisi on-premise dari platform besar dalam 12–18 bulan."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "6. Model bisnis dan unit ekonomi"
+    },
+    {
+      "type": "paragraph",
+      "text": "Modelnya adalah lisensi tahunan on-premise (mulai {{tables.segments.3.2}} untuk logistik hingga {{tables.segments.1.2}} untuk sektor publik) ditambah implementasi. Pada {{fin.end_year}}, skenario dasar menunjukkan margin kotor {{fin.gm_last|pct0}}, LTV/CAC **{{fin.ltv_cac_last|x1}}**, dan payback CAC {{fin.cac_payback_last|num0}} bulan. Rule of 40 (pertumbuhan pendapatan + margin EBITDA) pada {{fin.end_year}} sebesar {{fin.rule40_last|pct0}} [[src:feld]]; burn multiple pada {{fin.start_year}} sebesar {{fin.burn_multiple_first|x1}} [[src:sacks]]."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "7. Rencana keuangan dan imbal hasil"
+    },
+    {
+      "type": "table",
+      "caption": "Skenario dasar: angka utama, {{fin.start_year}}–{{fin.end_year}}",
+      "columns": {
+        "$ref": "tables.pnl_columns"
+      },
+      "rows": {
+        "$ref": "tables.pnl"
+      },
+      "col_widths_cm": [
+        5.5,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1
+      ],
+      "source": "financial_model.py, skenario dasar; nilai nominal; data fiktif"
+    },
+    {
+      "type": "chart",
+      "caption": "Pendapatan dan EBITDA, skenario dasar, {{project.units.mn}}",
+      "chart": {
+        "$ref": "charts.revenue_ebitda"
+      },
+      "height_cm": 7,
+      "source": "financial_model.py, skenario dasar; nilai nominal; data fiktif"
+    },
+    {
+      "type": "table",
+      "caption": "Skenario: pendapatan, titik impas, dan imbal hasil investor",
+      "columns": [
+        "Skenario",
+        "Pendapatan 2030",
+        "EBITDA > 0",
+        "NPV pada {{fin.discount_rate|pct0}}",
+        "MOIC",
+        "IRR"
+      ],
+      "rows": {
+        "$ref": "tables.fin_scenarios"
+      },
+      "highlight_row": 1,
+      "source": "financial_model.py; investasi Rp80 miliar pada valuasi pra-dana Rp240 miliar, exit 2030 pada 4x pendapatan, dilusi 15%; data fiktif"
+    },
+    {
+      "type": "paragraph",
+      "text": "NPV skenario dasar pada tingkat diskonto {{fin.discount_rate|pct0}} adalah **{{fin.npv_base|money_mn0}}**; nilai terminal melebihi total NPV, sehingga valuasi sangat bergantung pada asumsi kelipatan exit. MOIC investor {{fin.moic_base|x1}} (IRR {{fin.irr_base|pct0}}), di bawah patokan ventura yang lazim; skenario optimis memberi {{fin.moic_bull|x1}} (IRR {{fin.irr_bull|pct0}}). Pada skenario pesimis, kas minimum turun ke {{fin.min_cash_bear|money_mn0}}."
+    },
+    {
+      "type": "table",
+      "caption": "Sensitivitas NPV ({{project.units.mn}}) terhadap nilai kontrak dan pelanggan baru",
+      "columns": {
+        "$ref": "tables.sensitivity_columns"
+      },
+      "rows": {
+        "$ref": "tables.sensitivity"
+      },
+      "source": "financial_model.py, deviasi dari skenario dasar"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "8. Skor potensi"
+    },
+    {
+      "type": "paragraph",
+      "text": "Penilaian memakai 11 kriteria berskala 0–5 dengan bobot profil “pilot / investor” dan profil pasar Indonesia. Setiap skor memiliki tingkat bukti: A — terverifikasi, B — estimasi kredibel, C — asumsi. Keyakinan bukti {{score.confidence|pct0}}."
+    },
+    {
+      "type": "scorecard",
+      "caption": "Kartu skor potensi (profil: pilot / investor)",
+      "criteria": {
+        "$ref": "tables.scorecard"
+      },
+      "total": {
+        "$ref": "score.total"
+      },
+      "source": "scoring.py, profil “pilot / investor”; skor fiktif"
+    },
+    {
+      "type": "chart",
+      "caption": "Skor per kriteria (0–5)",
+      "chart": {
+        "$ref": "charts.score"
+      },
+      "height_cm": 9,
+      "source": "scoring.py, profil “pilot / investor”; skor fiktif"
+    },
+    {
+      "type": "table",
+      "caption": "Skor total per profil audiens",
+      "columns": [
+        "Audiens",
+        "Skor",
+        "Kelas"
+      ],
+      "rows": {
+        "$ref": "tables.by_audience"
+      },
+      "col_widths_cm": [
+        9.0,
+        3.0,
+        4.0
+      ],
+      "source": "scoring.py: pengali audiens pada profil tahap"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "9. Regulasi dan kedaulatan"
+    },
+    {
+      "type": "paragraph",
+      "text": "Cakupan regulasi untuk profil pasar ini: {{score.regulatory_definition}}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Data pribadi dalam dokumen pelanggan wajib diproses sesuai UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi [[src:id_pdp]]. Layanan elektronik yang ditawarkan di Indonesia memerlukan pendaftaran Penyelenggara Sistem Elektronik (PSE) berdasarkan Permenkominfo 5/2020 [[src:id_pse]]; PP 71/2019 mewajibkan PSE lingkup publik mengelola dan menyimpan data di wilayah Indonesia, dengan pengecualian terbatas [[src:id_pp71]]. Untuk pengadaan pemerintah, Perpres 46/2025 memprioritaskan produk dalam negeri dengan nilai TKDN tertentu [[src:id_tkdn]]."
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Status contoh: terdaftar sebagai PSE; penilaian TKDN sedang berjalan, target Q1 2027.",
+        "Penerapan: on-premise secara bawaan, data tetap di jaringan pelanggan di Indonesia.",
+        "Tidak ada API model pihak ketiga di jalur pemrosesan inti."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "10. Risiko dan mitigasi"
+    },
+    {
+      "type": "table",
+      "caption": "Daftar risiko utama",
+      "columns": [
+        "Risiko",
+        "Kemungkinan",
+        "Dampak",
+        "Mitigasi",
+        "Metrik kendali"
+      ],
+      "rows": [
+        [
+          "Pilot tidak berlanjut menjadi kontrak",
+          "sedang",
+          "tinggi",
+          "Kontrak dengan ambang metrik sebelum pilot",
+          "tingkat perpanjangan ≥ 60%"
+        ],
+        [
+          "Konsentrasi pendapatan (42% dari satu pelanggan)",
+          "tinggi",
+          "sedang",
+          "10 perpanjangan sebelum Q4 2027",
+          "pelanggan terbesar < 25%"
+        ],
+        [
+          "Platform merilis edisi on-premise",
+          "sedang",
+          "tinggi",
+          "Templat industri, konektor ERP",
+          "tingkat kemenangan vs platform"
+        ],
+        [
+          "Biaya infrastruktur GPU naik",
+          "sedang",
+          "sedang",
+          "Model terkuantisasi, cadangan CPU",
+          "HPP ≤ 30% pendapatan"
+        ]
+      ],
+      "font_size": 10,
+      "source": "penilaian ahli tim; perbandingan per kategori solusi, bukan perusahaan tertentu"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "11. Peta jalan"
+    },
+    {
+      "type": "numbered",
+      "items": [
+        "Q4 2026 — Pendanaan dan tim: Rp80 miliar; +6 insinyur, kepala penjualan korporasi",
+        "Q1 2027 — Kepatuhan: Sertifikat TKDN dan pembaruan pendaftaran PSE",
+        "Q2 2027 — Penjualan berulang: 5 kontrak diperpanjang, siklus ≤ 6 bulan",
+        "Q4 2027 — Skala: 10 kontrak, NRR ≥ 110%, 2 integrator",
+        "Q2 2028 — Ekspor: Pilot di pasar tetangga; keputusan putaran Rp60 miliar"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "12. Rekomendasi"
+    },
+    {
+      "type": "numbered",
+      "items": [
+        "Berinvestasi bertahap: tahap kedua setelah 5 kontrak diperpanjang.",
+        "Sebelum penutupan, peroleh data aktual churn dan biaya akuisisi (naikkan tingkat bukti unit ekonomi dari C ke B/A).",
+        "Kurangi konsentrasi pendapatan: tidak ada pelanggan di atas 25% pada akhir 2027.",
+        "Ulangi penilaian dalam 6 bulan dengan rubrik yang sama; target skor minimal 70."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Laporan menggunakan struktur “jawaban dahulu”: jawaban disampaikan lebih dulu, lalu argumen dan data."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Lampiran A. Asumsi model"
+    },
+    {
+      "type": "table",
+      "caption": "Asumsi utama model keuangan (skenario dasar)",
+      "columns": [
+        "Parameter",
+        "Nilai",
+        "Keterangan"
+      ],
+      "rows": [
+        [
+          "Pelanggan awal",
+          "3",
+          "pilot berbayar"
+        ],
+        [
+          "Pelanggan baru, 2026–2030",
+          "8 / 16 / 26 / 34 / 40",
+          "rencana penjualan"
+        ],
+        [
+          "Churn per tahun",
+          "8%",
+          "estimasi — asumsi (C)"
+        ],
+        [
+          "Kontrak tahunan",
+          "Rp960,0 juta, +5% per tahun",
+          "rata-rata portofolio"
+        ],
+        [
+          "HPP",
+          "30% pendapatan",
+          "infrastruktur GPU dan dukungan"
+        ],
+        [
+          "Tingkat diskonto",
+          "{{fin.discount_rate|pct0}}",
+          "asumsi contoh; praktik pasar lihat markets/"
+        ],
+        [
+          "Tarif pajak",
+          "22%",
+          "asumsi contoh; periksa peraturan yang berlaku"
+        ]
+      ],
+      "source": "financial_model.py, skenario dasar; nilai nominal; data fiktif"
+    },
+    {
+      "type": "sources"
+    }
+  ]
+}

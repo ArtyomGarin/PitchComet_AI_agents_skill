@@ -1,0 +1,627 @@
+{
+  "_template_note": "TEMPLATE copied from the fictional Velordoc example. Replace every text and number with your project's data; keep the «{ {path|format} }» placeholders that point into facts.json. Keys starting with '_' are ignored by the tools.",
+  "meta": {
+    "title": "Velordoc: product potential assessment and strategic plan",
+    "subtitle": "Analytical report · pilot stage · FICTIONAL EXAMPLE",
+    "org": "Example Strategy Team",
+    "author": "Prepared with the PitchComet skill",
+    "date": "October 2026",
+    "header": "Velordoc — potential assessment (example)",
+    "locale": "en",
+    "currency": "USD",
+    "font_size": 12,
+    "preset": "report",
+    "watermark": "NOTE: all product, market and financial data are fictional and serve only to demonstrate the tools."
+  },
+  "sources": [
+    {
+      "id": "nasa_trl",
+      "type": "web",
+      "org": "NASA",
+      "title": "Technology Readiness Levels",
+      "container": "NASA",
+      "url": "https://www.nasa.gov/directorates/somd/space-communications-navigation-program/technology-readiness-levels/",
+      "accessed": "2026-10-20",
+      "gost": "Technology Readiness Levels // NASA. URL: https://www.nasa.gov/directorates/somd/space-communications-navigation-program/technology-readiness-levels/ (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "feld",
+      "type": "web",
+      "authors": [
+        "Feld B."
+      ],
+      "title": "The Rule of 40% for a healthy SaaS company",
+      "container": "Feld Thoughts",
+      "date": "2015-02-03",
+      "url": "https://feld.com/archives/2015/02/rule-40-healthy-saas-company/",
+      "accessed": "2026-10-20",
+      "gost": "Feld B. The Rule of 40% For a Healthy SaaS Company // Feld Thoughts. 03.02.2015. URL: https://feld.com/archives/2015/02/rule-40-healthy-saas-company/ (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "sacks",
+      "type": "web",
+      "authors": [
+        "Sacks D."
+      ],
+      "title": "The burn multiple",
+      "container": "Craft Ventures",
+      "url": "https://www.craftventures.com/articles/the-burn-multiple",
+      "accessed": "2026-10-20",
+      "gost": "Sacks D. The Burn Multiple // Craft Ventures. URL: https://www.craftventures.com/articles/the-burn-multiple (дата обращения: 20.10.2026)."
+    },
+    {
+      "id": "ccpa",
+      "type": "law",
+      "org": "State of California Department of Justice",
+      "title": "California Consumer Privacy Act (CCPA)",
+      "url": "https://oag.ca.gov/privacy/ccpa",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "nistai",
+      "type": "standard",
+      "org": "National Institute of Standards and Technology",
+      "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+      "year": 2023,
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "soc2",
+      "type": "web",
+      "org": "AICPA & CIMA",
+      "title": "SOC 2® — SOC for Service Organizations: Trust Services Criteria",
+      "url": "https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "fedramp",
+      "type": "web",
+      "org": "FedRAMP",
+      "title": "FedRAMP — Federal Risk and Authorization Management Program",
+      "url": "https://www.fedramp.gov/",
+      "accessed": "2026-10-20"
+    },
+    {
+      "id": "example",
+      "type": "dataset",
+      "org": "Example Strategy Team",
+      "title": "Fictional example data “Velordoc”: input files examples/example_en/*.json and calculations of tools/*.py.",
+      "text": "Fictional example data “Velordoc”: input files examples/example_en/*.json and calculations of tools/*.py.",
+      "gost": "Fictional example data “Velordoc”: input files examples/example_en/*.json and calculations of tools/*.py."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title_page"
+    },
+    {
+      "type": "toc",
+      "levels": 2
+    },
+    {
+      "type": "page_break"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "1. Executive summary"
+    },
+    {
+      "type": "paragraph",
+      "text": "**Answer.** Product potential is **{{score.total|num0}} of 100** (grade {{score.grade}}: {{score.grade_label}}; range {{score.range_lo|num0}}–{{score.range_hi|num0}} given evidence quality). The problem and the market are strengths; the main gaps are {{score.top_gaps.0}} and {{score.top_gaps.1}}. Recommendation: invest in tranches, tying the second tranche to renewals of pilot contracts [[src:example]]."
+    },
+    {
+      "type": "key_figures",
+      "items": [
+        {
+          "value": "{{market.sam_base|money_bn}}",
+          "label": "serviceable market (SAM), {{market.base_year}}"
+        },
+        {
+          "value": "{{fin.revenue_last|money_mn0}}",
+          "label": "revenue {{fin.end_year}}, base case"
+        },
+        {
+          "value": "{{fin.moic_base|x1}}",
+          "label": "investor MOIC, base case"
+        },
+        {
+          "value": "{{score.total|num0}}/100",
+          "label": "potential score"
+        }
+      ],
+      "source": "example model (market_sizing.py, financial_model.py, scoring.py); fictional data"
+    },
+    {
+      "type": "paragraph",
+      "text": "Situation: finance, procurement and compliance teams process a growing flow of contracts, invoices and letters. Complication: cloud document services are not allowed for confidential records, and manual processing takes about 15 minutes per document. Question: can a local “classify → extract → validate → route” pipeline become a scalable product? Answer: yes, if pilots convert into repeatable contracts within 12–18 months."
+    },
+    {
+      "type": "callout",
+      "title": "Decision required:",
+      "text": "approve an investment of $5M for {{fin.ownership_entry|pct0}} in two tranches: $3M now and $2M after 5 renewed contracts."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "2. Problem and context"
+    },
+    {
+      "type": "paragraph",
+      "text": "According to 32 interviews and time-and-motion data from three pilots (example data), one document takes about 15 minutes of staff time: reading, data entry and cross-checks against the ERP. Template-based OCR saves time only on known layouts; on new layouts 18% of fields need rework [[src:example]]."
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "**Buyer** — head of finance operations or procurement; **user** — back-office specialist.",
+        "**Constraint** — the security policy forbids sending documents to external cloud services.",
+        "**Why now** — open-weight language models can now run on a single on-premise server (in a real report, support this with a dated, sourced benchmark)."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "3. Market"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.1. Method"
+    },
+    {
+      "type": "paragraph",
+      "text": "The market is estimated in two independent ways. **Bottom-up** (primary): organisations per segment × annual contract × share of reachable buyers (SAM) × achievable share (SOM). **Top-down** (check): illustrative document-processing software market × AI share × share of buyers requiring private deployment. The TAM gap is {{market.td_bu_ratio_tam|x1}}, below the 2x threshold at which the method requires assumptions to be revisited."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.2. Bottom-up estimate"
+    },
+    {
+      "type": "table",
+      "caption": "Market segments and TAM / SAM / SOM, {{market.base_year}}",
+      "columns": [
+        "Segment",
+        "Organisations",
+        "Annual contract",
+        "TAM",
+        "SAM",
+        "SOM 2030"
+      ],
+      "rows": {
+        "$ref": "tables.segments"
+      },
+      "col_widths_cm": [
+        4.4,
+        2.2,
+        2.3,
+        2.6,
+        2.6,
+        2.4
+      ],
+      "source": "market_sizing.py on fictional example data",
+      "font_size": 10
+    },
+    {
+      "type": "chart",
+      "caption": "Market funnel: TAM, SAM and SOM, {{market.base_year}}, {{project.units.bn}}",
+      "chart": {
+        "$ref": "charts.tam_sam_som"
+      },
+      "height_cm": 6.5,
+      "source": "market_sizing.py on fictional example data"
+    },
+    {
+      "type": "paragraph",
+      "text": "Result: TAM = **{{market.tam_base|money_bn}}**, SAM = **{{market.sam_base|money_bn}}**, SOM by {{market.horizon_year}} in the base case — **{{market.som_horizon_base|money_mn0}}**. The top-down estimate gives TAM {{market.tam_td|money_bn}} and SAM {{market.sam_td|money_bn}}."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.3. Growth scenarios"
+    },
+    {
+      "type": "table",
+      "caption": "Market scenarios to {{market.horizon_year}}",
+      "columns": [
+        "Scenario",
+        "CAGR",
+        "TAM 2030",
+        "SAM 2030",
+        "SOM 2030"
+      ],
+      "rows": {
+        "$ref": "tables.market_scenarios"
+      },
+      "source": "scenario assumptions of the example (market_sizing.py); nominal values"
+    },
+    {
+      "type": "chart",
+      "caption": "SAM by scenario, {{project.units.bn}}",
+      "chart": {
+        "$ref": "charts.sam_scenarios"
+      },
+      "height_cm": 7,
+      "source": "market_sizing.py on fictional example data"
+    },
+    {
+      "type": "paragraph",
+      "text": "All forecasts are nominal. With an assumed inflation of 2.5% a year, base-case SAM growth in real terms is {{market.real_cagr_base|pct0}} a year [[fn:Real growth uses the Fisher equation: (1 + nominal growth) / (1 + inflation) − 1. In real work take the inflation forecast from an official, dated source (see markets/).]]."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "4. Product and technology"
+    },
+    {
+      "type": "paragraph",
+      "text": "The product is a locally installed pipeline: document classification, field extraction with a language model, validation against ERP master data and routing to the right workflow. Technology readiness is assessed at **TRL {{metrics.trl.value}}** (“{{metrics.trl.label_en}}”) on the NASA TRL scale [[src:nasa_trl]]."
+    },
+    {
+      "type": "table",
+      "caption": "Pilot results (fictional data)",
+      "columns": [
+        "Metric",
+        "Before",
+        "After",
+        "Change"
+      ],
+      "rows": [
+        [
+          "Staff time per document",
+          "15 min",
+          "3 min",
+          "−{{metrics.pilot_roi.time_reduction|pct0}}"
+        ],
+        [
+          "Field extraction accuracy (n = 2,000)",
+          "{{metrics.pilot_accuracy.accuracy_baseline|pct0}}",
+          "{{metrics.pilot_accuracy.accuracy_model|pct0}}",
+          "+{{metrics.pilot_accuracy.value|pp0}}"
+        ],
+        [
+          "Customer savings per year",
+          "—",
+          "{{metrics.pilot_roi.net_savings_per_year|money_mn1}}",
+          "ROI {{metrics.pilot_roi.value|pct0}}"
+        ]
+      ],
+      "source": "pilot time study and labelled sample (metrics_calc.py: automation_roi, accuracy_vs_baseline); fictional data"
+    },
+    {
+      "type": "paragraph",
+      "text": "The accuracy difference is statistically significant at 95% (the confidence interval of the difference excludes zero). Moving to TRL 7 requires at least three months of routine operation at a customer."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "5. Competition and moat"
+    },
+    {
+      "type": "table",
+      "caption": "Comparison with alternatives (expert assessment, solution categories)",
+      "columns": [
+        "Alternative",
+        "New layouts",
+        "Private deployment",
+        "ERP checks",
+        "Time per document"
+      ],
+      "rows": [
+        [
+          "Template OCR",
+          "low",
+          "yes",
+          "partly",
+          "minutes"
+        ],
+        [
+          "Cloud document AI",
+          "high",
+          "no",
+          "partly",
+          "seconds"
+        ],
+        [
+          "Outsourced data entry",
+          "medium",
+          "partly",
+          "no",
+          "hours"
+        ],
+        [
+          "Velordoc",
+          "high",
+          "yes",
+          "yes",
+          "≈ 3 min"
+        ]
+      ],
+      "highlight_row": 3,
+      "source": "team's expert assessment; categories of alternatives, not specific companies"
+    },
+    {
+      "type": "paragraph",
+      "text": "The moat rests on a labelled corpus (1.2 million documents in the example), connectors to common ERP systems and embedding in customer workflows. The main threat is private-deployment editions from large platforms within 12–18 months."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "6. Business model and unit economics"
+    },
+    {
+      "type": "paragraph",
+      "text": "The model is an annual on-premise licence (from {{tables.segments.3.2}} for logistics to {{tables.segments.1.2}} for the public sector) plus implementation. In {{fin.end_year}} the base case shows gross margin {{fin.gm_last|pct0}}, LTV/CAC **{{fin.ltv_cac_last|x1}}** and CAC payback {{fin.cac_payback_last|num0}} months. Rule of 40 (revenue growth + EBITDA margin) in {{fin.end_year}} is {{fin.rule40_last|pct0}} [[src:feld]]; the burn multiple in {{fin.start_year}} is {{fin.burn_multiple_first|x1}} [[src:sacks]]."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "7. Financial plan and returns"
+    },
+    {
+      "type": "table",
+      "caption": "Base case: key figures, {{fin.start_year}}–{{fin.end_year}}",
+      "columns": {
+        "$ref": "tables.pnl_columns"
+      },
+      "rows": {
+        "$ref": "tables.pnl"
+      },
+      "col_widths_cm": [
+        5.5,
+        2.1,
+        2.1,
+        2.1,
+        2.1,
+        2.1
+      ],
+      "source": "financial_model.py, base case; nominal values; fictional data"
+    },
+    {
+      "type": "chart",
+      "caption": "Revenue and EBITDA, base case, {{project.units.mn}}",
+      "chart": {
+        "$ref": "charts.revenue_ebitda"
+      },
+      "height_cm": 7,
+      "source": "financial_model.py, base case; nominal values; fictional data"
+    },
+    {
+      "type": "table",
+      "caption": "Scenarios: revenue, break-even and investor returns",
+      "columns": [
+        "Scenario",
+        "Revenue 2030",
+        "EBITDA > 0",
+        "NPV at {{fin.discount_rate|pct0}}",
+        "MOIC",
+        "IRR"
+      ],
+      "rows": {
+        "$ref": "tables.fin_scenarios"
+      },
+      "highlight_row": 1,
+      "source": "financial_model.py; $5M at $15M pre-money, exit in 2030 at 4x revenue, 15% dilution; fictional data"
+    },
+    {
+      "type": "paragraph",
+      "text": "Base-case NPV at {{fin.discount_rate|pct0}} is **{{fin.npv_base|money_mn0}}**; terminal value exceeds total NPV, so the valuation depends critically on the exit-multiple assumption. Investor MOIC is {{fin.moic_base|x1}} (IRR {{fin.irr_base|pct0}}), below a typical venture benchmark; the bull case gives {{fin.moic_bull|x1}} (IRR {{fin.irr_bull|pct0}}). In the bear case minimum cash falls to {{fin.min_cash_bear|money_mn0}}."
+    },
+    {
+      "type": "table",
+      "caption": "NPV sensitivity ({{project.units.mn}}) to contract size and new customers",
+      "columns": {
+        "$ref": "tables.sensitivity_columns"
+      },
+      "rows": {
+        "$ref": "tables.sensitivity"
+      },
+      "source": "financial_model.py, deviations from the base case"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "8. Potential score"
+    },
+    {
+      "type": "paragraph",
+      "text": "The assessment uses 11 criteria on a 0–5 scale with the weights of the “pilot / investor” profile and the United States market profile. Each score carries an evidence level: A — verified, B — credible estimate, C — assumption. Evidence confidence is {{score.confidence|pct0}}."
+    },
+    {
+      "type": "scorecard",
+      "caption": "Potential scorecard (profile: pilot / investor)",
+      "criteria": {
+        "$ref": "tables.scorecard"
+      },
+      "total": {
+        "$ref": "score.total"
+      },
+      "source": "scoring.py, profile “pilot / investor”; fictional scores"
+    },
+    {
+      "type": "chart",
+      "caption": "Scores by criterion (0–5)",
+      "chart": {
+        "$ref": "charts.score"
+      },
+      "height_cm": 9,
+      "source": "scoring.py, profile “pilot / investor”; fictional scores"
+    },
+    {
+      "type": "table",
+      "caption": "Total score by audience profile",
+      "columns": [
+        "Audience",
+        "Score",
+        "Grade"
+      ],
+      "rows": {
+        "$ref": "tables.by_audience"
+      },
+      "col_widths_cm": [
+        9.0,
+        3.0,
+        4.0
+      ],
+      "source": "scoring.py: audience multipliers on the stage profile"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "9. Regulation and sovereignty"
+    },
+    {
+      "type": "paragraph",
+      "text": "Regulatory scope for this market profile: {{score.regulatory_definition}}"
+    },
+    {
+      "type": "paragraph",
+      "text": "The United States has no single federal data-protection statute; state laws apply, for example the California Consumer Privacy Act as amended by the CPRA [[src:ccpa]]; Velordoc acts as a service provider when deployed on the customer's premises. For AI risk, enterprise and federal buyers increasingly refer to the voluntary NIST AI Risk Management Framework [[src:nistai]]. Enterprise buyers usually expect a SOC 2 report [[src:soc2]]; cloud offerings sold to US federal agencies require FedRAMP authorization [[src:fedramp]]."
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Example status: SOC 2 Type I completed; Type II audit window under way.",
+        "Deployment: on-premise by default, so customer data does not leave the customer's environment.",
+        "No third-party model API in the core processing path."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "10. Risks and mitigation"
+    },
+    {
+      "type": "table",
+      "caption": "Key risk register",
+      "columns": [
+        "Risk",
+        "Probability",
+        "Impact",
+        "Mitigation",
+        "Control metric"
+      ],
+      "rows": [
+        [
+          "Pilots do not convert into contracts",
+          "medium",
+          "high",
+          "Contract with metric thresholds before the pilot",
+          "renewal rate ≥ 60%"
+        ],
+        [
+          "Revenue concentration (42% from one customer)",
+          "high",
+          "medium",
+          "10 renewals by Q4 2027",
+          "largest customer < 25%"
+        ],
+        [
+          "Platforms add private-deployment editions",
+          "medium",
+          "high",
+          "Industry templates, ERP connectors",
+          "win rate vs platforms"
+        ],
+        [
+          "GPU infrastructure costs rise",
+          "medium",
+          "medium",
+          "Quantised models, CPU fallback",
+          "COGS ≤ 30% of revenue"
+        ]
+      ],
+      "font_size": 10,
+      "source": "team's expert assessment; categories of alternatives, not specific companies"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "11. Roadmap"
+    },
+    {
+      "type": "numbered",
+      "items": [
+        "Q4 2026 — Round and team: $5M; +6 engineers, head of enterprise sales",
+        "Q1 2027 — Compliance: SOC 2 Type II report; AI risk assessment per NIST AI RMF documented",
+        "Q2 2027 — Repeatable sales: 5 renewed contracts, sales cycle ≤ 6 months",
+        "Q4 2027 — Scale: 10 contracts, NRR ≥ 110%, 2 integrators",
+        "Q2 2028 — Export: Pilot in a neighbouring market; decision on a $4M round"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "12. Recommendations"
+    },
+    {
+      "type": "numbered",
+      "items": [
+        "Invest in tranches: the second tranche after 5 renewed contracts.",
+        "Before closing, obtain actual churn and acquisition-cost data (move unit-economics scores from evidence level C to B/A).",
+        "Reduce revenue concentration: no customer above 25% by the end of 2027.",
+        "Repeat the assessment in 6 months with the same rubric; target score of at least 70."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The report follows an answer-first structure: the answer comes first, then the arguments and the data."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Appendix A. Model assumptions"
+    },
+    {
+      "type": "table",
+      "caption": "Key assumptions of the financial model (base case)",
+      "columns": [
+        "Parameter",
+        "Value",
+        "Comment"
+      ],
+      "rows": [
+        [
+          "Customers at start",
+          "3",
+          "paid pilots"
+        ],
+        [
+          "New customers, 2026–2030",
+          "8 / 16 / 26 / 34 / 40",
+          "sales plan"
+        ],
+        [
+          "Churn per year",
+          "8%",
+          "estimate — assumption (C)"
+        ],
+        [
+          "Annual contract",
+          "$60.0K, +5% a year",
+          "portfolio average"
+        ],
+        [
+          "Cost of revenue",
+          "30% of revenue",
+          "GPU infrastructure and support"
+        ],
+        [
+          "Discount rate",
+          "{{fin.discount_rate|pct0}}",
+          "example assumption; see markets/ for local practice"
+        ],
+        [
+          "Tax rate",
+          "21%",
+          "example assumption; check current law"
+        ]
+      ],
+      "source": "financial_model.py, base case; nominal values; fictional data"
+    },
+    {
+      "type": "sources"
+    }
+  ]
+}

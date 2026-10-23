@@ -1,0 +1,118 @@
+{
+  "_template_note": "MẪU dựa trên ví dụ hư cấu Velordoc. Thay toàn bộ văn bản và số liệu bằng dữ liệu dự án của bạn; giữ các chỗ giữ chỗ «{ {path|format} }» trỏ tới facts.json. Các khóa bắt đầu bằng '_' bị công cụ bỏ qua.",
+  "_EXAMPLE_DATA": "SẢN PHẨM HƯ CẤU \"Velordoc\". Mọi dữ liệu đều được tạo ra để minh họa công cụ; mọi sự trùng hợp với công ty thực tế là ngẫu nhiên.",
+  "currency": "VND",
+  "start_year": 2026,
+  "years": 5,
+  "revenue": {
+    "customers_start": 3,
+    "new_customers": [
+      8,
+      16,
+      26,
+      34,
+      40
+    ],
+    "churn_annual": 0.08,
+    "arpa_start": 1500000000.0,
+    "arpa_growth": 0.05,
+    "other_revenue": [
+      10000000000,
+      12500000000,
+      13750000000,
+      12500000000,
+      11250000000
+    ]
+  },
+  "costs": {
+    "cogs_pct": 0.3,
+    "rd": [
+      40000000000,
+      45000000000,
+      50000000000,
+      53750000000,
+      57500000000
+    ],
+    "sm_pct": 0.28,
+    "ga": [
+      10000000000,
+      11875000000,
+      13750000000,
+      15625000000,
+      17500000000
+    ],
+    "capex": [
+      15000000000,
+      9375000000,
+      9375000000,
+      11250000000,
+      12500000000
+    ]
+  },
+  "working_capital_pct": 0.12,
+  "tax_rate": 0.2,
+  "cash_start": 18750000000.0,
+  "funding": [
+    {
+      "year": 2026,
+      "amount": 125000000000.0
+    },
+    {
+      "year": 2028,
+      "amount": 93750000000.0
+    }
+  ],
+  "discount_rate": 0.22,
+  "terminal": {
+    "method": "exit_multiple",
+    "multiple": 4.0,
+    "metric": "revenue"
+  },
+  "investor": {
+    "investment": 125000000000.0,
+    "pre_money": 375000000000.0,
+    "entry_year": 2026,
+    "exit_year": 2030,
+    "exit_multiple": 4.0,
+    "exit_metric": "revenue",
+    "later_dilution": 0.15
+  },
+  "scenarios": {
+    "bear": {
+      "new_customers_mult": 0.6,
+      "arpa_mult": 0.9,
+      "churn_annual": 0.15,
+      "exit_multiple": 2.5
+    },
+    "base": {},
+    "bull": {
+      "new_customers_mult": 1.3,
+      "arpa_mult": 1.1,
+      "churn_annual": 0.06,
+      "exit_multiple": 5.0
+    }
+  },
+  "sensitivity": {
+    "output": "npv",
+    "x": {
+      "param": "arpa_mult",
+      "values": [
+        0.8,
+        0.9,
+        1.0,
+        1.1,
+        1.2
+      ]
+    },
+    "y": {
+      "param": "new_customers_mult",
+      "values": [
+        0.6,
+        0.8,
+        1.0,
+        1.2,
+        1.4
+      ]
+    }
+  }
+}

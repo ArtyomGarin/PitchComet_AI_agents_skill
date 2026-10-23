@@ -1,0 +1,83 @@
+{
+  "_template_note": "ШАБЛОН на основе вымышленного примера Velordoc. Замените все тексты и числа данными своего проекта; плейсхолдеры «{ {путь|формат} }» ссылаются на facts.json. Ключи с '_' инструменты игнорируют.",
+  "_EXAMPLE_DATA": "ВЫМЫШЛЕННЫЙ ПРОДУКТ «Velordoc». Все данные придуманы для демонстрации инструментов; совпадения с реальными компаниями случайны.",
+  "currency": "RUB",
+  "base_year": 2025,
+  "horizon_year": 2030,
+  "primary": "bottom_up",
+  "top_down": {
+    "total_market": 720000000000.0,
+    "total_market_label": "Условный рынок ПО для ввода и обработки документов, 2025",
+    "source": "EXAMPLE",
+    "filters": [
+      {
+        "name": "Доля затрат на интеллектуальную обработку документов на основе ИИ",
+        "share": 0.14,
+        "level": "TAM",
+        "rationale": "EXAMPLE"
+      },
+      {
+        "name": "Заказчики с требованием установки в своём контуре",
+        "share": 0.4,
+        "level": "SAM",
+        "rationale": "EXAMPLE"
+      },
+      {
+        "name": "Достижимая доля к 2030 г.",
+        "share": 0.06,
+        "level": "SOM",
+        "rationale": "EXAMPLE"
+      }
+    ]
+  },
+  "bottom_up": {
+    "segments": [
+      {
+        "name": "Банки и страховые компании",
+        "units": 4000,
+        "arpa": 4800000.0,
+        "sam_share": 0.5,
+        "som_share": 0.06,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "Органы власти и госкомпании",
+        "units": 3000,
+        "arpa": 6400000.0,
+        "sam_share": 0.6,
+        "som_share": 0.05,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "Промышленные холдинги",
+        "units": 12000,
+        "arpa": 2400000.0,
+        "sam_share": 0.35,
+        "som_share": 0.04,
+        "source": "EXAMPLE"
+      },
+      {
+        "name": "Логистика и ритейл",
+        "units": 15000,
+        "arpa": 1600000.0,
+        "sam_share": 0.3,
+        "som_share": 0.04,
+        "source": "EXAMPLE"
+      }
+    ]
+  },
+  "growth": {
+    "cagr": {
+      "bear": 0.1,
+      "base": 0.18,
+      "bull": 0.26
+    }
+  },
+  "som_ramp": "s_curve",
+  "som_share_multiplier": {
+    "bear": 0.6,
+    "base": 1.0,
+    "bull": 1.4
+  },
+  "inflation": 0.06
+}
