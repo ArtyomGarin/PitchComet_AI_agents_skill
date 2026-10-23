@@ -37,22 +37,6 @@
 
 Другие языки: [English](README.md) · [简体中文](README.zh-CN.md)
 
-
-## Быстрый старт за 60 секунд
-
-```bash
-git clone <адрес репозитория> pitchcomet && cd pitchcomet
-pip install -r requirements.txt
-python tools/auto_pitch.py --brief examples/autonomous_shiftlyra/brief_ru.json \
-       --pattern large_investor --out demo < /dev/null
-ls examples/autonomous_shiftlyra/demo   # deck.pptx  report.docx  qa_comet.json  auto_summary.json ...
-```
-
-Команда за несколько секунд собирает презентацию для инвестора и отчёт по вымышленному продукту из
-примера (бриф и реестр источников уже лежат в `examples/`), с проверкой качества. С `--render`
-получатся PNG-превью (нужны LibreOffice и poppler-utils). Для своего продукта напишите бриф из
-четырёх строк и начните с `--plan-only`.
-
 ## Галерея
 
 ![Презентация](docs/deck_large_investor_en.png)
@@ -187,9 +171,7 @@ pitchcomet/
 * Числа берутся из инструментов, а не из текста. Одна мысль на слайд; заголовки — выводы.
 * Примеры — вымышленные продукты, это указано (рыночные данные автономного примера реальные, со ссылками).
 
-## Благодарности
-
-PitchComet разработан с использованием личного практического опыта, а также
+## PitchComet разработан с использованием личного практического опыта, а также
 ИИ-ассистентов — в первую очередь **Grok** и **GigaChat**, которые активно применялись для
 написания, рецензирования и доработки скилла, его промптов, инструментов и документации.
 
