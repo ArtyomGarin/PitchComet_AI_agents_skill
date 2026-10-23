@@ -45,10 +45,6 @@ A full English investor deck in the comet theme, built from the description abov
 
 ![Deck](docs/deck_large_investor_en.png)
 
-| First slides of five patterns | Seven visual themes |
-|---|---|
-| ![Patterns](docs/patterns.png) | ![Themes](docs/themes.png) |
-
 The glossary slide in six languages and the report itself.
 
 | Glossary in six languages | Report (.docx) |
